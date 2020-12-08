@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Package btcbase 转换基于比特币地址规则的币种
-//使用此规则的币种有：BTC、BCH、LTC、ZEC、USDT、 BTY
+//使用此规则的币种有：BTC、BCH、LTC、ZEC、USDT、 DPOM
 package btcbase
 
 import (

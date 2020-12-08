@@ -35,7 +35,7 @@ const (
 
 //DefaultCoinsSymbol 默认的主币名称
 const (
-	DefaultCoinsSymbol = "bty"
+	DefaultCoinsSymbol = "dpom"
 )
 
 //UserKeyX 用户自定义执行器前缀byte类型
@@ -49,7 +49,7 @@ var (
 const (
 	InputPrecision        float64 = 1e4
 	Multiple1E4           int64   = 1e4
-	BTY                           = "BTY"
+	DPOM                           = "DPOM"
 	TxGroupMaxCount               = 20
 	MinerAction                   = "miner"
 	Int1E4                int64   = 10000

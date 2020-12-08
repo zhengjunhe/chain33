@@ -1359,13 +1359,13 @@ func TestDplatform_GetBalance(t *testing.T) {
 		}},
 
 		{In: types.ReqBalance{
-			AssetSymbol: "bty",
+			AssetSymbol: "dpom",
 			AssetExec:   "coins",
 			Execer:      cfg.ExecName("ticket"),
 			Addresses:   addrs,
 		}},
 		{In: types.ReqBalance{
-			AssetSymbol: "bty",
+			AssetSymbol: "dpom",
 			AssetExec:   "coins",
 			Execer:      cfg.ExecName("coins"),
 			Addresses:   addrs,

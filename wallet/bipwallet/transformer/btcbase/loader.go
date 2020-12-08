@@ -12,7 +12,7 @@ import (
 var coinPrefix = map[string][]byte{
 	"BTC":  {0x00},
 	"BCH":  {0x00},
-	"BTY":  {0x00},
+	"DPOM":  {0x00},
 	"YCC":  {0x00},
 	"LTC":  {0x30},
 	"ZEC":  {0x1c, 0xb8},

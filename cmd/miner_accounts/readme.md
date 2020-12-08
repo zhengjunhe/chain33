@@ -23,7 +23,7 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
 
 需要监控
  1. 挖矿总量异常： 根据总体币的挖矿情况报警 （不再根据原来的固定值）
-    1. 随着挖矿的bty变动， 用于挖矿的币会有变化， 按固定的值来预警， 在用于挖矿的币变少时会有误报， 在json中增加 expectTotalIncrease 项， 在 totalIncreate < expectTotalIncrease * 90% 预警
+    1. 随着挖矿的dpom变动， 用于挖矿的币会有变化， 按固定的值来预警， 在用于挖矿的币变少时会有误报， 在json中增加 expectTotalIncrease 项， 在 totalIncreate < expectTotalIncrease * 90% 预警
  1. 挖矿帐号异常
     1. 是否有某个挖矿帐号， 一个小时挖矿所得为0, 可能是挖矿机器出故障了
     1. 增涨不到预期的50%

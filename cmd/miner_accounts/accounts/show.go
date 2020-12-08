@@ -20,7 +20,7 @@ import (
 )
 
 const secondsPerBlock = 5
-const btyPreBlock = 5
+const dpomPreBlock = 5
 const baseInterval = 3600
 const maxInterval = 15 * 24 * 3600
 const monitorBtyLowLimit = 3 * 1e7 * types.Coin
@@ -169,7 +169,7 @@ func calcIncrease(miner *MinerAccounts, acc1, acc2 []*rpctypes.Account, header *
 		if v.lastAcc != nil && v.curAcc != nil {
 			total := v.curAcc.Balance + v.curAcc.Frozen
 			increase := total - v.lastAcc.Balance - v.lastAcc.Frozen
-			expectIncrease := float64(miner.Blocks) * float64(btyPreBlock) * (float64(v.curAcc.Frozen) / float64(types.Coin)) / ticketTotal
+			expectIncrease := float64(miner.Blocks) * float64(dpomPreBlock) * (float64(v.curAcc.Frozen) / float64(types.Coin)) / ticketTotal
 
 			m := &MinerAccount{
 				Addr:           k,
@@ -186,7 +186,7 @@ func calcIncrease(miner *MinerAccounts, acc1, acc2 []*rpctypes.Account, header *
 
 			// 由于取不到挖矿的交易， 通过预期挖矿数， 推断间隔多少个区块能挖到。
 			// 由于挖矿分布的波动， 用双倍的预期能挖到区块的时间间隔来预警
-			expectBlocks := (expectIncrease / btyPreBlock)                               // 一个小时预期挖多少个块
+			expectBlocks := (expectIncrease / dpomPreBlock)                               // 一个小时预期挖多少个块
 			expectMinerInterval := float64(miner.Seconds/secondsPerBlock) / expectBlocks // 预期多少秒可以挖一个块
 			moniterInterval := int64(2*expectMinerInterval) + 1
 

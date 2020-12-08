@@ -46,7 +46,7 @@ func TestCoinsType(t *testing.T) {
 	assets, err := ty.GetAssets(tx)
 	assert.NoError(t, err)
 	assert.Equal(t, 1, len(assets))
-	assert.Equal(t, "BTY", assets[0].GetSymbol())
+	assert.Equal(t, "DPOM", assets[0].GetSymbol())
 }
 
 func TestCoinsPb(t *testing.T) {

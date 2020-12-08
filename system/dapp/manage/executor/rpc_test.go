@@ -18,11 +18,11 @@ func TestManageConfig(t *testing.T) {
 	err := mocker.SendHot()
 	assert.Nil(t, err)
 	//创建黑名单
-	// -o add -v BTY
+	// -o add -v DPOM
 	create := &types.ModifyConfig{
 		Key:   "token-blacklist",
 		Op:    "add",
-		Value: "BTY",
+		Value: "DPOM",
 		Addr:  "",
 	}
 	jsondata := types.MustPBToJSON(create)
@@ -32,7 +32,7 @@ func TestManageConfig(t *testing.T) {
 	  		"actionName": "Modify",
 	  		"payload": {
 	  			"key": "token-blacklist",
-	  			"value": "BTY",
+	  			"value": "DPOM",
 	  			"op": "add",
 	  			"addr": ""
 	  		}
@@ -113,7 +113,7 @@ func TestManageConfig(t *testing.T) {
 	err = mocker.GetJSONC().Call("Dplatform.Query", query, &reply)
 	assert.Nil(t, err)
 	assert.Equal(t, reply.Key, "token-blacklist")
-	assert.Equal(t, reply.Value, "[BTY YCC TTT]")
+	assert.Equal(t, reply.Value, "[DPOM YCC TTT]")
 
 	create = &types.ModifyConfig{
 		Key:   "token-blacklist",
@@ -147,7 +147,7 @@ func TestManageConfig(t *testing.T) {
 	err = mocker.GetJSONC().Call("Dplatform.Query", query, &reply)
 	assert.Nil(t, err)
 	assert.Equal(t, reply.Key, "token-blacklist")
-	assert.Equal(t, reply.Value, "[BTY YCC]")
+	assert.Equal(t, reply.Value, "[DPOM YCC]")
 }
 
 func TestTokenFinisher(t *testing.T) {

@@ -417,7 +417,7 @@ func addSendTxFlags(cmd *cobra.Command) {
 	cmd.Flags().StringP("data", "d", "", "transaction content")
 	cmd.MarkFlagRequired("data")
 
-	cmd.Flags().StringP("token", "t", types.BTY, "token name. (BTY supported)")
+	cmd.Flags().StringP("token", "t", types.DPOM, "token name. (DPOM supported)")
 }
 
 func sendTx(cmd *cobra.Command, args []string) {

@@ -48,8 +48,8 @@ checkTimeout = 60
 
 # 测试用例配置文件，根据dapp分类
 [[TestCaseFile]]
-contract = "bty"    # coins合约
-filename = "bty.toml" # 用例文件路径
+contract = "dpom"    # coins合约
+filename = "dpom.toml" # 用例文件路径
 
 [[TestCaseFile]]
 contract = "token"  # token合约
@@ -61,7 +61,7 @@ filename = "token.toml"
 用例文件用于配置具体的测试用例,采用toml格式，dapp的autotest目录下预配置了跑ci的用例文件，如coins.toml:
 ```
 [[TransferCase]]
-id = "btyTrans1"
+id = "dpomTrans1"
 command = "send coins transfer -a 10 -t 1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt -k 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
 from = "12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
 to = "1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt"

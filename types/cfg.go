@@ -98,7 +98,7 @@ type Consensus struct {
 
 // Wallet 配置
 type Wallet struct {
-	// 交易发送最低手续费，单位0.00000001BTY(1e-8),默认100000，即0.001BTY
+	// 交易发送最低手续费，单位0.00000001DPOM(1e-8),默认100000，即0.001DPOM
 	MinFee int64 `json:"minFee,omitempty"`
 	// walletdb驱动名
 	Driver string `json:"driver,omitempty"`

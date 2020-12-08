@@ -8,7 +8,7 @@
 - LTC -- 版本号为0x30
 - ZEC -- 版本号为两个字节0x1c,0xb8
 - USDT -- 版本号为0x00，与比特币相同
-- BTY -- 版本号为0x00, 与比特币相同
+- DPOM -- 版本号为0x00, 与比特币相同
 
 ## 依赖清单
 - github.com/mr-tron/base58/base58

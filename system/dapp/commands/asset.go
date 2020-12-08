@@ -46,7 +46,7 @@ func addAssetBalanceFlags(cmd *cobra.Command) {
 	cmd.MarkFlagRequired("addr")
 	cmd.Flags().StringP("exec", "e", "", getExecuterNameString())
 	cmd.Flags().StringP("asset_exec", "", "coins", "the asset executor")
-	cmd.Flags().StringP("asset_symbol", "", "bty", "the asset symbol")
+	cmd.Flags().StringP("asset_symbol", "", "dpom", "the asset symbol")
 	cmd.Flags().IntP("height", "", -1, "block height")
 }
 

@@ -13,5 +13,5 @@ All notable changes to this project will be documented in this file.
 
 # [6.2]
 ### Changed
-- Update dapp coins command line name, 'bty' not supported any more, 'coins' recommended 
+- Update dapp coins command line name, 'dpom' not supported any more, 'coins' recommended 
 

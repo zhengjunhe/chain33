@@ -40,7 +40,7 @@ var CoinName = map[uint32]string{
 	TypeBitcoin:      "BTC",
 	TypeLitecoin:     "LTC",
 	TypeZcash:        "ZEC",
-	TypeBty:          "BTY",
+	TypeBty:          "DPOM",
 	TypeYcc:          "YCC",
 }
 
@@ -51,7 +51,7 @@ var coinNameType = map[string]uint32{
 	"BTC": TypeBitcoin,
 	"LTC": TypeLitecoin,
 	"ZEC": TypeZcash,
-	"BTY": TypeBty,
+	"DPOM": TypeBty,
 	"YCC": TypeYcc,
 }
 

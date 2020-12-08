@@ -22,7 +22,7 @@ var testPrivkey = map[string]string{
 	"LTC":  "T4qcryHFU8c1kKNWYCFymCafmaVasjm6doJwga5CSDtENenrNwPj",
 	"ZEC":  "5HxWvvfubhXpYYpS3tJkw6fq9jE9j18THftkZjHHfmFiWtmAbrj",
 	"USDT": "L3U5kJqHAPXzRGeHvtV5HXTwyjmiAvYG8bk42zswDPz7XwUJ6XfP",
-	"BTY":  "L3U5kJqHAPXzRGeHvtV5HXTwyjmiAvYG8bk42zswDPz7XwUJ6XfP",
+	"DPOM":  "L3U5kJqHAPXzRGeHvtV5HXTwyjmiAvYG8bk42zswDPz7XwUJ6XfP",
 }
 
 var testPrivByte = make(map[string][]byte)
@@ -33,7 +33,7 @@ var ansPubkey = map[string]string{
 	"LTC":  "0325b737cdf14ec8885b578fd901dbb8e2c1020863865656dc74377df4fee67891",
 	"ZEC":  "030b4c866585dd868a9d62348a9cd008d6a312937048fff31670e7e920cfc7a744",
 	"USDT": "0367476225d991b4850b64f751bdb58a65904b70dd09f6cb30f31855f45302ac6a",
-	"BTY":  "0367476225d991b4850b64f751bdb58a65904b70dd09f6cb30f31855f45302ac6a",
+	"DPOM":  "0367476225d991b4850b64f751bdb58a65904b70dd09f6cb30f31855f45302ac6a",
 }
 
 var testPubkey = map[string]string{
@@ -42,7 +42,7 @@ var testPubkey = map[string]string{
 	"LTC":  "0325b737cdf14ec8885b578fd901dbb8e2c1020863865656dc74377df4fee67891",
 	"ZEC":  "040b4c866585dd868a9d62348a9cd008d6a312937048fff31670e7e920cfc7a7447b5f0bba9e01e6fe4735c8383e6e7a3347a0fd72381b8f797a19f694054e5a69",
 	"USDT": "0367476225d991b4850b64f751bdb58a65904b70dd09f6cb30f31855f45302ac6a",
-	"BTY":  "0367476225d991b4850b64f751bdb58a65904b70dd09f6cb30f31855f45302ac6a",
+	"DPOM":  "0367476225d991b4850b64f751bdb58a65904b70dd09f6cb30f31855f45302ac6a",
 }
 
 var ansAddress = map[string]string{
@@ -51,7 +51,7 @@ var ansAddress = map[string]string{
 	"LTC":  "LTFdikYPHPKBbkgfxcvDN9g8x6jgRCmDrE",
 	"ZEC":  "t1h8SqgtM3QM5e2M8EzhhT1yL2PXXtA6oqe",
 	"USDT": "1MeionVMkdVuPV82BAXSZsHyxtXNxLFVN8",
-	"BTY":  "1MeionVMkdVuPV82BAXSZsHyxtXNxLFVN8",
+	"DPOM":  "1MeionVMkdVuPV82BAXSZsHyxtXNxLFVN8",
 }
 
 //测试基于BTC规则的币种

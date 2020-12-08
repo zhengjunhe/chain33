@@ -40,7 +40,7 @@ func StatCmd() *cobra.Command {
 func getTotalCoinsCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "total_coins",
-		Short: "Get total amount of a token (default: bty of current height)",
+		Short: "Get total amount of a token (default: dpom of current height)",
 		Run:   totalCoins,
 	}
 	addTotalCoinsCmdFlags(cmd)
@@ -48,7 +48,7 @@ func getTotalCoinsCmd() *cobra.Command {
 }
 
 func addTotalCoinsCmdFlags(cmd *cobra.Command) {
-	cmd.Flags().StringP("symbol", "s", "bty", "token symbol")
+	cmd.Flags().StringP("symbol", "s", "dpom", "token symbol")
 	cmd.Flags().StringP("actual", "a", "", "actual statistics, any string")
 	cmd.Flags().Int64P("height", "t", -1, `block height, "-1" stands for current height`)
 }
@@ -94,7 +94,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 	var totalAmount int64
 	resp := commandtypes.GetTotalCoinsResult{}
 
-	if symbol == "bty" {
+	if symbol == "dpom" {
 		//查询历史总手续费
 		fee, err := queryTotalFeeWithHeight(height, rpc)
 		if err != nil {
@@ -104,7 +104,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 
 		resp.TxCount = fee.TxCount
 		var issueCoins int64
-		//只适用bty主网计算
+		//只适用dpom主网计算
 		if height < 2270000 {
 			issueCoins = 30 * height
 		} else { //挖矿产量降低30->8
@@ -147,7 +147,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 				StartKey:  startKey,
 				Count:     count,
 			}
-			if symbol == "bty" {
+			if symbol == "dpom" {
 				params.Execer = "coins"
 			} else {
 				params.Execer = "token"
@@ -164,7 +164,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 			startKey = res.NextKey
 		}
 
-		if symbol == "bty" {
+		if symbol == "dpom" {
 			resp.ActualAmount = strconv.FormatFloat(float64(actualAmount)/float64(types.Coin), 'f', 4, 64)
 			resp.DifferenceAmount = strconv.FormatFloat(float64(totalAmount-actualAmount)/float64(types.Coin), 'f', 4, 64)
 		} else {
@@ -187,7 +187,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 func getExecBalanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "exec_balance",
-		Short: "Get the exec amount of a token of one address (default: all exec-addr bty of current height of one addr)",
+		Short: "Get the exec amount of a token of one address (default: all exec-addr dpom of current height of one addr)",
 		Run:   execBalance,
 	}
 	addExecBalanceCmdFlags(cmd)
@@ -195,7 +195,7 @@ func getExecBalanceCmd() *cobra.Command {
 }
 
 func addExecBalanceCmdFlags(cmd *cobra.Command) {
-	cmd.Flags().StringP("symbol", "s", "bty", "token symbol")
+	cmd.Flags().StringP("symbol", "s", "dpom", "token symbol")
 	cmd.Flags().StringP("exec", "e", "coins", "excutor name")
 	cmd.Flags().StringP("addr", "a", "", "address")
 	cmd.MarkFlagRequired("addr")
@@ -242,7 +242,7 @@ func execBalance(cmd *cobra.Command, args []string) {
 
 	resp := commandtypes.GetExecBalanceResult{}
 
-	if symbol == "bty" {
+	if symbol == "dpom" {
 		exec = "coins"
 	}
 
@@ -297,7 +297,7 @@ func execBalance(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	if symbol == "bty" {
+	if symbol == "dpom" {
 		convertReplyToResult(&replys, &resp, types.Coin)
 	} else {
 		convertReplyToResult(&replys, &resp, types.TokenPrecision)

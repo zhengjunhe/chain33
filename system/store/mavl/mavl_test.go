@@ -292,8 +292,8 @@ func TestIterateCallBack_Mode1(t *testing.T) {
 
 	//var accountdb *account.DB
 	accountdb := account.NewCoinsAccount(cfg)
-	key := "mavl-coins-bty-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
-	prefix := "mavl-coins-bty-exec-"
+	key := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	prefix := "mavl-coins-dpom-exec-"
 	execAddr1 := "16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	var acc = &types.Account{
@@ -437,8 +437,8 @@ func TestIterateCallBack_Mode2(t *testing.T) {
 
 	//var accountdb *account.DB
 	accountdb := account.NewCoinsAccount(cfg)
-	key := "mavl-coins-bty-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
-	prefix := "mavl-coins-bty-exec-"
+	key := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	prefix := "mavl-coins-dpom-exec-"
 	execAddr1 := "16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	var acc = &types.Account{
@@ -575,8 +575,8 @@ func TestIterateCallBack_Mode2(t *testing.T) {
 	fmt.Println("func TestIterateCallBack------test case6-------")
 	resp = &types.StoreListReply{}
 	resp.End = []byte(addr)
-	resp.Start = []byte("mavl-coins-bty-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:")
-	resp.End = genPrefixEdge([]byte("mavl-coins-bty-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"))
+	resp.Start = []byte("mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:")
+	resp.End = genPrefixEdge([]byte("mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"))
 	resp.Count = 1
 	resp.Mode = 2
 	query = &drivers.StorelistQuery{StoreListReply: resp}
