@@ -34,7 +34,7 @@ dep = ["dpomTrans1"]
 
 
 [[TransferCase]]
-id = "failBtyTrans"
+id = "failDpomTrans"
 command = "send coins transfer -a 15 -t 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv -k 1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 from = "1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 to = "12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"

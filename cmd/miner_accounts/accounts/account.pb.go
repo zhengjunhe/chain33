@@ -77,7 +77,7 @@ type MinerAccount struct {
 	Increase          string `protobuf:"bytes,3,opt,name=increase" json:"increase,omitempty"`
 	Frozen            string `protobuf:"bytes,4,opt,name=frozen" json:"frozen,omitempty"`
 	ExpectIncrease    string `protobuf:"bytes,5,opt,name=expectIncrease" json:"expectIncrease,omitempty"`
-	MinerBtyDuring    string `protobuf:"bytes,6,opt,name=minerBtyDuring" json:"minerBtyDuring,omitempty"`
+	MinerDpomDuring    string `protobuf:"bytes,6,opt,name=minerDpomDuring" json:"minerDpomDuring,omitempty"`
 	ExpectMinerBlocks string `protobuf:"bytes,7,opt,name=expectMinerBlocks" json:"expectMinerBlocks,omitempty"`
 }
 
@@ -121,9 +121,9 @@ func (m *MinerAccount) GetExpectIncrease() string {
 	return ""
 }
 
-func (m *MinerAccount) GetMinerBtyDuring() string {
+func (m *MinerAccount) GetMinerDpomDuring() string {
 	if m != nil {
-		return m.MinerBtyDuring
+		return m.MinerDpomDuring
 	}
 	return ""
 }

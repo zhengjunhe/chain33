@@ -22,7 +22,7 @@ func TestBipwallet(t *testing.T) {
 		TypeBitcoin:      "BTC",
 		TypeLitecoin:     "LTC",
 		TypeZayedcoin:    "ZEC",
-		TypeBty:          "DPOM",
+		TypeDpom:          "DPOM",
 		TypeYcc:          "YCC",
 	*/
 	//bitsize=128 返回12个单词或者汉子，bitsize+32=160  返回15个单词或者汉子，bitszie=256 返回24个单词或者汉子

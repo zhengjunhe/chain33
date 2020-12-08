@@ -23,7 +23,7 @@ const secondsPerBlock = 5
 const dpomPreBlock = 5
 const baseInterval = 3600
 const maxInterval = 15 * 24 * 3600
-const monitorBtyLowLimit = 3 * 1e7 * types.Coin
+const monitorDpomLowLimit = 3 * 1e7 * types.Coin
 
 var log = l.New("module", "accounts")
 
@@ -73,13 +73,13 @@ func (show *ShowMinerAccount) Get(in *TimeAt, out *interface{}) error {
 		return nil
 	}
 
-	totalBty := int64(0)
+	totalDpom := int64(0)
 	for _, acc := range curAcc {
-		totalBty += acc.Frozen
+		totalDpom += acc.Frozen
 	}
-	log.Info("show 1st balance", "utc", header.BlockTime, "total", totalBty)
+	log.Info("show 1st balance", "utc", header.BlockTime, "total", totalDpom)
 
-	monitorInterval := calcMoniterInterval(totalBty)
+	monitorInterval := calcMoniterInterval(totalDpom)
 	log.Info("show", "monitor Interval", monitorInterval)
 
 	lastHourHeader, lastAcc, err := cache.getBalance(addrs, "ticket", header.Height-monitorInterval)
@@ -124,10 +124,10 @@ func toBlockHeight(timeAt string) (int64, error) {
 
 // 计算监控区块的范围
 // 做对小额帐号限制，不然监控范围过大， 如9000个币需要138天
-func calcMoniterInterval(totalBty int64) int64 {
+func calcMoniterInterval(totalDpom int64) int64 {
 	monitorInterval := int64(baseInterval)
-	if totalBty < monitorBtyLowLimit && totalBty > 0 {
-		monitorInterval = int64(float64(monitorBtyLowLimit) / float64(totalBty) * float64(baseInterval))
+	if totalDpom < monitorDpomLowLimit && totalDpom > 0 {
+		monitorInterval = int64(float64(monitorDpomLowLimit) / float64(totalDpom) * float64(baseInterval))
 	}
 	if monitorInterval > maxInterval {
 		monitorInterval = maxInterval
@@ -193,10 +193,10 @@ func calcIncrease(miner *MinerAccounts, acc1, acc2 []*rpctypes.Account, header *
 			m.ExpectMinerBlocks = strconv.FormatFloat(expectBlocks, 'f', 4, 64)
 			_, acc, err := cache.getBalance([]string{m.Addr}, "ticket", header.Height-moniterInterval)
 			if err != nil || len(acc) == 0 {
-				m.MinerBtyDuring = "0.0000"
+				m.MinerDpomDuring = "0.0000"
 			} else {
 				minerDelta := total - acc[0].Balance - acc[0].Frozen
-				m.MinerBtyDuring = strconv.FormatFloat(float64(minerDelta)/float64(types.Coin), 'f', 4, 64)
+				m.MinerDpomDuring = strconv.FormatFloat(float64(minerDelta)/float64(types.Coin), 'f', 4, 64)
 			}
 
 			miner.MinerAccounts = append(miner.MinerAccounts, m)
