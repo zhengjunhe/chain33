@@ -77,17 +77,17 @@ service calculator {
 
 ### 代码生成
 ##### 生成基本代码
->使用chain33-tool，工具使用参考[文档](https://github.com/33cn/chain33/blob/master/cmd/tools/doc/gendapp.md)
+>使用dplatform-tool，工具使用参考[文档](https://github.com/33cn/dplatform/blob/master/cmd/tools/doc/gendapp.md)
 ```
 //本例默认将calculator生成至官方plugin项目dapp目录下
-$ cd $GOPATH/src/github.com/33cn/chain33/cmd/tools && go build -o tool
+$ cd $GOPATH/src/github.com/33cn/dplatform/cmd/tools && go build -o tool
 $ ./tool gendapp -n calculator -p doc/calculator.proto
 $ cd $GOPATH/src/github.com/33cn/plugin/plugin/dapp/calculator && ls
 ```
 
 ##### 生成pb.go文件
-pb.go文件基于protobuf提供的proto-gen-go插件生成，这里protobuf的版本必须和chain33引用的保持一致，
-具体可以查看chain33项目go.mod文件，github.com/golang/protobuf库的版本
+pb.go文件基于protobuf提供的proto-gen-go插件生成，这里protobuf的版本必须和dplatform引用的保持一致，
+具体可以查看dplatform项目go.mod文件，github.com/golang/protobuf库的版本
 ```
 //进入生成合约的目录
 $ cd $GOPATH/src/github.com/33cn/plugin/plugin/dapp/calculator
@@ -305,8 +305,8 @@ func (j *Jrpc)QueryCalcCount(in *ptypes.ReqQueryCalcCount, result *interface{}) 
 ```
 
 ##### rpc说明
->对于构造交易和query类接口可以通过chain33框架的rpc去调用，
-分别是Chain33.CreateTransaction和Chain33.Query，上述代码只是示例如何开发rpc接口，
+>对于构造交易和query类接口可以通过dplatform框架的rpc去调用，
+分别是Dplatform.CreateTransaction和Dplatform.Query，上述代码只是示例如何开发rpc接口，
 实际使用中，只需要实现query接口，并通过框架rpc调用，也可以根据需求封装rpc接口，在commands模块将会介绍如何调用框架rpc
 
 #### commands命令行模块
@@ -316,11 +316,11 @@ func (j *Jrpc)QueryCalcCount(in *ptypes.ReqQueryCalcCount, result *interface{}) 
 >涉及框架基础库使用，包括相关类型和网络组件
 ```go
 import (
-	"github.com/33cn/chain33/rpc/jsonclient"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	"github.com/33cn/dplatform/types"
 	"github.com/spf13/cobra"
 
-	rpctypes "github.com/33cn/chain33/rpc/types"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
 	calculatortypes "github.com/33cn/plugin/plugin/dapp/calculator/types"
 )
 ```
@@ -350,14 +350,14 @@ func createAdd(cmd *cobra.Command, args []string) {
 		Summand: summand,
 		Addend:  addend,
 	}
-	chain33Req := rpctypes.CreateTxIn{
+	dplatformReq := rpctypes.CreateTxIn{
 		Execer:     ptypes.CalculatorX,
 		ActionName: ptypes.NameAddAction,
 		Payload:    types.MustPBToJSON(&req),
 	}
 	var res string
 	//调用框架CreateTransaction接口构建原始交易
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CreateTransaction", chain33Req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.CreateTransaction", dplatformReq, &res)
 	ctx.RunWithoutMarshal()
 }
 ```
@@ -384,7 +384,7 @@ func queryCalcCountCmd() *cobra.Command {
  	req := ptypes.ReqQueryCalcCount{
  		Action: action,
  	}
- 	chain33Req := &rpctypes.Query4Jrpc{
+ 	dplatformReq := &rpctypes.Query4Jrpc{
  		Execer:   ptypes.CalculatorX,
  		FuncName: "CalcCount",
  		Payload:  types.MustPBToJSON(&req),
@@ -392,7 +392,7 @@ func queryCalcCountCmd() *cobra.Command {
  	var res interface{}
  	res = &calculatortypes.ReplyQueryCalcCount{}
  	//调用框架Query rpc接口, 通过框架调用，需要指定query对应的函数名称，具体参数见Query4Jrpc结构
- 	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.Query", chain33Req, &res)
+ 	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.Query", dplatformReq, &res)
  	//调用合约内部rpc接口, 注意合约自定义的rpc接口是以合约名称作为rpc服务，这里为calculator
  	//ctx := jsonclient.NewRPCCtx(rpcLaddr, "calculator.QueryCalcCount", req, &res)
  	ctx.Run()
@@ -437,13 +437,13 @@ $ cd $GOPATH/src/github.com/33cn/plugin && make
 编译后可以运行节点，进行钱包相关配置，即可发送合约交易进行功能性测试，本例相关命令行
 ```bash
 # 通过curl方式调用rpc接口构建Add原始交易
-curl -kd '{"method":"Chain33.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:8801
-# 通过chain33-cli构建Add原始交易
-./chain33-cli calculator add -a 1 -s 1
+curl -kd '{"method":"Dplatform.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:8801
+# 通过dplatform-cli构建Add原始交易
+./dplatform-cli calculator add -a 1 -s 1
 
 # queryCount接口类似
 curl -kd '{"method":"calculator.QueryCalcCount", "params":[{"action":"Add"}]}' http://localhost:8801
-./chain33-cli calculator query_count -a Add
+./dplatform-cli calculator query_count -a Add
 ``` 
 
 #### 进阶

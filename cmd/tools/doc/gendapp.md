@@ -1,19 +1,19 @@
 
-# chain33 gendapp
-根据定义的合约protobuf原型文件，自动生成chain33 dapp基本代码
+# dplatform gendapp
+根据定义的合约protobuf原型文件，自动生成dplatform dapp基本代码
 
 ### 编译
 ```
-//本地存在chain33代码，该步骤可省略
-$ go get github.com/33cn/chain33
-//编译chain33 tools
-$ go build -i -o $GOPATH/bin/chain33-tool github.com/33cn/chain33/cmd/tools
+//本地存在dplatform代码，该步骤可省略
+$ go get github.com/33cn/dplatform
+//编译dplatform tools
+$ go build -i -o $GOPATH/bin/dplatform-tool github.com/33cn/dplatform/cmd/tools
 ```
 
 ### 使用
 ```
 //查看命令使用方法
-$ chain33-tool gendapp --help
+$ dplatform-tool gendapp --help
 Usage:
   tools gendapp [flags]
 
@@ -31,10 +31,10 @@ Flags:
 举例:
 ```
 // 默认路径生成名为demo的合约代码
-$ chain33-tool gendapp -n demo -p ./demo.proto
+$ dplatform-tool gendapp -n demo -p ./demo.proto
 
 // 指定输出包路径
-$ chain33-tool gendapp -n demo -p ./demo.proto -o github.com/33cn/chain33/plugin/dapp/
+$ dplatform-tool gendapp -n demo -p ./demo.proto -o github.com/33cn/dplatform/plugin/dapp/
 
 ```
 ### proto规范
@@ -91,8 +91,8 @@ demo
 
 ```
 ##### 生成pb.go文件
-pb.go文件基于protobuf提供的proto-gen-go插件生成，这里protobuf的版本必须和chain33引用的保持一致，
-具体可以查看chain33项目go.mod文件，github.com/golang/protobuf库的版本
+pb.go文件基于protobuf提供的proto-gen-go插件生成，这里protobuf的版本必须和dplatform引用的保持一致，
+具体可以查看dplatform项目go.mod文件，github.com/golang/protobuf库的版本
 ```
 //进入到上述proto目录执行相关脚本，将会在types目录下生成对应pb.go文件
 $ cd proto && make
@@ -101,5 +101,5 @@ $ cd proto && make
 ##### 后续开发   
 在生成代码基础上，需要实现交易创建，执行，及所需rpc服务<br/>
 初次开发可以参考官方简单计算器合约
-[开发步骤](https://github.com/33cn/chain33/blob/master/cmd/tools/doc/gencalculator.md)
+[开发步骤](https://github.com/33cn/dplatform/blob/master/cmd/tools/doc/gencalculator.md)
 
