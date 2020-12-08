@@ -208,11 +208,11 @@ func (m *MinerAccounts) GetExpectTotalIncrease() string {
 }
 
 type Config struct {
-	Whitelist    []string `protobuf:"bytes,1,rep,name=whitelist" json:"whitelist,omitempty"`
-	JrpcBindAddr string   `protobuf:"bytes,2,opt,name=jrpcBindAddr" json:"jrpcBindAddr,omitempty"`
-	DataDir      string   `protobuf:"bytes,3,opt,name=dataDir" json:"dataDir,omitempty"`
-	MinerAddr    []string `protobuf:"bytes,4,rep,name=minerAddr" json:"minerAddr,omitempty"`
-	DplatformHost  string   `protobuf:"bytes,5,opt,name=dplatformhost" json:"dplatformhost,omitempty"`
+	Whitelist     []string `protobuf:"bytes,1,rep,name=whitelist" json:"whitelist,omitempty"`
+	JrpcBindAddr  string   `protobuf:"bytes,2,opt,name=jrpcBindAddr" json:"jrpcBindAddr,omitempty"`
+	DataDir       string   `protobuf:"bytes,3,opt,name=dataDir" json:"dataDir,omitempty"`
+	MinerAddr     []string `protobuf:"bytes,4,rep,name=minerAddr" json:"minerAddr,omitempty"`
+	DplatformHost string   `protobuf:"bytes,5,opt,name=dplatformhost" json:"dplatformhost,omitempty"`
 }
 
 func (m *Config) Reset()                    { *m = Config{} }

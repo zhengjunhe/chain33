@@ -25,7 +25,7 @@ type Create func(cfg *DplatformConfig)
 var (
 	AllowUserExec = [][]byte{ExecerNone}
 	EmptyValue    = []byte("FFFFFFFFemptyBVBiCj5jvE15pEiwro8TQRGnJSNsJF") //这字符串表示数据库中的空值
-	cliSysParam   = make(map[string]*DplatformConfig)                       // map key is title
+	cliSysParam   = make(map[string]*DplatformConfig)                     // map key is title
 	regModuleInit = make(map[string]Create)
 	regExecInit   = make(map[string]Create)
 	runonce       = sync.Once{}

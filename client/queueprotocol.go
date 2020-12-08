@@ -601,10 +601,10 @@ func (q *QueueProtocol) GetLastHeader() (*types.Header, error) {
 func (q *QueueProtocol) Version() (*types.VersionInfo, error) {
 	types.AssertConfig(q.client)
 	return &types.VersionInfo{
-		Title:   q.client.GetConfig().GetTitle(),
-		App:     version.GetAppVersion(),
+		Title:     q.client.GetConfig().GetTitle(),
+		App:       version.GetAppVersion(),
 		Dplatform: version.GetVersion(),
-		LocalDb: version.GetLocalDBVersion(),
+		LocalDb:   version.GetLocalDBVersion(),
 	}, nil
 }
 
