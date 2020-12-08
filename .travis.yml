@@ -1,5 +1,5 @@
 language: go
-go_import_path: github.com/33cn/chain33
+go_import_path: github.com/33cn/dplatform
 
 
 os: linux

@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-autotest
-    container_name: autotest-chain33
+    container_name: autotest-dplatform
 
   chain32:
     build:
