@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package types;
-option go_package = "github.com/33cn/chain33/types";
+option go_package = "github.com/33cn/dplatform/types";
 
 message Reply {
     bool  isOk = 1;
@@ -79,6 +79,6 @@ message ReqRandHash {
 message VersionInfo {
     string title   = 1;
     string app     = 2;
-    string chain33 = 3;
+    string dplatform = 3;
     string localDb = 4;
 }
