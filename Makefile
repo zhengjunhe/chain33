@@ -4,18 +4,18 @@
 # 3. make build
 # ...
 export GO111MODULE=on
-SRC := github.com/33cn/chain33/cmd/chain33
-SRC_CLI := github.com/33cn/chain33/cmd/cli
-SRC_SIGNATORY := github.com/33cn/chain33/cmd/signatory-server
-SRC_MINER := github.com/33cn/chain33/cmd/miner_accounts
-APP := build/chain33
-CLI := build/chain33-cli
+SRC := github.com/33cn/dplatform/cmd/dplatform
+SRC_CLI := github.com/33cn/dplatform/cmd/cli
+SRC_SIGNATORY := github.com/33cn/dplatform/cmd/signatory-server
+SRC_MINER := github.com/33cn/dplatform/cmd/miner_accounts
+APP := build/dplatform
+CLI := build/dplatform-cli
 SIGNATORY := build/signatory-server
 MINER := build/miner_accounts
 AUTOTEST := build/autotest/autotest
-SRC_AUTOTEST := github.com/33cn/chain33/cmd/autotest
+SRC_AUTOTEST := github.com/33cn/dplatform/cmd/autotest
 LDFLAGS := -ldflags "-w -s"
-BUILD_FLAGS = -ldflags "-X github.com/33cn/chain33/common/version.GitCommit=`git rev-parse --short=8 HEAD`"
+BUILD_FLAGS = -ldflags "-X github.com/33cn/dplatform/common/version.GitCommit=`git rev-parse --short=8 HEAD`"
 MKPATH=$(abspath $(lastword $(MAKEFILE_LIST)))
 MKDIR=$(dir $(MKPATH))
 DAPP := ""
@@ -37,26 +37,26 @@ dep: ## Get the dependencies
 
 all: ## Builds for multiple platforms
 	@gox  $(LDFLAGS) $(SRC)
-	@cp cmd/chain33/chain33.toml build/
-	@cp cmd/chain33/bityuan.toml build/
-	@mv chain33* build/
+	@cp cmd/dplatform/dplatform.toml build/
+	@cp cmd/dplatform/bityuan.toml build/
+	@mv dplatform* build/
 
 build: ## Build the binary file
 	@go build $(BUILD_FLAGS) -v -i -o  $(APP) $(SRC)
-	@cp cmd/chain33/chain33.toml build/
-	@cp cmd/chain33/bityuan.toml build/
+	@cp cmd/dplatform/dplatform.toml build/
+	@cp cmd/dplatform/bityuan.toml build/
 
 release: ## Build the binary file
 	@go build -v -i -o $(APP) $(LDFLAGS) $(SRC)
-	@cp cmd/chain33/chain33.toml build/
-	@cp cmd/chain33/bityuan.toml build/
-	@cp cmd/chain33/chain33.para.toml build/
+	@cp cmd/dplatform/dplatform.toml build/
+	@cp cmd/dplatform/bityuan.toml build/
+	@cp cmd/dplatform/dplatform.para.toml build/
 
 cli: ## Build cli binary
 	@go build -v -i -o $(CLI) $(SRC_CLI)
 
 execblock: ## Build cli binary
-	@go build -v -i -o build/execblock github.com/33cn/chain33/cmd/execblock
+	@go build -v -i -o build/execblock github.com/33cn/dplatform/cmd/execblock
 
 
 para:
@@ -83,7 +83,7 @@ miner:
 build_ci: depends ## Build the binary file for CI
 	@go build -v -i -o $(CLI) $(SRC_CLI)
 	@go build  $(BUILD_FLAGS) -v -o $(APP) $(SRC)
-	@cp cmd/chain33/chain33.toml build/
+	@cp cmd/dplatform/dplatform.toml build/
 
 linter: vet ineffassign gosec ## Use gometalinter check code, ignore some unserious warning
 	@./golinter.sh "filter"
@@ -135,28 +135,28 @@ coverage: ## Generate global code coverage report
 coverhtml: ## Generate global code coverage report in HTML
 	@./build/tools/coverage.sh html
 
-docker: ## build docker image for chain33 run
-	@sudo docker build . -f ./build/Dockerfile-run -t chain33:latest
+docker: ## build docker image for dplatform run
+	@sudo docker build . -f ./build/Dockerfile-run -t dplatform:latest
 
-docker-compose: ## build docker-compose for chain33 run
+docker-compose: ## build docker-compose for dplatform run
 	@cd build && if ! [ -d ci ]; then \
 	 make -C ../ ; \
 	 fi; \
-	 cp chain33* Dockerfile  docker-compose* system-test* ci/ && cd ci/ && ./docker-compose-pre.sh run $(PROJ) $(DAPP)  && cd ../..
+	 cp dplatform* Dockerfile  docker-compose* system-test* ci/ && cd ci/ && ./docker-compose-pre.sh run $(PROJ) $(DAPP)  && cd ../..
 
-docker-compose-down: ## build docker-compose for chain33 run
+docker-compose-down: ## build docker-compose for dplatform run
 	@cd build && if [ -d ci ]; then \
-	 cp chain33* Dockerfile  docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh down $(PROJ) $(DAPP) && cd .. ; \
+	 cp dplatform* Dockerfile  docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh down $(PROJ) $(DAPP) && cd .. ; \
 	 fi; \
 	 cd ..
 
-fork-test: ## build fork-test for chain33 run
-	@cd build && cp chain33* Dockerfile system-fork-test.sh docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh forktest $(PROJ) $(DAPP) && cd ../..
+fork-test: ## build fork-test for dplatform run
+	@cd build && cp dplatform* Dockerfile system-fork-test.sh docker-compose* ci/ && cd ci/ && ./docker-compose-pre.sh forktest $(PROJ) $(DAPP) && cd ../..
 
 
 clean: ## Remove previous build
 	@rm -rf $(shell find . -name 'datadir' -not -path "./vendor/*")
-	@rm -rf build/chain33*
+	@rm -rf build/dplatform*
 	@rm -rf build/relayd*
 	@rm -rf build/*.log
 	@rm -rf build/logs
@@ -182,7 +182,7 @@ cleandata:
 	rm -rf build/datadir/addrbook
 	rm -rf build/datadir/blockchain.db
 	rm -rf build/datadir/mavltree
-	rm -rf build/chain33.log
+	rm -rf build/dplatform.log
 
 fmt_go: fmt_shell ## go fmt
 	@go fmt ./...
@@ -212,7 +212,7 @@ mock:
 	@cd common/db && mockery -name=KVDB && mv mocks/KVDB.go mocks/kvdb.go && cd -
 	@cd common/db && mockery -name=DB && mv mocks/DB.go mocks/db.go && cd -
 	@cd queue && mockery -name=Client && mv mocks/Client.go mocks/client.go && cd -
-	@cd types/ && mockery -name=Chain33Client && mv mocks/Chain33Client.go mocks/chain33client.go && cd -
+	@cd types/ && mockery -name=DplatformClient && mv mocks/DplatformClient.go mocks/dplatformclient.go && cd -
 
 
 
@@ -268,7 +268,7 @@ webhook_auto_ci: clean fmt_proto fmt_shell protobuf mock
 		  fi;
 
 addupstream:
-	git remote add upstream https://github.com/33cn/chain33.git
+	git remote add upstream https://github.com/33cn/dplatform.git
 	git remote -v
 
 sync:
@@ -293,7 +293,7 @@ push:
 pull:
 	@remotelist=$$(git remote | grep ${name});if [ -z $$remotelist ]; then \
 		echo ${remotelist}; \
-		git remote add ${name} https://github.com/${name}/chain33.git ; \
+		git remote add ${name} https://github.com/${name}/dplatform.git ; \
 	fi;
 	git fetch ${name}
 	git checkout ${name}/${b}
