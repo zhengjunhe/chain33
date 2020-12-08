@@ -59,7 +59,7 @@ grpcFuncWhitelist=["*"]
 
 [mempool]
 poolCacheSize=10240
-# 最小得交易手续费率，这个没有默认值，必填，一般是0.001 coins
+# 最小得交易手续费率，这个没有默认值，必填，一般是0.0001 coins
 minTxFeeRate=10000
 # 最大的交易手续费率, 0.1 coins
 maxTxFeeRate=1000000

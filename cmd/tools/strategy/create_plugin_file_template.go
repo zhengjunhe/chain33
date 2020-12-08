@@ -125,7 +125,7 @@ msgCacheSize=10240
 driver="leveldb"
 [mempool]
 poolCacheSize=102400
-minTxFeeRate=100000
+minTxFeeRate=10000
 [consensus]
 name="ticket"
 minerstart=true

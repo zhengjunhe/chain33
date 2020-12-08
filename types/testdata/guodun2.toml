@@ -62,7 +62,7 @@ keyFile="key.pem"
 
 [mempool]
 poolCacheSize=102400
-minTxFeeRate=100000
+minTxFeeRate=10000
 maxTxNumPerAccount=100
 maxTxFee=1000000000
 
