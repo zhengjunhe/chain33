@@ -15,13 +15,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	coinstypes "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
+	coinstypes "github.com/33cn/dplatform/system/dapp/coins/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/BurntSushi/toml"
 )
 
@@ -57,7 +57,7 @@ func initWrite() *Config {
 }
 
 func main() {
-	chain33Cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	dplatformCfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	cfg := initWrite()
 	receiveAddr = cfg.UserWriteConf.ReceiveAddr
 	currentHeight = cfg.UserWriteConf.CurrentHeight
@@ -70,7 +70,7 @@ func main() {
 		return
 	}
 	fmt.Println("starting scaning.............")
-	scanWrite(chain33Cfg)
+	scanWrite(dplatformCfg)
 }
 
 func ioHeightAndIndex() error {
@@ -107,7 +107,7 @@ func ioHeightAndIndex() error {
 	return nil
 }
 
-func scanWrite(cfg *types.Chain33Config) {
+func scanWrite(cfg *types.DplatformConfig) {
 	for {
 		time.Sleep(time.Second * 5)
 		rpc, err := jsonclient.NewJSONClient(rpcAddr)
@@ -127,7 +127,7 @@ func scanWrite(cfg *types.Chain33Config) {
 		}
 
 		var replyTxInfos rpctypes.ReplyTxInfos
-		err = rpc.Call("Chain33.GetTxByAddr", paramsReqAddr, &replyTxInfos)
+		err = rpc.Call("Dplatform.GetTxByAddr", paramsReqAddr, &replyTxInfos)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			continue
@@ -146,7 +146,7 @@ func scanWrite(cfg *types.Chain33Config) {
 		for _, hash := range txHashes {
 			paramsQuery := rpctypes.QueryParm{Hash: hash}
 			var transactionDetail rpctypes.TransactionDetail
-			err = rpc.Call("Chain33.QueryTransaction", paramsQuery, &transactionDetail)
+			err = rpc.Call("Dplatform.QueryTransaction", paramsQuery, &transactionDetail)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				continue
@@ -202,12 +202,12 @@ func scanWrite(cfg *types.Chain33Config) {
 				Expire: "0",
 			}
 			var signed string
-			rpc.Call("Chain33.SignRawTx", paramsReqSignRawTx, &signed)
+			rpc.Call("Dplatform.SignRawTx", paramsReqSignRawTx, &signed)
 			paramsRaw := rpctypes.RawParm{
 				Data: signed,
 			}
 			var sent string
-			rpc.Call("Chain33.SendTransaction", paramsRaw, &sent)
+			rpc.Call("Dplatform.SendTransaction", paramsRaw, &sent)
 			f, err := os.OpenFile(heightFile, os.O_RDWR, 0666)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)

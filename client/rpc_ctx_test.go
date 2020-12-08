@@ -8,8 +8,8 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/33cn/chain33/rpc/jsonclient"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	"github.com/33cn/dplatform/types"
 
 	"fmt"
 
@@ -94,7 +94,7 @@ func (c *GrpcCtx) Run() (err error) {
 	}
 	defer conn.Close()
 
-	rpc := types.NewChain33Client(conn)
+	rpc := types.NewDplatformClient(conn)
 	switch c.Method {
 	case "GetBlocks":
 		reply, err := rpc.GetBlocks(context.Background(), c.Params.(*types.ReqBlocks))

@@ -10,13 +10,13 @@ import (
 
 	"strings"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/client/mocks"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
@@ -31,7 +31,7 @@ var (
 
 func GenerAccDb() (*DB, *DB) {
 	//构造账户数据库
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	accCoin := NewCoinsAccount(cfg)
 	stroedb, _ := db.NewGoMemDB("gomemdb", "test", 128)
 	accCoin.SetDB(stroedb)
@@ -117,7 +117,7 @@ func TestDepositBalance(t *testing.T) {
 
 func initEnv() queue.Queue {
 	var q = queue.New("channel")
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	q.SetConfig(cfg)
 	return q
 }
@@ -207,7 +207,7 @@ func TestGetTotalCoins(t *testing.T) {
 
 func TestAccountName(t *testing.T) {
 	stroedb, _ := db.NewGoMemDB("gomemdb", "test", 128)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	accCoin := NewCoinsAccount(cfg)
 	accCoin.SetDB(stroedb)
 	coinsAddr := address.ExecAddress("coins")
@@ -472,7 +472,7 @@ func getExecBalance(callback func(*types.StoreList) (*types.StoreListReply, erro
 }
 
 func TestGetExecBalance2(t *testing.T) {
-	accCoin := NewCoinsAccount(types.NewChain33Config(types.GetDefaultCfgstring()))
+	accCoin := NewCoinsAccount(types.NewDplatformConfig(types.GetDefaultCfgstring()))
 	key := "mavl-coins-bty-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	execAddr := "16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
@@ -559,7 +559,7 @@ func TestGetExecBalance2(t *testing.T) {
 }
 
 func TestGetBalance(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	accCoin := NewCoinsAccount(cfg)
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 

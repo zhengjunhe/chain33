@@ -8,15 +8,15 @@ import (
 	"flag"
 	"time"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/rpc"
+	"github.com/33cn/dplatform/types"
 )
 
 var (
-	configPath = flag.String("f", "../cmd/chain33/chain33.test.toml", "configfile")
+	configPath = flag.String("f", "../cmd/dplatform/dplatform.test.toml", "configfile")
 
 	jrpcaddr = "localhost:8801"
 	jrpcsite = "http://localhost:8801"
@@ -103,7 +103,7 @@ func (mock *mockClient) NewMessage(topic string, ty int64, data interface{}) *qu
 func (mock *mockClient) FreeMessage(msg ...*queue.Message) {
 }
 
-func (mock *mockClient) GetConfig() *types.Chain33Config {
+func (mock *mockClient) GetConfig() *types.DplatformConfig {
 	return mock.c.GetConfig()
 }
 
@@ -138,7 +138,7 @@ func (mock *mockQueue) Name() string {
 func (mock *mockSystem) startup(size int) client.QueueProtocolAPI {
 
 	var q = queue.New("channel")
-	q.SetConfig(types.NewChain33Config(types.GetDefaultCfgstring()))
+	q.SetConfig(types.NewDplatformConfig(types.GetDefaultCfgstring()))
 	queue := &mockQueue{q: q}
 	chain := &mockBlockChain{}
 	chain.SetQueueClient(q)

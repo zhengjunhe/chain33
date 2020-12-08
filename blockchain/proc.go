@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"sync/atomic"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 )
 
 //ProcRecvMsg blockchain模块的消息接收处理

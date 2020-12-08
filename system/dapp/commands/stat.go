@@ -11,11 +11,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
+	commandtypes "github.com/33cn/dplatform/system/dapp/commands/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/spf13/cobra"
 )
 
@@ -126,7 +126,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 		//params.FuncName = "GetTokenInfo"
 		//params.Payload = req
 		//var res tokenty.Token
-		err = rpc.Call("Chain33.Query", params, &res)
+		err = rpc.Call("Dplatform.Query", params, &res)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return
@@ -153,7 +153,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 				params.Execer = "token"
 			}
 			var res types.ReplyGetTotalCoins
-			err = rpc.Call("Chain33.GetTotalCoins", params, &res)
+			err = rpc.Call("Dplatform.GetTotalCoins", params, &res)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				return
@@ -264,7 +264,7 @@ func execBalance(cmd *cobra.Command, args []string) {
 	for {
 		var reply types.ReplyGetExecBalance
 		var str string
-		err = rpc.Call("Chain33.GetExecBalance", reqParam, &str)
+		err = rpc.Call("Dplatform.GetExecBalance", reqParam, &str)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return
@@ -399,7 +399,7 @@ func totalFee(cmd *cobra.Command, args []string) {
 func getLastBlock(rpc *jsonclient.JSONClient) (*rpctypes.Header, error) {
 
 	res := &rpctypes.Header{}
-	err := rpc.Call("Chain33.GetLastHeader", nil, &res)
+	err := rpc.Call("Dplatform.GetLastHeader", nil, &res)
 	if err != nil {
 		return nil, err
 	}
@@ -411,7 +411,7 @@ func getBlockHash(height int64, rpc *jsonclient.JSONClient) (string, error) {
 
 	params := types.ReqInt{Height: height}
 	var res rpctypes.ReplyHash
-	err := rpc.Call("Chain33.GetBlockHash", params, &res)
+	err := rpc.Call("Dplatform.GetBlockHash", params, &res)
 	if err != nil {
 		return "", err
 	}
@@ -453,7 +453,7 @@ func queryTotalFeeWithHash(blockHash string, rpc *jsonclient.JSONClient) (*types
 	hash = append([]byte("TotalFeeKey:"), hash...)
 	params := types.LocalDBGet{Keys: [][]byte{hash[:]}}
 	res := &types.TotalFee{}
-	err = rpc.Call("Chain33.QueryTotalFee", params, &res)
+	err = rpc.Call("Dplatform.QueryTotalFee", params, &res)
 	if err != nil {
 		return nil, err
 	}
@@ -469,7 +469,7 @@ func getBlocks(start, end int64, rpc *jsonclient.JSONClient) (*rpctypes.BlockDet
 		Isdetail: true,
 	}
 	res := &rpctypes.BlockDetails{}
-	err := rpc.Call("Chain33.GetBlocks", params, &res)
+	err := rpc.Call("Dplatform.GetBlocks", params, &res)
 	if err != nil {
 		return nil, err
 	}

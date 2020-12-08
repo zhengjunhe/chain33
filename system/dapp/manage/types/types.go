@@ -8,8 +8,8 @@ package types
 import (
 	"reflect"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/types"
 )
 
 var (
@@ -31,13 +31,13 @@ func init() {
 }
 
 //InitFork init
-func InitFork(cfg *types.Chain33Config) {
+func InitFork(cfg *types.DplatformConfig) {
 	cfg.RegisterDappFork(ManageX, "Enable", 120000)
 	cfg.RegisterDappFork(ManageX, "ForkManageExec", 400000)
 }
 
 //InitExecutor init Executor
-func InitExecutor(cfg *types.Chain33Config) {
+func InitExecutor(cfg *types.DplatformConfig) {
 	types.RegistorExecutor(ManageX, NewType(cfg))
 }
 
@@ -47,7 +47,7 @@ type ManageType struct {
 }
 
 // NewType new a managetype object
-func NewType(cfg *types.Chain33Config) *ManageType {
+func NewType(cfg *types.DplatformConfig) *ManageType {
 	c := &ManageType{}
 	c.SetChild(c)
 	c.SetConfig(cfg)

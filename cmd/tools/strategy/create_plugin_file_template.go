@@ -12,16 +12,16 @@ const (
 	CpftMainGo = `package main
 
 import (
-	_ "github.com/33cn/chain33/system"
+	_ "github.com/33cn/dplatform/system"
 	_ "${PROJECTPATH}/plugin"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util/cli"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util/cli"
 )
 
 func main() {
 	types.S("cfg.${PROJECTNAME}", ${PROJECTNAME})
-	cli.RunChain33("${PROJECTNAME}")
+	cli.RunDplatform("${PROJECTNAME}")
 }
 `
 
@@ -205,7 +205,7 @@ genesis="14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"
 superManager=[
 "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP",
 ]
-#系统中所有的fork,默认用chain33的测试网络的
+#系统中所有的fork,默认用dplatform的测试网络的
 #但是我们可以替换
 [fork.system]
 ForkChainParamV1= 0
@@ -252,7 +252,7 @@ ForkTradeAsset= -1
 
 	// 生成项目Makefile文件的模板 Makefile
 	CpftMakefile = `
-CHAIN33=github.com/33cn/chain33
+CHAIN33=github.com/33cn/dplatform
 CHAIN33_PATH=vendor/${CHAIN33}
 all: vendor proto build
 
@@ -276,7 +276,7 @@ update:
 	cp -Rf vendor/${CHAIN33}/vendor/* vendor/
 	rm -rf vendor/${CHAIN33}/vendor
 	govendor init
-	go build -i -o tool github.com/33cn/plugin/vendor/github.com/33cn/chain33/cmd/tools
+	go build -i -o tool github.com/33cn/plugin/vendor/github.com/33cn/dplatform/cmd/tools
 	./tool import --path "plugin" --packname "${PROJECTPATH}/plugin" --conf "plugin/plugin.toml"
 
 updatevendor:
@@ -341,8 +341,8 @@ gitrepo = "github.com/33cn/plugin/plugin/mempool/score"
 
 import (
 	_ "${PROJECTPATH}/plugin"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/util/cli"
+	_ "github.com/33cn/dplatform/system"
+	"github.com/33cn/dplatform/util/cli"
 )
 
 func main() {
@@ -364,7 +364,7 @@ func Cmd() *cobra.Command {
 	CpftDappPlugin = `package ${PROJECTNAME}
 
 import (
-	"github.com/33cn/chain33/pluginmgr"
+	"github.com/33cn/dplatform/pluginmgr"
 	"${PROJECTPATH}/plugin/dapp/${PROJECTNAME}/commands"
 	"${PROJECTPATH}/plugin/dapp/${PROJECTNAME}/executor"
 	"${PROJECTPATH}/plugin/dapp/${PROJECTNAME}/types"
@@ -386,8 +386,8 @@ func init() {
 
 import (
 	log "github.com/inconshreveable/log15"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
 )
 
 var clog = log.New("module", "execs.${EXECNAME}")
@@ -463,7 +463,7 @@ message ${ACTIONNAME}None {
 	CpftDappTypefile = `package types
 
 import (
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 var (

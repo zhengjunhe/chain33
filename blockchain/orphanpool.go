@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/types"
 )
 
 var (
@@ -34,11 +34,11 @@ type OrphanPool struct {
 	orphans      map[string]*orphanBlock
 	prevOrphans  map[string][]*orphanBlock
 	oldestOrphan *orphanBlock
-	param        *types.Chain33Config
+	param        *types.DplatformConfig
 }
 
 //NewOrphanPool new
-func NewOrphanPool(param *types.Chain33Config) *OrphanPool {
+func NewOrphanPool(param *types.DplatformConfig) *OrphanPool {
 	op := &OrphanPool{
 		orphans:     make(map[string]*orphanBlock),
 		prevOrphans: make(map[string][]*orphanBlock),

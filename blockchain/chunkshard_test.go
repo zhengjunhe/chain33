@@ -11,12 +11,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/mock"
 
-	dbm "github.com/33cn/chain33/common/db"
-	qmocks "github.com/33cn/chain33/queue/mocks"
+	dbm "github.com/33cn/dplatform/common/db"
+	qmocks "github.com/33cn/dplatform/queue/mocks"
 	"github.com/stretchr/testify/assert"
 )
 

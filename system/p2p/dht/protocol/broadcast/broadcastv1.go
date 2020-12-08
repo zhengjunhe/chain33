@@ -8,8 +8,8 @@ import (
 	"context"
 	"sync/atomic"
 
-	prototypes "github.com/33cn/chain33/system/p2p/dht/protocol/types"
-	"github.com/33cn/chain33/types"
+	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+	"github.com/33cn/dplatform/types"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/peer"
 )

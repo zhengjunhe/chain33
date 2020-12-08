@@ -116,11 +116,11 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// Chain33Client is the client API for Chain33 service.
+// DplatformClient is the client API for Dplatform service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type Chain33Client interface {
-	// chain33 对外提供服务的接口
+type DplatformClient interface {
+	// dplatform 对外提供服务的接口
 	//区块链接口
 	GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error)
 	//获取最新的区块头
@@ -215,7 +215,7 @@ type Chain33Client interface {
 	GetBlockByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*BlockDetails, error)
 	//通过block seq 获取对应的blocks hash 信息
 	GetBlockBySeq(ctx context.Context, in *Int64, opts ...grpc.CallOption) (*BlockSeq, error)
-	//关闭chain33
+	//关闭dplatform
 	CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error)
 	//获取地址所以合约下的余额
 	GetAllExecBalance(ctx context.Context, in *ReqAllExecBalance, opts ...grpc.CallOption) (*AllExecBalance, error)
@@ -237,557 +237,557 @@ type Chain33Client interface {
 	GetHeaders(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Headers, error)
 }
 
-type chain33Client struct {
+type dplatformClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewChain33Client(cc grpc.ClientConnInterface) Chain33Client {
-	return &chain33Client{cc}
+func NewDplatformClient(cc grpc.ClientConnInterface) DplatformClient {
+	return &dplatformClient{cc}
 }
 
-func (c *chain33Client) GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlocks", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlocks", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetLastHeader(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Header, error) {
+func (c *dplatformClient) GetLastHeader(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Header, error) {
 	out := new(Header)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetLastHeader", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetLastHeader", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) CreateRawTransaction(ctx context.Context, in *CreateTx, opts ...grpc.CallOption) (*UnsignTx, error) {
+func (c *dplatformClient) CreateRawTransaction(ctx context.Context, in *CreateTx, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateRawTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/CreateRawTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) CreateRawTxGroup(ctx context.Context, in *CreateTransactionGroup, opts ...grpc.CallOption) (*UnsignTx, error) {
+func (c *dplatformClient) CreateRawTxGroup(ctx context.Context, in *CreateTransactionGroup, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateRawTxGroup", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/CreateRawTxGroup", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) QueryTransaction(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*TransactionDetail, error) {
+func (c *dplatformClient) QueryTransaction(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*TransactionDetail, error) {
 	out := new(TransactionDetail)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/QueryTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) SendTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) SendTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SendTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/SendTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetTransactionByAddr(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*ReplyTxInfos, error) {
+func (c *dplatformClient) GetTransactionByAddr(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*ReplyTxInfos, error) {
 	out := new(ReplyTxInfos)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetTransactionByAddr", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetTransactionByAddr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetTransactionByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*TransactionDetails, error) {
+func (c *dplatformClient) GetTransactionByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*TransactionDetails, error) {
 	out := new(TransactionDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetTransactionByHashes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetTransactionByHashes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetMemPool(ctx context.Context, in *ReqGetMempool, opts ...grpc.CallOption) (*ReplyTxList, error) {
+func (c *dplatformClient) GetMemPool(ctx context.Context, in *ReqGetMempool, opts ...grpc.CallOption) (*ReplyTxList, error) {
 	out := new(ReplyTxList)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetMemPool", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetMemPool", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetAccounts(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletAccounts, error) {
+func (c *dplatformClient) GetAccounts(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletAccounts, error) {
 	out := new(WalletAccounts)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAccounts", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetAccounts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetAccount(ctx context.Context, in *ReqGetAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformClient) GetAccount(ctx context.Context, in *ReqGetAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) NewAccount(ctx context.Context, in *ReqNewAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformClient) NewAccount(ctx context.Context, in *ReqNewAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/NewAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/NewAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) WalletTransactionList(ctx context.Context, in *ReqWalletTransactionList, opts ...grpc.CallOption) (*WalletTxDetails, error) {
+func (c *dplatformClient) WalletTransactionList(ctx context.Context, in *ReqWalletTransactionList, opts ...grpc.CallOption) (*WalletTxDetails, error) {
 	out := new(WalletTxDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/WalletTransactionList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/WalletTransactionList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) ImportPrivkey(ctx context.Context, in *ReqWalletImportPrivkey, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformClient) ImportPrivkey(ctx context.Context, in *ReqWalletImportPrivkey, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/ImportPrivkey", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/ImportPrivkey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) SendToAddress(ctx context.Context, in *ReqWalletSendToAddress, opts ...grpc.CallOption) (*ReplyHash, error) {
+func (c *dplatformClient) SendToAddress(ctx context.Context, in *ReqWalletSendToAddress, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.chain33/SendToAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/SendToAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) SetTxFee(ctx context.Context, in *ReqWalletSetFee, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) SetTxFee(ctx context.Context, in *ReqWalletSetFee, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SetTxFee", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/SetTxFee", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) SetLabl(ctx context.Context, in *ReqWalletSetLabel, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformClient) SetLabl(ctx context.Context, in *ReqWalletSetLabel, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.chain33/SetLabl", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/SetLabl", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) MergeBalance(ctx context.Context, in *ReqWalletMergeBalance, opts ...grpc.CallOption) (*ReplyHashes, error) {
+func (c *dplatformClient) MergeBalance(ctx context.Context, in *ReqWalletMergeBalance, opts ...grpc.CallOption) (*ReplyHashes, error) {
 	out := new(ReplyHashes)
-	err := c.cc.Invoke(ctx, "/types.chain33/MergeBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/MergeBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) SetPasswd(ctx context.Context, in *ReqWalletSetPasswd, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) SetPasswd(ctx context.Context, in *ReqWalletSetPasswd, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SetPasswd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/SetPasswd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) Lock(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) Lock(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/Lock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/Lock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) UnLock(ctx context.Context, in *WalletUnLock, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) UnLock(ctx context.Context, in *WalletUnLock, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/UnLock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/UnLock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetLastMemPool(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ReplyTxList, error) {
+func (c *dplatformClient) GetLastMemPool(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ReplyTxList, error) {
 	out := new(ReplyTxList)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetLastMemPool", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetLastMemPool", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetProperFee(ctx context.Context, in *ReqProperFee, opts ...grpc.CallOption) (*ReplyProperFee, error) {
+func (c *dplatformClient) GetProperFee(ctx context.Context, in *ReqProperFee, opts ...grpc.CallOption) (*ReplyProperFee, error) {
 	out := new(ReplyProperFee)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetProperFee", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetProperFee", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetWalletStatus(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletStatus, error) {
+func (c *dplatformClient) GetWalletStatus(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletStatus, error) {
 	out := new(WalletStatus)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetWalletStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetWalletStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetBlockOverview(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*BlockOverview, error) {
+func (c *dplatformClient) GetBlockOverview(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*BlockOverview, error) {
 	out := new(BlockOverview)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockOverview", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockOverview", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetAddrOverview(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*AddrOverview, error) {
+func (c *dplatformClient) GetAddrOverview(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*AddrOverview, error) {
 	out := new(AddrOverview)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAddrOverview", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetAddrOverview", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetBlockHash(ctx context.Context, in *ReqInt, opts ...grpc.CallOption) (*ReplyHash, error) {
+func (c *dplatformClient) GetBlockHash(ctx context.Context, in *ReqInt, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GenSeed(ctx context.Context, in *GenSeedLang, opts ...grpc.CallOption) (*ReplySeed, error) {
+func (c *dplatformClient) GenSeed(ctx context.Context, in *GenSeedLang, opts ...grpc.CallOption) (*ReplySeed, error) {
 	out := new(ReplySeed)
-	err := c.cc.Invoke(ctx, "/types.chain33/GenSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GenSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetSeed(ctx context.Context, in *GetSeedByPw, opts ...grpc.CallOption) (*ReplySeed, error) {
+func (c *dplatformClient) GetSeed(ctx context.Context, in *GetSeedByPw, opts ...grpc.CallOption) (*ReplySeed, error) {
 	out := new(ReplySeed)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) SaveSeed(ctx context.Context, in *SaveSeedByPw, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) SaveSeed(ctx context.Context, in *SaveSeedByPw, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/SaveSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/SaveSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetBalance(ctx context.Context, in *ReqBalance, opts ...grpc.CallOption) (*Accounts, error) {
+func (c *dplatformClient) GetBalance(ctx context.Context, in *ReqBalance, opts ...grpc.CallOption) (*Accounts, error) {
 	out := new(Accounts)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) QueryChain(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) QueryChain(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryChain", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/QueryChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) ExecWallet(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) ExecWallet(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/ExecWallet", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/ExecWallet", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) QueryConsensus(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) QueryConsensus(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryConsensus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/QueryConsensus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) CreateTransaction(ctx context.Context, in *CreateTxIn, opts ...grpc.CallOption) (*UnsignTx, error) {
+func (c *dplatformClient) CreateTransaction(ctx context.Context, in *CreateTxIn, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/CreateTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetHexTxByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*HexTx, error) {
+func (c *dplatformClient) GetHexTxByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*HexTx, error) {
 	out := new(HexTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetHexTxByHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetHexTxByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) DumpPrivkey(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*ReplyString, error) {
+func (c *dplatformClient) DumpPrivkey(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*ReplyString, error) {
 	out := new(ReplyString)
-	err := c.cc.Invoke(ctx, "/types.chain33/DumpPrivkey", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/DumpPrivkey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) DumpPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) DumpPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/DumpPrivkeysFile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/DumpPrivkeysFile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) ImportPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) ImportPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/ImportPrivkeysFile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/ImportPrivkeysFile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) Version(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*VersionInfo, error) {
+func (c *dplatformClient) Version(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*VersionInfo, error) {
 	out := new(VersionInfo)
-	err := c.cc.Invoke(ctx, "/types.chain33/Version", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/Version", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) IsSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) IsSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/IsSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/IsSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetPeerInfo(ctx context.Context, in *P2PGetPeerReq, opts ...grpc.CallOption) (*PeerList, error) {
+func (c *dplatformClient) GetPeerInfo(ctx context.Context, in *P2PGetPeerReq, opts ...grpc.CallOption) (*PeerList, error) {
 	out := new(PeerList)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetPeerInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetPeerInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) NetInfo(ctx context.Context, in *P2PGetNetInfoReq, opts ...grpc.CallOption) (*NodeNetInfo, error) {
+func (c *dplatformClient) NetInfo(ctx context.Context, in *P2PGetNetInfoReq, opts ...grpc.CallOption) (*NodeNetInfo, error) {
 	out := new(NodeNetInfo)
-	err := c.cc.Invoke(ctx, "/types.chain33/NetInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/NetInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) IsNtpClockSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) IsNtpClockSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/IsNtpClockSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/IsNtpClockSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetFatalFailure(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int32, error) {
+func (c *dplatformClient) GetFatalFailure(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int32, error) {
 	out := new(Int32)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetFatalFailure", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetFatalFailure", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetLastBlockSequence(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int64, error) {
+func (c *dplatformClient) GetLastBlockSequence(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetLastBlockSequence", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetLastBlockSequence", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetSequenceByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*Int64, error) {
+func (c *dplatformClient) GetSequenceByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetSequenceByHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetSequenceByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetBlockByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*BlockDetails, error) {
+func (c *dplatformClient) GetBlockByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*BlockDetails, error) {
 	out := new(BlockDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockByHashes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockByHashes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetBlockBySeq(ctx context.Context, in *Int64, opts ...grpc.CallOption) (*BlockSeq, error) {
+func (c *dplatformClient) GetBlockBySeq(ctx context.Context, in *Int64, opts ...grpc.CallOption) (*BlockSeq, error) {
 	out := new(BlockSeq)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetBlockBySeq", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockBySeq", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformClient) CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.chain33/CloseQueue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/CloseQueue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetAllExecBalance(ctx context.Context, in *ReqAllExecBalance, opts ...grpc.CallOption) (*AllExecBalance, error) {
+func (c *dplatformClient) GetAllExecBalance(ctx context.Context, in *ReqAllExecBalance, opts ...grpc.CallOption) (*AllExecBalance, error) {
 	out := new(AllExecBalance)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetAllExecBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetAllExecBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) SignRawTx(ctx context.Context, in *ReqSignRawTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
+func (c *dplatformClient) SignRawTx(ctx context.Context, in *ReqSignRawTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/SignRawTx", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/SignRawTx", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) CreateNoBalanceTransaction(ctx context.Context, in *NoBalanceTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
+func (c *dplatformClient) CreateNoBalanceTransaction(ctx context.Context, in *NoBalanceTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateNoBalanceTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/CreateNoBalanceTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) QueryRandNum(ctx context.Context, in *ReqRandHash, opts ...grpc.CallOption) (*ReplyHash, error) {
+func (c *dplatformClient) QueryRandNum(ctx context.Context, in *ReqRandHash, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.chain33/QueryRandNum", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/QueryRandNum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetFork(ctx context.Context, in *ReqKey, opts ...grpc.CallOption) (*Int64, error) {
+func (c *dplatformClient) GetFork(ctx context.Context, in *ReqKey, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetFork", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetFork", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) CreateNoBalanceTxs(ctx context.Context, in *NoBalanceTxs, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
+func (c *dplatformClient) CreateNoBalanceTxs(ctx context.Context, in *NoBalanceTxs, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.chain33/CreateNoBalanceTxs", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/CreateNoBalanceTxs", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetParaTxByTitle(ctx context.Context, in *ReqParaTxByTitle, opts ...grpc.CallOption) (*ParaTxDetails, error) {
+func (c *dplatformClient) GetParaTxByTitle(ctx context.Context, in *ReqParaTxByTitle, opts ...grpc.CallOption) (*ParaTxDetails, error) {
 	out := new(ParaTxDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetParaTxByTitle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetParaTxByTitle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) LoadParaTxByTitle(ctx context.Context, in *ReqHeightByTitle, opts ...grpc.CallOption) (*ReplyHeightByTitle, error) {
+func (c *dplatformClient) LoadParaTxByTitle(ctx context.Context, in *ReqHeightByTitle, opts ...grpc.CallOption) (*ReplyHeightByTitle, error) {
 	out := new(ReplyHeightByTitle)
-	err := c.cc.Invoke(ctx, "/types.chain33/LoadParaTxByTitle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/LoadParaTxByTitle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetParaTxByHeight(ctx context.Context, in *ReqParaTxByHeight, opts ...grpc.CallOption) (*ParaTxDetails, error) {
+func (c *dplatformClient) GetParaTxByHeight(ctx context.Context, in *ReqParaTxByHeight, opts ...grpc.CallOption) (*ParaTxDetails, error) {
 	out := new(ParaTxDetails)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetParaTxByHeight", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetParaTxByHeight", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chain33Client) GetHeaders(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Headers, error) {
+func (c *dplatformClient) GetHeaders(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Headers, error) {
 	out := new(Headers)
-	err := c.cc.Invoke(ctx, "/types.chain33/GetHeaders", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatform/GetHeaders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// Chain33Server is the server API for Chain33 service.
-type Chain33Server interface {
-	// chain33 对外提供服务的接口
+// DplatformServer is the server API for Dplatform service.
+type DplatformServer interface {
+	// dplatform 对外提供服务的接口
 	//区块链接口
 	GetBlocks(context.Context, *ReqBlocks) (*Reply, error)
 	//获取最新的区块头
@@ -882,7 +882,7 @@ type Chain33Server interface {
 	GetBlockByHashes(context.Context, *ReqHashes) (*BlockDetails, error)
 	//通过block seq 获取对应的blocks hash 信息
 	GetBlockBySeq(context.Context, *Int64) (*BlockSeq, error)
-	//关闭chain33
+	//关闭dplatform
 	CloseQueue(context.Context, *ReqNil) (*Reply, error)
 	//获取地址所以合约下的余额
 	GetAllExecBalance(context.Context, *ReqAllExecBalance) (*AllExecBalance, error)
@@ -904,1518 +904,1518 @@ type Chain33Server interface {
 	GetHeaders(context.Context, *ReqBlocks) (*Headers, error)
 }
 
-// UnimplementedChain33Server can be embedded to have forward compatible implementations.
-type UnimplementedChain33Server struct {
+// UnimplementedDplatformServer can be embedded to have forward compatible implementations.
+type UnimplementedDplatformServer struct {
 }
 
-func (*UnimplementedChain33Server) GetBlocks(ctx context.Context, req *ReqBlocks) (*Reply, error) {
+func (*UnimplementedDplatformServer) GetBlocks(ctx context.Context, req *ReqBlocks) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBlocks not implemented")
 }
-func (*UnimplementedChain33Server) GetLastHeader(ctx context.Context, req *ReqNil) (*Header, error) {
+func (*UnimplementedDplatformServer) GetLastHeader(ctx context.Context, req *ReqNil) (*Header, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastHeader not implemented")
 }
-func (*UnimplementedChain33Server) CreateRawTransaction(ctx context.Context, req *CreateTx) (*UnsignTx, error) {
+func (*UnimplementedDplatformServer) CreateRawTransaction(ctx context.Context, req *CreateTx) (*UnsignTx, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRawTransaction not implemented")
 }
-func (*UnimplementedChain33Server) CreateRawTxGroup(ctx context.Context, req *CreateTransactionGroup) (*UnsignTx, error) {
+func (*UnimplementedDplatformServer) CreateRawTxGroup(ctx context.Context, req *CreateTransactionGroup) (*UnsignTx, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRawTxGroup not implemented")
 }
-func (*UnimplementedChain33Server) QueryTransaction(ctx context.Context, req *ReqHash) (*TransactionDetail, error) {
+func (*UnimplementedDplatformServer) QueryTransaction(ctx context.Context, req *ReqHash) (*TransactionDetail, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryTransaction not implemented")
 }
-func (*UnimplementedChain33Server) SendTransaction(ctx context.Context, req *Transaction) (*Reply, error) {
+func (*UnimplementedDplatformServer) SendTransaction(ctx context.Context, req *Transaction) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendTransaction not implemented")
 }
-func (*UnimplementedChain33Server) GetTransactionByAddr(ctx context.Context, req *ReqAddr) (*ReplyTxInfos, error) {
+func (*UnimplementedDplatformServer) GetTransactionByAddr(ctx context.Context, req *ReqAddr) (*ReplyTxInfos, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionByAddr not implemented")
 }
-func (*UnimplementedChain33Server) GetTransactionByHashes(ctx context.Context, req *ReqHashes) (*TransactionDetails, error) {
+func (*UnimplementedDplatformServer) GetTransactionByHashes(ctx context.Context, req *ReqHashes) (*TransactionDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionByHashes not implemented")
 }
-func (*UnimplementedChain33Server) GetMemPool(ctx context.Context, req *ReqGetMempool) (*ReplyTxList, error) {
+func (*UnimplementedDplatformServer) GetMemPool(ctx context.Context, req *ReqGetMempool) (*ReplyTxList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMemPool not implemented")
 }
-func (*UnimplementedChain33Server) GetAccounts(ctx context.Context, req *ReqNil) (*WalletAccounts, error) {
+func (*UnimplementedDplatformServer) GetAccounts(ctx context.Context, req *ReqNil) (*WalletAccounts, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccounts not implemented")
 }
-func (*UnimplementedChain33Server) GetAccount(ctx context.Context, req *ReqGetAccount) (*WalletAccount, error) {
+func (*UnimplementedDplatformServer) GetAccount(ctx context.Context, req *ReqGetAccount) (*WalletAccount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
-func (*UnimplementedChain33Server) NewAccount(ctx context.Context, req *ReqNewAccount) (*WalletAccount, error) {
+func (*UnimplementedDplatformServer) NewAccount(ctx context.Context, req *ReqNewAccount) (*WalletAccount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewAccount not implemented")
 }
-func (*UnimplementedChain33Server) WalletTransactionList(ctx context.Context, req *ReqWalletTransactionList) (*WalletTxDetails, error) {
+func (*UnimplementedDplatformServer) WalletTransactionList(ctx context.Context, req *ReqWalletTransactionList) (*WalletTxDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WalletTransactionList not implemented")
 }
-func (*UnimplementedChain33Server) ImportPrivkey(ctx context.Context, req *ReqWalletImportPrivkey) (*WalletAccount, error) {
+func (*UnimplementedDplatformServer) ImportPrivkey(ctx context.Context, req *ReqWalletImportPrivkey) (*WalletAccount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportPrivkey not implemented")
 }
-func (*UnimplementedChain33Server) SendToAddress(ctx context.Context, req *ReqWalletSendToAddress) (*ReplyHash, error) {
+func (*UnimplementedDplatformServer) SendToAddress(ctx context.Context, req *ReqWalletSendToAddress) (*ReplyHash, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendToAddress not implemented")
 }
-func (*UnimplementedChain33Server) SetTxFee(ctx context.Context, req *ReqWalletSetFee) (*Reply, error) {
+func (*UnimplementedDplatformServer) SetTxFee(ctx context.Context, req *ReqWalletSetFee) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetTxFee not implemented")
 }
-func (*UnimplementedChain33Server) SetLabl(ctx context.Context, req *ReqWalletSetLabel) (*WalletAccount, error) {
+func (*UnimplementedDplatformServer) SetLabl(ctx context.Context, req *ReqWalletSetLabel) (*WalletAccount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetLabl not implemented")
 }
-func (*UnimplementedChain33Server) MergeBalance(ctx context.Context, req *ReqWalletMergeBalance) (*ReplyHashes, error) {
+func (*UnimplementedDplatformServer) MergeBalance(ctx context.Context, req *ReqWalletMergeBalance) (*ReplyHashes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MergeBalance not implemented")
 }
-func (*UnimplementedChain33Server) SetPasswd(ctx context.Context, req *ReqWalletSetPasswd) (*Reply, error) {
+func (*UnimplementedDplatformServer) SetPasswd(ctx context.Context, req *ReqWalletSetPasswd) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetPasswd not implemented")
 }
-func (*UnimplementedChain33Server) Lock(ctx context.Context, req *ReqNil) (*Reply, error) {
+func (*UnimplementedDplatformServer) Lock(ctx context.Context, req *ReqNil) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Lock not implemented")
 }
-func (*UnimplementedChain33Server) UnLock(ctx context.Context, req *WalletUnLock) (*Reply, error) {
+func (*UnimplementedDplatformServer) UnLock(ctx context.Context, req *WalletUnLock) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnLock not implemented")
 }
-func (*UnimplementedChain33Server) GetLastMemPool(ctx context.Context, req *ReqNil) (*ReplyTxList, error) {
+func (*UnimplementedDplatformServer) GetLastMemPool(ctx context.Context, req *ReqNil) (*ReplyTxList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastMemPool not implemented")
 }
-func (*UnimplementedChain33Server) GetProperFee(ctx context.Context, req *ReqProperFee) (*ReplyProperFee, error) {
+func (*UnimplementedDplatformServer) GetProperFee(ctx context.Context, req *ReqProperFee) (*ReplyProperFee, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProperFee not implemented")
 }
-func (*UnimplementedChain33Server) GetWalletStatus(ctx context.Context, req *ReqNil) (*WalletStatus, error) {
+func (*UnimplementedDplatformServer) GetWalletStatus(ctx context.Context, req *ReqNil) (*WalletStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWalletStatus not implemented")
 }
-func (*UnimplementedChain33Server) GetBlockOverview(ctx context.Context, req *ReqHash) (*BlockOverview, error) {
+func (*UnimplementedDplatformServer) GetBlockOverview(ctx context.Context, req *ReqHash) (*BlockOverview, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBlockOverview not implemented")
 }
-func (*UnimplementedChain33Server) GetAddrOverview(ctx context.Context, req *ReqAddr) (*AddrOverview, error) {
+func (*UnimplementedDplatformServer) GetAddrOverview(ctx context.Context, req *ReqAddr) (*AddrOverview, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAddrOverview not implemented")
 }
-func (*UnimplementedChain33Server) GetBlockHash(ctx context.Context, req *ReqInt) (*ReplyHash, error) {
+func (*UnimplementedDplatformServer) GetBlockHash(ctx context.Context, req *ReqInt) (*ReplyHash, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBlockHash not implemented")
 }
-func (*UnimplementedChain33Server) GenSeed(ctx context.Context, req *GenSeedLang) (*ReplySeed, error) {
+func (*UnimplementedDplatformServer) GenSeed(ctx context.Context, req *GenSeedLang) (*ReplySeed, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenSeed not implemented")
 }
-func (*UnimplementedChain33Server) GetSeed(ctx context.Context, req *GetSeedByPw) (*ReplySeed, error) {
+func (*UnimplementedDplatformServer) GetSeed(ctx context.Context, req *GetSeedByPw) (*ReplySeed, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSeed not implemented")
 }
-func (*UnimplementedChain33Server) SaveSeed(ctx context.Context, req *SaveSeedByPw) (*Reply, error) {
+func (*UnimplementedDplatformServer) SaveSeed(ctx context.Context, req *SaveSeedByPw) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveSeed not implemented")
 }
-func (*UnimplementedChain33Server) GetBalance(ctx context.Context, req *ReqBalance) (*Accounts, error) {
+func (*UnimplementedDplatformServer) GetBalance(ctx context.Context, req *ReqBalance) (*Accounts, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBalance not implemented")
 }
-func (*UnimplementedChain33Server) QueryChain(ctx context.Context, req *ChainExecutor) (*Reply, error) {
+func (*UnimplementedDplatformServer) QueryChain(ctx context.Context, req *ChainExecutor) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryChain not implemented")
 }
-func (*UnimplementedChain33Server) ExecWallet(ctx context.Context, req *ChainExecutor) (*Reply, error) {
+func (*UnimplementedDplatformServer) ExecWallet(ctx context.Context, req *ChainExecutor) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecWallet not implemented")
 }
-func (*UnimplementedChain33Server) QueryConsensus(ctx context.Context, req *ChainExecutor) (*Reply, error) {
+func (*UnimplementedDplatformServer) QueryConsensus(ctx context.Context, req *ChainExecutor) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryConsensus not implemented")
 }
-func (*UnimplementedChain33Server) CreateTransaction(ctx context.Context, req *CreateTxIn) (*UnsignTx, error) {
+func (*UnimplementedDplatformServer) CreateTransaction(ctx context.Context, req *CreateTxIn) (*UnsignTx, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTransaction not implemented")
 }
-func (*UnimplementedChain33Server) GetHexTxByHash(ctx context.Context, req *ReqHash) (*HexTx, error) {
+func (*UnimplementedDplatformServer) GetHexTxByHash(ctx context.Context, req *ReqHash) (*HexTx, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHexTxByHash not implemented")
 }
-func (*UnimplementedChain33Server) DumpPrivkey(ctx context.Context, req *ReqString) (*ReplyString, error) {
+func (*UnimplementedDplatformServer) DumpPrivkey(ctx context.Context, req *ReqString) (*ReplyString, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DumpPrivkey not implemented")
 }
-func (*UnimplementedChain33Server) DumpPrivkeysFile(ctx context.Context, req *ReqPrivkeysFile) (*Reply, error) {
+func (*UnimplementedDplatformServer) DumpPrivkeysFile(ctx context.Context, req *ReqPrivkeysFile) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DumpPrivkeysFile not implemented")
 }
-func (*UnimplementedChain33Server) ImportPrivkeysFile(ctx context.Context, req *ReqPrivkeysFile) (*Reply, error) {
+func (*UnimplementedDplatformServer) ImportPrivkeysFile(ctx context.Context, req *ReqPrivkeysFile) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportPrivkeysFile not implemented")
 }
-func (*UnimplementedChain33Server) Version(ctx context.Context, req *ReqNil) (*VersionInfo, error) {
+func (*UnimplementedDplatformServer) Version(ctx context.Context, req *ReqNil) (*VersionInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Version not implemented")
 }
-func (*UnimplementedChain33Server) IsSync(ctx context.Context, req *ReqNil) (*Reply, error) {
+func (*UnimplementedDplatformServer) IsSync(ctx context.Context, req *ReqNil) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsSync not implemented")
 }
-func (*UnimplementedChain33Server) GetPeerInfo(ctx context.Context, req *P2PGetPeerReq) (*PeerList, error) {
+func (*UnimplementedDplatformServer) GetPeerInfo(ctx context.Context, req *P2PGetPeerReq) (*PeerList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPeerInfo not implemented")
 }
-func (*UnimplementedChain33Server) NetInfo(ctx context.Context, req *P2PGetNetInfoReq) (*NodeNetInfo, error) {
+func (*UnimplementedDplatformServer) NetInfo(ctx context.Context, req *P2PGetNetInfoReq) (*NodeNetInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NetInfo not implemented")
 }
-func (*UnimplementedChain33Server) IsNtpClockSync(ctx context.Context, req *ReqNil) (*Reply, error) {
+func (*UnimplementedDplatformServer) IsNtpClockSync(ctx context.Context, req *ReqNil) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsNtpClockSync not implemented")
 }
-func (*UnimplementedChain33Server) GetFatalFailure(ctx context.Context, req *ReqNil) (*Int32, error) {
+func (*UnimplementedDplatformServer) GetFatalFailure(ctx context.Context, req *ReqNil) (*Int32, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFatalFailure not implemented")
 }
-func (*UnimplementedChain33Server) GetLastBlockSequence(ctx context.Context, req *ReqNil) (*Int64, error) {
+func (*UnimplementedDplatformServer) GetLastBlockSequence(ctx context.Context, req *ReqNil) (*Int64, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastBlockSequence not implemented")
 }
-func (*UnimplementedChain33Server) GetSequenceByHash(ctx context.Context, req *ReqHash) (*Int64, error) {
+func (*UnimplementedDplatformServer) GetSequenceByHash(ctx context.Context, req *ReqHash) (*Int64, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSequenceByHash not implemented")
 }
-func (*UnimplementedChain33Server) GetBlockByHashes(ctx context.Context, req *ReqHashes) (*BlockDetails, error) {
+func (*UnimplementedDplatformServer) GetBlockByHashes(ctx context.Context, req *ReqHashes) (*BlockDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBlockByHashes not implemented")
 }
-func (*UnimplementedChain33Server) GetBlockBySeq(ctx context.Context, req *Int64) (*BlockSeq, error) {
+func (*UnimplementedDplatformServer) GetBlockBySeq(ctx context.Context, req *Int64) (*BlockSeq, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBlockBySeq not implemented")
 }
-func (*UnimplementedChain33Server) CloseQueue(ctx context.Context, req *ReqNil) (*Reply, error) {
+func (*UnimplementedDplatformServer) CloseQueue(ctx context.Context, req *ReqNil) (*Reply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CloseQueue not implemented")
 }
-func (*UnimplementedChain33Server) GetAllExecBalance(ctx context.Context, req *ReqAllExecBalance) (*AllExecBalance, error) {
+func (*UnimplementedDplatformServer) GetAllExecBalance(ctx context.Context, req *ReqAllExecBalance) (*AllExecBalance, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllExecBalance not implemented")
 }
-func (*UnimplementedChain33Server) SignRawTx(ctx context.Context, req *ReqSignRawTx) (*ReplySignRawTx, error) {
+func (*UnimplementedDplatformServer) SignRawTx(ctx context.Context, req *ReqSignRawTx) (*ReplySignRawTx, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SignRawTx not implemented")
 }
-func (*UnimplementedChain33Server) CreateNoBalanceTransaction(ctx context.Context, req *NoBalanceTx) (*ReplySignRawTx, error) {
+func (*UnimplementedDplatformServer) CreateNoBalanceTransaction(ctx context.Context, req *NoBalanceTx) (*ReplySignRawTx, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateNoBalanceTransaction not implemented")
 }
-func (*UnimplementedChain33Server) QueryRandNum(ctx context.Context, req *ReqRandHash) (*ReplyHash, error) {
+func (*UnimplementedDplatformServer) QueryRandNum(ctx context.Context, req *ReqRandHash) (*ReplyHash, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryRandNum not implemented")
 }
-func (*UnimplementedChain33Server) GetFork(ctx context.Context, req *ReqKey) (*Int64, error) {
+func (*UnimplementedDplatformServer) GetFork(ctx context.Context, req *ReqKey) (*Int64, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFork not implemented")
 }
-func (*UnimplementedChain33Server) CreateNoBalanceTxs(ctx context.Context, req *NoBalanceTxs) (*ReplySignRawTx, error) {
+func (*UnimplementedDplatformServer) CreateNoBalanceTxs(ctx context.Context, req *NoBalanceTxs) (*ReplySignRawTx, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateNoBalanceTxs not implemented")
 }
-func (*UnimplementedChain33Server) GetParaTxByTitle(ctx context.Context, req *ReqParaTxByTitle) (*ParaTxDetails, error) {
+func (*UnimplementedDplatformServer) GetParaTxByTitle(ctx context.Context, req *ReqParaTxByTitle) (*ParaTxDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetParaTxByTitle not implemented")
 }
-func (*UnimplementedChain33Server) LoadParaTxByTitle(ctx context.Context, req *ReqHeightByTitle) (*ReplyHeightByTitle, error) {
+func (*UnimplementedDplatformServer) LoadParaTxByTitle(ctx context.Context, req *ReqHeightByTitle) (*ReplyHeightByTitle, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoadParaTxByTitle not implemented")
 }
-func (*UnimplementedChain33Server) GetParaTxByHeight(ctx context.Context, req *ReqParaTxByHeight) (*ParaTxDetails, error) {
+func (*UnimplementedDplatformServer) GetParaTxByHeight(ctx context.Context, req *ReqParaTxByHeight) (*ParaTxDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetParaTxByHeight not implemented")
 }
-func (*UnimplementedChain33Server) GetHeaders(ctx context.Context, req *ReqBlocks) (*Headers, error) {
+func (*UnimplementedDplatformServer) GetHeaders(ctx context.Context, req *ReqBlocks) (*Headers, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHeaders not implemented")
 }
 
-func RegisterChain33Server(s *grpc.Server, srv Chain33Server) {
-	s.RegisterService(&_Chain33_serviceDesc, srv)
+func RegisterDplatformServer(s *grpc.Server, srv DplatformServer) {
+	s.RegisterService(&_Dplatform_serviceDesc, srv)
 }
 
-func _Chain33_GetBlocks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetBlocks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqBlocks)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetBlocks(ctx, in)
+		return srv.(DplatformServer).GetBlocks(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlocks",
+		FullMethod: "/types.dplatform/GetBlocks",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetBlocks(ctx, req.(*ReqBlocks))
+		return srv.(DplatformServer).GetBlocks(ctx, req.(*ReqBlocks))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetLastHeader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetLastHeader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetLastHeader(ctx, in)
+		return srv.(DplatformServer).GetLastHeader(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetLastHeader",
+		FullMethod: "/types.dplatform/GetLastHeader",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetLastHeader(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).GetLastHeader(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_CreateRawTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_CreateRawTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateTx)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).CreateRawTransaction(ctx, in)
+		return srv.(DplatformServer).CreateRawTransaction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateRawTransaction",
+		FullMethod: "/types.dplatform/CreateRawTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).CreateRawTransaction(ctx, req.(*CreateTx))
+		return srv.(DplatformServer).CreateRawTransaction(ctx, req.(*CreateTx))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_CreateRawTxGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_CreateRawTxGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateTransactionGroup)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).CreateRawTxGroup(ctx, in)
+		return srv.(DplatformServer).CreateRawTxGroup(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateRawTxGroup",
+		FullMethod: "/types.dplatform/CreateRawTxGroup",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).CreateRawTxGroup(ctx, req.(*CreateTransactionGroup))
+		return srv.(DplatformServer).CreateRawTxGroup(ctx, req.(*CreateTransactionGroup))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_QueryTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_QueryTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqHash)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).QueryTransaction(ctx, in)
+		return srv.(DplatformServer).QueryTransaction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryTransaction",
+		FullMethod: "/types.dplatform/QueryTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).QueryTransaction(ctx, req.(*ReqHash))
+		return srv.(DplatformServer).QueryTransaction(ctx, req.(*ReqHash))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_SendTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_SendTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Transaction)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).SendTransaction(ctx, in)
+		return srv.(DplatformServer).SendTransaction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SendTransaction",
+		FullMethod: "/types.dplatform/SendTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).SendTransaction(ctx, req.(*Transaction))
+		return srv.(DplatformServer).SendTransaction(ctx, req.(*Transaction))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetTransactionByAddr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetTransactionByAddr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqAddr)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetTransactionByAddr(ctx, in)
+		return srv.(DplatformServer).GetTransactionByAddr(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetTransactionByAddr",
+		FullMethod: "/types.dplatform/GetTransactionByAddr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetTransactionByAddr(ctx, req.(*ReqAddr))
+		return srv.(DplatformServer).GetTransactionByAddr(ctx, req.(*ReqAddr))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetTransactionByHashes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetTransactionByHashes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqHashes)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetTransactionByHashes(ctx, in)
+		return srv.(DplatformServer).GetTransactionByHashes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetTransactionByHashes",
+		FullMethod: "/types.dplatform/GetTransactionByHashes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetTransactionByHashes(ctx, req.(*ReqHashes))
+		return srv.(DplatformServer).GetTransactionByHashes(ctx, req.(*ReqHashes))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetMemPool_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetMemPool_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqGetMempool)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetMemPool(ctx, in)
+		return srv.(DplatformServer).GetMemPool(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetMemPool",
+		FullMethod: "/types.dplatform/GetMemPool",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetMemPool(ctx, req.(*ReqGetMempool))
+		return srv.(DplatformServer).GetMemPool(ctx, req.(*ReqGetMempool))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetAccounts(ctx, in)
+		return srv.(DplatformServer).GetAccounts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAccounts",
+		FullMethod: "/types.dplatform/GetAccounts",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetAccounts(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).GetAccounts(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqGetAccount)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetAccount(ctx, in)
+		return srv.(DplatformServer).GetAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAccount",
+		FullMethod: "/types.dplatform/GetAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetAccount(ctx, req.(*ReqGetAccount))
+		return srv.(DplatformServer).GetAccount(ctx, req.(*ReqGetAccount))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_NewAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_NewAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNewAccount)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).NewAccount(ctx, in)
+		return srv.(DplatformServer).NewAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/NewAccount",
+		FullMethod: "/types.dplatform/NewAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).NewAccount(ctx, req.(*ReqNewAccount))
+		return srv.(DplatformServer).NewAccount(ctx, req.(*ReqNewAccount))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_WalletTransactionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_WalletTransactionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqWalletTransactionList)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).WalletTransactionList(ctx, in)
+		return srv.(DplatformServer).WalletTransactionList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/WalletTransactionList",
+		FullMethod: "/types.dplatform/WalletTransactionList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).WalletTransactionList(ctx, req.(*ReqWalletTransactionList))
+		return srv.(DplatformServer).WalletTransactionList(ctx, req.(*ReqWalletTransactionList))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_ImportPrivkey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_ImportPrivkey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqWalletImportPrivkey)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).ImportPrivkey(ctx, in)
+		return srv.(DplatformServer).ImportPrivkey(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ImportPrivkey",
+		FullMethod: "/types.dplatform/ImportPrivkey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).ImportPrivkey(ctx, req.(*ReqWalletImportPrivkey))
+		return srv.(DplatformServer).ImportPrivkey(ctx, req.(*ReqWalletImportPrivkey))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_SendToAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_SendToAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqWalletSendToAddress)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).SendToAddress(ctx, in)
+		return srv.(DplatformServer).SendToAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SendToAddress",
+		FullMethod: "/types.dplatform/SendToAddress",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).SendToAddress(ctx, req.(*ReqWalletSendToAddress))
+		return srv.(DplatformServer).SendToAddress(ctx, req.(*ReqWalletSendToAddress))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_SetTxFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_SetTxFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqWalletSetFee)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).SetTxFee(ctx, in)
+		return srv.(DplatformServer).SetTxFee(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SetTxFee",
+		FullMethod: "/types.dplatform/SetTxFee",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).SetTxFee(ctx, req.(*ReqWalletSetFee))
+		return srv.(DplatformServer).SetTxFee(ctx, req.(*ReqWalletSetFee))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_SetLabl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_SetLabl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqWalletSetLabel)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).SetLabl(ctx, in)
+		return srv.(DplatformServer).SetLabl(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SetLabl",
+		FullMethod: "/types.dplatform/SetLabl",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).SetLabl(ctx, req.(*ReqWalletSetLabel))
+		return srv.(DplatformServer).SetLabl(ctx, req.(*ReqWalletSetLabel))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_MergeBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_MergeBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqWalletMergeBalance)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).MergeBalance(ctx, in)
+		return srv.(DplatformServer).MergeBalance(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/MergeBalance",
+		FullMethod: "/types.dplatform/MergeBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).MergeBalance(ctx, req.(*ReqWalletMergeBalance))
+		return srv.(DplatformServer).MergeBalance(ctx, req.(*ReqWalletMergeBalance))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_SetPasswd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_SetPasswd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqWalletSetPasswd)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).SetPasswd(ctx, in)
+		return srv.(DplatformServer).SetPasswd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SetPasswd",
+		FullMethod: "/types.dplatform/SetPasswd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).SetPasswd(ctx, req.(*ReqWalletSetPasswd))
+		return srv.(DplatformServer).SetPasswd(ctx, req.(*ReqWalletSetPasswd))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_Lock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_Lock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).Lock(ctx, in)
+		return srv.(DplatformServer).Lock(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/Lock",
+		FullMethod: "/types.dplatform/Lock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).Lock(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).Lock(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_UnLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_UnLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(WalletUnLock)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).UnLock(ctx, in)
+		return srv.(DplatformServer).UnLock(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/UnLock",
+		FullMethod: "/types.dplatform/UnLock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).UnLock(ctx, req.(*WalletUnLock))
+		return srv.(DplatformServer).UnLock(ctx, req.(*WalletUnLock))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetLastMemPool_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetLastMemPool_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetLastMemPool(ctx, in)
+		return srv.(DplatformServer).GetLastMemPool(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetLastMemPool",
+		FullMethod: "/types.dplatform/GetLastMemPool",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetLastMemPool(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).GetLastMemPool(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetProperFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetProperFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqProperFee)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetProperFee(ctx, in)
+		return srv.(DplatformServer).GetProperFee(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetProperFee",
+		FullMethod: "/types.dplatform/GetProperFee",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetProperFee(ctx, req.(*ReqProperFee))
+		return srv.(DplatformServer).GetProperFee(ctx, req.(*ReqProperFee))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetWalletStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetWalletStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetWalletStatus(ctx, in)
+		return srv.(DplatformServer).GetWalletStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetWalletStatus",
+		FullMethod: "/types.dplatform/GetWalletStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetWalletStatus(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).GetWalletStatus(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetBlockOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetBlockOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqHash)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetBlockOverview(ctx, in)
+		return srv.(DplatformServer).GetBlockOverview(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockOverview",
+		FullMethod: "/types.dplatform/GetBlockOverview",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetBlockOverview(ctx, req.(*ReqHash))
+		return srv.(DplatformServer).GetBlockOverview(ctx, req.(*ReqHash))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetAddrOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetAddrOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqAddr)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetAddrOverview(ctx, in)
+		return srv.(DplatformServer).GetAddrOverview(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAddrOverview",
+		FullMethod: "/types.dplatform/GetAddrOverview",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetAddrOverview(ctx, req.(*ReqAddr))
+		return srv.(DplatformServer).GetAddrOverview(ctx, req.(*ReqAddr))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetBlockHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetBlockHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqInt)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetBlockHash(ctx, in)
+		return srv.(DplatformServer).GetBlockHash(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockHash",
+		FullMethod: "/types.dplatform/GetBlockHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetBlockHash(ctx, req.(*ReqInt))
+		return srv.(DplatformServer).GetBlockHash(ctx, req.(*ReqInt))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GenSeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GenSeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GenSeedLang)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GenSeed(ctx, in)
+		return srv.(DplatformServer).GenSeed(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GenSeed",
+		FullMethod: "/types.dplatform/GenSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GenSeed(ctx, req.(*GenSeedLang))
+		return srv.(DplatformServer).GenSeed(ctx, req.(*GenSeedLang))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetSeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetSeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSeedByPw)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetSeed(ctx, in)
+		return srv.(DplatformServer).GetSeed(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetSeed",
+		FullMethod: "/types.dplatform/GetSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetSeed(ctx, req.(*GetSeedByPw))
+		return srv.(DplatformServer).GetSeed(ctx, req.(*GetSeedByPw))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_SaveSeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_SaveSeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SaveSeedByPw)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).SaveSeed(ctx, in)
+		return srv.(DplatformServer).SaveSeed(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SaveSeed",
+		FullMethod: "/types.dplatform/SaveSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).SaveSeed(ctx, req.(*SaveSeedByPw))
+		return srv.(DplatformServer).SaveSeed(ctx, req.(*SaveSeedByPw))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqBalance)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetBalance(ctx, in)
+		return srv.(DplatformServer).GetBalance(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBalance",
+		FullMethod: "/types.dplatform/GetBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetBalance(ctx, req.(*ReqBalance))
+		return srv.(DplatformServer).GetBalance(ctx, req.(*ReqBalance))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_QueryChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_QueryChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChainExecutor)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).QueryChain(ctx, in)
+		return srv.(DplatformServer).QueryChain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryChain",
+		FullMethod: "/types.dplatform/QueryChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).QueryChain(ctx, req.(*ChainExecutor))
+		return srv.(DplatformServer).QueryChain(ctx, req.(*ChainExecutor))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_ExecWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_ExecWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChainExecutor)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).ExecWallet(ctx, in)
+		return srv.(DplatformServer).ExecWallet(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ExecWallet",
+		FullMethod: "/types.dplatform/ExecWallet",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).ExecWallet(ctx, req.(*ChainExecutor))
+		return srv.(DplatformServer).ExecWallet(ctx, req.(*ChainExecutor))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_QueryConsensus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_QueryConsensus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChainExecutor)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).QueryConsensus(ctx, in)
+		return srv.(DplatformServer).QueryConsensus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryConsensus",
+		FullMethod: "/types.dplatform/QueryConsensus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).QueryConsensus(ctx, req.(*ChainExecutor))
+		return srv.(DplatformServer).QueryConsensus(ctx, req.(*ChainExecutor))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_CreateTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_CreateTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateTxIn)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).CreateTransaction(ctx, in)
+		return srv.(DplatformServer).CreateTransaction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateTransaction",
+		FullMethod: "/types.dplatform/CreateTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).CreateTransaction(ctx, req.(*CreateTxIn))
+		return srv.(DplatformServer).CreateTransaction(ctx, req.(*CreateTxIn))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetHexTxByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetHexTxByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqHash)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetHexTxByHash(ctx, in)
+		return srv.(DplatformServer).GetHexTxByHash(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetHexTxByHash",
+		FullMethod: "/types.dplatform/GetHexTxByHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetHexTxByHash(ctx, req.(*ReqHash))
+		return srv.(DplatformServer).GetHexTxByHash(ctx, req.(*ReqHash))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_DumpPrivkey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_DumpPrivkey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqString)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).DumpPrivkey(ctx, in)
+		return srv.(DplatformServer).DumpPrivkey(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/DumpPrivkey",
+		FullMethod: "/types.dplatform/DumpPrivkey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).DumpPrivkey(ctx, req.(*ReqString))
+		return srv.(DplatformServer).DumpPrivkey(ctx, req.(*ReqString))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_DumpPrivkeysFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_DumpPrivkeysFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqPrivkeysFile)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).DumpPrivkeysFile(ctx, in)
+		return srv.(DplatformServer).DumpPrivkeysFile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/DumpPrivkeysFile",
+		FullMethod: "/types.dplatform/DumpPrivkeysFile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).DumpPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
+		return srv.(DplatformServer).DumpPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_ImportPrivkeysFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_ImportPrivkeysFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqPrivkeysFile)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).ImportPrivkeysFile(ctx, in)
+		return srv.(DplatformServer).ImportPrivkeysFile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/ImportPrivkeysFile",
+		FullMethod: "/types.dplatform/ImportPrivkeysFile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).ImportPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
+		return srv.(DplatformServer).ImportPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_Version_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_Version_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).Version(ctx, in)
+		return srv.(DplatformServer).Version(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/Version",
+		FullMethod: "/types.dplatform/Version",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).Version(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).Version(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_IsSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_IsSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).IsSync(ctx, in)
+		return srv.(DplatformServer).IsSync(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/IsSync",
+		FullMethod: "/types.dplatform/IsSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).IsSync(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).IsSync(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetPeerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetPeerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(P2PGetPeerReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetPeerInfo(ctx, in)
+		return srv.(DplatformServer).GetPeerInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetPeerInfo",
+		FullMethod: "/types.dplatform/GetPeerInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetPeerInfo(ctx, req.(*P2PGetPeerReq))
+		return srv.(DplatformServer).GetPeerInfo(ctx, req.(*P2PGetPeerReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_NetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_NetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(P2PGetNetInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).NetInfo(ctx, in)
+		return srv.(DplatformServer).NetInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/NetInfo",
+		FullMethod: "/types.dplatform/NetInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).NetInfo(ctx, req.(*P2PGetNetInfoReq))
+		return srv.(DplatformServer).NetInfo(ctx, req.(*P2PGetNetInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_IsNtpClockSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_IsNtpClockSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).IsNtpClockSync(ctx, in)
+		return srv.(DplatformServer).IsNtpClockSync(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/IsNtpClockSync",
+		FullMethod: "/types.dplatform/IsNtpClockSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).IsNtpClockSync(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).IsNtpClockSync(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetFatalFailure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetFatalFailure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetFatalFailure(ctx, in)
+		return srv.(DplatformServer).GetFatalFailure(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetFatalFailure",
+		FullMethod: "/types.dplatform/GetFatalFailure",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetFatalFailure(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).GetFatalFailure(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetLastBlockSequence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetLastBlockSequence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetLastBlockSequence(ctx, in)
+		return srv.(DplatformServer).GetLastBlockSequence(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetLastBlockSequence",
+		FullMethod: "/types.dplatform/GetLastBlockSequence",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetLastBlockSequence(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).GetLastBlockSequence(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetSequenceByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetSequenceByHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqHash)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetSequenceByHash(ctx, in)
+		return srv.(DplatformServer).GetSequenceByHash(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetSequenceByHash",
+		FullMethod: "/types.dplatform/GetSequenceByHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetSequenceByHash(ctx, req.(*ReqHash))
+		return srv.(DplatformServer).GetSequenceByHash(ctx, req.(*ReqHash))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetBlockByHashes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetBlockByHashes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqHashes)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetBlockByHashes(ctx, in)
+		return srv.(DplatformServer).GetBlockByHashes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockByHashes",
+		FullMethod: "/types.dplatform/GetBlockByHashes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetBlockByHashes(ctx, req.(*ReqHashes))
+		return srv.(DplatformServer).GetBlockByHashes(ctx, req.(*ReqHashes))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetBlockBySeq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetBlockBySeq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Int64)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetBlockBySeq(ctx, in)
+		return srv.(DplatformServer).GetBlockBySeq(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetBlockBySeq",
+		FullMethod: "/types.dplatform/GetBlockBySeq",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetBlockBySeq(ctx, req.(*Int64))
+		return srv.(DplatformServer).GetBlockBySeq(ctx, req.(*Int64))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_CloseQueue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_CloseQueue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqNil)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).CloseQueue(ctx, in)
+		return srv.(DplatformServer).CloseQueue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CloseQueue",
+		FullMethod: "/types.dplatform/CloseQueue",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).CloseQueue(ctx, req.(*ReqNil))
+		return srv.(DplatformServer).CloseQueue(ctx, req.(*ReqNil))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetAllExecBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetAllExecBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqAllExecBalance)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetAllExecBalance(ctx, in)
+		return srv.(DplatformServer).GetAllExecBalance(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetAllExecBalance",
+		FullMethod: "/types.dplatform/GetAllExecBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetAllExecBalance(ctx, req.(*ReqAllExecBalance))
+		return srv.(DplatformServer).GetAllExecBalance(ctx, req.(*ReqAllExecBalance))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_SignRawTx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_SignRawTx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqSignRawTx)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).SignRawTx(ctx, in)
+		return srv.(DplatformServer).SignRawTx(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/SignRawTx",
+		FullMethod: "/types.dplatform/SignRawTx",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).SignRawTx(ctx, req.(*ReqSignRawTx))
+		return srv.(DplatformServer).SignRawTx(ctx, req.(*ReqSignRawTx))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_CreateNoBalanceTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_CreateNoBalanceTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NoBalanceTx)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).CreateNoBalanceTransaction(ctx, in)
+		return srv.(DplatformServer).CreateNoBalanceTransaction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateNoBalanceTransaction",
+		FullMethod: "/types.dplatform/CreateNoBalanceTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).CreateNoBalanceTransaction(ctx, req.(*NoBalanceTx))
+		return srv.(DplatformServer).CreateNoBalanceTransaction(ctx, req.(*NoBalanceTx))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_QueryRandNum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_QueryRandNum_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqRandHash)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).QueryRandNum(ctx, in)
+		return srv.(DplatformServer).QueryRandNum(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/QueryRandNum",
+		FullMethod: "/types.dplatform/QueryRandNum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).QueryRandNum(ctx, req.(*ReqRandHash))
+		return srv.(DplatformServer).QueryRandNum(ctx, req.(*ReqRandHash))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetFork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetFork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqKey)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetFork(ctx, in)
+		return srv.(DplatformServer).GetFork(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetFork",
+		FullMethod: "/types.dplatform/GetFork",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetFork(ctx, req.(*ReqKey))
+		return srv.(DplatformServer).GetFork(ctx, req.(*ReqKey))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_CreateNoBalanceTxs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_CreateNoBalanceTxs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NoBalanceTxs)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).CreateNoBalanceTxs(ctx, in)
+		return srv.(DplatformServer).CreateNoBalanceTxs(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/CreateNoBalanceTxs",
+		FullMethod: "/types.dplatform/CreateNoBalanceTxs",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).CreateNoBalanceTxs(ctx, req.(*NoBalanceTxs))
+		return srv.(DplatformServer).CreateNoBalanceTxs(ctx, req.(*NoBalanceTxs))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetParaTxByTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetParaTxByTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqParaTxByTitle)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetParaTxByTitle(ctx, in)
+		return srv.(DplatformServer).GetParaTxByTitle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetParaTxByTitle",
+		FullMethod: "/types.dplatform/GetParaTxByTitle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetParaTxByTitle(ctx, req.(*ReqParaTxByTitle))
+		return srv.(DplatformServer).GetParaTxByTitle(ctx, req.(*ReqParaTxByTitle))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_LoadParaTxByTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_LoadParaTxByTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqHeightByTitle)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).LoadParaTxByTitle(ctx, in)
+		return srv.(DplatformServer).LoadParaTxByTitle(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/LoadParaTxByTitle",
+		FullMethod: "/types.dplatform/LoadParaTxByTitle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).LoadParaTxByTitle(ctx, req.(*ReqHeightByTitle))
+		return srv.(DplatformServer).LoadParaTxByTitle(ctx, req.(*ReqHeightByTitle))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetParaTxByHeight_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetParaTxByHeight_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqParaTxByHeight)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetParaTxByHeight(ctx, in)
+		return srv.(DplatformServer).GetParaTxByHeight(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetParaTxByHeight",
+		FullMethod: "/types.dplatform/GetParaTxByHeight",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetParaTxByHeight(ctx, req.(*ReqParaTxByHeight))
+		return srv.(DplatformServer).GetParaTxByHeight(ctx, req.(*ReqParaTxByHeight))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chain33_GetHeaders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Dplatform_GetHeaders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReqBlocks)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(Chain33Server).GetHeaders(ctx, in)
+		return srv.(DplatformServer).GetHeaders(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.chain33/GetHeaders",
+		FullMethod: "/types.dplatform/GetHeaders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Chain33Server).GetHeaders(ctx, req.(*ReqBlocks))
+		return srv.(DplatformServer).GetHeaders(ctx, req.(*ReqBlocks))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Chain33_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "types.chain33",
-	HandlerType: (*Chain33Server)(nil),
+var _Dplatform_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "types.dplatform",
+	HandlerType: (*DplatformServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetBlocks",
-			Handler:    _Chain33_GetBlocks_Handler,
+			Handler:    _Dplatform_GetBlocks_Handler,
 		},
 		{
 			MethodName: "GetLastHeader",
-			Handler:    _Chain33_GetLastHeader_Handler,
+			Handler:    _Dplatform_GetLastHeader_Handler,
 		},
 		{
 			MethodName: "CreateRawTransaction",
-			Handler:    _Chain33_CreateRawTransaction_Handler,
+			Handler:    _Dplatform_CreateRawTransaction_Handler,
 		},
 		{
 			MethodName: "CreateRawTxGroup",
-			Handler:    _Chain33_CreateRawTxGroup_Handler,
+			Handler:    _Dplatform_CreateRawTxGroup_Handler,
 		},
 		{
 			MethodName: "QueryTransaction",
-			Handler:    _Chain33_QueryTransaction_Handler,
+			Handler:    _Dplatform_QueryTransaction_Handler,
 		},
 		{
 			MethodName: "SendTransaction",
-			Handler:    _Chain33_SendTransaction_Handler,
+			Handler:    _Dplatform_SendTransaction_Handler,
 		},
 		{
 			MethodName: "GetTransactionByAddr",
-			Handler:    _Chain33_GetTransactionByAddr_Handler,
+			Handler:    _Dplatform_GetTransactionByAddr_Handler,
 		},
 		{
 			MethodName: "GetTransactionByHashes",
-			Handler:    _Chain33_GetTransactionByHashes_Handler,
+			Handler:    _Dplatform_GetTransactionByHashes_Handler,
 		},
 		{
 			MethodName: "GetMemPool",
-			Handler:    _Chain33_GetMemPool_Handler,
+			Handler:    _Dplatform_GetMemPool_Handler,
 		},
 		{
 			MethodName: "GetAccounts",
-			Handler:    _Chain33_GetAccounts_Handler,
+			Handler:    _Dplatform_GetAccounts_Handler,
 		},
 		{
 			MethodName: "GetAccount",
-			Handler:    _Chain33_GetAccount_Handler,
+			Handler:    _Dplatform_GetAccount_Handler,
 		},
 		{
 			MethodName: "NewAccount",
-			Handler:    _Chain33_NewAccount_Handler,
+			Handler:    _Dplatform_NewAccount_Handler,
 		},
 		{
 			MethodName: "WalletTransactionList",
-			Handler:    _Chain33_WalletTransactionList_Handler,
+			Handler:    _Dplatform_WalletTransactionList_Handler,
 		},
 		{
 			MethodName: "ImportPrivkey",
-			Handler:    _Chain33_ImportPrivkey_Handler,
+			Handler:    _Dplatform_ImportPrivkey_Handler,
 		},
 		{
 			MethodName: "SendToAddress",
-			Handler:    _Chain33_SendToAddress_Handler,
+			Handler:    _Dplatform_SendToAddress_Handler,
 		},
 		{
 			MethodName: "SetTxFee",
-			Handler:    _Chain33_SetTxFee_Handler,
+			Handler:    _Dplatform_SetTxFee_Handler,
 		},
 		{
 			MethodName: "SetLabl",
-			Handler:    _Chain33_SetLabl_Handler,
+			Handler:    _Dplatform_SetLabl_Handler,
 		},
 		{
 			MethodName: "MergeBalance",
-			Handler:    _Chain33_MergeBalance_Handler,
+			Handler:    _Dplatform_MergeBalance_Handler,
 		},
 		{
 			MethodName: "SetPasswd",
-			Handler:    _Chain33_SetPasswd_Handler,
+			Handler:    _Dplatform_SetPasswd_Handler,
 		},
 		{
 			MethodName: "Lock",
-			Handler:    _Chain33_Lock_Handler,
+			Handler:    _Dplatform_Lock_Handler,
 		},
 		{
 			MethodName: "UnLock",
-			Handler:    _Chain33_UnLock_Handler,
+			Handler:    _Dplatform_UnLock_Handler,
 		},
 		{
 			MethodName: "GetLastMemPool",
-			Handler:    _Chain33_GetLastMemPool_Handler,
+			Handler:    _Dplatform_GetLastMemPool_Handler,
 		},
 		{
 			MethodName: "GetProperFee",
-			Handler:    _Chain33_GetProperFee_Handler,
+			Handler:    _Dplatform_GetProperFee_Handler,
 		},
 		{
 			MethodName: "GetWalletStatus",
-			Handler:    _Chain33_GetWalletStatus_Handler,
+			Handler:    _Dplatform_GetWalletStatus_Handler,
 		},
 		{
 			MethodName: "GetBlockOverview",
-			Handler:    _Chain33_GetBlockOverview_Handler,
+			Handler:    _Dplatform_GetBlockOverview_Handler,
 		},
 		{
 			MethodName: "GetAddrOverview",
-			Handler:    _Chain33_GetAddrOverview_Handler,
+			Handler:    _Dplatform_GetAddrOverview_Handler,
 		},
 		{
 			MethodName: "GetBlockHash",
-			Handler:    _Chain33_GetBlockHash_Handler,
+			Handler:    _Dplatform_GetBlockHash_Handler,
 		},
 		{
 			MethodName: "GenSeed",
-			Handler:    _Chain33_GenSeed_Handler,
+			Handler:    _Dplatform_GenSeed_Handler,
 		},
 		{
 			MethodName: "GetSeed",
-			Handler:    _Chain33_GetSeed_Handler,
+			Handler:    _Dplatform_GetSeed_Handler,
 		},
 		{
 			MethodName: "SaveSeed",
-			Handler:    _Chain33_SaveSeed_Handler,
+			Handler:    _Dplatform_SaveSeed_Handler,
 		},
 		{
 			MethodName: "GetBalance",
-			Handler:    _Chain33_GetBalance_Handler,
+			Handler:    _Dplatform_GetBalance_Handler,
 		},
 		{
 			MethodName: "QueryChain",
-			Handler:    _Chain33_QueryChain_Handler,
+			Handler:    _Dplatform_QueryChain_Handler,
 		},
 		{
 			MethodName: "ExecWallet",
-			Handler:    _Chain33_ExecWallet_Handler,
+			Handler:    _Dplatform_ExecWallet_Handler,
 		},
 		{
 			MethodName: "QueryConsensus",
-			Handler:    _Chain33_QueryConsensus_Handler,
+			Handler:    _Dplatform_QueryConsensus_Handler,
 		},
 		{
 			MethodName: "CreateTransaction",
-			Handler:    _Chain33_CreateTransaction_Handler,
+			Handler:    _Dplatform_CreateTransaction_Handler,
 		},
 		{
 			MethodName: "GetHexTxByHash",
-			Handler:    _Chain33_GetHexTxByHash_Handler,
+			Handler:    _Dplatform_GetHexTxByHash_Handler,
 		},
 		{
 			MethodName: "DumpPrivkey",
-			Handler:    _Chain33_DumpPrivkey_Handler,
+			Handler:    _Dplatform_DumpPrivkey_Handler,
 		},
 		{
 			MethodName: "DumpPrivkeysFile",
-			Handler:    _Chain33_DumpPrivkeysFile_Handler,
+			Handler:    _Dplatform_DumpPrivkeysFile_Handler,
 		},
 		{
 			MethodName: "ImportPrivkeysFile",
-			Handler:    _Chain33_ImportPrivkeysFile_Handler,
+			Handler:    _Dplatform_ImportPrivkeysFile_Handler,
 		},
 		{
 			MethodName: "Version",
-			Handler:    _Chain33_Version_Handler,
+			Handler:    _Dplatform_Version_Handler,
 		},
 		{
 			MethodName: "IsSync",
-			Handler:    _Chain33_IsSync_Handler,
+			Handler:    _Dplatform_IsSync_Handler,
 		},
 		{
 			MethodName: "GetPeerInfo",
-			Handler:    _Chain33_GetPeerInfo_Handler,
+			Handler:    _Dplatform_GetPeerInfo_Handler,
 		},
 		{
 			MethodName: "NetInfo",
-			Handler:    _Chain33_NetInfo_Handler,
+			Handler:    _Dplatform_NetInfo_Handler,
 		},
 		{
 			MethodName: "IsNtpClockSync",
-			Handler:    _Chain33_IsNtpClockSync_Handler,
+			Handler:    _Dplatform_IsNtpClockSync_Handler,
 		},
 		{
 			MethodName: "GetFatalFailure",
-			Handler:    _Chain33_GetFatalFailure_Handler,
+			Handler:    _Dplatform_GetFatalFailure_Handler,
 		},
 		{
 			MethodName: "GetLastBlockSequence",
-			Handler:    _Chain33_GetLastBlockSequence_Handler,
+			Handler:    _Dplatform_GetLastBlockSequence_Handler,
 		},
 		{
 			MethodName: "GetSequenceByHash",
-			Handler:    _Chain33_GetSequenceByHash_Handler,
+			Handler:    _Dplatform_GetSequenceByHash_Handler,
 		},
 		{
 			MethodName: "GetBlockByHashes",
-			Handler:    _Chain33_GetBlockByHashes_Handler,
+			Handler:    _Dplatform_GetBlockByHashes_Handler,
 		},
 		{
 			MethodName: "GetBlockBySeq",
-			Handler:    _Chain33_GetBlockBySeq_Handler,
+			Handler:    _Dplatform_GetBlockBySeq_Handler,
 		},
 		{
 			MethodName: "CloseQueue",
-			Handler:    _Chain33_CloseQueue_Handler,
+			Handler:    _Dplatform_CloseQueue_Handler,
 		},
 		{
 			MethodName: "GetAllExecBalance",
-			Handler:    _Chain33_GetAllExecBalance_Handler,
+			Handler:    _Dplatform_GetAllExecBalance_Handler,
 		},
 		{
 			MethodName: "SignRawTx",
-			Handler:    _Chain33_SignRawTx_Handler,
+			Handler:    _Dplatform_SignRawTx_Handler,
 		},
 		{
 			MethodName: "CreateNoBalanceTransaction",
-			Handler:    _Chain33_CreateNoBalanceTransaction_Handler,
+			Handler:    _Dplatform_CreateNoBalanceTransaction_Handler,
 		},
 		{
 			MethodName: "QueryRandNum",
-			Handler:    _Chain33_QueryRandNum_Handler,
+			Handler:    _Dplatform_QueryRandNum_Handler,
 		},
 		{
 			MethodName: "GetFork",
-			Handler:    _Chain33_GetFork_Handler,
+			Handler:    _Dplatform_GetFork_Handler,
 		},
 		{
 			MethodName: "CreateNoBalanceTxs",
-			Handler:    _Chain33_CreateNoBalanceTxs_Handler,
+			Handler:    _Dplatform_CreateNoBalanceTxs_Handler,
 		},
 		{
 			MethodName: "GetParaTxByTitle",
-			Handler:    _Chain33_GetParaTxByTitle_Handler,
+			Handler:    _Dplatform_GetParaTxByTitle_Handler,
 		},
 		{
 			MethodName: "LoadParaTxByTitle",
-			Handler:    _Chain33_LoadParaTxByTitle_Handler,
+			Handler:    _Dplatform_LoadParaTxByTitle_Handler,
 		},
 		{
 			MethodName: "GetParaTxByHeight",
-			Handler:    _Chain33_GetParaTxByHeight_Handler,
+			Handler:    _Dplatform_GetParaTxByHeight_Handler,
 		},
 		{
 			MethodName: "GetHeaders",
-			Handler:    _Chain33_GetHeaders_Handler,
+			Handler:    _Dplatform_GetHeaders_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

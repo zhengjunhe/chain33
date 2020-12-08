@@ -17,25 +17,25 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/33cn/dplatform/common/log/log15"
 	"google.golang.org/grpc"
 
-	"github.com/33cn/chain33/common"
-	log "github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc/grpcclient"
+	"github.com/33cn/dplatform/common"
+	log "github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/rpc/grpcclient"
 	"github.com/decred/base58"
 	b58 "github.com/mr-tron/base58"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatform/util/testnode"
 	"github.com/stretchr/testify/assert"
 
 	//加载系统内置store, 不要依赖plugin
-	_ "github.com/33cn/chain33/system/dapp/init"
-	_ "github.com/33cn/chain33/system/mempool/init"
-	_ "github.com/33cn/chain33/system/store/init"
+	_ "github.com/33cn/dplatform/system/dapp/init"
+	_ "github.com/33cn/dplatform/system/mempool/init"
+	_ "github.com/33cn/dplatform/system/store/init"
 )
 
 // 执行： go test -cover
@@ -140,7 +140,7 @@ func BenchmarkSendTx(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			for pb.Next() {
 				tx := util.CreateNoneTxWithTxHeight(cfg, priv, 0)
-				poststr := fmt.Sprintf(`{"jsonrpc":"2.0","id":2,"method":"Chain33.SendTransaction","params":[{"data":"%v"}]}`,
+				poststr := fmt.Sprintf(`{"jsonrpc":"2.0","id":2,"method":"Dplatform.SendTransaction","params":[{"data":"%v"}]}`,
 					common.ToHex(types.Encode(tx)))
 
 				resp, _ := http.Post("http://localhost:8801", "application/json", bytes.NewBufferString(poststr))
@@ -180,7 +180,7 @@ func BenchmarkSoloNewBlock(b *testing.B) {
 				panic(err.Error())
 			}
 			defer conn.Close()
-			gcli := types.NewChain33Client(conn)
+			gcli := types.NewDplatformClient(conn)
 			for {
 				tx := util.CreateNoneTxWithTxHeight(cfg, mock33.GetGenesisKey(), atomic.LoadInt64(&height))
 				//测试去签名情况

@@ -4,14 +4,14 @@
 
 // +build go1.8
 
-// Package main chain33程序入口
+// Package main dplatform程序入口
 package main
 
 import (
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/util/cli"
+	_ "github.com/33cn/dplatform/system"
+	"github.com/33cn/dplatform/util/cli"
 )
 
 func main() {
-	cli.RunChain33("", "")
+	cli.RunDplatform("", "")
 }

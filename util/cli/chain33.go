@@ -4,7 +4,7 @@
 
 // +build go1.8
 
-// package cli RunChain33函数会加载各个模块，组合成区块链程序
+// package cli RunDplatform函数会加载各个模块，组合成区块链程序
 //主循环由消息队列驱动。
 //消息队列本身可插拔，可以支持各种队列
 //同时共识模式也是可以插拔的。
@@ -21,35 +21,35 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/33cn/chain33/p2p"
+	"github.com/33cn/dplatform/p2p"
 
-	"github.com/33cn/chain33/metrics"
+	"github.com/33cn/dplatform/metrics"
 
 	"time"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/blockchain"
+	"github.com/33cn/dplatform/util"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/limits"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/consensus"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/mempool"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/store"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/wallet"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/limits"
+	clog "github.com/33cn/dplatform/common/log"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/common/version"
+	"github.com/33cn/dplatform/consensus"
+	"github.com/33cn/dplatform/executor"
+	"github.com/33cn/dplatform/mempool"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/rpc"
+	"github.com/33cn/dplatform/store"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/wallet"
 	"google.golang.org/grpc/grpclog"
 )
 
 var (
 	cpuNum      = runtime.NumCPU()
 	configPath  = flag.String("f", "", "configfile")
-	datadir     = flag.String("datadir", "", "data dir of chain33, include logs and datas")
+	datadir     = flag.String("datadir", "", "data dir of dplatform, include logs and datas")
 	versionCmd  = flag.Bool("v", false, "version")
 	fixtime     = flag.Bool("fixtime", false, "fix time")
 	waitPid     = flag.Bool("waitpid", false, "p2p stuck until seed save info wallet & wallet unlock")
@@ -61,8 +61,8 @@ var (
 	startHeight = flag.Int64("startheight", 0, "export block start height")
 )
 
-//RunChain33 : run Chain33
-func RunChain33(name, defCfg string) {
+//RunDplatform : run Dplatform
+func RunDplatform(name, defCfg string) {
 	flag.Parse()
 	if *versionCmd {
 		fmt.Println(version.GetVersion())
@@ -70,7 +70,7 @@ func RunChain33(name, defCfg string) {
 	}
 	if *configPath == "" {
 		if name == "" {
-			*configPath = "chain33.toml"
+			*configPath = "dplatform.toml"
 		} else {
 			*configPath = name + ".toml"
 		}
@@ -94,8 +94,8 @@ func RunChain33(name, defCfg string) {
 		panic(err)
 	}
 	//set config: bityuan 用 bityuan.toml 这个配置文件
-	chain33Cfg := types.NewChain33Config(types.MergeCfg(types.ReadFile(*configPath), defCfg))
-	cfg := chain33Cfg.GetModuleConfig()
+	dplatformCfg := types.NewDplatformConfig(types.MergeCfg(types.ReadFile(*configPath), defCfg))
+	cfg := dplatformCfg.GetModuleConfig()
 	if *datadir != "" {
 		util.ResetDatadir(cfg, *datadir)
 	}
@@ -149,41 +149,41 @@ func RunChain33(name, defCfg string) {
 	version.SetLocalDBVersion(cfg.Store.LocalDBVersion)
 	version.SetStoreDBVersion(cfg.Store.StoreDBVersion)
 	version.SetAppVersion(cfg.Version)
-	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " chain33:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
+	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " dplatform:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
 	log.Info("loading queue")
 	q := queue.New("channel")
-	q.SetConfig(chain33Cfg)
+	q.SetConfig(dplatformCfg)
 
 	log.Info("loading mempool module")
-	mem := mempool.New(chain33Cfg)
+	mem := mempool.New(dplatformCfg)
 	mem.SetQueueClient(q.Client())
 
 	log.Info("loading execs module")
-	exec := executor.New(chain33Cfg)
+	exec := executor.New(dplatformCfg)
 	exec.SetQueueClient(q.Client())
 
 	log.Info("loading blockchain module")
 	cfg.BlockChain.RollbackBlock = *rollback
 	cfg.BlockChain.RollbackSave = *save
-	chain := blockchain.New(chain33Cfg)
+	chain := blockchain.New(dplatformCfg)
 	chain.SetQueueClient(q.Client())
 
 	log.Info("loading store module")
-	s := store.New(chain33Cfg)
+	s := store.New(dplatformCfg)
 	s.SetQueueClient(q.Client())
 
 	chain.Upgrade()
 
 	log.Info("loading consensus module")
-	cs := consensus.New(chain33Cfg)
+	cs := consensus.New(dplatformCfg)
 	cs.SetQueueClient(q.Client())
 
 	//jsonrpc, grpc, channel 三种模式
-	rpcapi := rpc.New(chain33Cfg)
+	rpcapi := rpc.New(dplatformCfg)
 	rpcapi.SetQueueClient(q.Client())
 
 	log.Info("loading wallet module")
-	walletm := wallet.New(chain33Cfg)
+	walletm := wallet.New(dplatformCfg)
 	walletm.SetQueueClient(q.Client())
 
 	chain.Rollbackblock()
@@ -197,7 +197,7 @@ func RunChain33(name, defCfg string) {
 	log.Info("loading p2p module")
 	var network queue.Module
 	if cfg.P2P.Enable {
-		network = p2p.NewP2PMgr(chain33Cfg)
+		network = p2p.NewP2PMgr(dplatformCfg)
 	} else {
 		network = &util.MockModule{Key: "p2p"}
 	}
@@ -205,7 +205,7 @@ func RunChain33(name, defCfg string) {
 
 	health := util.NewHealthCheckServer(q.Client())
 	health.Start(cfg.Health)
-	metrics.StartMetrics(chain33Cfg)
+	metrics.StartMetrics(dplatformCfg)
 	defer func() {
 		//close all module,clean some resource
 		log.Info("begin close health module")

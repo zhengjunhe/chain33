@@ -7,14 +7,14 @@ package executor
 import (
 	"bytes"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/client/api"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	dbm "github.com/33cn/chain33/common/db"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/account"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/client/api"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	dbm "github.com/33cn/dplatform/common/db"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -30,7 +30,7 @@ type executor struct {
 	difficulty uint64
 	txs        []*types.Transaction
 	api        client.QueueProtocolAPI
-	gcli       types.Chain33Client
+	gcli       types.DplatformClient
 	execapi    api.ExecutorAPI
 	receipts   []*types.ReceiptData
 	//单个区块执行期间执行器缓存
@@ -39,7 +39,7 @@ type executor struct {
 	currTxIdx  int
 	currExecTx *types.Transaction
 	currDriver drivers.Driver
-	cfg        *types.Chain33Config
+	cfg        *types.DplatformConfig
 	exec       *Executor
 }
 

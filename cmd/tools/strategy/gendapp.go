@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/chain33/cmd/tools/tasks"
-	"github.com/33cn/chain33/cmd/tools/types"
-	"github.com/33cn/chain33/cmd/tools/util"
+	"github.com/33cn/dplatform/cmd/tools/tasks"
+	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatform/cmd/tools/util"
 )
 
 type genDappStrategy struct {
@@ -25,8 +25,8 @@ type genDappStrategy struct {
 }
 
 func (ad *genDappStrategy) Run() error {
-	fmt.Println("Begin generate chain33 dapp code.")
-	defer fmt.Println("End generate chain33 dapp code.")
+	fmt.Println("Begin generate dplatform dapp code.")
+	defer fmt.Println("End generate dplatform dapp code.")
 	if !ad.initMember() {
 		return fmt.Errorf("InitError")
 	}

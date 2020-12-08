@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/common/address"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/33cn/dplatform/common/address"
+	dbm "github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/common/version"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatform/util/testnode"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -26,7 +26,7 @@ func TestNeedReExec(t *testing.T) {
 			assert.Equal(t, r, "not support degrade the program")
 		}
 	}()
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	mock33 := testnode.NewWithConfig(cfg, nil)
 
 	//发送交易
@@ -78,7 +78,7 @@ func GetAddrTxsCount(db dbm.DB, addr string) (int64, error) {
 }
 
 func TestUpgradeStore(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	cfg.GetModuleConfig().BlockChain.EnableReExecLocal = true
 	mock33 := testnode.NewWithConfig(cfg, nil)
 	//发送交易

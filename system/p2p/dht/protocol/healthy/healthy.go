@@ -7,9 +7,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	types2 "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/system/p2p/dht/protocol"
+	types2 "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
 

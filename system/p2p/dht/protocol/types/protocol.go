@@ -16,13 +16,13 @@ import (
 	discovery "github.com/libp2p/go-libp2p-discovery"
 	kbt "github.com/libp2p/go-libp2p-kbucket"
 
-	"github.com/33cn/chain33/system/p2p/dht/net"
+	"github.com/33cn/dplatform/system/p2p/dht/net"
 
-	"github.com/33cn/chain33/p2p"
+	"github.com/33cn/dplatform/p2p"
 
-	"github.com/33cn/chain33/queue"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
@@ -66,7 +66,7 @@ type ProtocolManager struct {
 
 // P2PEnv p2p全局公共变量
 type P2PEnv struct {
-	ChainCfg        *types.Chain33Config
+	ChainCfg        *types.DplatformConfig
 	QueueClient     queue.Client
 	Host            core.Host
 	ConnManager     IConnManager
@@ -174,13 +174,13 @@ func (base *BaseProtocol) GetP2PEnv() *P2PEnv {
 }
 
 // GetChainCfg get chain cfg
-func (base *BaseProtocol) GetChainCfg() *types.Chain33Config {
+func (base *BaseProtocol) GetChainCfg() *types.DplatformConfig {
 
 	return base.ChainCfg
 
 }
 
-// GetQueueClient get chain33 msg queue client
+// GetQueueClient get dplatform msg queue client
 func (base *BaseProtocol) GetQueueClient() queue.Client {
 
 	return base.QueueClient

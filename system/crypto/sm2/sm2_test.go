@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/33cn/dplatform/common/crypto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/tjfoc/gmsm/sm2"

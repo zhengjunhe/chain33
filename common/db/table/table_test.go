@@ -7,9 +7,9 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 )
@@ -23,7 +23,7 @@ func TestTransactinList(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -162,7 +162,7 @@ func TestTransactinListAuto(t *testing.T) {
 		Primary: "",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -243,7 +243,7 @@ func TestTransactinListAuto(t *testing.T) {
 }
 
 func TestRow(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	rowmeta := NewTransactionRow()
 	row := rowmeta.CreateRow()
 	_, priv := util.Genaddress()
@@ -270,7 +270,7 @@ func TestDel(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -309,7 +309,7 @@ func TestUpdate(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	_, priv := util.Genaddress()
@@ -343,7 +343,7 @@ func TestReplaceTwice(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()
@@ -387,7 +387,7 @@ func TestReplace(t *testing.T) {
 		Primary: "Hash",
 		Index:   []string{"From", "To"},
 	}
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	table, err := NewTable(NewTransactionRow(), kvdb, opt)
 	assert.Nil(t, err)
 	addr1, priv := util.Genaddress()

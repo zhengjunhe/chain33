@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/cmd/autotest/types"
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/33cn/dplatform/cmd/autotest/types"
+	"github.com/33cn/dplatform/common/log/log15"
 	"github.com/BurntSushi/toml"
 )
 
@@ -87,7 +87,7 @@ func StartAutoTest() bool {
 
 	if len(autoTestConfig.CliCommand) == 0 {
 
-		stdLog.Error("NullChain33Cli")
+		stdLog.Error("NullDplatformCli")
 		return false
 	}
 	//init types

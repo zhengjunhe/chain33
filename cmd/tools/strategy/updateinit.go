@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/chain33/cmd/tools/tasks"
+	"github.com/33cn/dplatform/cmd/tools/tasks"
 )
 
 type updateInitStrategy struct {
@@ -26,8 +26,8 @@ type updateInitStrategy struct {
 }
 
 func (up *updateInitStrategy) Run() error {
-	mlog.Info("Begin run chain33 update init.go.")
-	defer mlog.Info("Run chain33 update init.go finish.")
+	mlog.Info("Begin run dplatform update init.go.")
+	defer mlog.Info("Run dplatform update init.go finish.")
 	if err := up.initMember(); err != nil {
 		return err
 	}
@@ -40,14 +40,14 @@ func (up *updateInitStrategy) initMember() error {
 	gopath := os.Getenv("GOPATH")
 	if err != nil || path == "" {
 		if len(gopath) > 0 {
-			path = filepath.Join(gopath, "/src/github.com/33cn/chain33/plugin/")
+			path = filepath.Join(gopath, "/src/github.com/33cn/dplatform/plugin/")
 		}
 	}
 	if packname == "" {
 		packname = strings.Replace(path, gopath+"/src/", "", 1)
 	}
 	if len(path) == 0 {
-		return errors.New("Chain33 Plugin Not Existed")
+		return errors.New("Dplatform Plugin Not Existed")
 	}
 	up.consRootPath = fmt.Sprintf("%s/consensus/", path)
 	up.dappRootPath = fmt.Sprintf("%s/dapp/", path)

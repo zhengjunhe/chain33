@@ -18,17 +18,17 @@ import (
 
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 
-	"github.com/33cn/chain33/client"
-	logger "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/p2p"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/p2p/dht/manage"
-	"github.com/33cn/chain33/system/p2p/dht/net"
-	"github.com/33cn/chain33/system/p2p/dht/protocol"
-	prototypes "github.com/33cn/chain33/system/p2p/dht/protocol/types"
-	"github.com/33cn/chain33/system/p2p/dht/store"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	logger "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/system/p2p/dht/manage"
+	"github.com/33cn/dplatform/system/p2p/dht/net"
+	"github.com/33cn/dplatform/system/p2p/dht/protocol"
+	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+	"github.com/33cn/dplatform/system/p2p/dht/store"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 	ds "github.com/ipfs/go-datastore"
 	"github.com/libp2p/go-libp2p"
 	connmgr "github.com/libp2p/go-libp2p-connmgr"
@@ -46,7 +46,7 @@ func init() {
 
 // P2P p2p struct
 type P2P struct {
-	chainCfg      *types.Chain33Config
+	chainCfg      *types.DplatformConfig
 	host          core.Host
 	discovery     *net.Discovery
 	connManag     *manage.ConnManager

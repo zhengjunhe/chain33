@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
 	"github.com/kevinms/leakybucket-go"
 	"github.com/libp2p/go-libp2p-core/control"
 	"github.com/libp2p/go-libp2p-core/host"

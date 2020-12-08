@@ -11,7 +11,7 @@ import (
 	bhost "github.com/libp2p/go-libp2p-blankhost"
 	swarmt "github.com/libp2p/go-libp2p-swarm/testing"
 
-	"github.com/33cn/chain33/client"
+	"github.com/33cn/dplatform/client"
 
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -19,18 +19,18 @@ import (
 
 	"os"
 
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/util"
 
 	"crypto/rand"
 	"fmt"
 	"testing"
 
-	l "github.com/33cn/chain33/common/log"
-	p2p2 "github.com/33cn/chain33/p2p"
-	"github.com/33cn/chain33/queue"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/wallet"
+	l "github.com/33cn/dplatform/common/log"
+	p2p2 "github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatform/queue"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/wallet"
 	core "github.com/libp2p/go-libp2p-core"
 	crypto "github.com/libp2p/go-libp2p-core/crypto"
 	p2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
@@ -124,7 +124,7 @@ func processMsg(q queue.Queue) {
 	}()
 }
 
-func NewP2p(cfg *types.Chain33Config, cli queue.Client) p2p2.IP2P {
+func NewP2p(cfg *types.DplatformConfig, cli queue.Client) p2p2.IP2P {
 	p2pmgr := p2p2.NewP2PMgr(cfg)
 	p2pmgr.SysAPI, _ = client.New(cli, nil)
 	subCfg := p2pmgr.ChainCfg.GetSubConfig().P2P
@@ -380,7 +380,7 @@ func Test_Id(t *testing.T) {
 
 func Test_p2p(t *testing.T) {
 
-	cfg := types.NewChain33Config(types.ReadFile("../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("../../../cmd/dplatform/dplatform.test.toml"))
 	q := queue.New("channel")
 	datadir := util.ResetDatadir(cfg.GetModuleConfig(), "$TEMP/")
 	q.SetConfig(cfg)

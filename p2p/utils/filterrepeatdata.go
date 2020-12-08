@@ -9,9 +9,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	log "github.com/33cn/chain33/common/log/log15"
+	log "github.com/33cn/dplatform/common/log/log15"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	lru "github.com/hashicorp/golang-lru"
 )
 

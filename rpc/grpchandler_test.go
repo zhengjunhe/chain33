@@ -11,10 +11,10 @@ import (
 
 	"strings"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types"
-	pb "github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client/mocks"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/types"
+	pb "github.com/33cn/dplatform/types"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -64,7 +64,7 @@ func init() {
 	//addr := "192.168.1.1"
 	//remoteIpWhitelist[addr] = true
 	//grpcFuncWhitelist["*"] = true
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	qapi = new(mocks.QueueProtocolAPI)
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
@@ -100,11 +100,11 @@ func TestSendTransaction(t *testing.T) {
 }
 
 func testVersionOK(t *testing.T) {
-	reply := &types.VersionInfo{Chain33: "6.0.2"}
+	reply := &types.VersionInfo{Dplatform: "6.0.2"}
 	qapi.On("Version").Return(reply, nil)
 	data, err := g.Version(getOkCtx(), nil)
 	assert.Nil(t, err, "the error should be nil")
-	assert.Equal(t, "6.0.2", data.Chain33, "reply should be ok")
+	assert.Equal(t, "6.0.2", data.Dplatform, "reply should be ok")
 }
 
 func TestVersion(t *testing.T) {
@@ -677,13 +677,13 @@ func TestGrpc_QueryRandNum(t *testing.T) {
 }
 
 func TestGrpc_GetFork(t *testing.T) {
-	types.RegFork("para", func(cfg *types.Chain33Config) {
+	types.RegFork("para", func(cfg *types.DplatformConfig) {
 		cfg.SetDappFork("para", "fork100", 100)
 	})
 
 	str := types.GetDefaultCfgstring()
-	newstr := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
-	cfg := types.NewChain33Config(newstr)
+	newstr := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	cfg := types.NewDplatformConfig(newstr)
 	Init(cfg)
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -693,7 +693,7 @@ func TestGrpc_GetFork(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, int64(100), val.Data)
 
-	cfg1 := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg1 := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	Init(cfg1)
 	api1 := new(mocks.QueueProtocolAPI)
 	api1.On("GetConfig", mock.Anything).Return(cfg1)

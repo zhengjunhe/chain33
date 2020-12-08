@@ -10,19 +10,19 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/33cn/chain33/client/api"
-	dbm "github.com/33cn/chain33/common/db"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/rpc/grpcclient"
-	drivers "github.com/33cn/chain33/system/dapp"
+	"github.com/33cn/dplatform/client/api"
+	dbm "github.com/33cn/dplatform/common/db"
+	clog "github.com/33cn/dplatform/common/log"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/pluginmgr"
+	"github.com/33cn/dplatform/rpc/grpcclient"
+	drivers "github.com/33cn/dplatform/system/dapp"
 
 	// register drivers
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
-	typ "github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
+	typ "github.com/33cn/dplatform/types"
 )
 
 var elog = log.New("module", "execs")
@@ -42,20 +42,20 @@ type Executor struct {
 	disableLocal   bool
 	client         queue.Client
 	qclient        client.QueueProtocolAPI
-	grpccli        types.Chain33Client
+	grpccli        types.DplatformClient
 	pluginEnable   map[string]bool
 	alias          map[string]string
 	noneDriverPool *sync.Pool
 }
 
-func execInit(cfg *typ.Chain33Config) {
+func execInit(cfg *typ.DplatformConfig) {
 	pluginmgr.InitExec(cfg)
 }
 
 var runonce sync.Once
 
 // New new executor
-func New(cfg *typ.Chain33Config) *Executor {
+func New(cfg *typ.DplatformConfig) *Executor {
 	// init executor
 	runonce.Do(func() {
 		execInit(cfg)

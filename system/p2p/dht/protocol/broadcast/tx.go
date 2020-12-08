@@ -7,7 +7,7 @@ package broadcast
 import (
 	"encoding/hex"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 func (protocol *broadcastProtocol) sendTx(tx *types.P2PTx, p2pData *types.BroadCastData, pid string) (doSend bool) {

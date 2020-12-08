@@ -12,9 +12,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/33cn/chain33/cmd/autotest/testflow"
+	"github.com/33cn/dplatform/cmd/autotest/testflow"
 	//默认只导入系统dapp的AutoTest
-	_ "github.com/33cn/chain33/system"
+	_ "github.com/33cn/dplatform/system"
 )
 
 var (

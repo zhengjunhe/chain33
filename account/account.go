@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package account 实现chain33 区块链资产操作
+// Package account 实现dplatform 区块链资产操作
 package account
 
 //package for account manger
@@ -18,12 +18,12 @@ package account
 import (
 	"strings"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	dbm "github.com/33cn/chain33/common/db"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	dbm "github.com/33cn/dplatform/common/db"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/types"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -37,17 +37,17 @@ type DB struct {
 	execer               string
 	symbol               string
 	accountKeyBuffer     []byte
-	cfg                  *types.Chain33Config
+	cfg                  *types.DplatformConfig
 }
 
 // NewCoinsAccount 新建账户
-func NewCoinsAccount(cfg *types.Chain33Config) *DB {
+func NewCoinsAccount(cfg *types.DplatformConfig) *DB {
 	prefix := "mavl-coins-" + cfg.GetCoinSymbol() + "-"
 	return newAccountDB(cfg, prefix)
 }
 
 // NewAccountDB 新建DB账户
-func NewAccountDB(cfg *types.Chain33Config, execer string, symbol string, db dbm.KV) (*DB, error) {
+func NewAccountDB(cfg *types.DplatformConfig, execer string, symbol string, db dbm.KV) (*DB, error) {
 	//如果execer 和  symbol 中存在 "-", 那么创建失败
 	if strings.ContainsRune(execer, '-') {
 		return nil, types.ErrExecNameNotAllow
@@ -62,7 +62,7 @@ func NewAccountDB(cfg *types.Chain33Config, execer string, symbol string, db dbm
 	return accDB, nil
 }
 
-func newAccountDB(cfg *types.Chain33Config, prefix string) *DB {
+func newAccountDB(cfg *types.DplatformConfig, prefix string) *DB {
 	acc := &DB{cfg: cfg}
 	acc.accountKeyPerfix = []byte(prefix)
 	acc.accountKeyBuffer = make([]byte, 0, len(acc.accountKeyPerfix)+64)

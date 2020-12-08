@@ -14,7 +14,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -35,7 +35,7 @@ func addPrefix(prefix, name string) string {
 
 // NewJSONClient produce a json object
 func NewJSONClient(url string) (*JSONClient, error) {
-	return New("Chain33", url, false)
+	return New("Dplatform", url, false)
 }
 
 // New produce a jsonclient by perfix and url

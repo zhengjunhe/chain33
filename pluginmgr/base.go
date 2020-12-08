@@ -6,9 +6,9 @@
 package pluginmgr
 
 import (
-	"github.com/33cn/chain33/rpc/types"
-	typ "github.com/33cn/chain33/types"
-	wcom "github.com/33cn/chain33/wallet/common"
+	"github.com/33cn/dplatform/rpc/types"
+	typ "github.com/33cn/dplatform/types"
+	wcom "github.com/33cn/dplatform/wallet/common"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ type PluginBase struct {
 	Name     string
 	ExecName string
 	RPC      func(name string, s types.RPCServer)
-	Exec     func(name string, cfg *typ.Chain33Config, sub []byte)
+	Exec     func(name string, cfg *typ.DplatformConfig, sub []byte)
 	Wallet   func(walletBiz wcom.WalletOperate, sub []byte)
 	Cmd      func() *cobra.Command
 }
@@ -33,7 +33,7 @@ func (p *PluginBase) GetExecutorName() string {
 }
 
 // InitExec init exec
-func (p *PluginBase) InitExec(cfg *typ.Chain33Config) {
+func (p *PluginBase) InitExec(cfg *typ.DplatformConfig) {
 	sub := cfg.GetSubConfig().Exec
 	subcfg, ok := sub[p.ExecName]
 	if !ok {

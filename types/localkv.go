@@ -32,7 +32,7 @@ func GetLocalDBKeyList() [][]byte {
 }
 
 //CalcTxKey local db中保存交易的方法
-func (c *Chain33Config) CalcTxKey(hash []byte) []byte {
+func (c *DplatformConfig) CalcTxKey(hash []byte) []byte {
 	if c.IsEnable("quickIndex") {
 		return append(TxHashPerfix, hash...)
 	}
@@ -40,7 +40,7 @@ func (c *Chain33Config) CalcTxKey(hash []byte) []byte {
 }
 
 // CalcTxKeyValue 保存local db中保存交易的方法
-func (c *Chain33Config) CalcTxKeyValue(txr *TxResult) []byte {
+func (c *DplatformConfig) CalcTxKeyValue(txr *TxResult) []byte {
 	if c.IsEnable("reduceLocaldb") {
 		txres := &TxResult{
 			Height:     txr.GetHeight(),

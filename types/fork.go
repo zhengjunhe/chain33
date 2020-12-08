@@ -156,22 +156,22 @@ func (f *Forks) setForkForParaZero() {
 }
 
 // IsFork 是否系统 fork高度
-func (c *Chain33Config) IsFork(height int64, fork string) bool {
+func (c *DplatformConfig) IsFork(height int64, fork string) bool {
 	return c.forks.IsFork(height, fork)
 }
 
 // IsDappFork 是否dapp fork高度
-func (c *Chain33Config) IsDappFork(height int64, dapp, fork string) bool {
+func (c *DplatformConfig) IsDappFork(height int64, dapp, fork string) bool {
 	return c.forks.IsDappFork(height, dapp, fork)
 }
 
 // GetDappFork 获取dapp fork高度
-func (c *Chain33Config) GetDappFork(dapp, fork string) int64 {
+func (c *DplatformConfig) GetDappFork(dapp, fork string) int64 {
 	return c.forks.GetDappFork(dapp, fork)
 }
 
 // SetDappFork 设置dapp fork高度
-func (c *Chain33Config) SetDappFork(dapp, fork string, height int64) {
+func (c *DplatformConfig) SetDappFork(dapp, fork string, height int64) {
 	if c.needSetForkZero() {
 		height = 0
 		if fork == "ForkBlockHash" {
@@ -182,7 +182,7 @@ func (c *Chain33Config) SetDappFork(dapp, fork string, height int64) {
 }
 
 // RegisterDappFork 注册dapp fork高度
-func (c *Chain33Config) RegisterDappFork(dapp, fork string, height int64) {
+func (c *DplatformConfig) RegisterDappFork(dapp, fork string, height int64) {
 	if c.needSetForkZero() {
 		height = 0
 		if fork == "ForkBlockHash" {
@@ -193,17 +193,17 @@ func (c *Chain33Config) RegisterDappFork(dapp, fork string, height int64) {
 }
 
 // GetFork 获取系统fork高度
-func (c *Chain33Config) GetFork(fork string) int64 {
+func (c *DplatformConfig) GetFork(fork string) int64 {
 	return c.forks.GetFork(fork)
 }
 
 // HasFork 是否有系统fork
-func (c *Chain33Config) HasFork(fork string) bool {
+func (c *DplatformConfig) HasFork(fork string) bool {
 	return c.forks.HasFork(fork)
 }
 
 // IsEnableFork 是否使能了fork
-func (c *Chain33Config) IsEnableFork(height int64, fork string, enable bool) bool {
+func (c *DplatformConfig) IsEnableFork(height int64, fork string, enable bool) bool {
 	if !enable {
 		return false
 	}
@@ -212,21 +212,21 @@ func (c *Chain33Config) IsEnableFork(height int64, fork string, enable bool) boo
 
 //fork 设置规则：
 //所有的fork都需要有明确的配置，不开启fork 配置为 -1; forks即为从toml中读入文件
-func (c *Chain33Config) initForkConfig(forks *ForkList) {
-	chain33fork := c.forks.GetAll()
-	if chain33fork == nil {
-		panic("chain33 fork not init")
+func (c *DplatformConfig) initForkConfig(forks *ForkList) {
+	dplatformfork := c.forks.GetAll()
+	if dplatformfork == nil {
+		panic("dplatform fork not init")
 	}
-	//开始判断chain33fork中的system部分是否已经设置
+	//开始判断dplatformfork中的system部分是否已经设置
 	s := ""
-	for k := range chain33fork {
+	for k := range dplatformfork {
 		if !strings.Contains(k, ".") {
 			if _, ok := forks.System[k]; !ok {
 				s += "system fork " + k + " not config\n"
 			}
 		}
 	}
-	for k := range chain33fork {
+	for k := range dplatformfork {
 		forkname := strings.Split(k, ".")
 		if len(forkname) == 1 {
 			continue

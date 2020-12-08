@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/types"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/types"
 	"github.com/XiaoMi/pegasus-go-client/pegasus"
 	"github.com/syndtr/goleveldb/leveldb/util"
 )

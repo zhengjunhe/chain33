@@ -12,7 +12,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/33cn/chain33/common"
+	"github.com/33cn/dplatform/common"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

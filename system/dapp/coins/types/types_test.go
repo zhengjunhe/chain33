@@ -8,12 +8,12 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestTypeReflact(t *testing.T) {
-	ty := NewType(types.NewChain33Config(types.GetDefaultCfgstring()))
+	ty := NewType(types.NewDplatformConfig(types.GetDefaultCfgstring()))
 	assert.NotNil(t, ty)
 	//创建一个json字符串
 	data, err := types.PBToJSON(&types.AssetsTransfer{Amount: 10})
@@ -31,7 +31,7 @@ func TestTypeReflact(t *testing.T) {
 }
 
 func TestCoinsType(t *testing.T) {
-	ty := NewType(types.NewChain33Config(types.GetDefaultCfgstring()))
+	ty := NewType(types.NewDplatformConfig(types.GetDefaultCfgstring()))
 	payload := ty.GetPayload()
 	assert.Equal(t, &CoinsAction{}, payload.(*CoinsAction))
 

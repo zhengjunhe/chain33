@@ -5,8 +5,8 @@
 package types
 
 import (
-	"github.com/33cn/chain33/cmd/tools/gencode/base"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/33cn/dplatform/cmd/tools/gencode/base"
+	"github.com/33cn/dplatform/cmd/tools/types"
 )
 
 func init() {
@@ -46,8 +46,8 @@ var (
 	typesContent = `package types
 
 import (
-log "github.com/33cn/chain33/common/log/log15"
-"github.com/33cn/chain33/types"
+log "github.com/33cn/dplatform/common/log/log15"
+"github.com/33cn/dplatform/types"
 "reflect"
 )
 
@@ -83,12 +83,12 @@ func init() {
 }
 
 // InitFork defines register fork
-func InitFork(cfg *types.Chain33Config) {
+func InitFork(cfg *types.DplatformConfig) {
 	cfg.RegisterDappFork(${CLASSNAME}X, "Enable", 0)
 }
 
 // InitExecutor defines register executor
-func InitExecutor(cfg *types.Chain33Config) {
+func InitExecutor(cfg *types.DplatformConfig) {
 	types.RegistorExecutor(${CLASSNAME}X, NewType(cfg))
 }
 
@@ -96,7 +96,7 @@ type ${EXECNAME}Type struct {
     types.ExecTypeBase
 }
 
-func NewType(cfg *types.Chain33Config) *${EXECNAME}Type {
+func NewType(cfg *types.DplatformConfig) *${EXECNAME}Type {
     c := &${EXECNAME}Type{}
     c.SetChild(c)
     c.SetConfig(cfg)

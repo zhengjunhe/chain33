@@ -8,19 +8,19 @@ import (
 	"testing"
 	"time"
 
-	drivers "github.com/33cn/chain33/system/dapp"
+	drivers "github.com/33cn/dplatform/system/dapp"
 
 	"strings"
 
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	_ "github.com/33cn/dplatform/system"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestLoadDriverFork(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
 	exec, _ := initEnv(new)
 	cfg := exec.client.GetConfig()
 	execInit(cfg)
@@ -36,7 +36,7 @@ func TestLoadDriverFork(t *testing.T) {
 	tx2 := *tx
 	tx2.Execer = []byte("user.p.test.notAllow")
 	// local fork值 为0, 测试不出fork前的情况
-	//types.SetTitleOnlyForTest("chain33")
+	//types.SetTitleOnlyForTest("dplatform")
 	t.Log("get fork value", cfg.GetFork("ForkCacheDriver"), cfg.GetTitle())
 	cases := []struct {
 		height     int64

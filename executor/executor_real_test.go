@@ -13,14 +13,14 @@ import (
 
 	"sync"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/merkle"
-	_ "github.com/33cn/chain33/system"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/merkle"
+	_ "github.com/33cn/dplatform/system"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatform/util/testnode"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -41,7 +41,7 @@ func TestExecGenesisBlock(t *testing.T) {
 	assert.Equal(t, block.Height, int64(0))
 }
 
-func newMockNode() *testnode.Chain33Mock {
+func newMockNode() *testnode.DplatformMock {
 	cfg := testnode.GetDefaultConfig()
 	cfg.GetModuleConfig().Consensus.Minerstart = false
 	runonce.Do(func() {

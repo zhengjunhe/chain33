@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/blockchain"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
+	commandtypes "github.com/33cn/dplatform/system/dapp/commands/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/spf13/cobra"
 )
 
@@ -81,7 +81,7 @@ func blockBodyCmd(cmd *cobra.Command, args []string) {
 		Isdetail: detailBool,
 	}
 	var res rpctypes.BlockDetails
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetBlocks", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetBlocks", params, &res)
 	ctx.SetResultCb(parseBlockDetail)
 	ctx.Run()
 }
@@ -129,7 +129,7 @@ func blockHeightHash(cmd *cobra.Command, args []string) {
 		Height: height,
 	}
 	var res rpctypes.ReplyHash
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetBlockHash", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetBlockHash", params, &res)
 	ctx.Run()
 }
 
@@ -156,7 +156,7 @@ func blockViewByHash(cmd *cobra.Command, args []string) {
 		Hash: blockHash,
 	}
 	var res rpctypes.BlockOverview
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetBlockOverview", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetBlockOverview", params, &res)
 	ctx.Run()
 }
 
@@ -197,7 +197,7 @@ func blockHeader(cmd *cobra.Command, args []string) {
 		IsDetail: detailBool,
 	}
 	var res rpctypes.Headers
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetHeaders", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetHeaders", params, &res)
 	ctx.Run()
 }
 
@@ -214,7 +214,7 @@ func GetLastHeaderCmd() *cobra.Command {
 func lastHeader(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res rpctypes.Header
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetLastHeader", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetLastHeader", nil, &res)
 	ctx.Run()
 }
 
@@ -231,7 +231,7 @@ func GetLastBlockSequenceCmd() *cobra.Command {
 func lastSequence(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res int64
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetLastBlockSequence", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetLastBlockSequence", nil, &res)
 	ctx.Run()
 }
 
@@ -257,7 +257,7 @@ func getsequences(cmd *cobra.Command, args []string) {
 		Isdetail: false,
 	}
 	var res rpctypes.ReplyBlkSeqs
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetBlockSequences", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetBlockSequences", params, &res)
 	//ctx.SetResultCb(parseBlockDetail)
 	ctx.Run()
 }
@@ -296,7 +296,7 @@ func getblockbyhashs(cmd *cobra.Command, args []string) {
 	}
 
 	var res rpctypes.BlockDetails
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetBlockByHashes", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetBlockByHashes", params, &res)
 	//ctx.SetResultCb(parseQueryTxsByHashesRes)
 	ctx.Run()
 }
@@ -367,7 +367,7 @@ func addPushSubscribe(cmd *cobra.Command, args []string) {
 	}
 
 	var res types.ReplySubscribePush
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.AddPushSubscribe", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.AddPushSubscribe", params, &res)
 	ctx.Run()
 }
 
@@ -385,7 +385,7 @@ func listPushes(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 
 	var res types.PushSubscribes
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.ListPushes", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.ListPushes", nil, &res)
 	ctx.Run()
 }
 
@@ -414,6 +414,6 @@ func getPushSeqLastNumCmd(cmd *cobra.Command, args []string) {
 	}
 
 	var res types.Int64
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetPushSeqLastNum", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetPushSeqLastNum", params, &res)
 	ctx.Run()
 }

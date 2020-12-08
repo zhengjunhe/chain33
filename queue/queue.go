@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package queue chain33底层消息队列模块
+// Package queue dplatform底层消息队列模块
 package queue
 
 import (
@@ -15,9 +15,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 
-	log "github.com/33cn/chain33/common/log/log15"
+	log "github.com/33cn/dplatform/common/log/log15"
 )
 
 //消息队列：
@@ -60,8 +60,8 @@ type Queue interface {
 	Start()
 	Client() Client
 	Name() string
-	SetConfig(cfg *types.Chain33Config)
-	GetConfig() *types.Chain33Config
+	SetConfig(cfg *types.DplatformConfig)
+	GetConfig() *types.DplatformConfig
 }
 
 type queue struct {
@@ -72,7 +72,7 @@ type queue struct {
 	callback  chan *Message
 	isClose   int32
 	name      string
-	cfg       *types.Chain33Config
+	cfg       *types.DplatformConfig
 	msgPool   *sync.Pool
 }
 
@@ -96,7 +96,7 @@ func New(name string) Queue {
 		for {
 			select {
 			case <-q.done:
-				qlog.Info("closing chain33 callback")
+				qlog.Info("closing dplatform callback")
 				return
 			case msg := <-q.callback:
 				if msg.callback != nil {
@@ -108,13 +108,13 @@ func New(name string) Queue {
 	return q
 }
 
-// GetConfig return the queue Chain33Config
-func (q *queue) GetConfig() *types.Chain33Config {
+// GetConfig return the queue DplatformConfig
+func (q *queue) GetConfig() *types.DplatformConfig {
 	return q.cfg
 }
 
 // Name return the queue name
-func (q *queue) SetConfig(cfg *types.Chain33Config) {
+func (q *queue) SetConfig(cfg *types.DplatformConfig) {
 	if cfg == nil {
 		panic("set config is nil")
 	}
@@ -136,11 +136,11 @@ func (q *queue) Start() {
 	// Block until a signal is received.
 	select {
 	case <-q.done:
-		qlog.Info("closing chain33 done")
+		qlog.Info("closing dplatform done")
 		//atomic.StoreInt32(&q.isClose, 1)
 		break
 	case <-q.interrupt:
-		qlog.Info("closing chain33")
+		qlog.Info("closing dplatform")
 		//atomic.StoreInt32(&q.isClose, 1)
 		break
 	case s := <-c:

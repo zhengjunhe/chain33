@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package wallet wallet chain33钱包功能实现
+// Package wallet wallet dplatform钱包功能实现
 package wallet
 
 import (
@@ -13,18 +13,18 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	dbm "github.com/33cn/chain33/common/db"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/wallet/bipwallet"
-	wcom "github.com/33cn/chain33/wallet/common"
+	"github.com/33cn/dplatform/account"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/crypto"
+	dbm "github.com/33cn/dplatform/common/db"
+	clog "github.com/33cn/dplatform/common/log"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/wallet/bipwallet"
+	wcom "github.com/33cn/dplatform/wallet/common"
 )
 
 var (
@@ -93,7 +93,7 @@ func DisableLog() {
 }
 
 // New 创建一个钱包对象
-func New(cfg *types.Chain33Config) *Wallet {
+func New(cfg *types.DplatformConfig) *Wallet {
 	mcfg := cfg.GetModuleConfig().Wallet
 	//walletStore
 	//accountdb = account.NewCoinsAccount()

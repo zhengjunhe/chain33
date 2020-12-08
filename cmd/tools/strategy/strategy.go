@@ -8,8 +8,8 @@ package strategy
 import (
 	"fmt"
 
-	"github.com/33cn/chain33/cmd/tools/types"
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatform/common/log/log15"
 	"github.com/pkg/errors"
 )
 

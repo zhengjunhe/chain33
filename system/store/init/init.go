@@ -7,5 +7,5 @@ package init
 
 import (
 	// Register some standard stuff
-	_ "github.com/33cn/chain33/system/store/mavl"
+	_ "github.com/33cn/dplatform/system/store/mavl"
 )

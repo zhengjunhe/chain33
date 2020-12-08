@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/queue"
+	"github.com/33cn/dplatform/queue"
 	"github.com/stretchr/testify/assert"
 )
 

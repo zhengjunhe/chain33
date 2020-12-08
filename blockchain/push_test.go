@@ -9,22 +9,22 @@ import (
 	"testing"
 	"time"
 
-	bcMocks "github.com/33cn/chain33/blockchain/mocks"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/consensus"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/mempool"
-	"github.com/33cn/chain33/p2p"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/store"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/wallet"
+	bcMocks "github.com/33cn/dplatform/blockchain/mocks"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/crypto"
+	"github.com/33cn/dplatform/consensus"
+	"github.com/33cn/dplatform/executor"
+	"github.com/33cn/dplatform/mempool"
+	"github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/rpc"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
+	"github.com/33cn/dplatform/store"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatform/wallet"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
@@ -32,7 +32,7 @@ import (
 
 var sendTxWait = time.Millisecond * 5
 
-type Chain33Mock struct {
+type DplatformMock struct {
 	random  *rand.Rand
 	q       queue.Queue
 	client  queue.Client
@@ -51,26 +51,26 @@ type Chain33Mock struct {
 }
 
 //GetAPI :
-func (mock *Chain33Mock) GetAPI() client.QueueProtocolAPI {
+func (mock *DplatformMock) GetAPI() client.QueueProtocolAPI {
 	return mock.api
 }
 
 //GetRPC :
-func (mock *Chain33Mock) GetRPC() *rpc.RPC {
+func (mock *DplatformMock) GetRPC() *rpc.RPC {
 	return mock.rpc
 }
 
 //GetCfg :
-func (mock *Chain33Mock) GetCfg() *types.Config {
+func (mock *DplatformMock) GetCfg() *types.Config {
 	return mock.cfg
 }
 
 //Close :
-func (mock *Chain33Mock) Close() {
+func (mock *DplatformMock) Close() {
 	mock.closeNoLock()
 }
 
-func (mock *Chain33Mock) closeNoLock() {
+func (mock *DplatformMock) closeNoLock() {
 	mock.network.Close()
 	mock.rpc.Close()
 	mock.mem.Close()
@@ -87,22 +87,22 @@ func (mock *Chain33Mock) closeNoLock() {
 }
 
 //GetClient :
-func (mock *Chain33Mock) GetClient() queue.Client {
+func (mock *DplatformMock) GetClient() queue.Client {
 	return mock.client
 }
 
 //GetBlockChain :
-func (mock *Chain33Mock) GetBlockChain() *BlockChain {
+func (mock *DplatformMock) GetBlockChain() *BlockChain {
 	return mock.chain
 }
 
 //GetGenesisKey :
-func (mock *Chain33Mock) GetGenesisKey() crypto.PrivKey {
+func (mock *DplatformMock) GetGenesisKey() crypto.PrivKey {
 	return util.TestPrivkeyList[1]
 }
 
 //WaitHeight :
-func (mock *Chain33Mock) WaitHeight(height int64) error {
+func (mock *DplatformMock) WaitHeight(height int64) error {
 	for {
 		header, err := mock.api.GetLastHeader()
 		if err != nil {
@@ -116,7 +116,7 @@ func (mock *Chain33Mock) WaitHeight(height int64) error {
 	return nil
 }
 
-func (mock *Chain33Mock) GetJSONC() *jsonclient.JSONClient {
+func (mock *DplatformMock) GetJSONC() *jsonclient.JSONClient {
 	jsonc, err := jsonclient.NewJSONClient("http://" + mock.cfg.RPC.JrpcBindAddr + "/")
 	if err != nil {
 		return nil
@@ -125,7 +125,7 @@ func (mock *Chain33Mock) GetJSONC() *jsonclient.JSONClient {
 }
 
 //WaitTx :
-func (mock *Chain33Mock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
+func (mock *DplatformMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
 	if hash == nil {
 		return nil, nil
 	}
@@ -140,7 +140,7 @@ func (mock *Chain33Mock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error
 		data := rpctypes.QueryParm{
 			Hash: common.ToHex(hash),
 		}
-		err = mock.GetJSONC().Call("Chain33.QueryTransaction", data, &testResult)
+		err = mock.GetJSONC().Call("Dplatform.QueryTransaction", data, &testResult)
 		return &testResult, err
 	}
 }
@@ -680,7 +680,7 @@ func Test_RecoverPush(t *testing.T) {
 	assert.Equal(t, atomic.LoadInt32(&pushNotifyInfo.status), notRunning)
 	chain.ProcGetLastPushSeq(subscribe.Name)
 
-	//chain33的push服务重启后，不会将其添加到task中，
+	//dplatform的push服务重启后，不会将其添加到task中，
 	chainAnother := &BlockChain{
 		isRecordBlockSequence: true,
 		enablePushSubscribe:   true,
@@ -693,26 +693,26 @@ func Test_RecoverPush(t *testing.T) {
 }
 
 //init work
-func NewChain33Mock(cfgpath string, mockapi client.QueueProtocolAPI) *Chain33Mock {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+func NewDplatformMock(cfgpath string, mockapi client.QueueProtocolAPI) *DplatformMock {
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	return newWithConfigNoLock(cfg, mockapi)
 }
 
-func NewChain33MockWithFlag(cfgpath string, mockapi client.QueueProtocolAPI, isRecordBlockSequence, enablePushSubscribe bool) *Chain33Mock {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+func NewDplatformMockWithFlag(cfgpath string, mockapi client.QueueProtocolAPI, isRecordBlockSequence, enablePushSubscribe bool) *DplatformMock {
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	cfg.GetModuleConfig().BlockChain.IsRecordBlockSequence = isRecordBlockSequence
 	cfg.GetModuleConfig().BlockChain.EnablePushSubscribe = enablePushSubscribe
 	return newWithConfigNoLock(cfg, mockapi)
 }
 
-func newWithConfigNoLock(cfg *types.Chain33Config, mockapi client.QueueProtocolAPI) *Chain33Mock {
+func newWithConfigNoLock(cfg *types.DplatformConfig, mockapi client.QueueProtocolAPI) *DplatformMock {
 	mfg := cfg.GetModuleConfig()
 	sub := cfg.GetSubConfig()
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	types.Debug = false
 	datadir := util.ResetDatadir(mfg, "$TEMP/")
-	mock := &Chain33Mock{cfg: mfg, sub: sub, q: q, datadir: datadir}
+	mock := &DplatformMock{cfg: mfg, sub: sub, q: q, datadir: datadir}
 	mock.random = rand.New(rand.NewSource(types.Now().UnixNano()))
 
 	mock.exec = executor.New(cfg)
@@ -762,7 +762,7 @@ func newWithConfigNoLock(cfg *types.Chain33Config, mockapi client.QueueProtocolA
 	return mock
 }
 
-func addTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
+func addTx(cfg *types.DplatformConfig, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
 	txs := util.GenCoinsTxs(cfg, priv, 1)
 	hash := common.ToHex(txs[0].Hash())
 	reply, err := api.SendTx(txs[0])
@@ -775,7 +775,7 @@ func addTx(cfg *types.Chain33Config, priv crypto.PrivKey, api client.QueueProtoc
 	return txs, hash, nil
 }
 
-func createBlocks(t *testing.T, mock33 *Chain33Mock, blockchain *BlockChain, number int64) {
+func createBlocks(t *testing.T, mock33 *DplatformMock, blockchain *BlockChain, number int64) {
 	chainlog.Info("testProcAddBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -801,8 +801,8 @@ func createBlocks(t *testing.T, mock33 *Chain33Mock, blockchain *BlockChain, num
 	chainlog.Info("testProcAddBlockMsg end --------------------")
 }
 
-func createBlockChain(t *testing.T) (*BlockChain, *Chain33Mock) {
-	mock33 := NewChain33Mock("", nil)
+func createBlockChain(t *testing.T) (*BlockChain, *DplatformMock) {
+	mock33 := NewDplatformMock("", nil)
 
 	//cfg := mock33.GetClient().GetConfig()
 	blockchain := mock33.GetBlockChain()
@@ -811,8 +811,8 @@ func createBlockChain(t *testing.T) (*BlockChain, *Chain33Mock) {
 	return blockchain, mock33
 }
 
-func createBlockChainWithFalgSet(t *testing.T, isRecordBlockSequence, enablePushSubscribe bool) (*BlockChain, *Chain33Mock) {
-	mock33 := NewChain33MockWithFlag("", nil, isRecordBlockSequence, enablePushSubscribe)
+func createBlockChainWithFalgSet(t *testing.T, isRecordBlockSequence, enablePushSubscribe bool) (*BlockChain, *DplatformMock) {
+	mock33 := NewDplatformMockWithFlag("", nil, isRecordBlockSequence, enablePushSubscribe)
 
 	//cfg := mock33.GetClient().GetConfig()
 	blockchain := mock33.GetBlockChain()

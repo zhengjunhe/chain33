@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/stretchr/testify/assert"
 )
@@ -21,7 +21,7 @@ func Test_Discovery(t *testing.T) {
 	t.Log("h2", hosts[2].ID())
 	t.Log("h3", hosts[3].ID())
 	haddrinfo1 := peer.AddrInfo{ID: hosts[1].ID(), Addrs: hosts[1].Addrs()}
-	cfg := types.NewChain33Config(types.ReadFile("../../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("../../../../cmd/dplatform/dplatform.test.toml"))
 	mcfg := &p2pty.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P["dht"], mcfg)
 	mcfg.RelayEnable = true

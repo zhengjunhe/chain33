@@ -8,7 +8,7 @@ import (
 	"errors"
 	"reflect"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/golang/protobuf/proto"
 )
 

@@ -9,9 +9,9 @@ import (
 
 	"fmt"
 
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/common/version"
+	"github.com/33cn/dplatform/types"
 )
 
 // Upgrade 升级localDB和storeDB

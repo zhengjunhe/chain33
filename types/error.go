@@ -8,7 +8,7 @@ import (
 	"errors"
 )
 
-// chain33定义的错误类型
+// dplatform定义的错误类型
 var (
 	ErrSequenceNotMatch        = errors.New("ErrSequenceNotMatch")
 	ErrSequenceTooBig          = errors.New("ErrSequenceTooBig")

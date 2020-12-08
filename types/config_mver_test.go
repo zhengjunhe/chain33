@@ -23,12 +23,12 @@ func TestConfigFlat(t *testing.T) {
 }
 
 func TestConfigMverInit(t *testing.T) {
-	RegFork("store-kvmvccmavl", func(cfg *Chain33Config) {
+	RegFork("store-kvmvccmavl", func(cfg *DplatformConfig) {
 		cfg.RegisterDappFork("store-kvmvccmavl", "ForkKvmvccmavl", MaxHeight)
 	})
-	cfg := NewChain33ConfigNoInit(ReadFile("testdata/local.mvertest.toml"))
+	cfg := NewDplatformConfigNoInit(ReadFile("testdata/local.mvertest.toml"))
 	cfg.EnableCheckFork(false)
-	cfg.chain33CfgInit(cfg.GetModuleConfig())
+	cfg.dplatformCfgInit(cfg.GetModuleConfig())
 	assert.Equal(t, cfg.MGStr("mver.consensus.name2", 0), "ticket-bityuan")
 	assert.Equal(t, cfg.MGStr("mver.consensus.name2", 10), "ticket-bityuanv5")
 	assert.Equal(t, cfg.MGStr("mver.consensus.name2", 25), "ticket-bityuanv2")
@@ -65,7 +65,7 @@ func initChainBase() {
 
 }
 
-func getP(cfg *Chain33Config, height int64) *ChainParam {
+func getP(cfg *DplatformConfig, height int64) *ChainParam {
 	initChainBase()
 	initChainBityuanV3()
 	if cfg.IsFork(height, "ForkChainParamV1") {
@@ -86,7 +86,7 @@ func initChainBityuanV3() {
 }
 
 func TestInitChainParam(t *testing.T) {
-	cfg := NewChain33Config(ReadFile("../cmd/chain33/chain33.toml"))
+	cfg := NewDplatformConfig(ReadFile("../cmd/dplatform/dplatform.toml"))
 	forkid := cfg.GetFork("ForkChainParamV1")
 	assert.Equal(t, cfg.GetP(0), getP(cfg, 0))
 	assert.Equal(t, cfg.GetP(forkid-1), getP(cfg, forkid-1))

@@ -9,19 +9,19 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatform/util/testnode"
 	"github.com/stretchr/testify/assert"
 
-	_ "github.com/33cn/chain33/system"
+	_ "github.com/33cn/dplatform/system"
 )
 
-func getRPCClient(t *testing.T, mocker *testnode.Chain33Mock) *jsonclient.JSONClient {
+func getRPCClient(t *testing.T, mocker *testnode.DplatformMock) *jsonclient.JSONClient {
 	jrpcClient := mocker.GetJSONC()
 	assert.NotNil(t, jrpcClient)
 	return jrpcClient
@@ -56,7 +56,7 @@ func TestErrLog(t *testing.T) {
 		Hash: common.ToHex(tx12.Hash()),
 	}
 	//query transaction
-	err = jrpcClient.Call("Chain33.QueryTransaction", req, &testResult)
+	err = jrpcClient.Call("Dplatform.QueryTransaction", req, &testResult)
 	assert.Nil(t, err)
 	assert.Equal(t, string(testResult.Receipt.Logs[0].Log), `"ErrNoBalance"`)
 	assert.Equal(t, "0.6000", testResult.Tx.AmountFmt)
@@ -89,7 +89,7 @@ func TestSendToExec(t *testing.T) {
 		ExecName:    "user.f3d",
 	}
 	var res string
-	err := jrpcClient.Call("Chain33.CreateRawTransaction", req, &res)
+	err := jrpcClient.Call("Dplatform.CreateRawTransaction", req, &res)
 	assert.Nil(t, err)
 	gen := mocker.GetGenesisKey()
 	tx := getTx(t, res)
@@ -112,7 +112,7 @@ func TestGetAllExecBalance(t *testing.T) {
 	addr := "38BRY193Wvy9MkdqMjmuaYeUHnJaFjUxMP"
 	req := types.ReqAddr{Addr: addr}
 	var res rpctypes.AllExecBalance
-	err := jrpcClient.Call("Chain33.GetAllExecBalance", req, &res)
+	err := jrpcClient.Call("Dplatform.GetAllExecBalance", req, &res)
 	assert.Nil(t, err)
 	assert.Equal(t, addr, res.Addr)
 	assert.Nil(t, res.ExecAccount)
@@ -130,7 +130,7 @@ func TestCreateTransactionUserWrite(t *testing.T) {
 		Payload:    []byte(`{"key":"value"}`),
 	}
 	var res string
-	err := jrpcClient.Call("Chain33.CreateTransaction", req, &res)
+	err := jrpcClient.Call("Dplatform.CreateTransaction", req, &res)
 	assert.Nil(t, err)
 	tx := getTx(t, res)
 	assert.NotNil(t, tx)
@@ -150,7 +150,7 @@ func TestExprieCreateNoBalanceTransaction(t *testing.T) {
 		Payload:    []byte(`{"key":"value"}`),
 	}
 	var res string
-	err := jrpcClient.Call("Chain33.CreateTransaction", req, &res)
+	err := jrpcClient.Call("Dplatform.CreateTransaction", req, &res)
 	assert.Nil(t, err)
 	gen := mocker.GetGenesisKey().Bytes()
 	req2 := &types.NoBalanceTx{
@@ -159,7 +159,7 @@ func TestExprieCreateNoBalanceTransaction(t *testing.T) {
 		Expire:  "300s",
 	}
 	var groupres string
-	err = jrpcClient.Call("Chain33.CreateNoBalanceTransaction", req2, &groupres)
+	err = jrpcClient.Call("Dplatform.CreateNoBalanceTransaction", req2, &groupres)
 	assert.Nil(t, err)
 
 	txByteData, err := common.FromHex(groupres)
@@ -184,7 +184,7 @@ func TestExprieSignRawTx(t *testing.T) {
 		Payload:    []byte(`{"key":"value"}`),
 	}
 	var res string
-	err := jrpcClient.Call("Chain33.CreateTransaction", req, &res)
+	err := jrpcClient.Call("Dplatform.CreateTransaction", req, &res)
 	assert.Nil(t, err)
 
 	txNone := &types.Transaction{Execer: []byte(cfg.ExecName(types.NoneX)), Payload: []byte("no-fee-transaction")}
@@ -197,7 +197,7 @@ func TestExprieSignRawTx(t *testing.T) {
 		Txs: []string{hex.EncodeToString(types.Encode(txNone)), res},
 	}
 	var groupres string
-	err = jrpcClient.Call("Chain33.CreateRawTxGroup", req2, &groupres)
+	err = jrpcClient.Call("Dplatform.CreateRawTxGroup", req2, &groupres)
 	assert.Nil(t, err)
 
 	txByteData, err := common.FromHex(groupres)
@@ -211,7 +211,7 @@ func TestExprieSignRawTx(t *testing.T) {
 		Expire:  "300s",
 	}
 	var signgrouptx string
-	err = jrpcClient.Call("Chain33.SignRawTx", req3, &signgrouptx)
+	err = jrpcClient.Call("Dplatform.SignRawTx", req3, &signgrouptx)
 	assert.Nil(t, err)
 
 	txByteData, err = common.FromHex(signgrouptx)

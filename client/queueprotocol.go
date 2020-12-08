@@ -9,11 +9,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/33cn/dplatform/common/log/log15"
 
-	"github.com/33cn/chain33/common/version"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/version"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 )
 
 const (
@@ -603,7 +603,7 @@ func (q *QueueProtocol) Version() (*types.VersionInfo, error) {
 	return &types.VersionInfo{
 		Title:   q.client.GetConfig().GetTitle(),
 		App:     version.GetAppVersion(),
-		Chain33: version.GetVersion(),
+		Dplatform: version.GetVersion(),
 		LocalDb: version.GetLocalDBVersion(),
 	}, nil
 }
@@ -1034,13 +1034,13 @@ func (q *QueueProtocol) GetParaTxByHeight(param *types.ReqParaTxByHeight) (*type
 }
 
 //GetConfig 通过seq以及title获取对应平行连的交易
-func (q *QueueProtocol) GetConfig() *types.Chain33Config {
+func (q *QueueProtocol) GetConfig() *types.DplatformConfig {
 	if q.client == nil {
-		panic("client is nil, can not get Chain33Config")
+		panic("client is nil, can not get DplatformConfig")
 	}
 	cfg := q.client.GetConfig()
 	if cfg == nil {
-		panic("Chain33Config is nil")
+		panic("DplatformConfig is nil")
 	}
 	return cfg
 }

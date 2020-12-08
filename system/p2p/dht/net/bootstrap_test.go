@@ -7,7 +7,7 @@ import (
 
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
 	bhost "github.com/libp2p/go-libp2p-blankhost"
 	"github.com/libp2p/go-libp2p-core/host"
 	swarmt "github.com/libp2p/go-libp2p-swarm/testing"

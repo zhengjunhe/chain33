@@ -9,8 +9,8 @@ import (
 
 	"strings"
 
-	"github.com/33cn/chain33/common"
-	pb "github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	pb "github.com/33cn/dplatform/types"
 	"golang.org/x/net/context"
 )
 

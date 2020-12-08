@@ -7,12 +7,12 @@ import (
 
 	"google.golang.org/grpc/codes"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/queue"
-	qmocks "github.com/33cn/chain33/queue/mocks"
-	"github.com/33cn/chain33/rpc"
-	"github.com/33cn/chain33/rpc/grpcclient"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client/mocks"
+	"github.com/33cn/dplatform/queue"
+	qmocks "github.com/33cn/dplatform/queue/mocks"
+	"github.com/33cn/dplatform/rpc"
+	"github.com/33cn/dplatform/rpc/grpcclient"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"google.golang.org/grpc/status"
@@ -20,7 +20,7 @@ import (
 
 func TestAPI(t *testing.T) {
 	api := new(mocks.QueueProtocolAPI)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	gapi, err := grpcclient.NewMainChainClient(cfg, "")
 	assert.Nil(t, err)
 	api.On("GetConfig", mock.Anything).Return(cfg)

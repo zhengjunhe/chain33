@@ -10,12 +10,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	"github.com/33cn/chain33/system/dapp/commands"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/pluginmgr"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
+	"github.com/33cn/dplatform/system/dapp/commands"
+	"github.com/33cn/dplatform/types"
 	"github.com/spf13/cobra"
 )
 
@@ -25,55 +25,55 @@ func Run(RPCAddr, ParaName, name string) {
 	log.SetLogLevel("error")
 	configPath := ""
 	for i, arg := range os.Args[:] {
-		if arg == "--conf" && i+1 <= len(os.Args)-1 { // --conf chain33.toml 可以配置读入cli配置文件路径
+		if arg == "--conf" && i+1 <= len(os.Args)-1 { // --conf dplatform.toml 可以配置读入cli配置文件路径
 			configPath = os.Args[i+1]
 			break
 		}
-		if strings.HasPrefix(arg, "--conf=") { // --conf="chain33.toml"
+		if strings.HasPrefix(arg, "--conf=") { // --conf="dplatform.toml"
 			configPath = strings.TrimPrefix(arg, "--conf=")
 			break
 		}
 	}
 	if configPath == "" {
 		if name == "" {
-			configPath = "chain33.toml"
+			configPath = "dplatform.toml"
 		} else {
 			configPath = name + ".toml"
 		}
 	}
 
 	exist, _ := pathExists(configPath)
-	var chain33Cfg *types.Chain33Config
+	var dplatformCfg *types.DplatformConfig
 	if exist {
-		chain33Cfg = types.NewChain33Config(types.ReadFile(configPath))
+		dplatformCfg = types.NewDplatformConfig(types.ReadFile(configPath))
 	} else {
 		cfgstring := types.GetDefaultCfgstring()
 		if ParaName != "" {
 			cfgstring = strings.Replace(cfgstring, "Title=\"local\"", fmt.Sprintf("Title=\"%s\"", ParaName), 1)
 			cfgstring = strings.Replace(cfgstring, "FixTime=false", "CoinSymbol=\"para\"", 1)
 		}
-		chain33Cfg = types.NewChain33Config(cfgstring)
+		dplatformCfg = types.NewDplatformConfig(cfgstring)
 	}
 
-	types.SetCliSysParam(chain33Cfg.GetTitle(), chain33Cfg)
+	types.SetCliSysParam(dplatformCfg.GetTitle(), dplatformCfg)
 
 	rootCmd := &cobra.Command{
-		Use:   chain33Cfg.GetTitle() + "-cli",
-		Short: chain33Cfg.GetTitle() + " client tools",
+		Use:   dplatformCfg.GetTitle() + "-cli",
+		Short: dplatformCfg.GetTitle() + " client tools",
 	}
 
 	closeCmd := &cobra.Command{
 		Use:   "close",
-		Short: "Close " + chain33Cfg.GetTitle(),
+		Short: "Close " + dplatformCfg.GetTitle(),
 		Run: func(cmd *cobra.Command, args []string) {
 			rpcLaddr, err := cmd.Flags().GetString("rpc_laddr")
 			if err != nil {
 				panic(err)
 			}
 			//		rpc, _ := jsonrpc.NewJSONClient(rpcLaddr)
-			//		rpc.Call("Chain33.CloseQueue", nil, nil)
+			//		rpc.Call("Dplatform.CloseQueue", nil, nil)
 			var res rpctypes.Reply
-			ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.CloseQueue", nil, &res)
+			ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.CloseQueue", nil, &res)
 			ctx.Run()
 		},
 	}
@@ -100,11 +100,11 @@ func Run(RPCAddr, ParaName, name string) {
 	RPCAddr = testTLS(RPCAddr)
 	pluginmgr.AddCmd(rootCmd)
 	log.SetLogLevel("error")
-	chain33Cfg.S("RPCAddr", RPCAddr)
-	chain33Cfg.S("ParaName", ParaName)
-	rootCmd.PersistentFlags().String("rpc_laddr", chain33Cfg.GStr("RPCAddr"), "http url")
-	rootCmd.PersistentFlags().String("paraName", chain33Cfg.GStr("ParaName"), "parachain")
-	rootCmd.PersistentFlags().String("title", chain33Cfg.GetTitle(), "get title name")
+	dplatformCfg.S("RPCAddr", RPCAddr)
+	dplatformCfg.S("ParaName", ParaName)
+	rootCmd.PersistentFlags().String("rpc_laddr", dplatformCfg.GStr("RPCAddr"), "http url")
+	rootCmd.PersistentFlags().String("paraName", dplatformCfg.GStr("ParaName"), "parachain")
+	rootCmd.PersistentFlags().String("title", dplatformCfg.GetTitle(), "get title name")
 	rootCmd.PersistentFlags().MarkHidden("title")
 	rootCmd.PersistentFlags().String("conf", "", "cli config")
 	if err := rootCmd.Execute(); err != nil {

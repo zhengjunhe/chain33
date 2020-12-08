@@ -8,19 +8,19 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/util"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/queue"
-	qmocks "github.com/33cn/chain33/queue/mocks"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	dbm "github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/queue"
+	qmocks "github.com/33cn/dplatform/queue/mocks"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func InitEnv() *BlockChain {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	chain := New(cfg)
@@ -399,7 +399,7 @@ func TestGetSetSerialChunkNum(t *testing.T) {
 }
 
 func TestGetBodyFromP2Pstore(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	chain := New(cfg)

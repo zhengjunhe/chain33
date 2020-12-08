@@ -6,13 +6,13 @@
 package store
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/store"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/system/store"
+	"github.com/33cn/dplatform/types"
 )
 
 // New new store queue module
-func New(cfg *types.Chain33Config) queue.Module {
+func New(cfg *types.DplatformConfig) queue.Module {
 	mcfg := cfg.GetModuleConfig().Store
 	sub := cfg.GetSubConfig().Store
 	s, err := store.Load(mcfg.Name)

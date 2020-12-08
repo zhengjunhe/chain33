@@ -10,9 +10,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	dbm "github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/types"
 )
 
 const (
@@ -86,7 +86,7 @@ type Push struct {
 	tasks          map[string]*pushNotify
 	mu             sync.Mutex
 	postService    PostService
-	cfg            *types.Chain33Config
+	cfg            *types.DplatformConfig
 	postFail2Sleep int32
 	postwg         *sync.WaitGroup
 }
@@ -218,7 +218,7 @@ func (chain *BlockChain) ProcGetLastPushSeq(name string) (int64, error) {
 	return n, nil
 }
 
-func newpush(commonStore CommonStore, seqStore SequenceStore, cfg *types.Chain33Config) *Push {
+func newpush(commonStore CommonStore, seqStore SequenceStore, cfg *types.DplatformConfig) *Push {
 	tasks := make(map[string]*pushNotify)
 
 	pushClient := &PushClient{

@@ -5,8 +5,8 @@
 package client
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 )
 
 // QueueProtocolAPI 消息通道交互API接口定义
@@ -115,7 +115,7 @@ type QueueProtocolAPI interface {
 	// --------------- store interfaces end
 
 	// +++++++++++++++ other interfaces begin
-	// close chain33
+	// close dplatform
 	CloseQueue() (*types.Reply, error)
 	// --------------- other interfaces end
 	// types.EventAddBlockSeqCB
@@ -132,5 +132,5 @@ type QueueProtocolAPI interface {
 	GetParaTxByHeight(param *types.ReqParaTxByHeight) (*types.ParaTxDetails, error)
 
 	// get chain config
-	GetConfig() *types.Chain33Config
+	GetConfig() *types.DplatformConfig
 }

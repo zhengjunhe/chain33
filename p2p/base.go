@@ -6,10 +6,10 @@
 package p2p
 
 import (
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common/pubsub"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/common/pubsub"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	lru "github.com/hashicorp/golang-lru"
 )
 
@@ -23,7 +23,7 @@ type IP2P interface {
 type Manager struct {
 	SysAPI   client.QueueProtocolAPI
 	Client   queue.Client
-	ChainCfg *types.Chain33Config
+	ChainCfg *types.DplatformConfig
 	PubSub   *pubsub.PubSub
 	//subChan         chan interface{}
 	broadcastFilter *lru.Cache
@@ -61,7 +61,7 @@ func LoadP2PCreate(p2pType string) CreateP2P {
 }
 
 // NewP2PMgr new p2p manager
-func NewP2PMgr(cfg *types.Chain33Config) *Manager {
+func NewP2PMgr(cfg *types.DplatformConfig) *Manager {
 	mgr := &Manager{
 		PubSub: pubsub.NewPubSub(1024),
 	}

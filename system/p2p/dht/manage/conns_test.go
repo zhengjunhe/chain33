@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 	bhost "github.com/libp2p/go-libp2p-blankhost"
 	"github.com/libp2p/go-libp2p-core/metrics"
 	"github.com/libp2p/go-libp2p-core/network"
@@ -65,7 +65,7 @@ func Test_ConnManager(t *testing.T) {
 	defer cancel()
 	netw := swarmt.GenSwarm(t, ctx)
 	h := bhost.NewBlankHost(netw)
-	cfg := types.NewChain33Config(types.ReadFile("../../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("../../../../cmd/dplatform/dplatform.test.toml"))
 	mcfg := &p2pty.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P["dht"], mcfg)
 	bandwidthTracker := metrics.NewBandwidthCounter()

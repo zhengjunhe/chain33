@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -187,7 +187,7 @@ func TestSubStore(t *testing.T) {
 }
 
 func TestRegAndLoad(t *testing.T) {
-	Reg("test", func(cfg *types.Store, sub []byte, chain33cfg *types.Chain33Config) queue.Module {
+	Reg("test", func(cfg *types.Store, sub []byte, dplatformcfg *types.DplatformConfig) queue.Module {
 		return nil
 	})
 

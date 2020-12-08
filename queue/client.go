@@ -12,7 +12,7 @@ import (
 
 	"unsafe"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 //消息队列的主要作用是解耦合，让各个模块相对的独立运行。
@@ -40,7 +40,7 @@ type Client interface {
 	CloseQueue() (*types.Reply, error)
 	NewMessage(topic string, ty int64, data interface{}) (msg *Message)
 	FreeMessage(msg ...*Message) //回收msg， 需要注意回收时上下文不再引用
-	GetConfig() *types.Chain33Config
+	GetConfig() *types.DplatformConfig
 }
 
 // Module be used for module interface
@@ -70,12 +70,12 @@ func newClient(q *queue) Client {
 	return client
 }
 
-// GetConfig return the queue Chain33Config
-func (client *client) GetConfig() *types.Chain33Config {
+// GetConfig return the queue DplatformConfig
+func (client *client) GetConfig() *types.DplatformConfig {
 	types.AssertConfig(client.q)
 	cfg := client.q.GetConfig()
 	if cfg == nil {
-		panic("Chain33Config is nil")
+		panic("DplatformConfig is nil")
 	}
 	return cfg
 }
@@ -217,7 +217,7 @@ func (client *client) CloseQueue() (*types.Reply, error) {
 	if client.q.isClosed() {
 		return &types.Reply{IsOk: true}, nil
 	}
-	qlog.Debug("queue", "msg", "closing chain33")
+	qlog.Debug("queue", "msg", "closing dplatform")
 	client.q.interrupt <- struct{}{}
 	//	close(client.q.interupt)
 	return &types.Reply{IsOk: true}, nil

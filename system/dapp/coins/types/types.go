@@ -7,7 +7,7 @@ package types
 import (
 	"reflect"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 const (
@@ -42,12 +42,12 @@ func init() {
 }
 
 // InitFork initials coins forks.
-func InitFork(cfg *types.Chain33Config) {
+func InitFork(cfg *types.DplatformConfig) {
 	cfg.RegisterDappFork(CoinsX, "Enable", 0)
 }
 
 // InitExecutor registers coins.
-func InitExecutor(cfg *types.Chain33Config) {
+func InitExecutor(cfg *types.DplatformConfig) {
 	types.RegistorExecutor(CoinsX, NewType(cfg))
 }
 
@@ -57,7 +57,7 @@ type CoinsType struct {
 }
 
 // NewType new coinstype
-func NewType(cfg *types.Chain33Config) *CoinsType {
+func NewType(cfg *types.DplatformConfig) *CoinsType {
 	c := &CoinsType{}
 	c.SetChild(c)
 	c.SetConfig(cfg)

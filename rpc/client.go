@@ -2,21 +2,21 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package rpc chain33 RPC模块包含JSONRpc以及grpc
+// Package rpc dplatform RPC模块包含JSONRpc以及grpc
 package rpc
 
 import (
 	"encoding/hex"
 	"time"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/queue"
-	ety "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/account"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/queue"
+	ety "github.com/33cn/dplatform/system/dapp/coins/types"
+	"github.com/33cn/dplatform/types"
 )
 
 var log = log15.New("module", "rpc")

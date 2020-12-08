@@ -16,9 +16,9 @@ import (
 
 	"strconv"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/crypto"
 )
 
 var (
@@ -155,7 +155,7 @@ func (txgroup *Transactions) RebuiltGroup() {
 }
 
 //SetExpire 设置交易组中交易的过期时间
-func (txgroup *Transactions) SetExpire(cfg *Chain33Config, n int, expire time.Duration) {
+func (txgroup *Transactions) SetExpire(cfg *DplatformConfig, n int, expire time.Duration) {
 	if n >= len(txgroup.GetTxs()) {
 		return
 	}
@@ -163,7 +163,7 @@ func (txgroup *Transactions) SetExpire(cfg *Chain33Config, n int, expire time.Du
 }
 
 //IsExpire 交易是否过期
-func (txgroup *Transactions) IsExpire(cfg *Chain33Config, height, blocktime int64) bool {
+func (txgroup *Transactions) IsExpire(cfg *DplatformConfig, height, blocktime int64) bool {
 	txs := txgroup.Txs
 	for i := 0; i < len(txs); i++ {
 		if txs[i].isExpire(cfg, height, blocktime) {
@@ -174,7 +174,7 @@ func (txgroup *Transactions) IsExpire(cfg *Chain33Config, height, blocktime int6
 }
 
 //CheckWithFork 和fork 无关的有个检查函数
-func (txgroup *Transactions) CheckWithFork(cfg *Chain33Config, checkFork, paraFork bool, height, minfee, maxFee int64) error {
+func (txgroup *Transactions) CheckWithFork(cfg *DplatformConfig, checkFork, paraFork bool, height, minfee, maxFee int64) error {
 	txs := txgroup.Txs
 	if len(txs) < 2 {
 		return ErrTxGroupCountLessThanTwo
@@ -263,7 +263,7 @@ func (txgroup *Transactions) CheckWithFork(cfg *Chain33Config, checkFork, paraFo
 }
 
 //Check height == 0 的时候，不做检查
-func (txgroup *Transactions) Check(cfg *Chain33Config, height, minfee, maxFee int64) error {
+func (txgroup *Transactions) Check(cfg *DplatformConfig, height, minfee, maxFee int64) error {
 	paraFork := cfg.IsFork(height, "ForkTxGroupPara")
 	checkFork := cfg.IsFork(height, "ForkBlockCheck")
 	return txgroup.CheckWithFork(cfg, checkFork, paraFork, height, minfee, maxFee)
@@ -332,7 +332,7 @@ func (tx *TransactionCache) Tx() *Transaction {
 }
 
 //Check 交易缓存中交易组合费用的检测
-func (tx *TransactionCache) Check(cfg *Chain33Config, height, minfee, maxFee int64) error {
+func (tx *TransactionCache) Check(cfg *DplatformConfig, height, minfee, maxFee int64) error {
 	if !tx.checked {
 		tx.checked = true
 		txs, err := tx.GetTxGroup()
@@ -490,7 +490,7 @@ func (tx *Transaction) checkSign() bool {
 }
 
 //Check 交易检测
-func (tx *Transaction) Check(cfg *Chain33Config, height, minfee, maxFee int64) error {
+func (tx *Transaction) Check(cfg *DplatformConfig, height, minfee, maxFee int64) error {
 	group, err := tx.GetTxGroup()
 	if err != nil {
 		return err
@@ -501,7 +501,7 @@ func (tx *Transaction) Check(cfg *Chain33Config, height, minfee, maxFee int64) e
 	return group.Check(cfg, height, minfee, maxFee)
 }
 
-func (tx *Transaction) check(cfg *Chain33Config, height, minfee, maxFee int64) error {
+func (tx *Transaction) check(cfg *DplatformConfig, height, minfee, maxFee int64) error {
 	if minfee == 0 {
 		return nil
 	}
@@ -521,7 +521,7 @@ func (tx *Transaction) check(cfg *Chain33Config, height, minfee, maxFee int64) e
 }
 
 //SetExpire 设置交易过期时间
-func (tx *Transaction) SetExpire(cfg *Chain33Config, expire time.Duration) {
+func (tx *Transaction) SetExpire(cfg *DplatformConfig, expire time.Duration) {
 	//Txheight处理
 	if cfg.IsEnable("TxHeight") && int64(expire) > TxHeightFlag {
 		tx.Expire = int64(expire)
@@ -570,7 +570,7 @@ func (tx *Transaction) SetRealFee(minFee int64) error {
 var ExpireBound int64 = 1000000000 // 交易过期分界线，小于expireBound比较height，大于expireBound比较blockTime
 
 //IsExpire 交易是否过期
-func (tx *Transaction) IsExpire(cfg *Chain33Config, height, blocktime int64) bool {
+func (tx *Transaction) IsExpire(cfg *DplatformConfig, height, blocktime int64) bool {
 	group, _ := tx.GetTxGroup()
 	if group == nil {
 		return tx.isExpire(cfg, height, blocktime)
@@ -593,7 +593,7 @@ func (tx *Transaction) From() string {
 }
 
 //检查交易是否过期，过期返回true，未过期返回false
-func (tx *Transaction) isExpire(cfg *Chain33Config, height, blocktime int64) bool {
+func (tx *Transaction) isExpire(cfg *DplatformConfig, height, blocktime int64) bool {
 	valid := tx.Expire
 	// Expire为0，返回false
 	if valid == 0 {
@@ -615,7 +615,7 @@ func (tx *Transaction) isExpire(cfg *Chain33Config, height, blocktime int64) boo
 }
 
 //GetTxHeight 获取交易高度
-func GetTxHeight(cfg *Chain33Config, valid int64, height int64) int64 {
+func GetTxHeight(cfg *DplatformConfig, valid int64, height int64) int64 {
 	if cfg.IsPara() {
 		return -1
 	}

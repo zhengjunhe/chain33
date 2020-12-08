@@ -28,17 +28,17 @@ package consensus
 	GO版本：	  go1.8.4
 	步骤：
 		//  1.编译版本
-		cd $GOPATH/src/gitlab.33.cn/chain33
-		git clone git@gitlab.33.cn:chain33/chain33.git
-		cd chain33
+		cd $GOPATH/src/gitlab.33.cn/dplatform
+		git clone git@gitlab.33.cn:dplatform/dplatform.git
+		cd dplatform
 		go build
 
 		//	2.从管理机上拷贝可执行文件到各个节点
-		scp chain33 ubuntu@172.31.8.229:/home/ubuntu/
-		scp chain33 ubuntu@172.31.15.241:/home/ubuntu/
-		scp chain33 ubuntu@172.31.4.182:/home/ubuntu/
+		scp dplatform ubuntu@172.31.8.229:/home/ubuntu/
+		scp dplatform ubuntu@172.31.15.241:/home/ubuntu/
+		scp dplatform ubuntu@172.31.4.182:/home/ubuntu/
 
-		// 3.在各个节点上，依次修改chain33.toml
+		// 3.在各个节点上，依次修改dplatform.toml
 			name="raft"
 			minerstart=true
 			genesis="14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"
@@ -49,7 +49,7 @@ package consensus
 			readOnlyPeersURL="http://172.31.2.210:9021,http://172.31.2.252:9021"
             addPeersURL=""
        // 4.然后依次启动种子节点，raft集群相关节点
-       ./chain33 或者写个启动脚本
+       ./dplatform 或者写个启动脚本
 
        // 5.动态增删节点
              动态加入节点
@@ -57,8 +57,8 @@ package consensus
 		    	    curl -L http://127.0.0.1:9121/4 -X POST -d http://172.31.4.185:9021
 		    	    注意：前者为要加入的nodeId 值，后面http地址为要加入的peerUrl地址，将peerURL依次追加到addPeersURL中,
    	                      用逗号分隔,一次只能添加一个节点
-		    	2.）然后在chain33.toml配置文件中，写好相关参数，启动chain33即可,
-                    chain33.toml配置文件可依据前一个节点的配置
+		    	2.）然后在dplatform.toml配置文件中，写好相关参数，启动dplatform即可,
+                    dplatform.toml配置文件可依据前一个节点的配置
                     修改如下参数:
                      nodeId=x             //第几个节点
                     isNewJoinNode=true    //是否为新增节点
@@ -93,10 +93,10 @@ package consensus
    多节点测试：
    windows和linux均可
    develop分支请先用protoc重新生成pb.go文件
-   首先下载pbftbranch，然后创建code.aliyun.com/chain33文件夹，将解压出来的chain33文件夹放入下面，进入chain33文件夹
+   首先下载pbftbranch，然后创建code.aliyun.com/dplatform文件夹，将解压出来的dplatform文件夹放入下面，进入dplatform文件夹
    执行go build命令生成可执行文件
    因为我是在一台电脑上进行测试，因此只需要在本机上拷贝文件即可，若需要在不同的电脑上进行测试，拷贝到不同电脑上即可
-   修改个节点的chain33.toml即可，主要修改方式如下：
+   修改个节点的dplatform.toml即可，主要修改方式如下：
    name = "pbft"
    genesis = "14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"
    minerstart = true
@@ -106,7 +106,7 @@ package consensus
    PeersURL = "127.0.0.1:8890,127.0.0.1:8891"  //所有节点的ip地址，用逗号隔开，我是一台电脑所以用的本地地址只是port不同
    ClientAddr = "127.0.0.1:8890"  //当前节点的ip地址
    //TODO 动态增加或者删除节点
-  然后chain33命令启动所有节点后，再向mempool写入交易validator
+  然后dplatform命令启动所有节点后，再向mempool写入交易validator
 
 4.tendermint:
 实现功能：
@@ -122,18 +122,18 @@ package consensus
 	GO版本：	  go1.9.2
 	步骤：
 		//  1.编译版本
-		cd $GOPATH/src/gitlab.33.cn/chain33
-		git clone git@gitlab.33.cn:chain33/chain33.git
-		cd chain33
+		cd $GOPATH/src/gitlab.33.cn/dplatform
+		git clone git@gitlab.33.cn:dplatform/dplatform.git
+		cd dplatform
 		go build
 
 		//	2.从管理机上拷贝可执行文件到各个节点
-		scp chain33 ubuntu@192.168.0.117:/home/ubuntu/
-		scp chain33 ubuntu@192.168.0.119:/home/ubuntu/
-		scp chain33 ubuntu@192.168.0.120:/home/ubuntu/
-		scp chain33 ubuntu@192.168.0.121:/home/ubuntu/
+		scp dplatform ubuntu@192.168.0.117:/home/ubuntu/
+		scp dplatform ubuntu@192.168.0.119:/home/ubuntu/
+		scp dplatform ubuntu@192.168.0.120:/home/ubuntu/
+		scp dplatform ubuntu@192.168.0.121:/home/ubuntu/
 
-		// 3.在各个节点上，依次修改chain33.toml中[consensus]项
+		// 3.在各个节点上，依次修改dplatform.toml中[consensus]项
 			name="tendermint"
 			minerstart=false
 			genesis="14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"
@@ -151,11 +151,11 @@ package consensus
 			createEmptyBlocksInterval=0
 			seeds=["192.168.0.117:46656","192.168.0.119:46656","192.168.0.120:46656","192.168.0.121:46656"]
        // 4.然后依次启动种子节点，tendermint集群相关节点
-       ./chain33 或者写个启动脚本
+       ./dplatform 或者写个启动脚本
        // 5.动态增删节点
              动态加入节点
-		    	1.）将新生成的priv_validator.json文件和其他Validator节点的genesis.json和chain33.toml拷贝到待加入集群的节点工作目录下，然后启动chain33。
-					注意：可以修改chain33.toml文件的[p2p]项和[consensus]项中的seeds参数，只要是集群节点就可以。
+		    	1.）将新生成的priv_validator.json文件和其他Validator节点的genesis.json和dplatform.toml拷贝到待加入集群的节点工作目录下，然后启动dplatform。
+					注意：可以修改dplatform.toml文件的[p2p]项和[consensus]项中的seeds参数，只要是集群节点就可以。
 		    	2.）将新节点的priv_validator.json文件中的pub_key记录下来，向集群任一节点发送交易，执行器为valnode，构建payload为ValNodeAction结构体的序列化，
 					该结构体参数Value为ValNodeAction_Node结构体地址，Ty为1，ValNodeAction_Node结构体有两个参数，PubKey为刚才记录下的字符串通过hex.DecodeString()编码生成的[]byte，
 					Power最大不能超过总power值的1/3。该笔交易执行成功即添加完成，新节点将会参与新区块的共识。

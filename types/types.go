@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package types 实现了chain33基础结构体、接口、常量等的定义
+// Package types 实现了dplatform基础结构体、接口、常量等的定义
 package types
 
 import (
@@ -14,15 +14,15 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/types/jsonpb"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/crypto"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/types/jsonpb"
 	"github.com/golang/protobuf/proto"
 
 	// 注册system的crypto 加密算法
-	_ "github.com/33cn/chain33/system/crypto/init"
+	_ "github.com/33cn/dplatform/system/crypto/init"
 )
 
 var tlog = log.New("module", "types")
@@ -41,7 +41,7 @@ type TxGroup interface {
 }
 
 //ExecName  执行器name
-func (c *Chain33Config) ExecName(name string) string {
+func (c *DplatformConfig) ExecName(name string) string {
 	if len(name) > 1 && name[0] == '#' {
 		return name[1:]
 	}
@@ -131,7 +131,7 @@ func FindExecer(key []byte) (execer []byte, err error) {
 }
 
 //GetParaExec  获取平行链执行
-func (c *Chain33Config) GetParaExec(execer []byte) []byte {
+func (c *DplatformConfig) GetParaExec(execer []byte) []byte {
 	//必须是平行链
 	if !c.IsPara() {
 		return execer
@@ -326,7 +326,7 @@ func ManageKey(key string) string {
 }
 
 //ManaeKeyWithHeigh 超级管理员账户key
-func (c *Chain33Config) ManaeKeyWithHeigh(key string, height int64) string {
+func (c *DplatformConfig) ManaeKeyWithHeigh(key string, height int64) string {
 	if c.IsFork(height, "ForkExecKey") {
 		return ManageKey(key)
 	}

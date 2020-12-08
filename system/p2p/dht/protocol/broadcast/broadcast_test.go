@@ -11,19 +11,19 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/chain33/system/p2p/dht/net"
+	"github.com/33cn/dplatform/system/p2p/dht/net"
 	"github.com/libp2p/go-libp2p"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/multiformats/go-multiaddr"
 
-	"github.com/33cn/chain33/client"
-	commlog "github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/p2p"
-	"github.com/33cn/chain33/queue"
-	prototypes "github.com/33cn/chain33/system/p2p/dht/protocol/types"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	commlog "github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatform/queue"
+	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/stretchr/testify/assert"
 )
@@ -70,7 +70,7 @@ func newHost(port int32) core.Host {
 }
 
 func newTestEnv(q queue.Queue) *prototypes.P2PEnv {
-	cfg := types.NewChain33Config(types.ReadFile("../../../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("../../../../../cmd/dplatform/dplatform.test.toml"))
 	q.SetConfig(cfg)
 	go q.Start()
 

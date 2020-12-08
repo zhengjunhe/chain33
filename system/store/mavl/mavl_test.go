@@ -14,11 +14,11 @@ import (
 
 	"encoding/json"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/queue"
-	drivers "github.com/33cn/chain33/system/store"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/account"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/queue"
+	drivers "github.com/33cn/dplatform/system/store"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -281,7 +281,7 @@ func genPrefixEdge(prefix []byte) (r []byte) {
 func TestIterateCallBack_Mode1(t *testing.T) {
 	dir, err := ioutil.TempDir("", "example")
 	assert.Nil(t, err)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	defer os.RemoveAll(dir) // clean up
 	os.RemoveAll(dir)       //删除已存在目录
 	var storeCfg = newStoreCfg(dir)
@@ -426,7 +426,7 @@ func TestIterateCallBack_Mode1(t *testing.T) {
 func TestIterateCallBack_Mode2(t *testing.T) {
 	dir, err := ioutil.TempDir("", "example")
 	assert.Nil(t, err)
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	defer os.RemoveAll(dir) // clean up
 	os.RemoveAll(dir)       //删除已存在目录
 	var storeCfg = newStoreCfg(dir)

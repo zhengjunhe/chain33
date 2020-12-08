@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
+	cty "github.com/33cn/dplatform/system/dapp/coins/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/spf13/cobra"
 
 	// TODO: 暂时将插件中的类型引用起来，后续需要修改
@@ -75,7 +75,7 @@ func SendToAddress(rpcAddr string, from string, to string, amount int64, note st
 	}
 
 	var res rpctypes.ReplyHash
-	ctx := jsonclient.NewRPCCtx(rpcAddr, "Chain33.SendToAddress", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcAddr, "Dplatform.SendToAddress", params, &res)
 	ctx.Run()
 }
 

@@ -7,7 +7,7 @@ package basen_test
 import (
 	"testing"
 
-	"github.com/33cn/chain33/wallet/bipwallet/basen"
+	"github.com/33cn/dplatform/wallet/bipwallet/basen"
 )
 
 // These benchmarks mirror the ones in encoding/base64, and results

@@ -18,8 +18,8 @@ EventTransfer -> 转移资产
 import (
 	"fmt"
 
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/types"
 )
 
 // calcAddrKey store information on the receiving address

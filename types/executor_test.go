@@ -12,7 +12,7 @@ import (
 )
 
 func TestLoadExecutorType(t *testing.T) {
-	NewChain33Config(GetDefaultCfgstring())
+	NewDplatformConfig(GetDefaultCfgstring())
 	exec := LoadExecutorType("manage")
 	assert.NotEqual(t, exec, nil)
 	assert.Equal(t, exec.GetName(), "manage")
@@ -26,7 +26,7 @@ func TestLoadExecutorType(t *testing.T) {
 }
 
 func TestFormatTx(t *testing.T) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	tx := &Transaction{
 		Payload: []byte("this is  a test."),
 	}
@@ -38,7 +38,7 @@ func TestFormatTx(t *testing.T) {
 }
 
 func TestFormatTxEncode(t *testing.T) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	data, err := FormatTxEncode(cfg, "coins", &Transaction{
 		Payload: []byte("this is  a test."),
 	})
@@ -50,7 +50,7 @@ func TestFormatTxEncode(t *testing.T) {
 }
 
 func TestCallCreateTxJSON(t *testing.T) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	modify := &ModifyConfig{
 		Key:   "token-finisher",
 		Value: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -97,7 +97,7 @@ func TestCallCreateTxJSON(t *testing.T) {
 }
 
 func TestCallCreateTx(t *testing.T) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	modify := &ModifyConfig{
 		Key:   "token-finisher",
 		Value: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",

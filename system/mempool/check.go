@@ -4,13 +4,13 @@ import (
 	"errors"
 	"time"
 
-	"github.com/33cn/chain33/common"
+	"github.com/33cn/dplatform/common"
 
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/util"
 
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 )
 
 // CheckExpireValid 检查交易过期有效性，过期返回false，未过期返回true

@@ -3,9 +3,9 @@ package metrics
 import (
 	"time"
 
-	chain33log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/metrics/influxdb"
-	"github.com/33cn/chain33/types"
+	dplatformlog "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/metrics/influxdb"
+	"github.com/33cn/dplatform/types"
 	go_metrics "github.com/rcrowley/go-metrics"
 )
 
@@ -20,11 +20,11 @@ type influxDBPara struct {
 }
 
 var (
-	log = chain33log.New("module", "chain33 metrics")
+	log = dplatformlog.New("module", "dplatform metrics")
 )
 
 //StartMetrics 根据配置文件相关参数启动m
-func StartMetrics(cfg *types.Chain33Config) {
+func StartMetrics(cfg *types.DplatformConfig) {
 	metrics := cfg.GetModuleConfig().Metrics
 	if !metrics.EnableMetrics {
 		log.Info("Metrics data is not enabled to emit")

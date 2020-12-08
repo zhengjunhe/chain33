@@ -7,8 +7,8 @@ package client_test
 import (
 	"bytes"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 )
 
 type mockMempool struct {

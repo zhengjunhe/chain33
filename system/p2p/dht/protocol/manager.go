@@ -3,7 +3,7 @@ package protocol
 import (
 	"fmt"
 
-	"github.com/33cn/chain33/queue"
+	"github.com/33cn/dplatform/queue"
 )
 
 //TODO
@@ -27,7 +27,7 @@ func InitAllProtocol(env *P2PEnv) {
 	}
 }
 
-// EventHandler handle chain33 event
+// EventHandler handle dplatform event
 type EventHandler func(*queue.Message)
 
 var (

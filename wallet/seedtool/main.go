@@ -6,11 +6,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/33cn/dplatform/common/address"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/wallet"
-	"github.com/33cn/chain33/wallet/bipwallet"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/wallet"
+	"github.com/33cn/dplatform/wallet/bipwallet"
 
 	"net/http"
 	_ "net/http/pprof"

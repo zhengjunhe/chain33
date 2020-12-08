@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/common/merkle"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/33cn/dplatform/blockchain"
+	"github.com/33cn/dplatform/common/merkle"
+	_ "github.com/33cn/dplatform/system"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util/testnode"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -57,7 +57,7 @@ func TestBlockTable(t *testing.T) {
 	testBlockTable(cfg, t, blockchain)
 }
 
-func testBlockTable(cfg *types.Chain33Config, t *testing.T, blockchain *blockchain.BlockChain) {
+func testBlockTable(cfg *types.DplatformConfig, t *testing.T, blockchain *blockchain.BlockChain) {
 	curheight := blockchain.GetBlockHeight()
 
 	//通过当前高度获取header

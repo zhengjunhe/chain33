@@ -8,7 +8,7 @@ package autotest
 import (
 	"reflect"
 
-	"github.com/33cn/chain33/cmd/autotest/types"
+	"github.com/33cn/dplatform/cmd/autotest/types"
 )
 
 type coinsAutoTest struct {

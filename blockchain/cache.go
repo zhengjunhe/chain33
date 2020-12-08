@@ -8,7 +8,7 @@ import (
 	"container/list"
 	"sync"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	lru "github.com/hashicorp/golang-lru"
 )
 
@@ -20,11 +20,11 @@ type BlockCache struct {
 	cachelock  sync.Mutex
 	cacheQueue *list.List
 	maxHeight  int64 //用来辅助判断cache 是否正确
-	sysPm      *types.Chain33Config
+	sysPm      *types.DplatformConfig
 }
 
 //NewBlockCache new
-func NewBlockCache(param *types.Chain33Config, defCacheSize int64) *BlockCache {
+func NewBlockCache(param *types.DplatformConfig, defCacheSize int64) *BlockCache {
 	return &BlockCache{
 		cache:      make(map[int64]*list.Element),
 		cacheHash:  make(map[string]*list.Element),

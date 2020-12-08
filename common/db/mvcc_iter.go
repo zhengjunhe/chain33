@@ -7,7 +7,7 @@ package db
 import (
 	"bytes"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 //MVCCIter mvcc迭代器版本

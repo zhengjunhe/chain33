@@ -5,9 +5,9 @@
 package executor
 
 import (
-	dbm "github.com/33cn/chain33/common/db"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/33cn/dplatform/common/db"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
 )
 
 func init() {
@@ -116,7 +116,7 @@ func setAddrTxsCount(db dbm.KVDB, addr string, count int64) error {
 	return db.Set(kv.Key, kv.Value)
 }
 
-func updateAddrTxsCount(cfg *types.Chain33Config, cachedb dbm.KVDB, addr string, amount int64, isadd bool) (*types.KeyValue, error) {
+func updateAddrTxsCount(cfg *types.DplatformConfig, cachedb dbm.KVDB, addr string, amount int64, isadd bool) (*types.KeyValue, error) {
 	//blockchaindb 数据库0版本不支持此功能
 	ver := cfg.GInt("dbversion")
 	if ver == 0 {

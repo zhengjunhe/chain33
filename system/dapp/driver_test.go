@@ -6,10 +6,10 @@ import (
 
 	"sync"
 
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/rpc/grpcclient"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/client/mocks"
+	"github.com/33cn/dplatform/rpc/grpcclient"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -44,7 +44,7 @@ func (none *noneApp) GetDriverName() string {
 	return "none"
 }
 
-func Init(cfg *types.Chain33Config) {
+func Init(cfg *types.DplatformConfig) {
 	runonce.Do(func() {
 		Register(cfg, "none", newnoneApp, 0)
 		Register(cfg, "demo", newdemoApp, 1)
@@ -52,7 +52,7 @@ func Init(cfg *types.Chain33Config) {
 }
 
 func TestReigister(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -85,7 +85,7 @@ func TestReigister(t *testing.T) {
 }
 
 func TestDriverAPI(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -104,7 +104,7 @@ func TestDriverAPI(t *testing.T) {
 	demo.SetExecutorAPI(api, gcli)
 	assert.NotNil(t, demo.GetAPI())
 	assert.NotNil(t, demo.GetExecutorAPI())
-	cfg.SetTitleOnlyForTest("chain33")
+	cfg.SetTitleOnlyForTest("dplatform")
 	assert.Equal(t, "parentHash", string(demo.GetParentHash()))
 	assert.Equal(t, "parentHash", string(demo.GetLastHash()))
 	cfg.SetTitleOnlyForTest("user.p.wzw.")
@@ -121,7 +121,7 @@ func TestExecAddress(t *testing.T) {
 }
 
 func TestAllow(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -144,7 +144,7 @@ func TestAllow(t *testing.T) {
 }
 
 func TestDriverBase(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	Init(cfg)

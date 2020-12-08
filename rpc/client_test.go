@@ -9,25 +9,25 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client/mocks"
-	"github.com/33cn/chain33/common/address"
-	slog "github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/pluginmgr"
-	qmock "github.com/33cn/chain33/queue/mocks"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/account"
+	"github.com/33cn/dplatform/client/mocks"
+	"github.com/33cn/dplatform/common/address"
+	slog "github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/pluginmgr"
+	qmock "github.com/33cn/dplatform/queue/mocks"
+	cty "github.com/33cn/dplatform/system/dapp/coins/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
 
-func Init(cfg *types.Chain33Config) {
+func Init(cfg *types.DplatformConfig) {
 	slog.SetLogLevel("error")
 	pluginmgr.InitExec(cfg)
 }
 
 func newTestChannelClient() *channelClient {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	return &channelClient{
@@ -247,7 +247,7 @@ func TestChannelClient_GetAddrOverview(t *testing.T) {
 }
 
 func testChannelClientGetBalanceCoin(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	db := new(account.DB)
@@ -281,7 +281,7 @@ func testChannelClientGetBalanceCoin(t *testing.T) {
 }
 
 func testChannelClientGetBalanceOther(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	db := new(account.DB)
@@ -320,7 +320,7 @@ func TestChannelClient_GetBalance(t *testing.T) {
 }
 
 func TestChannelClient_GetTotalCoins(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	client := new(channelClient)
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -345,7 +345,7 @@ func TestChannelClient_GetTotalCoins(t *testing.T) {
 }
 
 func TestChannelClient_CreateNoBalanceTransaction(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	client := new(channelClient)
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)

@@ -8,13 +8,13 @@ package consensus
 import (
 	"reflect"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/consensus"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/system/consensus"
+	"github.com/33cn/dplatform/types"
 )
 
 // New new consensus queue module
-func New(cfg *types.Chain33Config) queue.Module {
+func New(cfg *types.DplatformConfig) queue.Module {
 	mcfg := cfg.GetModuleConfig().Consensus
 	sub := cfg.GetSubConfig().Consensus
 	con, err := consensus.Load(mcfg.Name)

@@ -1,13 +1,13 @@
 package mempool
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/mempool"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/system/mempool"
+	"github.com/33cn/dplatform/types"
 )
 
 // New new mempool queue module
-func New(cfg *types.Chain33Config) queue.Module {
+func New(cfg *types.DplatformConfig) queue.Module {
 	mcfg := cfg.GetModuleConfig().Mempool
 	sub := cfg.GetSubConfig().Mempool
 	con, err := mempool.Load(mcfg.Name)

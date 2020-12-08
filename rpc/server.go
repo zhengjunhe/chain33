@@ -10,12 +10,12 @@ import (
 	"net/rpc"
 	"time"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/pluginmgr"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/rpc/grpcclient"
-	_ "github.com/33cn/chain33/rpc/grpcclient" // register grpc multiple resolver
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/pluginmgr"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/rpc/grpcclient"
+	_ "github.com/33cn/dplatform/rpc/grpcclient" // register grpc multiple resolver
+	"github.com/33cn/dplatform/types"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -33,11 +33,11 @@ var (
 	rpcFilterPrintFuncBlacklist = make(map[string]bool)
 )
 
-// Chain33  a channel client
-type Chain33 struct {
+// Dplatform  a channel client
+type Dplatform struct {
 	cli channelClient
 	//for communicate with main chain in parallel chain
-	mainGrpcCli types.Chain33Client
+	mainGrpcCli types.DplatformClient
 }
 
 // Grpc a channelClient
@@ -59,7 +59,7 @@ func NewGrpcServer() *Grpcserver {
 
 // JSONRPCServer  a json rpcserver object
 type JSONRPCServer struct {
-	jrpc *Chain33
+	jrpc *Dplatform
 	s    *rpc.Server
 	l    net.Listener
 }
@@ -165,7 +165,7 @@ func NewGRpcServer(c queue.Client, api client.QueueProtocolAPI) *Grpcserver {
 	if rpcCfg.EnableTLS {
 		creds, err := credentials.NewServerTLSFromFile(rpcCfg.CertFile, rpcCfg.KeyFile)
 		if err != nil {
-			panic(fmt.Sprintf("err=%s, if cert.pem not found, run chain33-cli cert --host=127.0.0.1 to create", err.Error()))
+			panic(fmt.Sprintf("err=%s, if cert.pem not found, run dplatform-cli cert --host=127.0.0.1 to create", err.Error()))
 		}
 		credsOps := grpc.Creds(creds)
 		opts = append(opts, credsOps)
@@ -179,13 +179,13 @@ func NewGRpcServer(c queue.Client, api client.QueueProtocolAPI) *Grpcserver {
 
 	server := grpc.NewServer(opts...)
 	s.s = server
-	types.RegisterChain33Server(server, s.grpc)
+	types.RegisterDplatformServer(server, s.grpc)
 	return s
 }
 
 // NewJSONRPCServer new json rpcserver object
 func NewJSONRPCServer(c queue.Client, api client.QueueProtocolAPI) *JSONRPCServer {
-	j := &JSONRPCServer{jrpc: &Chain33{}}
+	j := &JSONRPCServer{jrpc: &Dplatform{}}
 	j.jrpc.cli.Init(c, api)
 	if c.GetConfig().IsPara() {
 		grpcCli, err := grpcclient.NewMainChainClient(c.GetConfig(), "")
@@ -196,7 +196,7 @@ func NewJSONRPCServer(c queue.Client, api client.QueueProtocolAPI) *JSONRPCServe
 	}
 	server := rpc.NewServer()
 	j.s = server
-	err := server.RegisterName("Chain33", j.jrpc)
+	err := server.RegisterName("Dplatform", j.jrpc)
 	if err != nil {
 		return nil
 	}
@@ -224,7 +224,7 @@ func InitCfg(cfg *types.RPC) {
 }
 
 // New produce a rpc by cfg
-func New(cfg *types.Chain33Config) *RPC {
+func New(cfg *types.DplatformConfig) *RPC {
 	mcfg := cfg.GetModuleConfig().RPC
 	InitCfg(mcfg)
 	if mcfg.EnableTrace {

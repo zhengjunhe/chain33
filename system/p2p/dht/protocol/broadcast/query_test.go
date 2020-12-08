@@ -8,9 +8,9 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/33cn/chain33/common/merkle"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/merkle"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 )
 

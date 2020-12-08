@@ -4,15 +4,15 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
 	opts "github.com/libp2p/go-libp2p-kad-dht/opts"
 	kbt "github.com/libp2p/go-libp2p-kbucket"
 
-	"github.com/33cn/chain33/common/log/log15"
+	"github.com/33cn/dplatform/common/log/log15"
 	host "github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	discovery "github.com/libp2p/go-libp2p-discovery"
@@ -41,7 +41,7 @@ type Discovery struct {
 }
 
 // InitDhtDiscovery init dht discovery
-func InitDhtDiscovery(ctx context.Context, host host.Host, peersInfo []peer.AddrInfo, chainCfg *types.Chain33Config, subCfg *p2pty.P2PSubConfig) *Discovery {
+func InitDhtDiscovery(ctx context.Context, host host.Host, peersInfo []peer.AddrInfo, chainCfg *types.DplatformConfig, subCfg *p2pty.P2PSubConfig) *Discovery {
 
 	// Make the DHT,不同的ID进入不同的网络。
 	//如果不修改DHTProto 则有可能会连入IPFS网络，dhtproto=/ipfs/kad/1.0.0

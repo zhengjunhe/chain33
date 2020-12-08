@@ -5,9 +5,9 @@
 package pluginmgr
 
 import (
-	"github.com/33cn/chain33/rpc/types"
-	typ "github.com/33cn/chain33/types"
-	wcom "github.com/33cn/chain33/wallet/common"
+	"github.com/33cn/dplatform/rpc/types"
+	typ "github.com/33cn/dplatform/types"
+	wcom "github.com/33cn/dplatform/wallet/common"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +18,7 @@ type Plugin interface {
 	// 获取插件中执行器名
 	GetExecutorName() string
 	// 初始化执行器时会调用该接口
-	InitExec(cfg *typ.Chain33Config)
+	InitExec(cfg *typ.DplatformConfig)
 	InitWallet(wallet wcom.WalletOperate, sub map[string][]byte)
 	AddCmd(rootCmd *cobra.Command)
 	AddRPC(s types.RPCServer)

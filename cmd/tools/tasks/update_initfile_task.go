@@ -12,7 +12,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/33cn/chain33/cmd/tools/util"
+	"github.com/33cn/dplatform/cmd/tools/util"
 )
 
 type itemData struct {

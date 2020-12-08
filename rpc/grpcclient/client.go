@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 )
@@ -14,10 +14,10 @@ const paraChainGrpcRecSize = 100 * 1024 * 1024
 
 var mu sync.Mutex
 
-var defaultClient types.Chain33Client
+var defaultClient types.DplatformClient
 
-//NewMainChainClient 创建一个平行链的 主链 grpc chain33 客户端
-func NewMainChainClient(cfg *types.Chain33Config, grpcaddr string) (types.Chain33Client, error) {
+//NewMainChainClient 创建一个平行链的 主链 grpc dplatform 客户端
+func NewMainChainClient(cfg *types.DplatformConfig, grpcaddr string) (types.DplatformClient, error) {
 	mu.Lock()
 	defer mu.Unlock()
 	if grpcaddr == "" && defaultClient != nil {
@@ -41,7 +41,7 @@ func NewMainChainClient(cfg *types.Chain33Config, grpcaddr string) (types.Chain3
 	if err != nil {
 		return nil, err
 	}
-	grpcClient := types.NewChain33Client(conn)
+	grpcClient := types.NewDplatformClient(conn)
 	if grpcaddr == "" {
 		defaultClient = grpcClient
 	}

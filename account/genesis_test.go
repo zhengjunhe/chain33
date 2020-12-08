@@ -7,7 +7,7 @@ package account
 import (
 	"testing"
 	//"fmt"
-	"github.com/33cn/chain33/common/address"
+	"github.com/33cn/dplatform/common/address"
 	"github.com/stretchr/testify/require"
 )
 

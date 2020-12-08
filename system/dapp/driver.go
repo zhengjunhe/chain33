@@ -13,13 +13,13 @@ import (
 	"bytes"
 	"reflect"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/client/api"
-	"github.com/33cn/chain33/common/address"
-	dbm "github.com/33cn/chain33/common/db"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/account"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/client/api"
+	"github.com/33cn/dplatform/common/address"
+	dbm "github.com/33cn/dplatform/common/db"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/types"
 )
 
 var blog = log.New("module", "execs.base")
@@ -62,7 +62,7 @@ type Driver interface {
 	Query(funcName string, params []byte) (types.Message, error)
 	IsFree() bool
 	SetAPI(client.QueueProtocolAPI)
-	SetExecutorAPI(queueapi client.QueueProtocolAPI, chain33api types.Chain33Client)
+	SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformClient)
 	SetTxs(txs []*types.Transaction)
 	SetReceipt(receipts []*types.ReceiptData)
 
@@ -153,8 +153,8 @@ func (d *DriverBase) SetAPI(queueapi client.QueueProtocolAPI) {
 }
 
 // SetExecutorAPI set queue protocol api
-func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, chain33api types.Chain33Client) {
-	d.execapi = api.New(queueapi, chain33api)
+func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformClient) {
+	d.execapi = api.New(queueapi, dplatformapi)
 }
 
 // GetAPI return queue protocol api
@@ -275,7 +275,7 @@ func (d *DriverBase) callLocal(prefix string, tx *types.Transaction, receipt *ty
 }
 
 // CheckAddress check address
-func CheckAddress(cfg *types.Chain33Config, addr string, height int64) error {
+func CheckAddress(cfg *types.DplatformConfig, addr string, height int64) error {
 	if IsDriverAddress(addr, height) {
 		return nil
 	}

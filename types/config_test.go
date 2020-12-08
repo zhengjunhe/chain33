@@ -11,7 +11,7 @@ import (
 )
 
 func TestChainConfig(t *testing.T) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	cfg.S("a", true)
 	_, err := cfg.G("b")
 	assert.Equal(t, err, ErrNotFound)
@@ -28,7 +28,7 @@ func TestChainConfig(t *testing.T) {
 
 //测试实际的配置文件
 func TestSubConfig(t *testing.T) {
-	cfg, err := initSubModuleString(readFile("testdata/chain33.toml"))
+	cfg, err := initSubModuleString(readFile("testdata/dplatform.toml"))
 	assert.Equal(t, 0, len(cfg.Consensus))
 	assert.Equal(t, 2, len(cfg.Store))
 	assert.Equal(t, 1, len(cfg.Exec))
@@ -37,15 +37,15 @@ func TestSubConfig(t *testing.T) {
 }
 
 func TestConfInit(t *testing.T) {
-	cfg := NewChain33Config(ReadFile("testdata/chain33.toml"))
+	cfg := NewDplatformConfig(ReadFile("testdata/dplatform.toml"))
 	assert.True(t, cfg.IsEnable("TxHeight"))
 }
 
 func TestConfigNoInit(t *testing.T) {
-	cfg := NewChain33ConfigNoInit(ReadFile("testdata/chain33.toml"))
+	cfg := NewDplatformConfigNoInit(ReadFile("testdata/dplatform.toml"))
 	assert.False(t, cfg.IsEnable("TxHeight"))
 	cfg.EnableCheckFork(false)
-	cfg.chain33CfgInit(cfg.GetModuleConfig())
+	cfg.dplatformCfgInit(cfg.GetModuleConfig())
 	mcfg := cfg.GetModuleConfig()
 	assert.Equal(t, cfg.forks.forks["ForkV16Withdraw"], int64(480000))
 	assert.Equal(t, mcfg.Fork.Sub["token"]["Enable"], int64(100899))

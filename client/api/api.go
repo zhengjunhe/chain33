@@ -7,9 +7,9 @@ import (
 	"errors"
 	"sync/atomic"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 )
@@ -46,7 +46,7 @@ type mainChainAPI struct {
 }
 
 //New 新建接口
-func New(api client.QueueProtocolAPI, grpcClient types.Chain33Client) ExecutorAPI {
+func New(api client.QueueProtocolAPI, grpcClient types.DplatformClient) ExecutorAPI {
 	types.AssertConfig(api)
 	types := api.GetConfig()
 	if types.IsPara() {
@@ -83,11 +83,11 @@ func (api *mainChainAPI) GetBlockByHashes(param *types.ReqHashes) (*types.BlockD
 
 type paraChainAPI struct {
 	api        client.QueueProtocolAPI
-	grpcClient types.Chain33Client
+	grpcClient types.DplatformClient
 	errflag    int32
 }
 
-func newParaChainAPI(api client.QueueProtocolAPI, grpcClient types.Chain33Client) ExecutorAPI {
+func newParaChainAPI(api client.QueueProtocolAPI, grpcClient types.DplatformClient) ExecutorAPI {
 	return &paraChainAPI{api: api, grpcClient: grpcClient}
 }
 

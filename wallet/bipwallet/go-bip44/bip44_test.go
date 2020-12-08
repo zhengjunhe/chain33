@@ -7,10 +7,10 @@ package bip44_test
 import (
 	"testing"
 
-	"github.com/33cn/chain33/wallet/bipwallet"
-	bip32 "github.com/33cn/chain33/wallet/bipwallet/go-bip32"
-	bip39 "github.com/33cn/chain33/wallet/bipwallet/go-bip39"
-	. "github.com/33cn/chain33/wallet/bipwallet/go-bip44"
+	"github.com/33cn/dplatform/wallet/bipwallet"
+	bip32 "github.com/33cn/dplatform/wallet/bipwallet/go-bip32"
+	bip39 "github.com/33cn/dplatform/wallet/bipwallet/go-bip39"
+	. "github.com/33cn/dplatform/wallet/bipwallet/go-bip44"
 	"github.com/stretchr/testify/assert"
 )
 

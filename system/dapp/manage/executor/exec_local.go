@@ -5,8 +5,8 @@
 package executor
 
 import (
-	pty "github.com/33cn/chain33/system/dapp/manage/types"
-	"github.com/33cn/chain33/types"
+	pty "github.com/33cn/dplatform/system/dapp/manage/types"
+	"github.com/33cn/dplatform/types"
 )
 
 // ExecLocal_Modify defines execlocal modify func

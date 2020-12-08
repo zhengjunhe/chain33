@@ -12,11 +12,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/chain33/common"
-	dbm "github.com/33cn/chain33/common/db"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	dbm "github.com/33cn/dplatform/common/db"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	lru "github.com/hashicorp/golang-lru"
 )
 
@@ -139,7 +139,7 @@ type BlockChain struct {
 }
 
 //New new
-func New(cfg *types.Chain33Config) *BlockChain {
+func New(cfg *types.DplatformConfig) *BlockChain {
 	mcfg := cfg.GetModuleConfig().BlockChain
 	futureBlocks, err := lru.New(maxFutureBlocks)
 	if err != nil {
@@ -199,7 +199,7 @@ func New(cfg *types.Chain33Config) *BlockChain {
 	return blockchain
 }
 
-func (chain *BlockChain) initConfig(cfg *types.Chain33Config) {
+func (chain *BlockChain) initConfig(cfg *types.DplatformConfig) {
 	mcfg := cfg.GetModuleConfig().BlockChain
 	//if cfg.IsEnable("TxHeight") && chain.DefCacheSize <= (types.LowAllowPackHeight+types.HighAllowPackHeight+1) {
 	//	panic("when Enable TxHeight DefCacheSize must big than types.LowAllowPackHeight + types.HighAllowPackHeight")

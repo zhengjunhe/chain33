@@ -10,14 +10,14 @@ package executor
 // nofee transaction will not pack into block
 
 import (
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
 )
 
 var driverName = "none"
 
 // Init register newnone
-func Init(name string, cfg *types.Chain33Config, sub []byte) {
+func Init(name string, cfg *types.DplatformConfig, sub []byte) {
 	if name != driverName {
 		panic("system dapp can't be rename")
 	}

@@ -6,9 +6,9 @@
 package executor
 
 import (
-	log "github.com/33cn/chain33/common/log/log15"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	log "github.com/33cn/dplatform/common/log/log15"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
 )
 
 var (
@@ -17,7 +17,7 @@ var (
 )
 
 // Init resister a dirver
-func Init(name string, cfg *types.Chain33Config, sub []byte) {
+func Init(name string, cfg *types.DplatformConfig, sub []byte) {
 	// 需要先 RegisterDappFork才可以Register dapp
 	drivers.Register(cfg, GetName(), newManage, cfg.GetDappFork(driverName, "Enable"))
 	InitExecType()
@@ -57,7 +57,7 @@ func (c *Manage) CheckTx(tx *types.Transaction, index int) error {
 }
 
 // IsSuperManager is supper manager or not
-func IsSuperManager(cfg *types.Chain33Config, addr string) bool {
+func IsSuperManager(cfg *types.DplatformConfig, addr string) bool {
 	conf := types.ConfSub(cfg, driverName)
 	for _, m := range conf.GStrList("superManager") {
 		if addr == m {

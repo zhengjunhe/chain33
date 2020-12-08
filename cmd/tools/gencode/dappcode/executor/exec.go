@@ -5,8 +5,8 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/cmd/tools/gencode/base"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/33cn/dplatform/cmd/tools/gencode/base"
+	"github.com/33cn/dplatform/cmd/tools/types"
 )
 
 func init() {
@@ -69,7 +69,7 @@ var (
 
 import (
 	${EXECNAME}types "${IMPORTPATH}/${EXECNAME}/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 /*
@@ -84,7 +84,7 @@ ${EXECFILECONTENT}`
 
 import (
 	${EXECNAME}types "${IMPORTPATH}/${EXECNAME}/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 /*
@@ -107,7 +107,7 @@ func (${EXEC_OBJECT} *${EXECNAME}) addAutoRollBack(tx *types.Transaction, kv []*
 	execDelContent = `package executor
 
 import (
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 )
 
 /* 

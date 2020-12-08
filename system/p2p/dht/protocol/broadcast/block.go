@@ -8,8 +8,8 @@ import (
 	"bytes"
 	"encoding/hex"
 
-	"github.com/33cn/chain33/common/merkle"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/merkle"
+	"github.com/33cn/dplatform/types"
 )
 
 func (protocol *broadcastProtocol) sendBlock(block *types.P2PBlock, p2pData *types.BroadCastData, pid string) (doSend bool) {

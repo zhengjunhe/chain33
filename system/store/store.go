@@ -6,12 +6,12 @@
 package store
 
 import (
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 )
 
 // Storecreate store queue module
-type Storecreate func(cfg *types.Store, sub []byte, chain33cfg *types.Chain33Config) queue.Module
+type Storecreate func(cfg *types.Store, sub []byte, dplatformcfg *types.DplatformConfig) queue.Module
 
 var regStore = make(map[string]Storecreate)
 

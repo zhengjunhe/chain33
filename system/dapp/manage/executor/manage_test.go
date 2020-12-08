@@ -1,5 +1,5 @@
 package executor_test
 
 import (
-	_ "github.com/33cn/chain33/system"
+	_ "github.com/33cn/dplatform/system"
 )

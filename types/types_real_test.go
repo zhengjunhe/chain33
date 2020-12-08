@@ -9,9 +9,9 @@ import (
 
 	"strings"
 
-	"github.com/33cn/chain33/common/address"
-	_ "github.com/33cn/chain33/system"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common/address"
+	_ "github.com/33cn/dplatform/system"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -19,7 +19,7 @@ import (
 func TestCallCreateTxPara(t *testing.T) {
 	str := types.ReadFile("testdata/guodun2.toml")
 	new := strings.Replace(str, "Title=\"user.p.guodun2.\"", "Title=\"user.p.sto.\"", 1)
-	cfg := types.NewChain33Config(new)
+	cfg := types.NewDplatformConfig(new)
 
 	req := &types.CreateTx{
 		To:          "184wj4nsgVxKyz2NhM3Yb5RK5Ap6AFRFq2",
@@ -45,7 +45,7 @@ func TestCallCreateTxPara(t *testing.T) {
 }
 
 func TestExecName(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	assert.Equal(t, cfg.ExecName("coins"), "coins")
 	cfg.SetTitleOnlyForTest("user.p.sto.")
 	assert.Equal(t, cfg.ExecName("coins"), "user.p.sto.coins")

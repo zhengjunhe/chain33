@@ -3,10 +3,10 @@ package blockchain
 import (
 	"fmt"
 
-	dbm "github.com/33cn/chain33/common/db"
-	"github.com/33cn/chain33/common/db/table"
-	"github.com/33cn/chain33/common/merkle"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/33cn/dplatform/common/db"
+	"github.com/33cn/dplatform/common/db/table"
+	"github.com/33cn/dplatform/common/merkle"
+	"github.com/33cn/dplatform/types"
 )
 
 var (
@@ -293,7 +293,7 @@ func (paratx *ParaTxRow) Get(key string) ([]byte, error) {
 }
 
 //saveParaTxTable 保存平行链标识
-func saveParaTxTable(cfg *types.Chain33Config, db dbm.DB, height int64, hash []byte, txs []*types.Transaction) ([]*types.KeyValue, error) {
+func saveParaTxTable(cfg *types.DplatformConfig, db dbm.DB, height int64, hash []byte, txs []*types.Transaction) ([]*types.KeyValue, error) {
 	kvdb := dbm.NewKVDB(db)
 	table := NewParaTxTable(kvdb)
 	if !cfg.IsFork(height, "ForkRootHash") {

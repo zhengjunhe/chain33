@@ -12,8 +12,8 @@ import (
 	"os"
 	"strings"
 
-	commandtypes "github.com/33cn/chain33/system/dapp/commands/types"
-	"github.com/33cn/chain33/types"
+	commandtypes "github.com/33cn/dplatform/system/dapp/commands/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/spf13/cobra"
 )
 

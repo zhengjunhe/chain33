@@ -5,9 +5,9 @@
 package executor
 
 import (
-	dbm "github.com/33cn/chain33/common/db"
-	pty "github.com/33cn/chain33/system/dapp/manage/types"
-	"github.com/33cn/chain33/types"
+	dbm "github.com/33cn/dplatform/common/db"
+	pty "github.com/33cn/dplatform/system/dapp/manage/types"
+	"github.com/33cn/dplatform/types"
 )
 
 // Action attribute
@@ -15,7 +15,7 @@ type Action struct {
 	db       dbm.KV
 	fromaddr string
 	height   int64
-	cfg      *types.Chain33Config
+	cfg      *types.DplatformConfig
 }
 
 // NewAction new a action object

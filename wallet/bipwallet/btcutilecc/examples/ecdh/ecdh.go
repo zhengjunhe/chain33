@@ -8,7 +8,7 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	btcutil "github.com/33cn/chain33/wallet/bipwallet/btcutilecc"
+	btcutil "github.com/33cn/dplatform/wallet/bipwallet/btcutilecc"
 )
 
 func main() {

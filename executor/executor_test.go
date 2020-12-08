@@ -11,20 +11,20 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/client/api"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	_ "github.com/33cn/chain33/system"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/client/api"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/store"
+	_ "github.com/33cn/dplatform/system"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
 	"github.com/stretchr/testify/assert"
 )
 
 func initEnv(cfgstring string) (*Executor, queue.Queue) {
-	cfg := types.NewChain33Config(cfgstring)
+	cfg := types.NewDplatformConfig(cfgstring)
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	exec := New(cfg)
@@ -192,7 +192,7 @@ func init() {
 
 var testRegOnce sync.Once
 
-func Register(cfg *types.Chain33Config) {
+func Register(cfg *types.DplatformConfig) {
 	testRegOnce.Do(func() {
 		drivers.Register(cfg, "demo", newdemoApp, 1)
 		drivers.Register(cfg, "demof", newdemofApp, 1)
@@ -284,7 +284,7 @@ func TestExecutorErrAPIEnv(t *testing.T) {
 	assert.Equal(t, true, api.IsAPIEnvError(err))
 }
 func TestCheckTx(t *testing.T) {
-	exec, q := initEnv(types.ReadFile("../cmd/chain33/chain33.test.toml"))
+	exec, q := initEnv(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
 	cfg := exec.client.GetConfig()
 
 	store := store.New(cfg)

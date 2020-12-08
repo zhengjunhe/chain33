@@ -9,8 +9,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
 )
 
 func isAllowKeyWrite(e *executor, key, realExecer []byte, tx *types.Transaction, index int) bool {
@@ -61,7 +61,7 @@ func isAllowKeyWrite(e *executor, key, realExecer []byte, tx *types.Transaction,
 	return c.IsFriend(execdriver, key, tx)
 }
 
-func isAllowLocalKey(cfg *types.Chain33Config, execer []byte, key []byte) error {
+func isAllowLocalKey(cfg *types.DplatformConfig, execer []byte, key []byte) error {
 	err := isAllowLocalKey2(cfg, execer, key)
 	if err != nil {
 		realexec := types.GetRealExecName(execer)
@@ -78,7 +78,7 @@ func isAllowLocalKey(cfg *types.Chain33Config, execer []byte, key []byte) error 
 	return nil
 }
 
-func isAllowLocalKey2(cfg *types.Chain33Config, execer []byte, key []byte) error {
+func isAllowLocalKey2(cfg *types.DplatformConfig, execer []byte, key []byte) error {
 	if len(execer) < 1 {
 		return errors.Wrap(types.ErrLocalPrefix, "execer empty")
 	}

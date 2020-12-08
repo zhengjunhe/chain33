@@ -6,11 +6,11 @@ import (
 
 	core "github.com/libp2p/go-libp2p-core"
 
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/system/p2p/dht/net"
-	prototypes "github.com/33cn/chain33/system/p2p/dht/protocol/types"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/system/p2p/dht/net"
+	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 )
 
 type peerPubSub struct {
@@ -39,7 +39,7 @@ func (p *peerPubSub) InitProtocol(env *prototypes.P2PEnv) {
 //处理订阅topic的请求
 func (p *peerPubSub) handleSubTopic(msg *queue.Message) {
 	//先检查是否已经订阅相关topic
-	//接收chain33其他模块发来的请求消息
+	//接收dplatform其他模块发来的请求消息
 	subtopic := msg.GetData().(*types.SubTopic)
 	topic := subtopic.GetTopic()
 	//check topic

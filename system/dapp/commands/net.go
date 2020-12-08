@@ -5,11 +5,11 @@
 package commands
 
 import (
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/spf13/cobra"
 
-	"github.com/33cn/chain33/rpc/jsonclient"
-	rpctypes "github.com/33cn/chain33/rpc/types"
+	"github.com/33cn/dplatform/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
 )
 
 // NetCmd net command
@@ -49,7 +49,7 @@ func peerInfo(cmd *cobra.Command, args []string) {
 	var res rpctypes.PeerList
 	p2pty, _ := cmd.Flags().GetString("type")
 	req := types.P2PGetPeerReq{P2PType: p2pty}
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetPeerInfo", req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetPeerInfo", req, &res)
 	ctx.Run()
 }
 
@@ -66,7 +66,7 @@ func IsClockSyncCmd() *cobra.Command {
 func isClockSync(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res bool
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.IsNtpClockSync", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.IsNtpClockSync", nil, &res)
 	ctx.Run()
 }
 
@@ -83,7 +83,7 @@ func IsSyncCmd() *cobra.Command {
 func isSync(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res bool
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.IsSync", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.IsSync", nil, &res)
 	ctx.Run()
 }
 
@@ -103,7 +103,7 @@ func netInfo(cmd *cobra.Command, args []string) {
 	p2pty, _ := cmd.Flags().GetString("type")
 	req := types.P2PGetNetInfoReq{P2PType: p2pty}
 	var res rpctypes.NodeNetinfo
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetNetInfo", req, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetNetInfo", req, &res)
 	ctx.Run()
 }
 
@@ -121,7 +121,7 @@ func NetProtocolsCmd() *cobra.Command {
 func netProtocols(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res types.NetProtocolInfos
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.NetProtocols", &types.ReqNil{}, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.NetProtocols", &types.ReqNil{}, &res)
 	ctx.Run()
 }
 
@@ -138,7 +138,7 @@ func GetFatalFailureCmd() *cobra.Command {
 func fatalFailure(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res int64
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetFatalFailure", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetFatalFailure", nil, &res)
 	ctx.Run()
 }
 
@@ -155,6 +155,6 @@ func GetTimeStausCmd() *cobra.Command {
 func timestatus(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res rpctypes.TimeStatus
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Chain33.GetTimeStatus", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetTimeStatus", nil, &res)
 	ctx.Run()
 }

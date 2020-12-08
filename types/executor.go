@@ -12,7 +12,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/33cn/chain33/common/address"
+	"github.com/33cn/dplatform/common/address"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -86,7 +86,7 @@ func LoadExecutorType(execstr string) ExecutorType {
 }
 
 // CallExecNewTx 重构完成后删除
-func CallExecNewTx(c *Chain33Config, execName, action string, param interface{}) ([]byte, error) {
+func CallExecNewTx(c *DplatformConfig, execName, action string, param interface{}) ([]byte, error) {
 	exec := LoadExecutorType(execName)
 	if exec == nil {
 		tlog.Error("callExecNewTx", "Error", "exec not found")
@@ -126,7 +126,7 @@ func CallCreateTransaction(execName, action string, param Message) (*Transaction
 }
 
 // CallCreateTx 构造交易信息
-func CallCreateTx(c *Chain33Config, execName, action string, param Message) ([]byte, error) {
+func CallCreateTx(c *DplatformConfig, execName, action string, param Message) ([]byte, error) {
 	tx, err := CallCreateTransaction(execName, action, param)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func CallCreateTx(c *Chain33Config, execName, action string, param Message) ([]b
 }
 
 //CallCreateTxJSON create tx by json
-func CallCreateTxJSON(c *Chain33Config, execName, action string, param json.RawMessage) ([]byte, error) {
+func CallCreateTxJSON(c *DplatformConfig, execName, action string, param json.RawMessage) ([]byte, error) {
 	exec := LoadExecutorType(execName)
 	if exec == nil {
 		execer := GetParaExecName([]byte(execName))
@@ -161,14 +161,14 @@ func CallCreateTxJSON(c *Chain33Config, execName, action string, param json.RawM
 }
 
 // CreateFormatTx 构造交易信息
-func CreateFormatTx(c *Chain33Config, execName string, payload []byte) (*Transaction, error) {
+func CreateFormatTx(c *DplatformConfig, execName string, payload []byte) (*Transaction, error) {
 	//填写nonce,execer,to, fee 等信息, 后面会增加一个修改transaction的函数，会加上execer fee 等的修改
 	tx := &Transaction{Payload: payload}
 	return FormatTx(c, execName, tx)
 }
 
 // FormatTx 格式化tx交易
-func FormatTx(c *Chain33Config, execName string, tx *Transaction) (*Transaction, error) {
+func FormatTx(c *DplatformConfig, execName string, tx *Transaction) (*Transaction, error) {
 	//填写nonce,execer,to, fee 等信息, 后面会增加一个修改transaction的函数，会加上execer fee 等的修改
 	tx.Nonce = rand.Int63()
 	tx.Execer = []byte(execName)
@@ -187,7 +187,7 @@ func FormatTx(c *Chain33Config, execName string, tx *Transaction) (*Transaction,
 }
 
 // FormatTxEncode 对交易信息编码成byte类型
-func FormatTxEncode(c *Chain33Config, execName string, tx *Transaction) ([]byte, error) {
+func FormatTxEncode(c *DplatformConfig, execName string, tx *Transaction) ([]byte, error) {
 	tx, err := FormatTx(c, execName, tx)
 	if err != nil {
 		return nil, err
@@ -291,9 +291,9 @@ type ExecutorType interface {
 	// collect assets the tx deal with
 	GetAssets(tx *Transaction) ([]*Asset, error)
 
-	// about chain33Config
-	GetConfig() *Chain33Config
-	SetConfig(cfg *Chain33Config)
+	// about dplatformConfig
+	GetConfig() *DplatformConfig
+	SetConfig(cfg *DplatformConfig)
 }
 
 // ExecTypeGet  获取类型值
@@ -311,7 +311,7 @@ type ExecTypeBase struct {
 	rpclist             map[string]reflect.Method
 	queryMap            map[string]reflect.Type
 	forks               *Forks
-	cfg                 *Chain33Config
+	cfg                 *DplatformConfig
 }
 
 // GetChild  获取子执行器
@@ -799,11 +799,11 @@ func (base *ExecTypeBase) GetAssets(tx *Transaction) ([]*Asset, error) {
 }
 
 //GetConfig ...
-func (base *ExecTypeBase) GetConfig() *Chain33Config {
+func (base *ExecTypeBase) GetConfig() *DplatformConfig {
 	return base.cfg
 }
 
 //SetConfig ...
-func (base *ExecTypeBase) SetConfig(cfg *Chain33Config) {
+func (base *ExecTypeBase) SetConfig(cfg *DplatformConfig) {
 	base.cfg = cfg
 }

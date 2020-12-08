@@ -12,20 +12,20 @@ import (
 	"os/user"
 	"path/filepath"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/client"
-	clog "github.com/33cn/chain33/common/log"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/blockchain"
+	"github.com/33cn/dplatform/client"
+	clog "github.com/33cn/dplatform/common/log"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/executor"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/store"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
 )
 
 var height = flag.Int64("height", 1, "exec block height")
-var datadir = flag.String("datadir", "", "data dir of chain33, include logs and datas")
-var configPath = flag.String("f", "chain33.toml", "configfile")
+var datadir = flag.String("datadir", "", "data dir of dplatform, include logs and datas")
+var configPath = flag.String("f", "dplatform.toml", "configfile")
 
 func resetDatadir(cfg *types.Config, datadir string) {
 	// Check in case of paths like "/something/~/something/"
@@ -43,7 +43,7 @@ func resetDatadir(cfg *types.Config, datadir string) {
 }
 
 func initEnv() (queue.Queue, queue.Module, queue.Module) {
-	cfg := types.NewChain33Config(types.ReadFile(*configPath))
+	cfg := types.NewDplatformConfig(types.ReadFile(*configPath))
 	mcfg := cfg.GetModuleConfig()
 	if *datadir != "" {
 		resetDatadir(mcfg, *datadir)

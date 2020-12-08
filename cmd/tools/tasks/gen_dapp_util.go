@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	sysutil "github.com/33cn/chain33/util"
+	sysutil "github.com/33cn/dplatform/util"
 )
 
 type actionInfoItem struct {

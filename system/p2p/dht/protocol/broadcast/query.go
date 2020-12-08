@@ -8,9 +8,9 @@ import (
 	"bytes"
 	"encoding/hex"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/merkle"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/merkle"
+	"github.com/33cn/dplatform/types"
 )
 
 func (protocol *broadcastProtocol) sendQueryData(query *types.P2PQueryData, p2pData *types.BroadCastData, pid string) bool {

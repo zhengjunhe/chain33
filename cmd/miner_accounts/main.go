@@ -17,11 +17,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	l "github.com/33cn/chain33/common/log/log15"
+	l "github.com/33cn/dplatform/common/log/log15"
 	tml "github.com/BurntSushi/toml"
 	"github.com/rs/cors"
 
-	"github.com/33cn/chain33/cmd/miner_accounts/accounts"
+	"github.com/33cn/dplatform/cmd/miner_accounts/accounts"
 )
 
 var (
@@ -57,7 +57,7 @@ func main() {
 		panic(err)
 	}
 
-	go accounts.SyncBlock(cfg.Chain33Host)
+	go accounts.SyncBlock(cfg.DplatformHost)
 
 	shower := accounts.ShowMinerAccount{DataDir: cfg.DataDir, Addrs: cfg.MinerAddr}
 	server := rpc.NewServer()

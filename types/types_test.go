@@ -13,8 +13,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/types/jsonpb"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/types/jsonpb"
 	proto "github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 )
@@ -59,21 +59,21 @@ func TestAllowExecName(t *testing.T) {
 }
 
 func BenchmarkExecName(b *testing.B) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	for i := 0; i < b.N; i++ {
 		cfg.ExecName("hello")
 	}
 }
 
 func BenchmarkG(b *testing.B) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	for i := 0; i < b.N; i++ {
 		cfg.G("TestNet")
 	}
 }
 
 func BenchmarkS(b *testing.B) {
-	cfg := NewChain33Config(GetDefaultCfgstring())
+	cfg := NewDplatformConfig(GetDefaultCfgstring())
 	for i := 0; i < b.N; i++ {
 		cfg.S("helloword", true)
 	}
@@ -411,7 +411,7 @@ func TestIterateCallBack_PrefixWithExecAddr(t *testing.T) {
 }
 
 func TestJsonpbUTF8Tx(t *testing.T) {
-	NewChain33Config(GetDefaultCfgstring())
+	NewDplatformConfig(GetDefaultCfgstring())
 	bdata, err := common.FromHex("0a05636f696e73121018010a0c108084af5f1a05310a320a3320e8b31b30b9b69483d7f9d3f04c3a22314b67453376617969715a4b6866684d66744e3776743267447639486f4d6b393431")
 	assert.Nil(t, err)
 	var r Transaction

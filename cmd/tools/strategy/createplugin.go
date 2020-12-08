@@ -10,10 +10,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/util"
 
-	"github.com/33cn/chain33/cmd/tools/tasks"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/33cn/dplatform/cmd/tools/tasks"
+	"github.com/33cn/dplatform/cmd/tools/types"
 	"github.com/pkg/errors"
 )
 
@@ -34,8 +34,8 @@ type createPluginStrategy struct {
 }
 
 func (c *createPluginStrategy) Run() error {
-	fmt.Println("Begin run chain33 create plugin project mode.")
-	defer fmt.Println("Run chain33 create plugin project mode finish.")
+	fmt.Println("Begin run dplatform create plugin project mode.")
+	defer fmt.Println("Run dplatform create plugin project mode finish.")
 	if err := c.initMember(); err != nil {
 		return err
 	}

@@ -7,16 +7,16 @@ package accounts
 import (
 	"time"
 
-	l "github.com/33cn/chain33/common/log/log15"
+	l "github.com/33cn/dplatform/common/log/log15"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 
 	//"encoding/json"
 	//"io/ioutil"
 	"fmt"
 	"strconv"
 
-	rpctypes "github.com/33cn/chain33/rpc/types"
+	rpctypes "github.com/33cn/dplatform/rpc/types"
 )
 
 const secondsPerBlock = 5

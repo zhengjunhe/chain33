@@ -6,10 +6,10 @@ package dapp
 
 //store package store the world - state data
 import (
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/common/address"
-	log "github.com/33cn/chain33/common/log/log15"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/common/address"
+	log "github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatform/types"
 )
 
 var elog = log.New("module", "execs")
@@ -29,7 +29,7 @@ var (
 )
 
 // Register register dcriver height in name
-func Register(cfg *types.Chain33Config, name string, create DriverCreate, height int64) {
+func Register(cfg *types.DplatformConfig, name string, create DriverCreate, height int64) {
 	if cfg == nil {
 		panic("Execute: GetConfig is nil")
 	}

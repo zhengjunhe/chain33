@@ -5,8 +5,8 @@
 package executor
 
 import (
-	"github.com/33cn/chain33/cmd/tools/gencode/base"
-	"github.com/33cn/chain33/cmd/tools/types"
+	"github.com/33cn/dplatform/cmd/tools/gencode/base"
+	"github.com/33cn/dplatform/cmd/tools/types"
 )
 
 func init() {
@@ -41,10 +41,10 @@ var (
 	executorContent = `package executor
 
 import (
-	log "github.com/33cn/chain33/common/log/log15"
+	log "github.com/33cn/dplatform/common/log/log15"
 	${EXECNAME}types "${IMPORTPATH}/${EXECNAME}/types"
-	drivers "github.com/33cn/chain33/system/dapp"
-	"github.com/33cn/chain33/types"
+	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatform/types"
 )
 
 /* 
@@ -61,7 +61,7 @@ var (
 var driverName = ${EXECNAME}types.${CLASSNAME}X
 
 // Init register dapp
-func Init(name string, cfg *types.Chain33Config, sub []byte) {
+func Init(name string, cfg *types.DplatformConfig, sub []byte) {
 	drivers.Register(cfg, GetName(), new${CLASSNAME}, cfg.GetDappFork(driverName, "Enable"))
     InitExecType()
 }

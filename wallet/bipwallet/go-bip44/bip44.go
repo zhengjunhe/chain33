@@ -10,8 +10,8 @@
 package bip44
 
 import (
-	bip32 "github.com/33cn/chain33/wallet/bipwallet/go-bip32"
-	bip39 "github.com/33cn/chain33/wallet/bipwallet/go-bip39"
+	bip32 "github.com/33cn/dplatform/wallet/bipwallet/go-bip32"
+	bip39 "github.com/33cn/dplatform/wallet/bipwallet/go-bip39"
 )
 
 // Purpose Purpose

@@ -9,25 +9,25 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/33cn/chain33/util"
+	"github.com/33cn/dplatform/util"
 
 	"github.com/golang/protobuf/proto"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/common"
-	"github.com/33cn/chain33/common/address"
-	"github.com/33cn/chain33/common/crypto"
-	"github.com/33cn/chain33/common/limits"
-	"github.com/33cn/chain33/common/log"
-	"github.com/33cn/chain33/executor"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/store"
-	_ "github.com/33cn/chain33/system/consensus/init"
-	_ "github.com/33cn/chain33/system/crypto/init"
-	cty "github.com/33cn/chain33/system/dapp/coins/types"
-	_ "github.com/33cn/chain33/system/dapp/init"
-	_ "github.com/33cn/chain33/system/store/init"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/blockchain"
+	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatform/common/crypto"
+	"github.com/33cn/dplatform/common/limits"
+	"github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatform/executor"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/store"
+	_ "github.com/33cn/dplatform/system/consensus/init"
+	_ "github.com/33cn/dplatform/system/crypto/init"
+	cty "github.com/33cn/dplatform/system/dapp/coins/types"
+	_ "github.com/33cn/dplatform/system/dapp/init"
+	_ "github.com/33cn/dplatform/system/store/init"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -146,7 +146,7 @@ func getprivkey(key string) crypto.PrivKey {
 }
 
 func initEnv3() (queue.Queue, queue.Module, queue.Module, *Mempool) {
-	cfg := types.NewChain33Config(types.ReadFile("../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("../../cmd/dplatform/dplatform.test.toml"))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
@@ -172,7 +172,7 @@ func initEnv(size int) (queue.Queue, *Mempool) {
 	if size == 0 {
 		size = 100
 	}
-	cfg := types.NewChain33Config(types.ReadFile("../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("../../cmd/dplatform/dplatform.test.toml"))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
@@ -193,7 +193,7 @@ func initEnv4(size int) (queue.Queue, *Mempool) {
 	if size == 0 {
 		size = 100
 	}
-	cfg := types.NewChain33Config(types.ReadFile("testdata/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("testdata/dplatform.test.toml"))
 	mcfg := cfg.GetModuleConfig()
 	var q = queue.New("channel")
 	q.SetConfig(cfg)

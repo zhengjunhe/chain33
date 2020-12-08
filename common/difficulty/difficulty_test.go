@@ -10,7 +10,7 @@ import (
 
 	"bytes"
 
-	"github.com/33cn/chain33/common"
+	"github.com/33cn/dplatform/common"
 )
 
 type ByteSlice []byte

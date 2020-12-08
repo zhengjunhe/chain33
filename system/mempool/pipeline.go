@@ -7,7 +7,7 @@ package mempool
 import (
 	"sync"
 
-	"github.com/33cn/chain33/queue"
+	"github.com/33cn/dplatform/queue"
 )
 
 //pipeline 适用于 一个问题，分成很多步完成，每步的输出作为下一步的输入

@@ -13,8 +13,8 @@ import (
 
 	lru "github.com/hashicorp/golang-lru"
 
-	"github.com/33cn/chain33/common/crypto"
-	_ "github.com/33cn/chain33/system/crypto/init"
+	"github.com/33cn/dplatform/common/crypto"
+	_ "github.com/33cn/dplatform/system/crypto/init"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

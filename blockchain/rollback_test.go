@@ -13,9 +13,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/33cn/chain33/types"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatform/util/testnode"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -24,13 +24,13 @@ var once sync.Once
 
 func TestRollbackblock(t *testing.T) {
 	once.Do(func() {
-		types.RegFork("store-kvmvccmavl", func(cfg *types.Chain33Config) {
+		types.RegFork("store-kvmvccmavl", func(cfg *types.DplatformConfig) {
 			cfg.RegisterDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 		})
 	})
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
-	cfg := types.NewChain33Config(new)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	cfg := types.NewDplatformConfig(new)
 	mfg := cfg.GetModuleConfig()
 	mfg.BlockChain.RollbackBlock = 0
 	mock33 := testnode.NewWithConfig(cfg, nil)
@@ -49,14 +49,14 @@ func TestRollbackblock(t *testing.T) {
 
 func TestNeedRollback(t *testing.T) {
 	once.Do(func() {
-		types.RegFork("store-kvmvccmavl", func(cfg *types.Chain33Config) {
+		types.RegFork("store-kvmvccmavl", func(cfg *types.DplatformConfig) {
 			cfg.RegisterDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 		})
 	})
 
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"chain33\"", 1)
-	cfg := types.NewChain33Config(new)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	cfg := types.NewDplatformConfig(new)
 	mock33 := testnode.NewWithConfig(cfg, nil)
 	chain := mock33.GetBlockChain()
 
@@ -160,7 +160,7 @@ func TestRollbackPara(t *testing.T) {
 	require.Equal(t, int64(2), chain.GetBlockHeight())
 }
 
-func testMockSendTx(t *testing.T, mock33 *testnode.Chain33Mock) {
+func testMockSendTx(t *testing.T, mock33 *testnode.DplatformMock) {
 	cfg := mock33.GetClient().GetConfig()
 	txs := util.GenCoinsTxs(cfg, mock33.GetGenesisKey(), 10)
 	for i := 0; i < len(txs); i++ {

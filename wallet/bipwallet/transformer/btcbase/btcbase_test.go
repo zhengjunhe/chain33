@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 
-	"github.com/33cn/chain33/wallet/bipwallet/transformer"
+	"github.com/33cn/dplatform/wallet/bipwallet/transformer"
 	"github.com/mr-tron/base58/base58"
 )
 

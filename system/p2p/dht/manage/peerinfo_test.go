@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/chain33/queue"
-	p2pty "github.com/33cn/chain33/system/p2p/dht/types"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/queue"
+	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	"github.com/33cn/dplatform/types"
 	bhost "github.com/libp2p/go-libp2p-blankhost"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -24,7 +24,7 @@ func Test_peerinfo(t *testing.T) {
 	defer cancel()
 	netw := swarmt.GenSwarm(t, ctx)
 	h := bhost.NewBlankHost(netw)
-	cfg := types.NewChain33Config(types.ReadFile("../../../../cmd/chain33/chain33.test.toml"))
+	cfg := types.NewDplatformConfig(types.ReadFile("../../../../cmd/dplatform/dplatform.test.toml"))
 	mcfg := &p2pty.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P["dht"], mcfg)
 	q := queue.New("channel")

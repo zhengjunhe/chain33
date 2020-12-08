@@ -10,7 +10,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/33cn/chain33/common/crypto"
+	"github.com/33cn/dplatform/common/crypto"
 	secp256k1 "github.com/btcsuite/btcd/btcec"
 )
 

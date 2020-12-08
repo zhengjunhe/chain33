@@ -8,16 +8,16 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	client "github.com/33cn/chain33/queue"
-	clientMocks "github.com/33cn/chain33/queue/mocks"
+	client "github.com/33cn/dplatform/queue"
+	clientMocks "github.com/33cn/dplatform/queue/mocks"
 )
 
 func TestUpgradePlugin(t *testing.T) {
-	cfg := types.NewChain33Config(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 
 	cli := new(clientMocks.Client)
 	cli.On("Sub", "blockchain").Return(nil)

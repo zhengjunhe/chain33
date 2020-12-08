@@ -56,7 +56,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/33cn/chain33/common"
+	"github.com/33cn/dplatform/common"
 	"github.com/golang/protobuf/proto"
 
 	stpb "github.com/golang/protobuf/ptypes/struct"

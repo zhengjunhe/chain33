@@ -7,9 +7,9 @@ package blockchain_test
 import (
 	"testing"
 
-	"github.com/33cn/chain33/blockchain"
-	"github.com/33cn/chain33/util"
-	"github.com/33cn/chain33/util/testnode"
+	"github.com/33cn/dplatform/blockchain"
+	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatform/util/testnode"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -7,10 +7,10 @@ package types
 import (
 	"net/rpc"
 
-	"github.com/33cn/chain33/account"
-	"github.com/33cn/chain33/client"
-	"github.com/33cn/chain33/queue"
-	"github.com/33cn/chain33/types"
+	"github.com/33cn/dplatform/account"
+	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatform/types"
 	"google.golang.org/grpc"
 )
 

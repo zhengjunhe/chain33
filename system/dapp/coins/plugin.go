@@ -6,10 +6,10 @@
 package coins
 
 import (
-	"github.com/33cn/chain33/pluginmgr"
-	_ "github.com/33cn/chain33/system/dapp/coins/autotest" // register package
-	"github.com/33cn/chain33/system/dapp/coins/executor"
-	"github.com/33cn/chain33/system/dapp/coins/types"
+	"github.com/33cn/dplatform/pluginmgr"
+	_ "github.com/33cn/dplatform/system/dapp/coins/autotest" // register package
+	"github.com/33cn/dplatform/system/dapp/coins/executor"
+	"github.com/33cn/dplatform/system/dapp/coins/types"
 )
 
 func init() {
