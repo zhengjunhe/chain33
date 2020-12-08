@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GOPATH = "${WORKSPACE}"
-        PROJ_DIR = "${WORKSPACE}/src/gitlab.33.cn/chain33/chain33"
+        PROJ_DIR = "${WORKSPACE}/src/gitlab.33.cn/dplatform/dplatform"
     }
 
     options {
@@ -12,7 +12,7 @@ pipeline {
         timestamps()
         gitLabConnection('gitlab33')
         gitlabBuilds(builds: ['check', 'build', 'test', 'deploy'])
-        checkoutToSubdirectory "src/gitlab.33.cn/chain33/chain33"
+        checkoutToSubdirectory "src/gitlab.33.cn/dplatform/dplatform"
     }
 
     stages {
@@ -40,13 +40,13 @@ pipeline {
         stage('test'){
             agent {
                 docker{
-                    image 'suyanlong/chain33-run:latest'
+                    image 'suyanlong/dplatform-run:latest'
                 }
             }
 
             environment {
                 GOPATH = "${WORKSPACE}"
-                PROJ_DIR = "${WORKSPACE}/src/gitlab.33.cn/chain33/chain33"
+                PROJ_DIR = "${WORKSPACE}/src/gitlab.33.cn/dplatform/dplatform"
             }
 
             steps {
@@ -65,7 +65,7 @@ pipeline {
                     gitlabCommitStatus(name: 'deploy'){
                         sh 'make build_ci'
                         sh "make autotest_ci proj=${env.BUILD_NUMBER}"
-                        sh "cd build && mkdir ${env.BUILD_NUMBER} && cp ci/* ${env.BUILD_NUMBER} -r && cp chain33* Dockerfile* docker* *.sh ${env.BUILD_NUMBER}/ && cd ${env.BUILD_NUMBER}/ && ./docker-compose-pre.sh run ${env.BUILD_NUMBER} all "
+                        sh "cd build && mkdir ${env.BUILD_NUMBER} && cp ci/* ${env.BUILD_NUMBER} -r && cp dplatform* Dockerfile* docker* *.sh ${env.BUILD_NUMBER}/ && cd ${env.BUILD_NUMBER}/ && ./docker-compose-pre.sh run ${env.BUILD_NUMBER} all "
                     }
                 }
             }
