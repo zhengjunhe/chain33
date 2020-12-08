@@ -15,8 +15,8 @@ set -o pipefail
 PWD=$(cd "$(dirname "$0")" && pwd)
 export PATH="$PWD:$PATH"
 
-NODE3="${1}_chain33_1"
-CLI="docker exec ${NODE3} /root/chain33-cli"
+NODE3="${1}_dplatform_1"
+CLI="docker exec ${NODE3} /root/dplatform-cli"
 
 NODE2="${1}_chain32_1"
 
@@ -25,7 +25,7 @@ NODE1="${1}_chain31_1"
 NODE4="${1}_chain30_1"
 
 NODE5="${1}_chain29_1"
-CLI5="docker exec ${NODE5} /root/chain33-cli"
+CLI5="docker exec ${NODE5} /root/dplatform-cli"
 
 containers=("${NODE1}" "${NODE2}" "${NODE3}" "${NODE4}")
 export COMPOSE_PROJECT_NAME="$1"
@@ -69,9 +69,9 @@ echo "COMPOSE_PROJECT_NAME=$COMPOSE_PROJECT_NAME"
 echo "CLI=$CLI"
 ####################
 
-testtoml=chain33.toml
+testtoml=dplatform.toml
 # to close solo miner config in un-miner node
-testtomlsolo=chain33-solo.toml
+testtomlsolo=dplatform-solo.toml
 
 function base_init() {
 
@@ -80,8 +80,8 @@ function base_init() {
     sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' ${testtoml}
 
     # p2p
-    sed -i $sedfix 's/^seeds=.*/seeds=["chain33:13802","chain32:13802","chain31:13802"]/g' ${testtoml}
-    #sed -i $sedfix 's/^enable=.*/enable=true/g' chain33.toml
+    sed -i $sedfix 's/^seeds=.*/seeds=["dplatform:13802","chain32:13802","chain31:13802"]/g' ${testtoml}
+    #sed -i $sedfix 's/^enable=.*/enable=true/g' dplatform.toml
     sed -i $sedfix '0,/^enable=.*/s//enable=true/' ${testtoml}
     sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' ${testtoml}
     sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' ${testtoml}
@@ -203,11 +203,11 @@ function start() {
 }
 
 function check_docker_status() {
-    status=$(docker-compose ps | grep chain33_1 | awk '{print $6}')
+    status=$(docker-compose ps | grep dplatform_1 | awk '{print $6}')
     if [ "${status}" == "Exit" ]; then
-        echo "=========== chain33 service Exit logs ========== "
-        docker-compose logs chain33
-        echo "=========== chain33 service Exit logs End========== "
+        echo "=========== dplatform service Exit logs ========== "
+        docker-compose logs dplatform
+        echo "=========== dplatform service Exit logs End========== "
     fi
 
 }

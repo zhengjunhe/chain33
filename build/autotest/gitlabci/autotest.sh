@@ -17,11 +17,11 @@ export PATH="$PWD:$PATH"
 
 PROJECT_NAME="${1}"
 
-NODE3="autotest-chain33"
-CLI="docker exec ${NODE3} /root/chain33-cli"
+NODE3="autotest-dplatform"
+CLI="docker exec ${NODE3} /root/dplatform-cli"
 
 NODE2="autotest-chain32"
-CLI2="docker exec ${NODE2} /root/chain33-cli"
+CLI2="docker exec ${NODE2} /root/dplatform-cli"
 
 sedfix=""
 if [ "$(uname)" == "Darwin" ]; then
@@ -30,24 +30,24 @@ fi
 
 function init() {
     # update test environment
-    sed -i $sedfix 's/^Title.*/Title="local"/g' chain33.toml
-    sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' chain33.toml
+    sed -i $sedfix 's/^Title.*/Title="local"/g' dplatform.toml
+    sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' dplatform.toml
 
     # p2p
-    sed -i $sedfix 's/^seeds=.*/seeds=["chain33:13802","chain32:13802"]/g' chain33.toml
-    #sed -i $sedfix 's/^enable=.*/enable=true/g' chain33.toml
-    sed -i $sedfix '0,/^enable=.*/s//enable=true/' chain33.toml
-    sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' chain33.toml
-    sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' chain33.toml
-    sed -i $sedfix 's/^useGithub=.*/useGithub=false/g' chain33.toml
+    sed -i $sedfix 's/^seeds=.*/seeds=["dplatform:13802","chain32:13802"]/g' dplatform.toml
+    #sed -i $sedfix 's/^enable=.*/enable=true/g' dplatform.toml
+    sed -i $sedfix '0,/^enable=.*/s//enable=true/' dplatform.toml
+    sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' dplatform.toml
+    sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' dplatform.toml
+    sed -i $sedfix 's/^useGithub=.*/useGithub=false/g' dplatform.toml
 
     # rpc
-    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:8801"/g' chain33.toml
-    sed -i $sedfix 's/^grpcBindAddr=.*/grpcBindAddr="0.0.0.0:8802"/g' chain33.toml
-    sed -i $sedfix 's/^whitelist=.*/whitelist=["localhost","127.0.0.1","0.0.0.0"]/g' chain33.toml
+    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:8801"/g' dplatform.toml
+    sed -i $sedfix 's/^grpcBindAddr=.*/grpcBindAddr="0.0.0.0:8802"/g' dplatform.toml
+    sed -i $sedfix 's/^whitelist=.*/whitelist=["localhost","127.0.0.1","0.0.0.0"]/g' dplatform.toml
 
     # wallet
-    sed -i $sedfix 's/^minerdisable=.*/minerdisable=false/g' chain33.toml
+    sed -i $sedfix 's/^minerdisable=.*/minerdisable=false/g' dplatform.toml
 
 }
 
@@ -214,11 +214,11 @@ function auto_test() {
     docker exec "${NODE3}" /root/autotest
 }
 
-function stop_chain33() {
+function stop_dplatform() {
 
     rv=$?
     echo "=========== #stop docker-compose ============="
-    docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml down && rm -rf ./chain33* ./*.toml ./autotest
+    docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml down && rm -rf ./dplatform* ./*.toml ./autotest
     echo "=========== #remove related images ============"
     docker rmi "${PROJECT_NAME}"_autotest || true
     exit ${rv}
@@ -239,7 +239,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 #trap exit
-trap "stop_chain33" INT TERM EXIT
+trap "stop_dplatform" INT TERM EXIT
 
 # run script
 main

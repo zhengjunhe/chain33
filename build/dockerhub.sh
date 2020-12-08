@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version=$(./chain33 -v)
+version=$(./dplatform -v)
 docker build . -f Dockerfile-node -t bityuan/node:"$version"
 
 docker tag bityuan/node:"$version" bityuan/node:latest

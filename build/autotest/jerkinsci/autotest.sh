@@ -21,7 +21,7 @@ if [[ ${PROJECT_NAME} == "" ]]; then
 fi
 
 NODE3="${PROJECT_NAME}_autotest_1"
-CLI="docker exec ${NODE3} /root/chain33-cli"
+CLI="docker exec ${NODE3} /root/dplatform-cli"
 TEMP_CI_DIR=ci-"${PROJECT_NAME}"
 
 sedfix=""
@@ -29,23 +29,23 @@ if [ "$(uname)" == "Darwin" ]; then
     sedfix=".bak"
 fi
 
-chain33Config="chain33.test.toml"
-chain33BlockTime=1
+dplatformConfig="dplatform.test.toml"
+dplatformBlockTime=1
 autoTestConfig="autotest.toml"
 autoTestCheckTimeout=10
 
-function config_chain33() {
+function config_dplatform() {
 
     # shellcheck disable=SC2015
-    echo "# config chain33 solo test"
+    echo "# config dplatform solo test"
     # update test environment
-    sed -i $sedfix 's/^Title.*/Title="local"/g' ${chain33Config}
-    # grep -q '^TestNet' ${chain33Config} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chain33Config} || sed -i '/^Title/a TestNet=true' ${chain33Config}
+    sed -i $sedfix 's/^Title.*/Title="local"/g' ${dplatformConfig}
+    # grep -q '^TestNet' ${dplatformConfig} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${dplatformConfig} || sed -i '/^Title/a TestNet=true' ${dplatformConfig}
 
-    if grep -q '^TestNet' ${chain33Config}; then
-        sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${chain33Config}
+    if grep -q '^TestNet' ${dplatformConfig}; then
+        sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${dplatformConfig}
     else
-        sed -i $sedfix '/^Title/a TestNet=true' ${chain33Config}
+        sed -i $sedfix '/^Title/a TestNet=true' ${dplatformConfig}
     fi
 }
 
@@ -55,7 +55,7 @@ function config_autotest() {
     sed -i $sedfix 's/^checkTimeout.*/checkTimeout='${autoTestCheckTimeout}'/' ${autoTestConfig}
 }
 
-function start_chain33() {
+function start_dplatform() {
 
     # create and run docker-compose container
     docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml up --build -d
@@ -99,7 +99,7 @@ function start_chain33() {
     echo "=========== #transfer to miner addr ============="
     hash=$(${CLI} send coins transfer -a 10000 -n test -t 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944)
     echo "${hash}"
-    sleep ${chain33BlockTime}
+    sleep ${dplatformBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -111,7 +111,7 @@ function start_chain33() {
     hash=$(${CLI} send coins transfer -a 10 -n test -t 1Q8hGLfoGe63efeWa8fJ4Pnukhkngt6poK -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944)
 
     echo "${hash}"
-    sleep ${chain33BlockTime}
+    sleep ${dplatformBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -125,7 +125,7 @@ function start_chain33() {
     hash=$(${CLI} wallet send -d "${signData}")
 
     echo "${hash}"
-    sleep ${chain33BlockTime}
+    sleep ${dplatformBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -142,7 +142,7 @@ function start_autotest() {
 
 }
 
-function stop_chain33() {
+function stop_dplatform() {
 
     rv=$?
     echo "=========== #stop docker-compose ============="
@@ -160,17 +160,17 @@ function main() {
         rm -rf ./"$TEMP_CI_DIR"
     fi
     mkdir "$TEMP_CI_DIR" && cd "$TEMP_CI_DIR"
-    mv ../autotest ../*.toml ./ && mv ../chain33* ./
+    mv ../autotest ../*.toml ./ && mv ../dplatform* ./
     cp ../compose-autotest.yml ../Dockerfile-autotest ./
 
-    config_chain33
+    config_dplatform
     config_autotest
-    start_chain33
+    start_dplatform
     start_autotest
 }
 
 #trap exit
-trap "stop_chain33" INT TERM EXIT
+trap "stop_dplatform" INT TERM EXIT
 
 # run script
 main

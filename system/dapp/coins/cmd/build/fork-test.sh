@@ -121,14 +121,14 @@ function sendcoinsTx() {
     amount=$5
 
     #组合形式交易
-    #hash=$(sudo docker exec -it $1 ./chain33-cli coins transfer -t $2 -a $5 -n $4 | tr '\r' ' ')
+    #hash=$(sudo docker exec -it $1 ./dplatform-cli coins transfer -t $2 -a $5 -n $4 | tr '\r' ' ')
     #echo $hash
-    #sign=$(sudo docker exec -it $1 ./chain33-cli wallet sign -a $3 -d $hash | tr '\r' ' ')
+    #sign=$(sudo docker exec -it $1 ./dplatform-cli wallet sign -a $3 -d $hash | tr '\r' ' ')
     #echo $sign
-    #sudo docker exec -it $1 ./chain33-cli wallet send -d $sign
+    #sudo docker exec -it $1 ./dplatform-cli wallet send -d $sign
 
     #单个命令形式交易
-    #sudo docker exec -it $1 ./chain33-cli send coins transfer -a $5 -n $4 -t $2 -k $From
+    #sudo docker exec -it $1 ./dplatform-cli send coins transfer -a $5 -n $4 -t $2 -k $From
     result=$($name send coins transfer -a "${amount}" -n "${note}" -t "${toAdd}" -k "${fromAdd}" | tr '\r' ' ')
     echo "hash: $result"
     coinsgStr=$result

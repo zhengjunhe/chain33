@@ -1,2 +1,2 @@
 #!/bin/bash
-./chain33 -f chain33.main.toml -datadir=main-88
+./dplatform -f dplatform.main.toml -datadir=main-88
