@@ -1,4 +1,4 @@
-module github.com/33cn/chain33
+module github.com/33cn/dplatform
 
 go 1.13
 
