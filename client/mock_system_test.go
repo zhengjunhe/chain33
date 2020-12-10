@@ -18,10 +18,10 @@ import (
 var (
 	configPath = flag.String("f", "../cmd/dplatform/dplatform.test.toml", "configfile")
 
-	jrpcaddr = "localhost:8801"
-	jrpcsite = "http://localhost:8801"
-	grpcaddr = "localhost:8802"
-	grpcsite = "localhost:8802"
+	jrpcaddr = "localhost:28803"
+	jrpcsite = "http://localhost:28803"
+	grpcaddr = "localhost:28804"
+	grpcsite = "localhost:28804"
 )
 
 func init() {

@@ -28,7 +28,7 @@ import (
 var (
 	configPath    = flag.String("f", "write.toml", "configfile")
 	receiveAddr   = "1MHkgR4uUg1ksssR5NFzU6zkzyCqxqjg2Z"
-	rpcAddr       = "http://localhost:8801"
+	rpcAddr       = "http://localhost:28803"
 	currentHeight int64
 	currentIndex  int64
 	heightFile    = "height.txt"

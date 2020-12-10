@@ -437,12 +437,12 @@ $ cd $GOPATH/src/github.com/33cn/plugin && make
 编译后可以运行节点，进行钱包相关配置，即可发送合约交易进行功能性测试，本例相关命令行
 ```bash
 # 通过curl方式调用rpc接口构建Add原始交易
-curl -kd '{"method":"Dplatform.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:8801
+curl -kd '{"method":"Dplatform.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:28803
 # 通过dplatform-cli构建Add原始交易
 ./dplatform-cli calculator add -a 1 -s 1
 
 # queryCount接口类似
-curl -kd '{"method":"calculator.QueryCalcCount", "params":[{"action":"Add"}]}' http://localhost:8801
+curl -kd '{"method":"calculator.QueryCalcCount", "params":[{"action":"Add"}]}' http://localhost:28803
 ./dplatform-cli calculator query_count -a Add
 ``` 
 

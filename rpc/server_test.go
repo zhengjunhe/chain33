@@ -206,7 +206,7 @@ func TestGrpc_Call(t *testing.T) {
 func TestRPC(t *testing.T) {
 	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
 	rpcCfg := cfg.GetModuleConfig().RPC
-	rpcCfg.JrpcBindAddr = "8801"
+	rpcCfg.JrpcBindAddr = "28803"
 	rpcCfg.GrpcBindAddr = "8802"
 	rpcCfg.Whitlist = []string{"127.0.0.1"}
 	rpcCfg.JrpcFuncBlacklist = []string{"CloseQueue"}

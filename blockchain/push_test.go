@@ -509,7 +509,7 @@ func Test_AddPush_PushNameShouldDiff(t *testing.T) {
 	subscribe.Contract = make(map[string]bool)
 	subscribe.Contract["coins"] = true
 	subscribe.Name = "push-test-" + fmt.Sprintf("%d", 9)
-	subscribe.URL = "http://localhost:8801"
+	subscribe.URL = "http://localhost:28803"
 	err := chain.push.addSubscriber(subscribe)
 	assert.Equal(t, err, types.ErrNotAllowModifyPush)
 

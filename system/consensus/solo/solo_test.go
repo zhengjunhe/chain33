@@ -105,8 +105,8 @@ func BenchmarkSendTx(b *testing.B) {
 	solocfg, err = types.ModifySubConfig(solocfg, "benchMode", true)
 	assert.Nil(b, err)
 	subcfg.Consensus["solo"] = solocfg
-	cfg.GetModuleConfig().RPC.JrpcBindAddr = "localhost:8801"
-	cfg.GetModuleConfig().RPC.GrpcBindAddr = "localhost:8802"
+	cfg.GetModuleConfig().RPC.JrpcBindAddr = "localhost:28803"
+	cfg.GetModuleConfig().RPC.GrpcBindAddr = "localhost:28804"
 	mock33 := testnode.NewWithRPC(cfg, nil)
 	log.SetLogLevel("error")
 	defer mock33.Close()
@@ -122,7 +122,7 @@ func BenchmarkSendTx(b *testing.B) {
 	})
 
 	b.Run("SendTx-GRPC", func(b *testing.B) {
-		gcli, _ := grpcclient.NewMainChainClient(cfg, "localhost:8802")
+		gcli, _ := grpcclient.NewMainChainClient(cfg, "localhost:28804")
 		b.RunParallel(func(pb *testing.PB) {
 			for pb.Next() {
 				tx := util.CreateNoneTxWithTxHeight(cfg, priv, 0)
@@ -143,7 +143,7 @@ func BenchmarkSendTx(b *testing.B) {
 				poststr := fmt.Sprintf(`{"jsonrpc":"2.0","id":2,"method":"Dplatform.SendTransaction","params":[{"data":"%v"}]}`,
 					common.ToHex(types.Encode(tx)))
 
-				resp, _ := http.Post("http://localhost:8801", "application/json", bytes.NewBufferString(poststr))
+				resp, _ := http.Post("http://localhost:28803", "application/json", bytes.NewBufferString(poststr))
 				ioutil.ReadAll(resp.Body)
 				resp.Body.Close()
 			}
@@ -159,7 +159,7 @@ func BenchmarkSoloNewBlock(b *testing.B) {
 	cfg := testnode.GetDefaultConfig()
 	cfg.GetModuleConfig().Exec.DisableAddrIndex = true
 	cfg.GetModuleConfig().Mempool.DisableExecCheck = true
-	cfg.GetModuleConfig().RPC.GrpcBindAddr = "localhost:8802"
+	cfg.GetModuleConfig().RPC.GrpcBindAddr = "localhost:28804"
 	subcfg := cfg.GetSubConfig()
 	solocfg, err := types.ModifySubConfig(subcfg.Consensus["solo"], "waitTxMs", 100)
 	assert.Nil(b, err)
@@ -175,7 +175,7 @@ func BenchmarkSoloNewBlock(b *testing.B) {
 		addr, _ := util.Genaddress()
 		go func(addr string) {
 			start <- struct{}{}
-			conn, err := grpc.Dial("localhost:8802", grpc.WithInsecure())
+			conn, err := grpc.Dial("localhost:28804", grpc.WithInsecure())
 			if err != nil {
 				panic(err.Error())
 			}

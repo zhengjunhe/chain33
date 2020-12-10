@@ -58,11 +58,11 @@ dbCache=4
 grpcLogFile="grpc33.log"
 
 [p2p.sub.dht]
-port=13803
+port=28805
 
 [rpc]
-jrpcBindAddr="localhost:8801"
-grpcBindAddr="localhost:8802"
+jrpcBindAddr="localhost:28803"
+grpcBindAddr="localhost:28804"
 whitelist=["127.0.0.1"]
 jrpcFuncWhitelist=["*"]
 grpcFuncWhitelist=["*"]

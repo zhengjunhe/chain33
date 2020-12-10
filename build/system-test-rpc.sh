@@ -104,7 +104,7 @@ dplatform_GetLastMemPool() {
 }
 
 dplatform_GetProperFee() {
-    http_req '{"method":"Dplatform.GetProperFee", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.properFee > 10000)' "$FUNCNAME"
+    http_req '{"method":"Dplatform.GetProperFee", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.properFee > 1000)' "$FUNCNAME"
 }
 
 dplatform_GetBlockOverview() {

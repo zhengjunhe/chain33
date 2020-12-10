@@ -123,7 +123,7 @@ targetTimespan = 288 #only for test
 targetTimePerBlock = 2
 
 [consensus.sub.para]
-ParaRemoteGrpcClient="localhost:8802"
+ParaRemoteGrpcClient="localhost:28804"
 #主链指定高度的区块开始同步
 startHeight=345850
 #打包时间间隔，单位秒

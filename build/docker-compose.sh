@@ -88,7 +88,7 @@ function base_init() {
     sed -i $sedfix 's/^useGithub=.*/useGithub=false/g' ${testtoml}
 
     # rpc
-    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:8801"/g' ${testtoml}
+    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:28803"/g' ${testtoml}
     sed -i $sedfix 's/^grpcBindAddr=.*/grpcBindAddr="0.0.0.0:8802"/g' ${testtoml}
     sed -i $sedfix 's/^whitelist=.*/whitelist=["localhost","127.0.0.1","0.0.0.0"]/g' ${testtoml}
 
@@ -379,7 +379,7 @@ function base_config() {
 
 function base_test() {
     if [ "$DAPP" == "" ]; then
-        system_test_rpc "https://${1}:8801"
+        system_test_rpc "https://${1}:28803"
     fi
     if [ "$DAPP" == "paracross" ]; then
         system_test_rpc "https://${1}:8901"
