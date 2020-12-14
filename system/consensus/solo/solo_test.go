@@ -17,25 +17,25 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatformos/common/log/log15"
 	"google.golang.org/grpc"
 
-	"github.com/33cn/dplatform/common"
-	log "github.com/33cn/dplatform/common/log"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/rpc/grpcclient"
+	"github.com/33cn/dplatformos/common"
+	log "github.com/33cn/dplatformos/common/log"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/rpc/grpcclient"
 	"github.com/decred/base58"
 	b58 "github.com/mr-tron/base58"
 
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/util/testnode"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/util/testnode"
 	"github.com/stretchr/testify/assert"
 
 	//加载系统内置store, 不要依赖plugin
-	_ "github.com/33cn/dplatform/system/dapp/init"
-	_ "github.com/33cn/dplatform/system/mempool/init"
-	_ "github.com/33cn/dplatform/system/store/init"
+	_ "github.com/33cn/dplatformos/system/dapp/init"
+	_ "github.com/33cn/dplatformos/system/mempool/init"
+	_ "github.com/33cn/dplatformos/system/store/init"
 )
 
 // 执行： go test -cover

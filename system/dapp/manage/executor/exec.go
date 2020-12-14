@@ -5,10 +5,10 @@
 package executor
 
 import (
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/system/dapp"
-	mty "github.com/33cn/dplatform/system/dapp/manage/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/system/dapp"
+	mty "github.com/33cn/dplatformos/system/dapp/manage/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 func (c *Manage) checkAddress(addr string) error {

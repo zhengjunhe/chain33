@@ -7,8 +7,8 @@ package bip44_test
 import (
 	"testing"
 
-	"github.com/33cn/dplatform/wallet/bipwallet"
-	. "github.com/33cn/dplatform/wallet/bipwallet/go-bip44"
+	"github.com/33cn/dplatformos/wallet/bipwallet"
+	. "github.com/33cn/dplatformos/wallet/bipwallet/go-bip44"
 )
 
 func TestBitLength(t *testing.T) {

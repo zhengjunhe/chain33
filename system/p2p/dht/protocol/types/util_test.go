@@ -11,11 +11,11 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/util/testnode"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/util/testnode"
 	"github.com/golang/snappy"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/libp2p/go-libp2p"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/crypto"

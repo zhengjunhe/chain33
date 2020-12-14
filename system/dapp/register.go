@@ -6,10 +6,10 @@ package dapp
 
 //store package store the world - state data
 import (
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common/address"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common/address"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/types"
 )
 
 var elog = log.New("module", "execs")

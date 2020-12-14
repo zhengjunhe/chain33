@@ -71,7 +71,7 @@ func TestMergeLevel2Error(t *testing.T) {
 }
 
 func TestMergeToml(t *testing.T) {
-	newcfg := MergeCfg(ReadFile("../cmd/dplatform/bityuan.toml"), bityuancfg)
+	newcfg := MergeCfg(ReadFile("../cmd/dplatformos/bityuan.toml"), bityuancfg)
 	cfg1, err := initCfgString(newcfg)
 	assert.Nil(t, err)
 	cfg2, err := initCfgString(readFile("testdata/bityuan.toml"))
@@ -194,7 +194,7 @@ superManager=[
     "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP", 
 ]
 
-#系统中所有的fork,默认用dplatform的测试网络的
+#系统中所有的fork,默认用dplatformos的测试网络的
 #但是我们可以替换
 [fork.system]
 ForkChainParamV1= 0

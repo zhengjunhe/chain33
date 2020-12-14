@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 //const

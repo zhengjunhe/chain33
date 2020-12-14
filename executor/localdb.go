@@ -1,10 +1,10 @@
 package executor
 
 import (
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 //LocalDB 本地数据库，类似localdb，不加入区块链的状态。

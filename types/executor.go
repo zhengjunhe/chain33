@@ -12,7 +12,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatformos/common/address"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -291,7 +291,7 @@ type ExecutorType interface {
 	// collect assets the tx deal with
 	GetAssets(tx *Transaction) ([]*Asset, error)
 
-	// about dplatformConfig
+	// about dplatformosConfig
 	GetConfig() *DplatformOSConfig
 	SetConfig(cfg *DplatformOSConfig)
 }

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package types 实现了dplatform基础结构体、接口、常量等的定义
+// Package types 实现了dplatformos基础结构体、接口、常量等的定义
 package types
 
 import (
@@ -14,15 +14,15 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/common/crypto"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/types/jsonpb"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/common/crypto"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/types/jsonpb"
 	"github.com/golang/protobuf/proto"
 
 	// 注册system的crypto 加密算法
-	_ "github.com/33cn/dplatform/system/crypto/init"
+	_ "github.com/33cn/dplatformos/system/crypto/init"
 )
 
 var tlog = log.New("module", "types")

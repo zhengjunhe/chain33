@@ -12,20 +12,20 @@ import (
 	"os/user"
 	"path/filepath"
 
-	"github.com/33cn/dplatform/blockchain"
-	"github.com/33cn/dplatform/client"
-	clog "github.com/33cn/dplatform/common/log"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/executor"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/store"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/blockchain"
+	"github.com/33cn/dplatformos/client"
+	clog "github.com/33cn/dplatformos/common/log"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/executor"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/store"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
 )
 
 var height = flag.Int64("height", 1, "exec block height")
-var datadir = flag.String("datadir", "", "data dir of dplatform, include logs and datas")
-var configPath = flag.String("f", "dplatform.toml", "configfile")
+var datadir = flag.String("datadir", "", "data dir of dplatformos, include logs and datas")
+var configPath = flag.String("f", "dplatformos.toml", "configfile")
 
 func resetDatadir(cfg *types.Config, datadir string) {
 	// Check in case of paths like "/something/~/something/"

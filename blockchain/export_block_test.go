@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	dbm "github.com/33cn/dplatform/common/db"
-	_ "github.com/33cn/dplatform/system"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util/testnode"
+	dbm "github.com/33cn/dplatformos/common/db"
+	_ "github.com/33cn/dplatformos/system"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util/testnode"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

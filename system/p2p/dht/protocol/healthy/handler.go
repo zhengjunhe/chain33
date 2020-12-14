@@ -4,10 +4,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/system/p2p/dht/protocol"
-	types2 "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/system/p2p/dht/protocol"
+	types2 "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 const (

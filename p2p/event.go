@@ -5,9 +5,9 @@
 package p2p
 
 import (
-	"github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 var (

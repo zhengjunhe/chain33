@@ -12,16 +12,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/common/crypto"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/store"
-	_ "github.com/33cn/dplatform/system"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/wallet/bipwallet"
-	wcom "github.com/33cn/dplatform/wallet/common"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/common/crypto"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/store"
+	_ "github.com/33cn/dplatformos/system"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/wallet/bipwallet"
+	wcom "github.com/33cn/dplatformos/wallet/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -32,7 +32,7 @@ func init() {
 }
 
 func initEnv() (*Wallet, queue.Module, queue.Queue, string) {
-	cfg := types.NewDplatformOSConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../cmd/dplatformos/dplatformos.test.toml"))
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
 	wallet := New(cfg)

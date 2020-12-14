@@ -14,7 +14,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/golang/protobuf/proto"
 )
 

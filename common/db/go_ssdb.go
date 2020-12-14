@@ -7,7 +7,7 @@ package db
 import (
 	"bytes"
 
-	log "github.com/33cn/dplatform/common/log/log15"
+	log "github.com/33cn/dplatformos/common/log/log15"
 	"github.com/syndtr/goleveldb/leveldb/util"
 
 	"fmt"
@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 var dlog = log.New("module", "db.ssdb")

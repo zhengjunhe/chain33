@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	cty "github.com/33cn/dplatform/system/dapp/coins/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	cty "github.com/33cn/dplatformos/system/dapp/coins/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 
 	// TODO: 暂时将插件中的类型引用起来，后续需要修改

@@ -6,8 +6,8 @@ package p2p
 import (
 	"testing"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -43,7 +43,7 @@ func TestRegisterLoad(t *testing.T) {
 
 func TestEvent(t *testing.T) {
 
-	cfg := types.NewDplatformOSConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../cmd/dplatformos/dplatformos.test.toml"))
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	go q.Start()

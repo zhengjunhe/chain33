@@ -5,9 +5,9 @@
 package blockchain
 
 import (
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
 )
 
 //执行区块将变成一个私有的函数

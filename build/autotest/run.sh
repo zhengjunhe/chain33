@@ -18,7 +18,7 @@ function copyAutoTestConfig() {
     #pre config auto test
     {
 
-        echo 'cliCmd="./dplatform-cli"'
+        echo 'cliCmd="./dplatformos-cli"'
         echo "checkTimeout=60"
     } >"${AutoTestConfigFile}"
 
@@ -56,9 +56,9 @@ function copyAutoTestConfig() {
 
 function copyDplatformOS() {
 
-    echo "# copy dplatform bin to path \"$1\", make sure build dplatform"
-    cp ../dplatform ../dplatform-cli ../dplatform.toml "$1"
-    cp "${CHAIN33_PATH}"/cmd/dplatform/dplatform.test.toml "$1"
+    echo "# copy dplatformos bin to path \"$1\", make sure build dplatformos"
+    cp ../dplatformos ../dplatformos-cli ../dplatformos.toml "$1"
+    cp "${CHAIN33_PATH}"/cmd/dplatformos/dplatformos.test.toml "$1"
 }
 
 function copyAll() {

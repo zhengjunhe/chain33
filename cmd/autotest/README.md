@@ -5,7 +5,7 @@
 内部代码支持用例扩展开发，继承并实现通用接口，即可自定义实现用例类型。
 
 ### 编译
-通过dplatform makefile
+通过dplatformos makefile
 ```
 $ make autotest
 ```
@@ -13,7 +13,7 @@ $ make autotest
 ### 运行
 
 #### **直接执行**
-已启动dplatform服务并需要自定义配置用例文件
+已启动dplatformos服务并需要自定义配置用例文件
 ```
 $ ./autotest -f autotest.toml -l autotest.log
 ```
@@ -22,11 +22,11 @@ $ ./autotest -f autotest.toml -l autotest.log
 不指定默认为autotest.toml，autotest.log
 
 
-#### **通过dplatform makefile**
-dplatform开发人员修改框架或dapp代码，验证测试
+#### **通过dplatformos makefile**
+dplatformos开发人员修改框架或dapp代码，验证测试
 ```
 
-//启动单节点solo版本dplatform，运行默认配置autotest，dapp用于指定需要跑的配置用例
+//启动单节点solo版本dplatformos，运行默认配置autotest，dapp用于指定需要跑的配置用例
 $ make autotest dapp=coins
 $ make autotest dapp="coins token"
 
@@ -40,8 +40,8 @@ $ make autotest dapp=all
 
 配置文件为toml格式，用于指定具体的测试用例文件
 ```
-# 指定内部调用dplatform-cli程序文件
-cliCmd = "./dplatform-cli"
+# 指定内部调用dplatformos-cli程序文件
+cliCmd = "./dplatformos-cli"
 
 # 进行用例check时，主要根据交易hash查询回执，多次查询失败总超时，单位秒
 checkTimeout = 60
@@ -116,7 +116,7 @@ type BaseCase struct {
 
 ### 扩展开发
 分为以下几个步骤
-> 注册dapp的AutoTest类型，以dplatform/system/dapp/coins为例
+> 注册dapp的AutoTest类型，以dplatformos/system/dapp/coins为例
 增加autotest目录，并新建coins.go文件
 ```go
 package autotest
@@ -124,7 +124,7 @@ package autotest
 //导入autotest开发依赖，主要是types包
 import (
 	"reflect"
-	. "github.com/33cn/dplatform/cmd/autotest/types"
+	. "github.com/33cn/dplatformos/cmd/autotest/types"
 )
 
 //声明coins的AutoTest结构，其成员皆为coins将实现的用例类型

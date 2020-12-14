@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 /*
-dplatform 是由复杂美科技有限公司开发的区块链链框架
+dplatformos 是由复杂美科技有限公司开发的区块链链框架
 
 1. 高度可定制
 
@@ -12,7 +12,7 @@ dplatform 是由复杂美科技有限公司开发的区块链链框架
 3. 创新的 合约 调用和组合方式
 */
 
-package dplatform
+package dplatformos
 
 //有些包国内需要翻墙才能下载，我们把部分参见的包含在这里
 import (

@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 )
 

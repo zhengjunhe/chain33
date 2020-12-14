@@ -11,9 +11,9 @@ import (
 
 	"time"
 
-	"github.com/33cn/dplatform/client/mocks"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client/mocks"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,7 +31,7 @@ func TestStart(t *testing.T) {
 	api.On("Close").Return()
 	health.api = api
 
-	cfg, _ := types.InitCfg("../cmd/dplatform/dplatform.test.toml")
+	cfg, _ := types.InitCfg("../cmd/dplatformos/dplatformos.test.toml")
 	health.Start(cfg.Health)
 	time.Sleep(time.Second * 6)
 

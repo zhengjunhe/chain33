@@ -15,13 +15,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/common/log"
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	coinstypes "github.com/33cn/dplatform/system/dapp/coins/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/common/log"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	coinstypes "github.com/33cn/dplatformos/system/dapp/coins/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/BurntSushi/toml"
 )
 
@@ -57,7 +57,7 @@ func initWrite() *Config {
 }
 
 func main() {
-	dplatformCfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
+	dplatformosCfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	cfg := initWrite()
 	receiveAddr = cfg.UserWriteConf.ReceiveAddr
 	currentHeight = cfg.UserWriteConf.CurrentHeight
@@ -70,7 +70,7 @@ func main() {
 		return
 	}
 	fmt.Println("starting scaning.............")
-	scanWrite(dplatformCfg)
+	scanWrite(dplatformosCfg)
 }
 
 func ioHeightAndIndex() error {

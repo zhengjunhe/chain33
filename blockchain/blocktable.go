@@ -3,10 +3,10 @@ package blockchain
 import (
 	"fmt"
 
-	dbm "github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/common/db/table"
-	"github.com/33cn/dplatform/common/merkle"
-	"github.com/33cn/dplatform/types"
+	dbm "github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/common/db/table"
+	"github.com/33cn/dplatformos/common/merkle"
+	"github.com/33cn/dplatformos/types"
 )
 
 var (

@@ -8,7 +8,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 
-	"github.com/33cn/dplatform/common/crypto/sha3"
+	"github.com/33cn/dplatformos/common/crypto/sha3"
 	"golang.org/x/crypto/ripemd160"
 )
 

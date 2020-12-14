@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"strconv"
 
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/types"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/types"
 )
 
 var mvccPrefix = []byte(".-mvcc-.")

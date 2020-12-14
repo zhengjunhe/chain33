@@ -10,11 +10,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/dplatform/cmd/tools/gencode"
-	"github.com/33cn/dplatform/cmd/tools/types"
-	util2 "github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/cmd/tools/gencode"
+	"github.com/33cn/dplatformos/cmd/tools/types"
+	util2 "github.com/33cn/dplatformos/util"
 
-	"github.com/33cn/dplatform/cmd/tools/util"
+	"github.com/33cn/dplatformos/cmd/tools/util"
 )
 
 // GenDappCodeTask 通过生成好的pb.go和预先设计的模板，生成反射程序源码

@@ -1,10 +1,10 @@
 [![API Reference](
 https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f676f6c616e672f6764646f3f7374617475732e737667
-)](https://godoc.org/github.com/33cn/dplatform)
-[![pipeline status](https://api.travis-ci.org/33cn/dplatform.svg?branch=master)](https://travis-ci.org/33cn/dplatform/)
-[![Go Report Card](https://goreportcard.com/badge/github.com/33cn/dplatform)](https://goreportcard.com/report/github.com/33cn/dplatform)
- [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/33cn/dplatform?svg=true&branch=master&passingText=Windows%20-%20OK&failingText=Windows%20-%20failed&pendingText=Windows%20-%20pending)](https://ci.appveyor.com/project/33cn/dplatform)
-[![codecov](https://codecov.io/gh/33cn/dplatform/branch/master/graph/badge.svg)](https://codecov.io/gh/33cn/dplatform) [![Join the chat at https://gitter.im/33cn/Lobby](https://badges.gitter.im/33cn/Lobby.svg)](https://gitter.im/33cn/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+)](https://godoc.org/github.com/33cn/dplatformos)
+[![pipeline status](https://api.travis-ci.org/33cn/dplatformos.svg?branch=master)](https://travis-ci.org/33cn/dplatformos/)
+[![Go Report Card](https://goreportcard.com/badge/github.com/33cn/dplatformos)](https://goreportcard.com/report/github.com/33cn/dplatformos)
+ [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/33cn/dplatformos?svg=true&branch=master&passingText=Windows%20-%20OK&failingText=Windows%20-%20failed&pendingText=Windows%20-%20pending)](https://ci.appveyor.com/project/33cn/dplatformos)
+[![codecov](https://codecov.io/gh/33cn/dplatformos/branch/master/graph/badge.svg)](https://codecov.io/gh/33cn/dplatformos) [![Join the chat at https://gitter.im/33cn/Lobby](https://badges.gitter.im/33cn/Lobby.svg)](https://gitter.im/33cn/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # DplatformOS 区块链开发框架(为了适合go module 的版本号标准 最新版本号改为: 1.65.0)
 
@@ -16,13 +16,13 @@ https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/6874
 
 典型案例: https://github.com/bityuan/bityuan
 
-dplatform背后故事: [dplatform诞生记](https://mp.weixin.qq.com/s/9g5ZFDKJi9uzR_NFxfeuAA)
+dplatformos背后故事: [dplatformos诞生记](https://mp.weixin.qq.com/s/9g5ZFDKJi9uzR_NFxfeuAA)
 
 视频教程: [视频教程](https://chain.33.cn/document/289)
 
 # 感谢
 
-[腾讯玄武安全实验室](https://github.com/33cn/dplatform/issues?utf8=%E2%9C%93&q=label%3A%E8%85%BE%E8%AE%AF%E7%8E%84%E6%AD%A6%E5%AE%9E%E9%AA%8C%E5%AE%A4)
+[腾讯玄武安全实验室](https://github.com/33cn/dplatformos/issues?utf8=%E2%9C%93&q=label%3A%E8%85%BE%E8%AE%AF%E7%8E%84%E6%AD%A6%E5%AE%9E%E9%AA%8C%E5%AE%A4)
 
 # bug 奖励
 
@@ -43,8 +43,8 @@ L3 20000
 编译:
 
 ```shell
-git clone https://github.com/33cn/dplatform.git $GOPATH/src/github.com/33cn/dplatform
-cd $GOPATH/src/github.com/33cn/dplatform
+git clone https://github.com/33cn/dplatformos.git $GOPATH/src/github.com/33cn/dplatformos
+cd $GOPATH/src/github.com/33cn/dplatformos
 //国内用户需要导入一下代理
 export GOPROXY=https://mirrors.aliyun.com/goproxy
 make
@@ -65,10 +65,10 @@ $ make test
 通过这个命令可以运行一个单节点到环境，可以用于开发测试
 
 ```shell
-$ dplatform -f dplatform.toml
+$ dplatformos -f dplatformos.toml
 ```
 
-## 使用dplatform 开发插件注意点
+## 使用dplatformos 开发插件注意点
 
 * 不可以使用 master 分支，要使用 发布分支
 
@@ -79,16 +79,16 @@ $ dplatform -f dplatform.toml
 ### 细节过程
 
 * 如果有什么想法，建立 issues, 和我们来讨论。
-* 首先点击 右上角的 fork 图标， 把dplatform fork 到自己的分支 比如我的是 vipwzw/dplatform
-* `git clone https://github.com/vipwzw/dplatform.git $GOPATH/src/github.com/33cn/dplatform`
+* 首先点击 右上角的 fork 图标， 把dplatformos fork 到自己的分支 比如我的是 vipwzw/dplatformos
+* `git clone https://github.com/vipwzw/dplatformos.git $GOPATH/src/github.com/33cn/dplatformos`
 
 ```
-注意：这里要 clone 到 $GOPATH/src/github.com/33cn/dplatform, 否则go 包路径会找不到
+注意：这里要 clone 到 $GOPATH/src/github.com/33cn/dplatformos, 否则go 包路径会找不到
 ```
 
-* 添加 `33cn/dplatform` 远端分支： `git remote add upstream https://github.com/33cn/dplatform.git`  我已经把这个加入了 Makefile 可以直接 运行 `make addupstream` 
+* 添加 `33cn/dplatformos` 远端分支： `git remote add upstream https://github.com/33cn/dplatformos.git`  我已经把这个加入了 Makefile 可以直接 运行 `make addupstream` 
 
-* 保持 `33cn/dplatform` 和 `vipwzw/dplatform` master 分支的同步，可以直接跑 `make sync` , 或者执行下面的命令
+* 保持 `33cn/dplatformos` 和 `vipwzw/dplatformos` master 分支的同步，可以直接跑 `make sync` , 或者执行下面的命令
 
 ```
 git fetch upstream
@@ -99,7 +99,7 @@ git merge upstream/master
 注意：不要去修改 master 分支，这样，master 分支永远和upstream/master 保持同步
 ```
 
-* 从最新的33cn/dplatform代码建立分支开始开发
+* 从最新的33cn/dplatformos代码建立分支开始开发
 
 ```
 git fetch upstream
@@ -108,7 +108,7 @@ git merge upstream/master
 git branch -b "fixbug_ci"
 ```
 
-* 开发完成后, push 到 `vipwzw/dplatform`
+* 开发完成后, push 到 `vipwzw/dplatformos`
 
 ```
 git fetch upstream
@@ -125,11 +125,11 @@ git push origin fixbug_ci
 
 #### 准备阶段
 
-* 首先点击 右上角的 fork 图标， 把dplatform fork 到自己的分支 比如我的是 vipwzw/dplatform
-* `git clone https://github.com/vipwzw/dplatform.git $GOPATH/src/github.com/33cn/dplatform`
+* 首先点击 右上角的 fork 图标， 把dplatformos fork 到自己的分支 比如我的是 vipwzw/dplatformos
+* `git clone https://github.com/vipwzw/dplatformos.git $GOPATH/src/github.com/33cn/dplatformos`
 
 ```
-注意：这里要 clone 到 $GOPATH/src/github.com/33cn/dplatform, 否则go 包路径会找不到
+注意：这里要 clone 到 $GOPATH/src/github.com/33cn/dplatformos, 否则go 包路径会找不到
 ```
 
 ```
@@ -152,12 +152,12 @@ make push b=mydevbranchname m="这个提交的信息"
 
 ## 修改别人的pull requset
 
-比如我要修改 name=libangzhu branch dplatform-p2p-listenPort 的pr
+比如我要修改 name=libangzhu branch dplatformos-p2p-listenPort 的pr
 
 ##### step1: 拉取要修改的分支
 
 ```
-make pull name=libangzhu b=dplatform-p2p-listenPort
+make pull name=libangzhu b=dplatformos-p2p-listenPort
 ```
 
 然后修改代码，修改完成后,并且在本地commit
@@ -165,7 +165,7 @@ make pull name=libangzhu b=dplatform-p2p-listenPort
 ###### step2: push已经修改好的内容
 
 ```
-make pullpush name=libangzhu b=dplatform-p2p-listenPort
+make pullpush name=libangzhu b=dplatformos-p2p-listenPort
 ```
 
 ## License

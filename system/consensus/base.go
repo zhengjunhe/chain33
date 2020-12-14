@@ -11,13 +11,13 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/common/merkle"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/common/merkle"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
 )
 
 var tlog = log.New("module", "consensus")

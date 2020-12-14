@@ -8,13 +8,13 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/util"
 
-	"github.com/33cn/dplatform/common"
-	dbm "github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/queue"
-	qmocks "github.com/33cn/dplatform/queue/mocks"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	dbm "github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/queue"
+	qmocks "github.com/33cn/dplatformos/queue/mocks"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

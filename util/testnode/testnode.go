@@ -14,29 +14,29 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatformos/p2p"
 
-	"github.com/33cn/dplatform/account"
-	"github.com/33cn/dplatform/blockchain"
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/common/crypto"
-	"github.com/33cn/dplatform/common/limits"
-	"github.com/33cn/dplatform/common/log"
-	"github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/consensus"
-	"github.com/33cn/dplatform/executor"
-	"github.com/33cn/dplatform/mempool"
-	"github.com/33cn/dplatform/pluginmgr"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/rpc"
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	"github.com/33cn/dplatform/store"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/wallet"
+	"github.com/33cn/dplatformos/account"
+	"github.com/33cn/dplatformos/blockchain"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/common/crypto"
+	"github.com/33cn/dplatformos/common/limits"
+	"github.com/33cn/dplatformos/common/log"
+	"github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/consensus"
+	"github.com/33cn/dplatformos/executor"
+	"github.com/33cn/dplatformos/mempool"
+	"github.com/33cn/dplatformos/pluginmgr"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/rpc"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	"github.com/33cn/dplatformos/store"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/wallet"
 )
 
 func init() {
@@ -47,7 +47,7 @@ func init() {
 	log.SetLogLevel("info")
 }
 
-//保证只有一个dplatform 会运行
+//保证只有一个dplatformos 会运行
 var lognode = log15.New("module", "lognode")
 
 //DplatformOSMock :

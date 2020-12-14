@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatformos/common/log/log15"
 )
 
 //FloatDiff const
@@ -39,7 +39,7 @@ func AutoTestLogFormat() log15.Format {
 
 }
 
-//RunDplatformOSCli invoke dplatform client
+//RunDplatformOSCli invoke dplatformos client
 func RunDplatformOSCli(para []string) (string, error) {
 
 	rawOut, err := exec.Command(CliCmd, para[0:]...).CombinedOutput()

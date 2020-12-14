@@ -21,7 +21,7 @@ if [[ ${PROJECT_NAME} == "" ]]; then
 fi
 
 NODE3="${PROJECT_NAME}_autotest_1"
-CLI="docker exec ${NODE3} /root/dplatform-cli"
+CLI="docker exec ${NODE3} /root/dplatformos-cli"
 TEMP_CI_DIR=ci-"${PROJECT_NAME}"
 
 sedfix=""
@@ -29,23 +29,23 @@ if [ "$(uname)" == "Darwin" ]; then
     sedfix=".bak"
 fi
 
-dplatformConfig="dplatform.test.toml"
-dplatformBlockTime=1
+dplatformosConfig="dplatformos.test.toml"
+dplatformosBlockTime=1
 autoTestConfig="autotest.toml"
 autoTestCheckTimeout=10
 
-function config_dplatform() {
+function config_dplatformos() {
 
     # shellcheck disable=SC2015
-    echo "# config dplatform solo test"
+    echo "# config dplatformos solo test"
     # update test environment
-    sed -i $sedfix 's/^Title.*/Title="local"/g' ${dplatformConfig}
-    # grep -q '^TestNet' ${dplatformConfig} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${dplatformConfig} || sed -i '/^Title/a TestNet=true' ${dplatformConfig}
+    sed -i $sedfix 's/^Title.*/Title="local"/g' ${dplatformosConfig}
+    # grep -q '^TestNet' ${dplatformosConfig} && sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${dplatformosConfig} || sed -i '/^Title/a TestNet=true' ${dplatformosConfig}
 
-    if grep -q '^TestNet' ${dplatformConfig}; then
-        sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${dplatformConfig}
+    if grep -q '^TestNet' ${dplatformosConfig}; then
+        sed -i $sedfix 's/^TestNet.*/TestNet=true/' ${dplatformosConfig}
     else
-        sed -i $sedfix '/^Title/a TestNet=true' ${dplatformConfig}
+        sed -i $sedfix '/^Title/a TestNet=true' ${dplatformosConfig}
     fi
 }
 
@@ -55,7 +55,7 @@ function config_autotest() {
     sed -i $sedfix 's/^checkTimeout.*/checkTimeout='${autoTestCheckTimeout}'/' ${autoTestConfig}
 }
 
-function start_dplatform() {
+function start_dplatformos() {
 
     # create and run docker-compose container
     docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml up --build -d
@@ -99,7 +99,7 @@ function start_dplatform() {
     echo "=========== #transfer to miner addr ============="
     hash=$(${CLI} send coins transfer -a 10000 -n test -t 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944)
     echo "${hash}"
-    sleep ${dplatformBlockTime}
+    sleep ${dplatformosBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -111,7 +111,7 @@ function start_dplatform() {
     hash=$(${CLI} send coins transfer -a 10 -n test -t 1Q8hGLfoGe63efeWa8fJ4Pnukhkngt6poK -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944)
 
     echo "${hash}"
-    sleep ${dplatformBlockTime}
+    sleep ${dplatformosBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -125,7 +125,7 @@ function start_dplatform() {
     hash=$(${CLI} wallet send -d "${signData}")
 
     echo "${hash}"
-    sleep ${dplatformBlockTime}
+    sleep ${dplatformosBlockTime}
     result=$(${CLI} tx query -s "${hash}" | jq '.receipt.tyName')
     if [[ ${result} != '"ExecOk"' ]]; then
         echo "Failed"
@@ -142,7 +142,7 @@ function start_autotest() {
 
 }
 
-function stop_dplatform() {
+function stop_dplatformos() {
 
     rv=$?
     echo "=========== #stop docker-compose ============="
@@ -160,17 +160,17 @@ function main() {
         rm -rf ./"$TEMP_CI_DIR"
     fi
     mkdir "$TEMP_CI_DIR" && cd "$TEMP_CI_DIR"
-    mv ../autotest ../*.toml ./ && mv ../dplatform* ./
+    mv ../autotest ../*.toml ./ && mv ../dplatformos* ./
     cp ../compose-autotest.yml ../Dockerfile-autotest ./
 
-    config_dplatform
+    config_dplatformos
     config_autotest
-    start_dplatform
+    start_dplatformos
     start_autotest
 }
 
 #trap exit
-trap "stop_dplatform" INT TERM EXIT
+trap "stop_dplatformos" INT TERM EXIT
 
 # run script
 main

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatformos/common"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -13,8 +13,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/types/jsonpb"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/types/jsonpb"
 	proto "github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 )

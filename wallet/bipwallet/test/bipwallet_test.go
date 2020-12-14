@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 
-	"github.com/33cn/dplatform/wallet/bipwallet"
+	"github.com/33cn/dplatformos/wallet/bipwallet"
 )
 
 func TestBipwallet(t *testing.T) {

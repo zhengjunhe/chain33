@@ -7,10 +7,10 @@ package broadcast
 import (
 	"testing"
 
-	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/util/testnode"
+	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/util/testnode"
 	"github.com/stretchr/testify/require"
 )
 

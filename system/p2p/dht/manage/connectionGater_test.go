@@ -9,7 +9,7 @@ import (
 
 	core "github.com/libp2p/go-libp2p-core"
 
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
 	"github.com/libp2p/go-libp2p"
 	crypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/host"

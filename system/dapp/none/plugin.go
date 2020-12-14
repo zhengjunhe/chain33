@@ -6,8 +6,8 @@
 package none
 
 import (
-	"github.com/33cn/dplatform/pluginmgr"
-	"github.com/33cn/dplatform/system/dapp/none/executor"
+	"github.com/33cn/dplatformos/pluginmgr"
+	"github.com/33cn/dplatformos/system/dapp/none/executor"
 )
 
 func init() {

@@ -5,8 +5,8 @@
 package types
 
 import (
-	"github.com/33cn/dplatform/cmd/tools/gencode/base"
-	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatformos/cmd/tools/gencode/base"
+	"github.com/33cn/dplatformos/cmd/tools/types"
 )
 
 func init() {
@@ -46,8 +46,8 @@ var (
 	typesContent = `package types
 
 import (
-log "github.com/33cn/dplatform/common/log/log15"
-"github.com/33cn/dplatform/types"
+log "github.com/33cn/dplatformos/common/log/log15"
+"github.com/33cn/dplatformos/types"
 "reflect"
 )
 

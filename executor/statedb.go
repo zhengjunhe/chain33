@@ -7,9 +7,9 @@ package executor
 import (
 	"encoding/hex"
 
-	"github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 // StateDB state db for store mavl

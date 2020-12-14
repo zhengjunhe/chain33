@@ -3,9 +3,9 @@ package metrics
 import (
 	"time"
 
-	dplatformlog "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/metrics/influxdb"
-	"github.com/33cn/dplatform/types"
+	dplatformoslog "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/metrics/influxdb"
+	"github.com/33cn/dplatformos/types"
 	go_metrics "github.com/rcrowley/go-metrics"
 )
 
@@ -20,7 +20,7 @@ type influxDBPara struct {
 }
 
 var (
-	log = dplatformlog.New("module", "dplatform metrics")
+	log = dplatformoslog.New("module", "dplatformos metrics")
 )
 
 //StartMetrics 根据配置文件相关参数启动m

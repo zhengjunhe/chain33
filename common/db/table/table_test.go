@@ -7,9 +7,9 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 )

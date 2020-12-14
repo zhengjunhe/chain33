@@ -5,9 +5,9 @@
 package executor
 
 import (
-	dbm "github.com/33cn/dplatform/common/db"
-	pty "github.com/33cn/dplatform/system/dapp/manage/types"
-	"github.com/33cn/dplatform/types"
+	dbm "github.com/33cn/dplatformos/common/db"
+	pty "github.com/33cn/dplatformos/system/dapp/manage/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 // Action attribute

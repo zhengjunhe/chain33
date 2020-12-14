@@ -7,9 +7,9 @@ package wallet
 import (
 	"encoding/json"
 
-	"github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/types"
-	wcom "github.com/33cn/dplatform/wallet/common"
+	"github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/types"
+	wcom "github.com/33cn/dplatformos/wallet/common"
 )
 
 var (

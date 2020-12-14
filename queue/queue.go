@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package queue dplatform底层消息队列模块
+// Package queue dplatformos底层消息队列模块
 package queue
 
 import (
@@ -15,9 +15,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 
-	log "github.com/33cn/dplatform/common/log/log15"
+	log "github.com/33cn/dplatformos/common/log/log15"
 )
 
 //消息队列：
@@ -96,7 +96,7 @@ func New(name string) Queue {
 		for {
 			select {
 			case <-q.done:
-				qlog.Info("closing dplatform callback")
+				qlog.Info("closing dplatformos callback")
 				return
 			case msg := <-q.callback:
 				if msg.callback != nil {
@@ -136,11 +136,11 @@ func (q *queue) Start() {
 	// Block until a signal is received.
 	select {
 	case <-q.done:
-		qlog.Info("closing dplatform done")
+		qlog.Info("closing dplatformos done")
 		//atomic.StoreInt32(&q.isClose, 1)
 		break
 	case <-q.interrupt:
-		qlog.Info("closing dplatform")
+		qlog.Info("closing dplatformos")
 		//atomic.StoreInt32(&q.isClose, 1)
 		break
 	case s := <-c:

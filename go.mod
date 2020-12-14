@@ -1,4 +1,4 @@
-module github.com/33cn/dplatform
+module github.com/33cn/dplatformos
 
 go 1.13
 

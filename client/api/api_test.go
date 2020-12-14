@@ -7,12 +7,12 @@ import (
 
 	"google.golang.org/grpc/codes"
 
-	"github.com/33cn/dplatform/client/mocks"
-	"github.com/33cn/dplatform/queue"
-	qmocks "github.com/33cn/dplatform/queue/mocks"
-	"github.com/33cn/dplatform/rpc"
-	"github.com/33cn/dplatform/rpc/grpcclient"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client/mocks"
+	"github.com/33cn/dplatformos/queue"
+	qmocks "github.com/33cn/dplatformos/queue/mocks"
+	"github.com/33cn/dplatformos/rpc"
+	"github.com/33cn/dplatformos/rpc/grpcclient"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"google.golang.org/grpc/status"

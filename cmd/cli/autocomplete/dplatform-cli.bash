@@ -11,7 +11,7 @@ function _debug() {
     set +x
 }
 
-function _dplatform() {
+function _dplatformos() {
 
     set +x
     # 这是套路
@@ -74,6 +74,6 @@ function _dplatform() {
 
 }
 
-# 用 _subcmd 补全 dplatform-cli
+# 用 _subcmd 补全 dplatformos-cli
 # _subcmd 通过当前光标所在的输入参数过滤可选的子命令
-complete -F _dplatform dplatform-cli guodun
+complete -F _dplatformos dplatformos-cli guodun

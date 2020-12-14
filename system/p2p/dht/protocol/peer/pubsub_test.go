@@ -7,12 +7,12 @@ import (
 
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
 
-	l "github.com/33cn/dplatform/common/log"
-	"github.com/33cn/dplatform/queue"
+	l "github.com/33cn/dplatformos/common/log"
+	"github.com/33cn/dplatformos/queue"
 
-	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 
 	"testing"
 

@@ -8,9 +8,9 @@ package consensus
 import (
 	"reflect"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/system/consensus"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/system/consensus"
+	"github.com/33cn/dplatformos/types"
 )
 
 // New new consensus queue module

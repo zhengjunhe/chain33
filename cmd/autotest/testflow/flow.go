@@ -12,8 +12,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/dplatform/cmd/autotest/types"
-	"github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatformos/cmd/autotest/types"
+	"github.com/33cn/dplatformos/common/log/log15"
 )
 
 //TestOperator 测试操作符

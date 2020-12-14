@@ -4,7 +4,7 @@
 
 package executor
 
-import "github.com/33cn/dplatform/types"
+import "github.com/33cn/dplatformos/types"
 
 func init() {
 	RegisterPlugin("fee", &feePlugin{})

@@ -9,9 +9,9 @@ import (
 
 	"strings"
 
-	"github.com/33cn/dplatform/common/address"
-	_ "github.com/33cn/dplatform/system"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/address"
+	_ "github.com/33cn/dplatformos/system"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 )
 

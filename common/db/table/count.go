@@ -7,8 +7,8 @@ package table
 import (
 	"math"
 
-	"github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/types"
 )
 
 //Count 计数器

@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/33cn/dplatform/common/version"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/version"
+	"github.com/33cn/dplatformos/types"
 )
 
 //UpgradeChain 升级localdb

@@ -12,7 +12,7 @@ import (
 
 	"github.com/libp2p/go-libp2p-core/helpers"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 	core "github.com/libp2p/go-libp2p-core"
 	protobufCodec "github.com/multiformats/go-multicodec/protobuf"
 )

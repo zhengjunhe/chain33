@@ -7,7 +7,7 @@ package executor
 import (
 	"fmt"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 // Query_GetConfigItem get config item

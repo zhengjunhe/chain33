@@ -10,12 +10,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/crypto"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/crypto"
 
 	"strings"
 
-	_ "github.com/33cn/dplatform/system/crypto/init"
+	_ "github.com/33cn/dplatformos/system/crypto/init"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -54,7 +54,7 @@ func TestCreateGroupTx(t *testing.T) {
 
 func TestCreateParaGroupTx(t *testing.T) {
 	str := GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatformos\"", 1)
 	cfg := NewDplatformOSConfig(new)
 
 	testHeight := int64(1687250 + 1)

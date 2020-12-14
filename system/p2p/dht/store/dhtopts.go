@@ -1,8 +1,8 @@
 package store
 
 import (
-	dbm "github.com/33cn/dplatform/common/db"
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	dbm "github.com/33cn/dplatformos/common/db"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
 	opts "github.com/libp2p/go-libp2p-kad-dht/opts"
 )
 

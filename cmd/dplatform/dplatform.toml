@@ -1,4 +1,4 @@
-Title="dplatform"
+Title="dplatformos"
 TestNet=true
 FixTime=false
 # 配置主币的名称: 比特元链dpom, 部分未配置的平行链需要配置为 dpom， 新的平行链配置 para或其他， 不配置panic
@@ -10,7 +10,7 @@ TxHeight=true
 loglevel = "debug"
 logConsoleLevel = "info"
 # 日志文件名，可带目录，所有生成的日志文件都放到此目录下
-logFile = "logs/dplatform.log"
+logFile = "logs/dplatformos.log"
 # 单个日志文件的最大值（单位：兆）
 maxFileSize = 300
 # 最多保存的历史日志文件个数
@@ -325,7 +325,7 @@ dataEmitMode="influxdb"
 #以纳秒为单位的发送间隔
 duration=1000000000
 url="http://influxdb:8086"
-database="dplatformmetrics"
+database="dplatformosmetrics"
 username=""
 password=""
 namespace=""

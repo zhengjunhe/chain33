@@ -4,10 +4,10 @@ package protocol
 import (
 	"context"
 
-	"github.com/33cn/dplatform/p2p"
-	"github.com/33cn/dplatform/queue"
-	types2 "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/p2p"
+	"github.com/33cn/dplatformos/queue"
+	types2 "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 	ds "github.com/ipfs/go-datastore"
 	core "github.com/libp2p/go-libp2p-core"
 	discovery "github.com/libp2p/go-libp2p-discovery"
@@ -17,16 +17,16 @@ import (
 // all protocols
 const (
 	//p2pstore protocols
-	FetchChunk        = "/dplatform/fetch-chunk/" + types2.Version
-	StoreChunk        = "/dplatform/store-chunk/" + types2.Version
-	GetHeader         = "/dplatform/headers/" + types2.Version
-	GetChunkRecord    = "/dplatform/chunk-record/" + types2.Version
-	BroadcastFullNode = "/dplatform/full-node/" + types2.Version
+	FetchChunk        = "/dplatformos/fetch-chunk/" + types2.Version
+	StoreChunk        = "/dplatformos/store-chunk/" + types2.Version
+	GetHeader         = "/dplatformos/headers/" + types2.Version
+	GetChunkRecord    = "/dplatformos/chunk-record/" + types2.Version
+	BroadcastFullNode = "/dplatformos/full-node/" + types2.Version
 
 	//sync protocols
-	IsSync        = "/dplatform/is-sync/" + types2.Version
-	IsHealthy     = "/dplatform/is-healthy/" + types2.Version
-	GetLastHeader = "/dplatform/last-header/" + types2.Version
+	IsSync        = "/dplatformos/is-sync/" + types2.Version
+	IsHealthy     = "/dplatformos/is-healthy/" + types2.Version
+	GetLastHeader = "/dplatformos/last-header/" + types2.Version
 )
 
 // P2PEnv p2p全局公共变量

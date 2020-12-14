@@ -5,8 +5,8 @@
 package proto
 
 import (
-	"github.com/33cn/dplatform/cmd/tools/gencode/base"
-	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatformos/cmd/tools/gencode/base"
+	"github.com/33cn/dplatformos/cmd/tools/types"
 )
 
 func init() {
@@ -53,9 +53,9 @@ func (protoFile) GetFileReplaceTags() []string {
 var (
 	protoShellName    = "create_protobuf.sh"
 	protoShellContent = `#!/bin/bash
-# proto生成命令，将pb.go文件生成到types/目录下, dplatform_path支持引用dplatform框架的proto文件
-dplatform_path=$(go list -f '{{.Dir}}' "github.com/33cn/dplatform")
-protoc --go_out=plugins=grpc:../types ./*.proto --proto_path=. --proto_path="${dplatform_path}/types/proto/"
+# proto生成命令，将pb.go文件生成到types/目录下, dplatformos_path支持引用dplatformos框架的proto文件
+dplatformos_path=$(go list -f '{{.Dir}}' "github.com/33cn/dplatformos")
+protoc --go_out=plugins=grpc:../types ./*.proto --proto_path=. --proto_path="${dplatformos_path}/types/proto/"
 `
 
 	makeName    = "Makefile"

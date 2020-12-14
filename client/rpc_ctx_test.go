@@ -8,8 +8,8 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	"github.com/33cn/dplatformos/types"
 
 	"fmt"
 

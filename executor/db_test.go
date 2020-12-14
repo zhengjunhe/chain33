@@ -9,10 +9,10 @@ import (
 
 	"strings"
 
-	dbm "github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/store"
-	"github.com/33cn/dplatform/types"
+	dbm "github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/store"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -48,7 +48,7 @@ func testDBGet(t *testing.T, db dbm.KV) {
 
 func TestStateDBTxGetOld(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatformos\"", 1)
 	cfg := types.NewDplatformOSConfig(new)
 
 	q := queue.New("channel")

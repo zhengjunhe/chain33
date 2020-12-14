@@ -9,8 +9,8 @@ import (
 	"bytes"
 	"runtime"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/types"
 )
 
 /*     WARNING! If you're reading this because you're learning about crypto

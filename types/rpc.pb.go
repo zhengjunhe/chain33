@@ -120,7 +120,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DplatformOSClient interface {
-	// dplatform 对外提供服务的接口
+	// dplatformos 对外提供服务的接口
 	//区块链接口
 	GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error)
 	//获取最新的区块头
@@ -215,7 +215,7 @@ type DplatformOSClient interface {
 	GetBlockByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*BlockDetails, error)
 	//通过block seq 获取对应的blocks hash 信息
 	GetBlockBySeq(ctx context.Context, in *Int64, opts ...grpc.CallOption) (*BlockSeq, error)
-	//关闭dplatform
+	//关闭dplatformos
 	CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error)
 	//获取地址所以合约下的余额
 	GetAllExecBalance(ctx context.Context, in *ReqAllExecBalance, opts ...grpc.CallOption) (*AllExecBalance, error)
@@ -237,548 +237,548 @@ type DplatformOSClient interface {
 	GetHeaders(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Headers, error)
 }
 
-type dplatformClient struct {
+type dplatformosClient struct {
 	cc grpc.ClientConnInterface
 }
 
 func NewDplatformOSClient(cc grpc.ClientConnInterface) DplatformOSClient {
-	return &dplatformClient{cc}
+	return &dplatformosClient{cc}
 }
 
-func (c *dplatformClient) GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) GetBlocks(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlocks", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetBlocks", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetLastHeader(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Header, error) {
+func (c *dplatformosClient) GetLastHeader(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Header, error) {
 	out := new(Header)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetLastHeader", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetLastHeader", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) CreateRawTransaction(ctx context.Context, in *CreateTx, opts ...grpc.CallOption) (*UnsignTx, error) {
+func (c *dplatformosClient) CreateRawTransaction(ctx context.Context, in *CreateTx, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.dplatform/CreateRawTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/CreateRawTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) CreateRawTxGroup(ctx context.Context, in *CreateTransactionGroup, opts ...grpc.CallOption) (*UnsignTx, error) {
+func (c *dplatformosClient) CreateRawTxGroup(ctx context.Context, in *CreateTransactionGroup, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.dplatform/CreateRawTxGroup", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/CreateRawTxGroup", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) QueryTransaction(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*TransactionDetail, error) {
+func (c *dplatformosClient) QueryTransaction(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*TransactionDetail, error) {
 	out := new(TransactionDetail)
-	err := c.cc.Invoke(ctx, "/types.dplatform/QueryTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/QueryTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) SendTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) SendTransaction(ctx context.Context, in *Transaction, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/SendTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/SendTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetTransactionByAddr(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*ReplyTxInfos, error) {
+func (c *dplatformosClient) GetTransactionByAddr(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*ReplyTxInfos, error) {
 	out := new(ReplyTxInfos)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetTransactionByAddr", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetTransactionByAddr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetTransactionByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*TransactionDetails, error) {
+func (c *dplatformosClient) GetTransactionByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*TransactionDetails, error) {
 	out := new(TransactionDetails)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetTransactionByHashes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetTransactionByHashes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetMemPool(ctx context.Context, in *ReqGetMempool, opts ...grpc.CallOption) (*ReplyTxList, error) {
+func (c *dplatformosClient) GetMemPool(ctx context.Context, in *ReqGetMempool, opts ...grpc.CallOption) (*ReplyTxList, error) {
 	out := new(ReplyTxList)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetMemPool", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetMemPool", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetAccounts(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletAccounts, error) {
+func (c *dplatformosClient) GetAccounts(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletAccounts, error) {
 	out := new(WalletAccounts)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetAccounts", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetAccounts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetAccount(ctx context.Context, in *ReqGetAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformosClient) GetAccount(ctx context.Context, in *ReqGetAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) NewAccount(ctx context.Context, in *ReqNewAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformosClient) NewAccount(ctx context.Context, in *ReqNewAccount, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.dplatform/NewAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/NewAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) WalletTransactionList(ctx context.Context, in *ReqWalletTransactionList, opts ...grpc.CallOption) (*WalletTxDetails, error) {
+func (c *dplatformosClient) WalletTransactionList(ctx context.Context, in *ReqWalletTransactionList, opts ...grpc.CallOption) (*WalletTxDetails, error) {
 	out := new(WalletTxDetails)
-	err := c.cc.Invoke(ctx, "/types.dplatform/WalletTransactionList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/WalletTransactionList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) ImportPrivkey(ctx context.Context, in *ReqWalletImportPrivkey, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformosClient) ImportPrivkey(ctx context.Context, in *ReqWalletImportPrivkey, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.dplatform/ImportPrivkey", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/ImportPrivkey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) SendToAddress(ctx context.Context, in *ReqWalletSendToAddress, opts ...grpc.CallOption) (*ReplyHash, error) {
+func (c *dplatformosClient) SendToAddress(ctx context.Context, in *ReqWalletSendToAddress, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.dplatform/SendToAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/SendToAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) SetTxFee(ctx context.Context, in *ReqWalletSetFee, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) SetTxFee(ctx context.Context, in *ReqWalletSetFee, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/SetTxFee", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/SetTxFee", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) SetLabl(ctx context.Context, in *ReqWalletSetLabel, opts ...grpc.CallOption) (*WalletAccount, error) {
+func (c *dplatformosClient) SetLabl(ctx context.Context, in *ReqWalletSetLabel, opts ...grpc.CallOption) (*WalletAccount, error) {
 	out := new(WalletAccount)
-	err := c.cc.Invoke(ctx, "/types.dplatform/SetLabl", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/SetLabl", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) MergeBalance(ctx context.Context, in *ReqWalletMergeBalance, opts ...grpc.CallOption) (*ReplyHashes, error) {
+func (c *dplatformosClient) MergeBalance(ctx context.Context, in *ReqWalletMergeBalance, opts ...grpc.CallOption) (*ReplyHashes, error) {
 	out := new(ReplyHashes)
-	err := c.cc.Invoke(ctx, "/types.dplatform/MergeBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/MergeBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) SetPasswd(ctx context.Context, in *ReqWalletSetPasswd, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) SetPasswd(ctx context.Context, in *ReqWalletSetPasswd, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/SetPasswd", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/SetPasswd", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) Lock(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) Lock(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/Lock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/Lock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) UnLock(ctx context.Context, in *WalletUnLock, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) UnLock(ctx context.Context, in *WalletUnLock, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/UnLock", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/UnLock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetLastMemPool(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ReplyTxList, error) {
+func (c *dplatformosClient) GetLastMemPool(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*ReplyTxList, error) {
 	out := new(ReplyTxList)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetLastMemPool", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetLastMemPool", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetProperFee(ctx context.Context, in *ReqProperFee, opts ...grpc.CallOption) (*ReplyProperFee, error) {
+func (c *dplatformosClient) GetProperFee(ctx context.Context, in *ReqProperFee, opts ...grpc.CallOption) (*ReplyProperFee, error) {
 	out := new(ReplyProperFee)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetProperFee", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetProperFee", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetWalletStatus(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletStatus, error) {
+func (c *dplatformosClient) GetWalletStatus(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*WalletStatus, error) {
 	out := new(WalletStatus)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetWalletStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetWalletStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetBlockOverview(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*BlockOverview, error) {
+func (c *dplatformosClient) GetBlockOverview(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*BlockOverview, error) {
 	out := new(BlockOverview)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockOverview", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetBlockOverview", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetAddrOverview(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*AddrOverview, error) {
+func (c *dplatformosClient) GetAddrOverview(ctx context.Context, in *ReqAddr, opts ...grpc.CallOption) (*AddrOverview, error) {
 	out := new(AddrOverview)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetAddrOverview", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetAddrOverview", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetBlockHash(ctx context.Context, in *ReqInt, opts ...grpc.CallOption) (*ReplyHash, error) {
+func (c *dplatformosClient) GetBlockHash(ctx context.Context, in *ReqInt, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetBlockHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GenSeed(ctx context.Context, in *GenSeedLang, opts ...grpc.CallOption) (*ReplySeed, error) {
+func (c *dplatformosClient) GenSeed(ctx context.Context, in *GenSeedLang, opts ...grpc.CallOption) (*ReplySeed, error) {
 	out := new(ReplySeed)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GenSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GenSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetSeed(ctx context.Context, in *GetSeedByPw, opts ...grpc.CallOption) (*ReplySeed, error) {
+func (c *dplatformosClient) GetSeed(ctx context.Context, in *GetSeedByPw, opts ...grpc.CallOption) (*ReplySeed, error) {
 	out := new(ReplySeed)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) SaveSeed(ctx context.Context, in *SaveSeedByPw, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) SaveSeed(ctx context.Context, in *SaveSeedByPw, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/SaveSeed", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/SaveSeed", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetBalance(ctx context.Context, in *ReqBalance, opts ...grpc.CallOption) (*Accounts, error) {
+func (c *dplatformosClient) GetBalance(ctx context.Context, in *ReqBalance, opts ...grpc.CallOption) (*Accounts, error) {
 	out := new(Accounts)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) QueryChain(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) QueryChain(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/QueryChain", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/QueryChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) ExecWallet(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) ExecWallet(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/ExecWallet", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/ExecWallet", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) QueryConsensus(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) QueryConsensus(ctx context.Context, in *ChainExecutor, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/QueryConsensus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/QueryConsensus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) CreateTransaction(ctx context.Context, in *CreateTxIn, opts ...grpc.CallOption) (*UnsignTx, error) {
+func (c *dplatformosClient) CreateTransaction(ctx context.Context, in *CreateTxIn, opts ...grpc.CallOption) (*UnsignTx, error) {
 	out := new(UnsignTx)
-	err := c.cc.Invoke(ctx, "/types.dplatform/CreateTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/CreateTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetHexTxByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*HexTx, error) {
+func (c *dplatformosClient) GetHexTxByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*HexTx, error) {
 	out := new(HexTx)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetHexTxByHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetHexTxByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) DumpPrivkey(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*ReplyString, error) {
+func (c *dplatformosClient) DumpPrivkey(ctx context.Context, in *ReqString, opts ...grpc.CallOption) (*ReplyString, error) {
 	out := new(ReplyString)
-	err := c.cc.Invoke(ctx, "/types.dplatform/DumpPrivkey", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/DumpPrivkey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) DumpPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) DumpPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/DumpPrivkeysFile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/DumpPrivkeysFile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) ImportPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) ImportPrivkeysFile(ctx context.Context, in *ReqPrivkeysFile, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/ImportPrivkeysFile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/ImportPrivkeysFile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) Version(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*VersionInfo, error) {
+func (c *dplatformosClient) Version(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*VersionInfo, error) {
 	out := new(VersionInfo)
-	err := c.cc.Invoke(ctx, "/types.dplatform/Version", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/Version", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) IsSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) IsSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/IsSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/IsSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetPeerInfo(ctx context.Context, in *P2PGetPeerReq, opts ...grpc.CallOption) (*PeerList, error) {
+func (c *dplatformosClient) GetPeerInfo(ctx context.Context, in *P2PGetPeerReq, opts ...grpc.CallOption) (*PeerList, error) {
 	out := new(PeerList)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetPeerInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetPeerInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) NetInfo(ctx context.Context, in *P2PGetNetInfoReq, opts ...grpc.CallOption) (*NodeNetInfo, error) {
+func (c *dplatformosClient) NetInfo(ctx context.Context, in *P2PGetNetInfoReq, opts ...grpc.CallOption) (*NodeNetInfo, error) {
 	out := new(NodeNetInfo)
-	err := c.cc.Invoke(ctx, "/types.dplatform/NetInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/NetInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) IsNtpClockSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) IsNtpClockSync(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/IsNtpClockSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/IsNtpClockSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetFatalFailure(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int32, error) {
+func (c *dplatformosClient) GetFatalFailure(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int32, error) {
 	out := new(Int32)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetFatalFailure", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetFatalFailure", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetLastBlockSequence(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int64, error) {
+func (c *dplatformosClient) GetLastBlockSequence(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetLastBlockSequence", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetLastBlockSequence", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetSequenceByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*Int64, error) {
+func (c *dplatformosClient) GetSequenceByHash(ctx context.Context, in *ReqHash, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetSequenceByHash", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetSequenceByHash", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetBlockByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*BlockDetails, error) {
+func (c *dplatformosClient) GetBlockByHashes(ctx context.Context, in *ReqHashes, opts ...grpc.CallOption) (*BlockDetails, error) {
 	out := new(BlockDetails)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockByHashes", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetBlockByHashes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetBlockBySeq(ctx context.Context, in *Int64, opts ...grpc.CallOption) (*BlockSeq, error) {
+func (c *dplatformosClient) GetBlockBySeq(ctx context.Context, in *Int64, opts ...grpc.CallOption) (*BlockSeq, error) {
 	out := new(BlockSeq)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetBlockBySeq", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetBlockBySeq", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
+func (c *dplatformosClient) CloseQueue(ctx context.Context, in *ReqNil, opts ...grpc.CallOption) (*Reply, error) {
 	out := new(Reply)
-	err := c.cc.Invoke(ctx, "/types.dplatform/CloseQueue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/CloseQueue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetAllExecBalance(ctx context.Context, in *ReqAllExecBalance, opts ...grpc.CallOption) (*AllExecBalance, error) {
+func (c *dplatformosClient) GetAllExecBalance(ctx context.Context, in *ReqAllExecBalance, opts ...grpc.CallOption) (*AllExecBalance, error) {
 	out := new(AllExecBalance)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetAllExecBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetAllExecBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) SignRawTx(ctx context.Context, in *ReqSignRawTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
+func (c *dplatformosClient) SignRawTx(ctx context.Context, in *ReqSignRawTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.dplatform/SignRawTx", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/SignRawTx", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) CreateNoBalanceTransaction(ctx context.Context, in *NoBalanceTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
+func (c *dplatformosClient) CreateNoBalanceTransaction(ctx context.Context, in *NoBalanceTx, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.dplatform/CreateNoBalanceTransaction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/CreateNoBalanceTransaction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) QueryRandNum(ctx context.Context, in *ReqRandHash, opts ...grpc.CallOption) (*ReplyHash, error) {
+func (c *dplatformosClient) QueryRandNum(ctx context.Context, in *ReqRandHash, opts ...grpc.CallOption) (*ReplyHash, error) {
 	out := new(ReplyHash)
-	err := c.cc.Invoke(ctx, "/types.dplatform/QueryRandNum", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/QueryRandNum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetFork(ctx context.Context, in *ReqKey, opts ...grpc.CallOption) (*Int64, error) {
+func (c *dplatformosClient) GetFork(ctx context.Context, in *ReqKey, opts ...grpc.CallOption) (*Int64, error) {
 	out := new(Int64)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetFork", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetFork", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) CreateNoBalanceTxs(ctx context.Context, in *NoBalanceTxs, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
+func (c *dplatformosClient) CreateNoBalanceTxs(ctx context.Context, in *NoBalanceTxs, opts ...grpc.CallOption) (*ReplySignRawTx, error) {
 	out := new(ReplySignRawTx)
-	err := c.cc.Invoke(ctx, "/types.dplatform/CreateNoBalanceTxs", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/CreateNoBalanceTxs", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetParaTxByTitle(ctx context.Context, in *ReqParaTxByTitle, opts ...grpc.CallOption) (*ParaTxDetails, error) {
+func (c *dplatformosClient) GetParaTxByTitle(ctx context.Context, in *ReqParaTxByTitle, opts ...grpc.CallOption) (*ParaTxDetails, error) {
 	out := new(ParaTxDetails)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetParaTxByTitle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetParaTxByTitle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) LoadParaTxByTitle(ctx context.Context, in *ReqHeightByTitle, opts ...grpc.CallOption) (*ReplyHeightByTitle, error) {
+func (c *dplatformosClient) LoadParaTxByTitle(ctx context.Context, in *ReqHeightByTitle, opts ...grpc.CallOption) (*ReplyHeightByTitle, error) {
 	out := new(ReplyHeightByTitle)
-	err := c.cc.Invoke(ctx, "/types.dplatform/LoadParaTxByTitle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/LoadParaTxByTitle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetParaTxByHeight(ctx context.Context, in *ReqParaTxByHeight, opts ...grpc.CallOption) (*ParaTxDetails, error) {
+func (c *dplatformosClient) GetParaTxByHeight(ctx context.Context, in *ReqParaTxByHeight, opts ...grpc.CallOption) (*ParaTxDetails, error) {
 	out := new(ParaTxDetails)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetParaTxByHeight", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetParaTxByHeight", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *dplatformClient) GetHeaders(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Headers, error) {
+func (c *dplatformosClient) GetHeaders(ctx context.Context, in *ReqBlocks, opts ...grpc.CallOption) (*Headers, error) {
 	out := new(Headers)
-	err := c.cc.Invoke(ctx, "/types.dplatform/GetHeaders", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/types.dplatformos/GetHeaders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -787,7 +787,7 @@ func (c *dplatformClient) GetHeaders(ctx context.Context, in *ReqBlocks, opts ..
 
 // DplatformOSServer is the server API for DplatformOS service.
 type DplatformOSServer interface {
-	// dplatform 对外提供服务的接口
+	// dplatformos 对外提供服务的接口
 	//区块链接口
 	GetBlocks(context.Context, *ReqBlocks) (*Reply, error)
 	//获取最新的区块头
@@ -882,7 +882,7 @@ type DplatformOSServer interface {
 	GetBlockByHashes(context.Context, *ReqHashes) (*BlockDetails, error)
 	//通过block seq 获取对应的blocks hash 信息
 	GetBlockBySeq(context.Context, *Int64) (*BlockSeq, error)
-	//关闭dplatform
+	//关闭dplatformos
 	CloseQueue(context.Context, *ReqNil) (*Reply, error)
 	//获取地址所以合约下的余额
 	GetAllExecBalance(context.Context, *ReqAllExecBalance) (*AllExecBalance, error)
@@ -1103,7 +1103,7 @@ func _DplatformOS_GetBlocks_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetBlocks",
+		FullMethod: "/types.dplatformos/GetBlocks",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetBlocks(ctx, req.(*ReqBlocks))
@@ -1121,7 +1121,7 @@ func _DplatformOS_GetLastHeader_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetLastHeader",
+		FullMethod: "/types.dplatformos/GetLastHeader",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetLastHeader(ctx, req.(*ReqNil))
@@ -1139,7 +1139,7 @@ func _DplatformOS_CreateRawTransaction_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/CreateRawTransaction",
+		FullMethod: "/types.dplatformos/CreateRawTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).CreateRawTransaction(ctx, req.(*CreateTx))
@@ -1157,7 +1157,7 @@ func _DplatformOS_CreateRawTxGroup_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/CreateRawTxGroup",
+		FullMethod: "/types.dplatformos/CreateRawTxGroup",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).CreateRawTxGroup(ctx, req.(*CreateTransactionGroup))
@@ -1175,7 +1175,7 @@ func _DplatformOS_QueryTransaction_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/QueryTransaction",
+		FullMethod: "/types.dplatformos/QueryTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).QueryTransaction(ctx, req.(*ReqHash))
@@ -1193,7 +1193,7 @@ func _DplatformOS_SendTransaction_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/SendTransaction",
+		FullMethod: "/types.dplatformos/SendTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).SendTransaction(ctx, req.(*Transaction))
@@ -1211,7 +1211,7 @@ func _DplatformOS_GetTransactionByAddr_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetTransactionByAddr",
+		FullMethod: "/types.dplatformos/GetTransactionByAddr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetTransactionByAddr(ctx, req.(*ReqAddr))
@@ -1229,7 +1229,7 @@ func _DplatformOS_GetTransactionByHashes_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetTransactionByHashes",
+		FullMethod: "/types.dplatformos/GetTransactionByHashes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetTransactionByHashes(ctx, req.(*ReqHashes))
@@ -1247,7 +1247,7 @@ func _DplatformOS_GetMemPool_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetMemPool",
+		FullMethod: "/types.dplatformos/GetMemPool",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetMemPool(ctx, req.(*ReqGetMempool))
@@ -1265,7 +1265,7 @@ func _DplatformOS_GetAccounts_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetAccounts",
+		FullMethod: "/types.dplatformos/GetAccounts",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetAccounts(ctx, req.(*ReqNil))
@@ -1283,7 +1283,7 @@ func _DplatformOS_GetAccount_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetAccount",
+		FullMethod: "/types.dplatformos/GetAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetAccount(ctx, req.(*ReqGetAccount))
@@ -1301,7 +1301,7 @@ func _DplatformOS_NewAccount_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/NewAccount",
+		FullMethod: "/types.dplatformos/NewAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).NewAccount(ctx, req.(*ReqNewAccount))
@@ -1319,7 +1319,7 @@ func _DplatformOS_WalletTransactionList_Handler(srv interface{}, ctx context.Con
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/WalletTransactionList",
+		FullMethod: "/types.dplatformos/WalletTransactionList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).WalletTransactionList(ctx, req.(*ReqWalletTransactionList))
@@ -1337,7 +1337,7 @@ func _DplatformOS_ImportPrivkey_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/ImportPrivkey",
+		FullMethod: "/types.dplatformos/ImportPrivkey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).ImportPrivkey(ctx, req.(*ReqWalletImportPrivkey))
@@ -1355,7 +1355,7 @@ func _DplatformOS_SendToAddress_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/SendToAddress",
+		FullMethod: "/types.dplatformos/SendToAddress",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).SendToAddress(ctx, req.(*ReqWalletSendToAddress))
@@ -1373,7 +1373,7 @@ func _DplatformOS_SetTxFee_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/SetTxFee",
+		FullMethod: "/types.dplatformos/SetTxFee",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).SetTxFee(ctx, req.(*ReqWalletSetFee))
@@ -1391,7 +1391,7 @@ func _DplatformOS_SetLabl_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/SetLabl",
+		FullMethod: "/types.dplatformos/SetLabl",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).SetLabl(ctx, req.(*ReqWalletSetLabel))
@@ -1409,7 +1409,7 @@ func _DplatformOS_MergeBalance_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/MergeBalance",
+		FullMethod: "/types.dplatformos/MergeBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).MergeBalance(ctx, req.(*ReqWalletMergeBalance))
@@ -1427,7 +1427,7 @@ func _DplatformOS_SetPasswd_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/SetPasswd",
+		FullMethod: "/types.dplatformos/SetPasswd",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).SetPasswd(ctx, req.(*ReqWalletSetPasswd))
@@ -1445,7 +1445,7 @@ func _DplatformOS_Lock_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/Lock",
+		FullMethod: "/types.dplatformos/Lock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).Lock(ctx, req.(*ReqNil))
@@ -1463,7 +1463,7 @@ func _DplatformOS_UnLock_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/UnLock",
+		FullMethod: "/types.dplatformos/UnLock",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).UnLock(ctx, req.(*WalletUnLock))
@@ -1481,7 +1481,7 @@ func _DplatformOS_GetLastMemPool_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetLastMemPool",
+		FullMethod: "/types.dplatformos/GetLastMemPool",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetLastMemPool(ctx, req.(*ReqNil))
@@ -1499,7 +1499,7 @@ func _DplatformOS_GetProperFee_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetProperFee",
+		FullMethod: "/types.dplatformos/GetProperFee",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetProperFee(ctx, req.(*ReqProperFee))
@@ -1517,7 +1517,7 @@ func _DplatformOS_GetWalletStatus_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetWalletStatus",
+		FullMethod: "/types.dplatformos/GetWalletStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetWalletStatus(ctx, req.(*ReqNil))
@@ -1535,7 +1535,7 @@ func _DplatformOS_GetBlockOverview_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetBlockOverview",
+		FullMethod: "/types.dplatformos/GetBlockOverview",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetBlockOverview(ctx, req.(*ReqHash))
@@ -1553,7 +1553,7 @@ func _DplatformOS_GetAddrOverview_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetAddrOverview",
+		FullMethod: "/types.dplatformos/GetAddrOverview",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetAddrOverview(ctx, req.(*ReqAddr))
@@ -1571,7 +1571,7 @@ func _DplatformOS_GetBlockHash_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetBlockHash",
+		FullMethod: "/types.dplatformos/GetBlockHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetBlockHash(ctx, req.(*ReqInt))
@@ -1589,7 +1589,7 @@ func _DplatformOS_GenSeed_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GenSeed",
+		FullMethod: "/types.dplatformos/GenSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GenSeed(ctx, req.(*GenSeedLang))
@@ -1607,7 +1607,7 @@ func _DplatformOS_GetSeed_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetSeed",
+		FullMethod: "/types.dplatformos/GetSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetSeed(ctx, req.(*GetSeedByPw))
@@ -1625,7 +1625,7 @@ func _DplatformOS_SaveSeed_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/SaveSeed",
+		FullMethod: "/types.dplatformos/SaveSeed",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).SaveSeed(ctx, req.(*SaveSeedByPw))
@@ -1643,7 +1643,7 @@ func _DplatformOS_GetBalance_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetBalance",
+		FullMethod: "/types.dplatformos/GetBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetBalance(ctx, req.(*ReqBalance))
@@ -1661,7 +1661,7 @@ func _DplatformOS_QueryChain_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/QueryChain",
+		FullMethod: "/types.dplatformos/QueryChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).QueryChain(ctx, req.(*ChainExecutor))
@@ -1679,7 +1679,7 @@ func _DplatformOS_ExecWallet_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/ExecWallet",
+		FullMethod: "/types.dplatformos/ExecWallet",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).ExecWallet(ctx, req.(*ChainExecutor))
@@ -1697,7 +1697,7 @@ func _DplatformOS_QueryConsensus_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/QueryConsensus",
+		FullMethod: "/types.dplatformos/QueryConsensus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).QueryConsensus(ctx, req.(*ChainExecutor))
@@ -1715,7 +1715,7 @@ func _DplatformOS_CreateTransaction_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/CreateTransaction",
+		FullMethod: "/types.dplatformos/CreateTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).CreateTransaction(ctx, req.(*CreateTxIn))
@@ -1733,7 +1733,7 @@ func _DplatformOS_GetHexTxByHash_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetHexTxByHash",
+		FullMethod: "/types.dplatformos/GetHexTxByHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetHexTxByHash(ctx, req.(*ReqHash))
@@ -1751,7 +1751,7 @@ func _DplatformOS_DumpPrivkey_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/DumpPrivkey",
+		FullMethod: "/types.dplatformos/DumpPrivkey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).DumpPrivkey(ctx, req.(*ReqString))
@@ -1769,7 +1769,7 @@ func _DplatformOS_DumpPrivkeysFile_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/DumpPrivkeysFile",
+		FullMethod: "/types.dplatformos/DumpPrivkeysFile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).DumpPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
@@ -1787,7 +1787,7 @@ func _DplatformOS_ImportPrivkeysFile_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/ImportPrivkeysFile",
+		FullMethod: "/types.dplatformos/ImportPrivkeysFile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).ImportPrivkeysFile(ctx, req.(*ReqPrivkeysFile))
@@ -1805,7 +1805,7 @@ func _DplatformOS_Version_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/Version",
+		FullMethod: "/types.dplatformos/Version",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).Version(ctx, req.(*ReqNil))
@@ -1823,7 +1823,7 @@ func _DplatformOS_IsSync_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/IsSync",
+		FullMethod: "/types.dplatformos/IsSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).IsSync(ctx, req.(*ReqNil))
@@ -1841,7 +1841,7 @@ func _DplatformOS_GetPeerInfo_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetPeerInfo",
+		FullMethod: "/types.dplatformos/GetPeerInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetPeerInfo(ctx, req.(*P2PGetPeerReq))
@@ -1859,7 +1859,7 @@ func _DplatformOS_NetInfo_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/NetInfo",
+		FullMethod: "/types.dplatformos/NetInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).NetInfo(ctx, req.(*P2PGetNetInfoReq))
@@ -1877,7 +1877,7 @@ func _DplatformOS_IsNtpClockSync_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/IsNtpClockSync",
+		FullMethod: "/types.dplatformos/IsNtpClockSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).IsNtpClockSync(ctx, req.(*ReqNil))
@@ -1895,7 +1895,7 @@ func _DplatformOS_GetFatalFailure_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetFatalFailure",
+		FullMethod: "/types.dplatformos/GetFatalFailure",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetFatalFailure(ctx, req.(*ReqNil))
@@ -1913,7 +1913,7 @@ func _DplatformOS_GetLastBlockSequence_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetLastBlockSequence",
+		FullMethod: "/types.dplatformos/GetLastBlockSequence",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetLastBlockSequence(ctx, req.(*ReqNil))
@@ -1931,7 +1931,7 @@ func _DplatformOS_GetSequenceByHash_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetSequenceByHash",
+		FullMethod: "/types.dplatformos/GetSequenceByHash",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetSequenceByHash(ctx, req.(*ReqHash))
@@ -1949,7 +1949,7 @@ func _DplatformOS_GetBlockByHashes_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetBlockByHashes",
+		FullMethod: "/types.dplatformos/GetBlockByHashes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetBlockByHashes(ctx, req.(*ReqHashes))
@@ -1967,7 +1967,7 @@ func _DplatformOS_GetBlockBySeq_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetBlockBySeq",
+		FullMethod: "/types.dplatformos/GetBlockBySeq",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetBlockBySeq(ctx, req.(*Int64))
@@ -1985,7 +1985,7 @@ func _DplatformOS_CloseQueue_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/CloseQueue",
+		FullMethod: "/types.dplatformos/CloseQueue",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).CloseQueue(ctx, req.(*ReqNil))
@@ -2003,7 +2003,7 @@ func _DplatformOS_GetAllExecBalance_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetAllExecBalance",
+		FullMethod: "/types.dplatformos/GetAllExecBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetAllExecBalance(ctx, req.(*ReqAllExecBalance))
@@ -2021,7 +2021,7 @@ func _DplatformOS_SignRawTx_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/SignRawTx",
+		FullMethod: "/types.dplatformos/SignRawTx",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).SignRawTx(ctx, req.(*ReqSignRawTx))
@@ -2039,7 +2039,7 @@ func _DplatformOS_CreateNoBalanceTransaction_Handler(srv interface{}, ctx contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/CreateNoBalanceTransaction",
+		FullMethod: "/types.dplatformos/CreateNoBalanceTransaction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).CreateNoBalanceTransaction(ctx, req.(*NoBalanceTx))
@@ -2057,7 +2057,7 @@ func _DplatformOS_QueryRandNum_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/QueryRandNum",
+		FullMethod: "/types.dplatformos/QueryRandNum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).QueryRandNum(ctx, req.(*ReqRandHash))
@@ -2075,7 +2075,7 @@ func _DplatformOS_GetFork_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetFork",
+		FullMethod: "/types.dplatformos/GetFork",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetFork(ctx, req.(*ReqKey))
@@ -2093,7 +2093,7 @@ func _DplatformOS_CreateNoBalanceTxs_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/CreateNoBalanceTxs",
+		FullMethod: "/types.dplatformos/CreateNoBalanceTxs",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).CreateNoBalanceTxs(ctx, req.(*NoBalanceTxs))
@@ -2111,7 +2111,7 @@ func _DplatformOS_GetParaTxByTitle_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetParaTxByTitle",
+		FullMethod: "/types.dplatformos/GetParaTxByTitle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetParaTxByTitle(ctx, req.(*ReqParaTxByTitle))
@@ -2129,7 +2129,7 @@ func _DplatformOS_LoadParaTxByTitle_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/LoadParaTxByTitle",
+		FullMethod: "/types.dplatformos/LoadParaTxByTitle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).LoadParaTxByTitle(ctx, req.(*ReqHeightByTitle))
@@ -2147,7 +2147,7 @@ func _DplatformOS_GetParaTxByHeight_Handler(srv interface{}, ctx context.Context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetParaTxByHeight",
+		FullMethod: "/types.dplatformos/GetParaTxByHeight",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetParaTxByHeight(ctx, req.(*ReqParaTxByHeight))
@@ -2165,7 +2165,7 @@ func _DplatformOS_GetHeaders_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/types.dplatform/GetHeaders",
+		FullMethod: "/types.dplatformos/GetHeaders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DplatformOSServer).GetHeaders(ctx, req.(*ReqBlocks))
@@ -2174,7 +2174,7 @@ func _DplatformOS_GetHeaders_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 var _DplatformOS_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "types.dplatform",
+	ServiceName: "types.dplatformos",
 	HandlerType: (*DplatformOSServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

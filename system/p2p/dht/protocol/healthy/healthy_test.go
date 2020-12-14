@@ -8,11 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/system/p2p/dht/net"
-	"github.com/33cn/dplatform/system/p2p/dht/protocol"
-	types2 "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/system/p2p/dht/net"
+	"github.com/33cn/dplatformos/system/p2p/dht/protocol"
+	types2 "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -149,7 +149,7 @@ func initEnv(t *testing.T, q queue.Queue) []*Protocol {
 		t.Fatal(err)
 	}
 	t.Log("h1", host1.ID(), "h2", host2.ID())
-	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../../../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../../../cmd/dplatformos/dplatformos.test.toml"))
 	mcfg := &types2.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P[types2.DHTTypeName], mcfg)
 	mcfg.DisableFindLANPeers = true

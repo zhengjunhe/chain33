@@ -8,8 +8,8 @@ package log
 import (
 	"os"
 
-	"github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/types"
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 )
 
@@ -33,7 +33,7 @@ func SetLogLevel(logLevel string) {
 //SetFileLog 设置文件日志和控制台日志信息
 func SetFileLog(log *types.Log) {
 	if log == nil {
-		log = &types.Log{LogFile: "logs/dplatform.log"}
+		log = &types.Log{LogFile: "logs/dplatformos.log"}
 	}
 	if log.LogFile == "" {
 		SetLogLevel(log.LogConsoleLevel)

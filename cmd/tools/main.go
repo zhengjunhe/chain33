@@ -7,8 +7,8 @@ package main
 import (
 	"os"
 
-	"github.com/33cn/dplatform/cmd/tools/commands"
-	"github.com/33cn/dplatform/common/log"
+	"github.com/33cn/dplatformos/cmd/tools/commands"
+	"github.com/33cn/dplatformos/common/log"
 	"github.com/spf13/cobra"
 )
 
@@ -33,7 +33,7 @@ func addCommands(rootCmd *cobra.Command) {
 func runCommands() {
 	rootCmd := &cobra.Command{
 		Use:   "tools",
-		Short: "dplatform tools",
+		Short: "dplatformos tools",
 	}
 	addCommands(rootCmd)
 

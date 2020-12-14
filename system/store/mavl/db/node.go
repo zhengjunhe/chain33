@@ -9,8 +9,8 @@ import (
 
 	"fmt"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/types"
 	farm "github.com/dgryski/go-farm"
 	"github.com/golang/protobuf/proto"
 )

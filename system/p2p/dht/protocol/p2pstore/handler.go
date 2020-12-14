@@ -5,10 +5,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/system/p2p/dht/protocol"
-	types2 "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/system/p2p/dht/protocol"
+	types2 "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/libp2p/go-libp2p-core/network"
 	kb "github.com/libp2p/go-libp2p-kbucket"
 )

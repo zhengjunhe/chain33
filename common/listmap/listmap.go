@@ -3,7 +3,7 @@ package listmap
 import (
 	"container/list"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 //ListMap list 和 map 组合的一个数据结构体

@@ -8,12 +8,12 @@ package solo
 import (
 	"time"
 
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/common/merkle"
-	"github.com/33cn/dplatform/queue"
-	drivers "github.com/33cn/dplatform/system/consensus"
-	cty "github.com/33cn/dplatform/system/dapp/coins/types"
-	"github.com/33cn/dplatform/types"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/common/merkle"
+	"github.com/33cn/dplatformos/queue"
+	drivers "github.com/33cn/dplatformos/system/consensus"
+	cty "github.com/33cn/dplatformos/system/dapp/coins/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 var slog = log.New("module", "solo")

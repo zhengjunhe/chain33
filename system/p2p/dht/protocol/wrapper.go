@@ -7,9 +7,9 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/33cn/dplatform/queue"
-	types2 "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	types2 "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/helpers"
 	"github.com/libp2p/go-libp2p-core/network"

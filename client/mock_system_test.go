@@ -8,15 +8,15 @@ import (
 	"flag"
 	"time"
 
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common/log"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/rpc"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common/log"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/rpc"
+	"github.com/33cn/dplatformos/types"
 )
 
 var (
-	configPath = flag.String("f", "../cmd/dplatform/dplatform.test.toml", "configfile")
+	configPath = flag.String("f", "../cmd/dplatformos/dplatformos.test.toml", "configfile")
 
 	jrpcaddr = "localhost:28803"
 	jrpcsite = "http://localhost:28803"

@@ -3,8 +3,8 @@ package peer
 import (
 	"encoding/json"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 func (p *peerInfoProtol) netprotocolsHandleEvent(msg *queue.Message) {

@@ -4,12 +4,12 @@
 
 // +build go1.8
 
-// Package main dplatform程序入口
+// Package main dplatformos程序入口
 package main
 
 import (
-	_ "github.com/33cn/dplatform/system"
-	"github.com/33cn/dplatform/util/cli"
+	_ "github.com/33cn/dplatformos/system"
+	"github.com/33cn/dplatformos/util/cli"
 )
 
 func main() {

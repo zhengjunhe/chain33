@@ -1,2 +1,2 @@
 #!/bin/bash
-./dplatform -f dplatform.main.toml -datadir=main-88
+./dplatformos -f dplatformos.main.toml -datadir=main-88

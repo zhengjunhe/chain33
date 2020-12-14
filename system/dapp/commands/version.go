@@ -6,8 +6,8 @@
 package commands
 
 import (
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	"github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 )
 

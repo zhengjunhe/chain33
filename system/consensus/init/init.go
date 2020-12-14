@@ -7,5 +7,5 @@ package init
 
 import (
 	//初始化
-	_ "github.com/33cn/dplatform/system/consensus/solo"
+	_ "github.com/33cn/dplatformos/system/consensus/solo"
 )

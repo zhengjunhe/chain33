@@ -23,7 +23,7 @@ const (
 	KeyGenDapp                  = "generate_dapp"
 	KeyDappOutDir               = "generate_dapp_out_dir"
 
-	DefCpmConfigfile = "dplatform.cpm.toml"
+	DefCpmConfigfile = "dplatformos.cpm.toml"
 
 	TagGoPath          = "${GOPATH}"
 	TagProjectName     = "${PROJECTNAME}"   // 项目名称替换标签

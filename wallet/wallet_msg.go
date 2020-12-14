@@ -5,9 +5,9 @@
 package wallet
 
 import (
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
-	wcom "github.com/33cn/dplatform/wallet/common"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
+	wcom "github.com/33cn/dplatformos/wallet/common"
 )
 
 // ProcRecvMsg 处理消息循环

@@ -10,12 +10,12 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/util"
 
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	pty "github.com/33cn/dplatform/system/dapp/manage/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	pty "github.com/33cn/dplatformos/system/dapp/manage/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 )
 

@@ -17,11 +17,11 @@ export PATH="$PWD:$PATH"
 
 PROJECT_NAME="${1}"
 
-NODE3="autotest-dplatform"
-CLI="docker exec ${NODE3} /root/dplatform-cli"
+NODE3="autotest-dplatformos"
+CLI="docker exec ${NODE3} /root/dplatformos-cli"
 
 NODE2="autotest-chain32"
-CLI2="docker exec ${NODE2} /root/dplatform-cli"
+CLI2="docker exec ${NODE2} /root/dplatformos-cli"
 
 sedfix=""
 if [ "$(uname)" == "Darwin" ]; then
@@ -30,24 +30,24 @@ fi
 
 function init() {
     # update test environment
-    sed -i $sedfix 's/^Title.*/Title="local"/g' dplatform.toml
-    sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' dplatform.toml
+    sed -i $sedfix 's/^Title.*/Title="local"/g' dplatformos.toml
+    sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' dplatformos.toml
 
     # p2p
-    sed -i $sedfix 's/^seeds=.*/seeds=["dplatform:13802","chain32:13802"]/g' dplatform.toml
-    #sed -i $sedfix 's/^enable=.*/enable=true/g' dplatform.toml
-    sed -i $sedfix '0,/^enable=.*/s//enable=true/' dplatform.toml
-    sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' dplatform.toml
-    sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' dplatform.toml
-    sed -i $sedfix 's/^useGithub=.*/useGithub=false/g' dplatform.toml
+    sed -i $sedfix 's/^seeds=.*/seeds=["dplatformos:13802","chain32:13802"]/g' dplatformos.toml
+    #sed -i $sedfix 's/^enable=.*/enable=true/g' dplatformos.toml
+    sed -i $sedfix '0,/^enable=.*/s//enable=true/' dplatformos.toml
+    sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' dplatformos.toml
+    sed -i $sedfix 's/^innerSeedEnable=.*/innerSeedEnable=false/g' dplatformos.toml
+    sed -i $sedfix 's/^useGithub=.*/useGithub=false/g' dplatformos.toml
 
     # rpc
-    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:28803"/g' dplatform.toml
-    sed -i $sedfix 's/^grpcBindAddr=.*/grpcBindAddr="0.0.0.0:8802"/g' dplatform.toml
-    sed -i $sedfix 's/^whitelist=.*/whitelist=["localhost","127.0.0.1","0.0.0.0"]/g' dplatform.toml
+    sed -i $sedfix 's/^jrpcBindAddr=.*/jrpcBindAddr="0.0.0.0:28803"/g' dplatformos.toml
+    sed -i $sedfix 's/^grpcBindAddr=.*/grpcBindAddr="0.0.0.0:8802"/g' dplatformos.toml
+    sed -i $sedfix 's/^whitelist=.*/whitelist=["localhost","127.0.0.1","0.0.0.0"]/g' dplatformos.toml
 
     # wallet
-    sed -i $sedfix 's/^minerdisable=.*/minerdisable=false/g' dplatform.toml
+    sed -i $sedfix 's/^minerdisable=.*/minerdisable=false/g' dplatformos.toml
 
 }
 
@@ -214,11 +214,11 @@ function auto_test() {
     docker exec "${NODE3}" /root/autotest
 }
 
-function stop_dplatform() {
+function stop_dplatformos() {
 
     rv=$?
     echo "=========== #stop docker-compose ============="
-    docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml down && rm -rf ./dplatform* ./*.toml ./autotest
+    docker-compose -p "${PROJECT_NAME}" -f compose-autotest.yml down && rm -rf ./dplatformos* ./*.toml ./autotest
     echo "=========== #remove related images ============"
     docker rmi "${PROJECT_NAME}"_autotest || true
     exit ${rv}
@@ -239,7 +239,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 #trap exit
-trap "stop_dplatform" INT TERM EXIT
+trap "stop_dplatformos" INT TERM EXIT
 
 # run script
 main

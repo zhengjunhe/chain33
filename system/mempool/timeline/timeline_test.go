@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/33cn/dplatform/system/mempool"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/system/mempool"
+	"github.com/33cn/dplatformos/types"
 )
 
 func TestNewMempool(t *testing.T) {

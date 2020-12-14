@@ -1,10 +1,10 @@
 package mempool
 
 import (
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/listmap"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/listmap"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/types"
 )
 
 var shashlog = log.New("module", "mempool.shash")

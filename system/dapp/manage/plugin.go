@@ -9,10 +9,10 @@
 package manage
 
 import (
-	"github.com/33cn/dplatform/pluginmgr"
-	"github.com/33cn/dplatform/system/dapp/manage/commands"
-	"github.com/33cn/dplatform/system/dapp/manage/executor"
-	"github.com/33cn/dplatform/system/dapp/manage/types"
+	"github.com/33cn/dplatformos/pluginmgr"
+	"github.com/33cn/dplatformos/system/dapp/manage/commands"
+	"github.com/33cn/dplatformos/system/dapp/manage/executor"
+	"github.com/33cn/dplatformos/system/dapp/manage/types"
 )
 
 func init() {

@@ -10,10 +10,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
 
-	dbm "github.com/33cn/dplatform/common/db"
+	dbm "github.com/33cn/dplatformos/common/db"
 	"github.com/stretchr/testify/assert"
 )
 

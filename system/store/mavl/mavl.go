@@ -8,13 +8,13 @@ package mavl
 import (
 	"sync"
 
-	"github.com/33cn/dplatform/common"
-	clog "github.com/33cn/dplatform/common/log"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/queue"
-	drivers "github.com/33cn/dplatform/system/store"
-	mavl "github.com/33cn/dplatform/system/store/mavl/db"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	clog "github.com/33cn/dplatformos/common/log"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/queue"
+	drivers "github.com/33cn/dplatformos/system/store"
+	mavl "github.com/33cn/dplatformos/system/store/mavl/db"
+	"github.com/33cn/dplatformos/types"
 )
 
 var mlog = log.New("module", "mavl")
@@ -57,7 +57,7 @@ type subConfig struct {
 }
 
 // New new mavl store module
-func New(cfg *types.Store, sub []byte, dplatformcfg *types.DplatformOSConfig) queue.Module {
+func New(cfg *types.Store, sub []byte, dplatformoscfg *types.DplatformOSConfig) queue.Module {
 	bs := drivers.NewBaseStore(cfg)
 	var subcfg subConfig
 	if sub != nil {

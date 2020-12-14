@@ -35,5 +35,5 @@ message Config {
     string          jrpcBindAddr  = 2;
     string          dataDir       = 3;
     repeated string minerAddr     = 4;
-    string          dplatformhost = 5;
+    string          dplatformoshost = 5;
 }

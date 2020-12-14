@@ -14,8 +14,8 @@ import (
 
 	"io"
 
-	"github.com/33cn/dplatform/wallet/bipwallet/basen"
-	btcutil "github.com/33cn/dplatform/wallet/bipwallet/btcutilecc"
+	"github.com/33cn/dplatformos/wallet/bipwallet/basen"
+	btcutil "github.com/33cn/dplatformos/wallet/bipwallet/btcutilecc"
 	"golang.org/x/crypto/ripemd160"
 )
 

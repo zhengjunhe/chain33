@@ -9,7 +9,7 @@ package basen_test
 import (
 	"testing"
 
-	"github.com/33cn/dplatform/wallet/bipwallet/basen"
+	"github.com/33cn/dplatformos/wallet/bipwallet/basen"
 	"github.com/stretchr/testify/assert"
 )
 

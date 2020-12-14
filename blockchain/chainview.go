@@ -9,7 +9,7 @@ import (
 	"container/list"
 	"sync"
 
-	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatformos/common"
 )
 
 const blockNodeCacheLimit = 10240 //目前best主链保存最新的10240个blocknode

@@ -10,12 +10,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/33cn/dplatform/common/log"
-	"github.com/33cn/dplatform/pluginmgr"
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	"github.com/33cn/dplatform/system/dapp/commands"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/log"
+	"github.com/33cn/dplatformos/pluginmgr"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	"github.com/33cn/dplatformos/system/dapp/commands"
+	"github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 )
 
@@ -25,46 +25,46 @@ func Run(RPCAddr, ParaName, name string) {
 	log.SetLogLevel("error")
 	configPath := ""
 	for i, arg := range os.Args[:] {
-		if arg == "--conf" && i+1 <= len(os.Args)-1 { // --conf dplatform.toml 可以配置读入cli配置文件路径
+		if arg == "--conf" && i+1 <= len(os.Args)-1 { // --conf dplatformos.toml 可以配置读入cli配置文件路径
 			configPath = os.Args[i+1]
 			break
 		}
-		if strings.HasPrefix(arg, "--conf=") { // --conf="dplatform.toml"
+		if strings.HasPrefix(arg, "--conf=") { // --conf="dplatformos.toml"
 			configPath = strings.TrimPrefix(arg, "--conf=")
 			break
 		}
 	}
 	if configPath == "" {
 		if name == "" {
-			configPath = "dplatform.toml"
+			configPath = "dplatformos.toml"
 		} else {
 			configPath = name + ".toml"
 		}
 	}
 
 	exist, _ := pathExists(configPath)
-	var dplatformCfg *types.DplatformOSConfig
+	var dplatformosCfg *types.DplatformOSConfig
 	if exist {
-		dplatformCfg = types.NewDplatformOSConfig(types.ReadFile(configPath))
+		dplatformosCfg = types.NewDplatformOSConfig(types.ReadFile(configPath))
 	} else {
 		cfgstring := types.GetDefaultCfgstring()
 		if ParaName != "" {
 			cfgstring = strings.Replace(cfgstring, "Title=\"local\"", fmt.Sprintf("Title=\"%s\"", ParaName), 1)
 			cfgstring = strings.Replace(cfgstring, "FixTime=false", "CoinSymbol=\"para\"", 1)
 		}
-		dplatformCfg = types.NewDplatformOSConfig(cfgstring)
+		dplatformosCfg = types.NewDplatformOSConfig(cfgstring)
 	}
 
-	types.SetCliSysParam(dplatformCfg.GetTitle(), dplatformCfg)
+	types.SetCliSysParam(dplatformosCfg.GetTitle(), dplatformosCfg)
 
 	rootCmd := &cobra.Command{
-		Use:   dplatformCfg.GetTitle() + "-cli",
-		Short: dplatformCfg.GetTitle() + " client tools",
+		Use:   dplatformosCfg.GetTitle() + "-cli",
+		Short: dplatformosCfg.GetTitle() + " client tools",
 	}
 
 	closeCmd := &cobra.Command{
 		Use:   "close",
-		Short: "Close " + dplatformCfg.GetTitle(),
+		Short: "Close " + dplatformosCfg.GetTitle(),
 		Run: func(cmd *cobra.Command, args []string) {
 			rpcLaddr, err := cmd.Flags().GetString("rpc_laddr")
 			if err != nil {
@@ -100,11 +100,11 @@ func Run(RPCAddr, ParaName, name string) {
 	RPCAddr = testTLS(RPCAddr)
 	pluginmgr.AddCmd(rootCmd)
 	log.SetLogLevel("error")
-	dplatformCfg.S("RPCAddr", RPCAddr)
-	dplatformCfg.S("ParaName", ParaName)
-	rootCmd.PersistentFlags().String("rpc_laddr", dplatformCfg.GStr("RPCAddr"), "http url")
-	rootCmd.PersistentFlags().String("paraName", dplatformCfg.GStr("ParaName"), "parachain")
-	rootCmd.PersistentFlags().String("title", dplatformCfg.GetTitle(), "get title name")
+	dplatformosCfg.S("RPCAddr", RPCAddr)
+	dplatformosCfg.S("ParaName", ParaName)
+	rootCmd.PersistentFlags().String("rpc_laddr", dplatformosCfg.GStr("RPCAddr"), "http url")
+	rootCmd.PersistentFlags().String("paraName", dplatformosCfg.GStr("ParaName"), "parachain")
+	rootCmd.PersistentFlags().String("title", dplatformosCfg.GetTitle(), "get title name")
 	rootCmd.PersistentFlags().MarkHidden("title")
 	rootCmd.PersistentFlags().String("conf", "", "cli config")
 	if err := rootCmd.Execute(); err != nil {

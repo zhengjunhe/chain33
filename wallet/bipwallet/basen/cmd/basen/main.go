@@ -17,7 +17,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/33cn/dplatform/wallet/bipwallet/basen"
+	"github.com/33cn/dplatformos/wallet/bipwallet/basen"
 )
 
 var decoder = flag.String("decode", "none", "input decoding method")

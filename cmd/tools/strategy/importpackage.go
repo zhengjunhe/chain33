@@ -14,7 +14,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/33cn/dplatform/cmd/tools/util"
+	"github.com/33cn/dplatformos/cmd/tools/util"
 	"github.com/BurntSushi/toml"
 )
 
@@ -48,8 +48,8 @@ type importPackageStrategy struct {
 }
 
 func (im *importPackageStrategy) Run() error {
-	mlog.Info("Begin run dplatform import packages.")
-	defer mlog.Info("Run dplatform import packages finish.")
+	mlog.Info("Begin run dplatformos import packages.")
+	defer mlog.Info("Run dplatformos import packages finish.")
 	return im.runImpl()
 }
 

@@ -5,8 +5,8 @@
 package client
 
 import (
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 // QueueProtocolAPI 消息通道交互API接口定义
@@ -115,7 +115,7 @@ type QueueProtocolAPI interface {
 	// --------------- store interfaces end
 
 	// +++++++++++++++ other interfaces begin
-	// close dplatform
+	// close dplatformos
 	CloseQueue() (*types.Reply, error)
 	// --------------- other interfaces end
 	// types.EventAddBlockSeqCB

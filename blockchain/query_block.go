@@ -5,8 +5,8 @@
 package blockchain
 
 import (
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/types"
 )
 
 //GetBlockByHashes 通过blockhash 获取对应的block信息

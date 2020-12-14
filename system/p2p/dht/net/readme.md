@@ -23,15 +23,15 @@ pubsub是libp2p的订阅与发布功能，网络中的节点可以订阅其感�
   > 该系统设计的要易于理解和实施
         
 
-### pubsub在dplatform中用途
+### pubsub在dplatformos中用途
 ````
-pubsub基础功能集成在dplatform/system/p2p/dht/net/pubsub.go中,该功能主要包含订阅topic,向
+pubsub基础功能集成在dplatformos/system/p2p/dht/net/pubsub.go中,该功能主要包含订阅topic,向
 topic 发送消息，删除主题，获取已经订阅的topic.
 
-目前pubsub功能刷线应用在dplatform平行链模块，主要应用于在平行链内部共识期间的消息广播。
-dplatform平行链使用相关功能，需要先通过queue消息处理模块 发送相关消息事件注册自己的模块名与要订阅的topic，
+目前pubsub功能刷线应用在dplatformos平行链模块，主要应用于在平行链内部共识期间的消息广播。
+dplatformos平行链使用相关功能，需要先通过queue消息处理模块 发送相关消息事件注册自己的模块名与要订阅的topic，
 当有相关topic消息过来之后，pubsub就会通过queue 把接收到消息转发给注册的相应模块。
-后期计划用pubsub去掉dplatform的tx广播功能。
+后期计划用pubsub去掉dplatformos的tx广播功能。
 ````
 #### 接口说明
 
@@ -96,9 +96,9 @@ Relay 功能需要一些有中继功能的节点作为proxy。
 
 ```
 
-### pubsub在dplatform中用途
+### pubsub在dplatformos中用途
 ````
-中继功能目前还没有实际应用在dplatform中，作为探索开发，为以后dplatform有实际需求后，提供储备。
+中继功能目前还没有实际应用在dplatformos中，作为探索开发，为以后dplatformos有实际需求后，提供储备。
 ````
 
 

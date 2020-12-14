@@ -1,7 +1,7 @@
 package store
 
 import (
-	dbm "github.com/33cn/dplatform/common/db"
+	dbm "github.com/33cn/dplatformos/common/db"
 	"github.com/ipfs/go-datastore"
 	dsq "github.com/ipfs/go-datastore/query"
 )

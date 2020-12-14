@@ -28,7 +28,7 @@ func TestConfigMverInit(t *testing.T) {
 	})
 	cfg := NewDplatformOSConfigNoInit(ReadFile("testdata/local.mvertest.toml"))
 	cfg.EnableCheckFork(false)
-	cfg.dplatformCfgInit(cfg.GetModuleConfig())
+	cfg.dplatformosCfgInit(cfg.GetModuleConfig())
 	assert.Equal(t, cfg.MGStr("mver.consensus.name2", 0), "ticket-bityuan")
 	assert.Equal(t, cfg.MGStr("mver.consensus.name2", 10), "ticket-bityuanv5")
 	assert.Equal(t, cfg.MGStr("mver.consensus.name2", 25), "ticket-bityuanv2")
@@ -86,7 +86,7 @@ func initChainBityuanV3() {
 }
 
 func TestInitChainParam(t *testing.T) {
-	cfg := NewDplatformOSConfig(ReadFile("../cmd/dplatform/dplatform.toml"))
+	cfg := NewDplatformOSConfig(ReadFile("../cmd/dplatformos/dplatformos.toml"))
 	forkid := cfg.GetFork("ForkChainParamV1")
 	assert.Equal(t, cfg.GetP(0), getP(cfg, 0))
 	assert.Equal(t, cfg.GetP(forkid-1), getP(cfg, forkid-1))

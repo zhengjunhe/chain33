@@ -5,7 +5,7 @@ import (
 	uurl "net/url"
 	"time"
 
-	dplatformlog "github.com/33cn/dplatform/common/log/log15"
+	dplatformoslog "github.com/33cn/dplatformos/common/log/log15"
 	"github.com/influxdata/influxdb/client"
 	metrics "github.com/rcrowley/go-metrics"
 )
@@ -27,7 +27,7 @@ type reporter struct {
 }
 
 var (
-	log = dplatformlog.New("module", "influxdb")
+	log = dplatformoslog.New("module", "influxdb")
 )
 
 // InfluxDB starts a InfluxDB reporter which will post the from the given metrics.Registry at each d interval.

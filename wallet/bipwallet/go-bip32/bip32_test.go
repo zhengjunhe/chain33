@@ -8,7 +8,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	bip32 "github.com/33cn/dplatform/wallet/bipwallet/go-bip32"
+	bip32 "github.com/33cn/dplatformos/wallet/bipwallet/go-bip32"
 	"github.com/stretchr/testify/assert"
 )
 

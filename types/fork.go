@@ -213,20 +213,20 @@ func (c *DplatformOSConfig) IsEnableFork(height int64, fork string, enable bool)
 //fork 设置规则：
 //所有的fork都需要有明确的配置，不开启fork 配置为 -1; forks即为从toml中读入文件
 func (c *DplatformOSConfig) initForkConfig(forks *ForkList) {
-	dplatformfork := c.forks.GetAll()
-	if dplatformfork == nil {
-		panic("dplatform fork not init")
+	dplatformosfork := c.forks.GetAll()
+	if dplatformosfork == nil {
+		panic("dplatformos fork not init")
 	}
-	//开始判断dplatformfork中的system部分是否已经设置
+	//开始判断dplatformosfork中的system部分是否已经设置
 	s := ""
-	for k := range dplatformfork {
+	for k := range dplatformosfork {
 		if !strings.Contains(k, ".") {
 			if _, ok := forks.System[k]; !ok {
 				s += "system fork " + k + " not config\n"
 			}
 		}
 	}
-	for k := range dplatformfork {
+	for k := range dplatformosfork {
 		forkname := strings.Split(k, ".")
 		if len(forkname) == 1 {
 			continue

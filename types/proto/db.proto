@@ -3,7 +3,7 @@ syntax = "proto3";
 import "common.proto";
 
 package types;
-option go_package = "github.com/33cn/dplatform/types";
+option go_package = "github.com/33cn/dplatformos/types";
 
 // merkle avl tree
 message LeafNode {

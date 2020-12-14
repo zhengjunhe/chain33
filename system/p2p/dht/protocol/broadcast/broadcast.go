@@ -10,26 +10,26 @@ import (
 	"encoding/hex"
 	"sync/atomic"
 
-	"github.com/33cn/dplatform/common/pubsub"
+	"github.com/33cn/dplatformos/common/pubsub"
 
-	"github.com/33cn/dplatform/p2p/utils"
+	"github.com/33cn/dplatformos/p2p/utils"
 
 	"github.com/libp2p/go-libp2p-core/peer"
 
-	"github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/queue"
-	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/queue"
+	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 var log = log15.New("module", "p2p.broadcast")
 
 const (
 	protoTypeID = "BroadcastProtocolType"
-	broadcastV1 = "/dplatform/p2p/broadcast/1.0.0"
-	//broadcastV2     = "/dplatform/p2p/broadcast/2.0.0"
-	broadcastPubSub = "/dplatform/broadcast/pubsub/1.0.0"
+	broadcastV1 = "/dplatformos/p2p/broadcast/1.0.0"
+	//broadcastV2     = "/dplatformos/p2p/broadcast/2.0.0"
+	broadcastPubSub = "/dplatformos/broadcast/pubsub/1.0.0"
 )
 
 func init() {

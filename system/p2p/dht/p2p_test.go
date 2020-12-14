@@ -11,7 +11,7 @@ import (
 	bhost "github.com/libp2p/go-libp2p-blankhost"
 	swarmt "github.com/libp2p/go-libp2p-swarm/testing"
 
-	"github.com/33cn/dplatform/client"
+	"github.com/33cn/dplatformos/client"
 
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/host"
@@ -19,18 +19,18 @@ import (
 
 	"os"
 
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/util"
 
 	"crypto/rand"
 	"fmt"
 	"testing"
 
-	l "github.com/33cn/dplatform/common/log"
-	p2p2 "github.com/33cn/dplatform/p2p"
-	"github.com/33cn/dplatform/queue"
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/wallet"
+	l "github.com/33cn/dplatformos/common/log"
+	p2p2 "github.com/33cn/dplatformos/p2p"
+	"github.com/33cn/dplatformos/queue"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/wallet"
 	core "github.com/libp2p/go-libp2p-core"
 	crypto "github.com/libp2p/go-libp2p-core/crypto"
 	p2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
@@ -380,7 +380,7 @@ func Test_Id(t *testing.T) {
 
 func Test_p2p(t *testing.T) {
 
-	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../cmd/dplatformos/dplatformos.test.toml"))
 	q := queue.New("channel")
 	datadir := util.ResetDatadir(cfg.GetModuleConfig(), "$TEMP/")
 	q.SetConfig(cfg)

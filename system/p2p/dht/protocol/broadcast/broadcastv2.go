@@ -6,7 +6,7 @@ package broadcast
 
 //
 //import (
-//	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+//	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
 //	core "github.com/libp2p/go-libp2p-core"
 //)
 //

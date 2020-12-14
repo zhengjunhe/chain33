@@ -7,7 +7,7 @@ package log15
 import (
 	"os"
 
-	"github.com/33cn/dplatform/common/log/log15/term"
+	"github.com/33cn/dplatformos/common/log/log15/term"
 	colorable "github.com/mattn/go-colorable"
 )
 

@@ -7,7 +7,7 @@ package table
 import (
 	"testing"
 
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/util"
 	"github.com/stretchr/testify/assert"
 )
 

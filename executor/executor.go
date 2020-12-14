@@ -10,19 +10,19 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/33cn/dplatform/client/api"
-	dbm "github.com/33cn/dplatform/common/db"
-	clog "github.com/33cn/dplatform/common/log"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/pluginmgr"
-	"github.com/33cn/dplatform/rpc/grpcclient"
-	drivers "github.com/33cn/dplatform/system/dapp"
+	"github.com/33cn/dplatformos/client/api"
+	dbm "github.com/33cn/dplatformos/common/db"
+	clog "github.com/33cn/dplatformos/common/log"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/pluginmgr"
+	"github.com/33cn/dplatformos/rpc/grpcclient"
+	drivers "github.com/33cn/dplatformos/system/dapp"
 
 	// register drivers
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
-	typ "github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
+	typ "github.com/33cn/dplatformos/types"
 )
 
 var elog = log.New("module", "execs")

@@ -10,9 +10,9 @@ import (
 	"crypto/sha256"
 	"fmt"
 
-	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatformos/common/address"
 
-	"github.com/33cn/dplatform/common/crypto"
+	"github.com/33cn/dplatformos/common/crypto"
 	"github.com/mr-tron/base58/base58"
 	"golang.org/x/crypto/ripemd160"
 )

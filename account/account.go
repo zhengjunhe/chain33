@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package account 实现dplatform 区块链资产操作
+// Package account 实现dplatformos 区块链资产操作
 package account
 
 //package for account manger
@@ -18,12 +18,12 @@ package account
 import (
 	"strings"
 
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/address"
-	dbm "github.com/33cn/dplatform/common/db"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/address"
+	dbm "github.com/33cn/dplatformos/common/db"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/types"
 	"github.com/golang/protobuf/proto"
 )
 

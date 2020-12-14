@@ -15,10 +15,10 @@ objects=$(git verify-pack -v .git/objects/pack/pack-*.idx | grep -v chain | sort
 
 echo "All sizes are in kB's. The pack column is the size of the object, compressed, inside the pack file."
 
-# 39526  18752  2c8c0fa0a853bfa135f03f1bd30c905336425caa  cmd/dplatform/test
-# 30702  9463   240191b5561e737e50283045972befb4a13275d4  |/home/hugo/dev/src/github.com/33cn/dplatform/build/cli
+# 39526  18752  2c8c0fa0a853bfa135f03f1bd30c905336425caa  cmd/dplatformos/test
+# 30702  9463   240191b5561e737e50283045972befb4a13275d4  |/home/hugo/dev/src/github.com/33cn/dplatformos/build/cli
 # 26721  8842   33064554018a49d4f0ff9db680241efaa67e5b7f  cmd/cli/cli
-# 11979  4918   0c300a7b61218271e666f3246f36e8f1915b0d57  |/home/hugo/dev/src/github.com/33cn/dplatform/build/dplatform
+# 11979  4918   0c300a7b61218271e666f3246f36e8f1915b0d57  |/home/hugo/dev/src/github.com/33cn/dplatformos/build/dplatformos
 # 4834   1113   9ec4f3d49403e8b9dd46885031a92e23af3828b9  vendor/golang.org/x/text/collate/tables.go
 # 3563   1034   eb297e33f34b7ba69cdbf1fd720a97a74fa8aed9  vendor/golang.org/x/text/language/display/tables.go
 # 3561   1033   6493357efae3b213d709cfb5f50a7e037e5972ca  vendor/golang.org/x/text/language/display/tables.go

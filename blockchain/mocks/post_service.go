@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	types "github.com/33cn/dplatform/types"
+	types "github.com/33cn/dplatformos/types"
 	mock "github.com/stretchr/testify/mock"
 )
 

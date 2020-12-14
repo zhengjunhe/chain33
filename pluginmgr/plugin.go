@@ -5,9 +5,9 @@
 package pluginmgr
 
 import (
-	"github.com/33cn/dplatform/rpc/types"
-	typ "github.com/33cn/dplatform/types"
-	wcom "github.com/33cn/dplatform/wallet/common"
+	"github.com/33cn/dplatformos/rpc/types"
+	typ "github.com/33cn/dplatformos/types"
+	wcom "github.com/33cn/dplatformos/wallet/common"
 	"github.com/spf13/cobra"
 )
 

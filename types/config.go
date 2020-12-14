@@ -14,7 +14,7 @@ import (
 
 	"fmt"
 
-	"github.com/33cn/dplatform/types/chaincfg"
+	"github.com/33cn/dplatformos/types/chaincfg"
 	tml "github.com/BurntSushi/toml"
 )
 
@@ -104,15 +104,15 @@ func RegExecInit(cfg *DplatformOSConfig) {
 
 //NewDplatformOSConfig ...
 func NewDplatformOSConfig(cfgstring string) *DplatformOSConfig {
-	dplatformCfg := NewDplatformOSConfigNoInit(cfgstring)
-	dplatformCfg.dplatformCfgInit(dplatformCfg.mcfg)
-	return dplatformCfg
+	dplatformosCfg := NewDplatformOSConfigNoInit(cfgstring)
+	dplatformosCfg.dplatformosCfgInit(dplatformosCfg.mcfg)
+	return dplatformosCfg
 }
 
 //NewDplatformOSConfigNoInit ...
 func NewDplatformOSConfigNoInit(cfgstring string) *DplatformOSConfig {
 	cfg, sub := InitCfgString(cfgstring)
-	dplatformCfg := &DplatformOSConfig{
+	dplatformosCfg := &DplatformOSConfig{
 		mcfg:        cfg,
 		scfg:        sub,
 		minerExecs:  []string{"ticket"}, //挖矿的合约名单，适配旧配置，默认ticket
@@ -122,13 +122,13 @@ func NewDplatformOSConfigNoInit(cfgstring string) *DplatformOSConfig {
 		forks:       &Forks{make(map[string]int64)},
 	}
 	// 先将每个模块的fork初始化到DplatformOSConfig中，然后如果需要再将toml中的替换
-	dplatformCfg.setDefaultConfig()
-	dplatformCfg.setFlatConfig(cfgstring)
-	dplatformCfg.setMver(cfgstring)
+	dplatformosCfg.setDefaultConfig()
+	dplatformosCfg.setFlatConfig(cfgstring)
+	dplatformosCfg.setMver(cfgstring)
 	// TODO 需要测试是否与NewDplatformOSConfig分开
-	RegForkInit(dplatformCfg)
-	RegExecInit(dplatformCfg)
-	return dplatformCfg
+	RegForkInit(dplatformosCfg)
+	RegExecInit(dplatformosCfg)
+	return dplatformosCfg
 }
 
 //GetModuleConfig ...
@@ -161,8 +161,8 @@ func (c *DplatformOSConfig) setDefaultConfig() {
 		c.S("cfg."+key, cfg)
 	}
 	//防止报error 错误，不影响功能
-	if !c.HasConf("cfg.dplatform") {
-		c.S("cfg.dplatform", "")
+	if !c.HasConf("cfg.dplatformos") {
+		c.S("cfg.dplatformos", "")
 	}
 	if !c.HasConf("cfg.local") {
 		c.S("cfg.local", "")
@@ -196,7 +196,7 @@ func (c *DplatformOSConfig) getChainConfig(key string) (value interface{}, err e
 }
 
 // Init 初始化
-func (c *DplatformOSConfig) dplatformCfgInit(cfg *Config) {
+func (c *DplatformOSConfig) dplatformosCfgInit(cfg *Config) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 

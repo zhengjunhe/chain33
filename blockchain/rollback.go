@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"syscall"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/types"
 )
 
 // Rollbackblock chain Rollbackblock

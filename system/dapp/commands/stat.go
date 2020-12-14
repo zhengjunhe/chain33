@@ -11,11 +11,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	commandtypes "github.com/33cn/dplatform/system/dapp/commands/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	commandtypes "github.com/33cn/dplatformos/system/dapp/commands/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 )
 

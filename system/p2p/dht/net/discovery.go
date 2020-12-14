@@ -4,15 +4,15 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 
 	protocol "github.com/libp2p/go-libp2p-core/protocol"
 
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
 	opts "github.com/libp2p/go-libp2p-kad-dht/opts"
 	kbt "github.com/libp2p/go-libp2p-kbucket"
 
-	"github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatformos/common/log/log15"
 	host "github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/peer"
 	discovery "github.com/libp2p/go-libp2p-discovery"

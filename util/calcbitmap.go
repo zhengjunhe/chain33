@@ -7,7 +7,7 @@ package util
 import (
 	"math/big"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 //CalcBitMap subs are align with subData,get the bases' tx's bitmap from subs result

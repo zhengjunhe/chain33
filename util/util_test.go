@@ -11,14 +11,14 @@ import (
 
 	"strings"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/address"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/queue"
-	qmocks "github.com/33cn/dplatform/queue/mocks"
-	_ "github.com/33cn/dplatform/system/crypto/secp256k1"
-	_ "github.com/33cn/dplatform/system/dapp/coins/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/address"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/queue"
+	qmocks "github.com/33cn/dplatformos/queue/mocks"
+	_ "github.com/33cn/dplatformos/system/crypto/secp256k1"
+	_ "github.com/33cn/dplatformos/system/dapp/coins/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -52,15 +52,15 @@ func TestMakeStringLower(t *testing.T) {
 }
 
 func TestResetDatadir(t *testing.T) {
-	cfg, _ := types.InitCfg("../cmd/dplatform/dplatform.toml")
+	cfg, _ := types.InitCfg("../cmd/dplatformos/dplatformos.toml")
 	datadir := ResetDatadir(cfg, "$TEMP/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 
-	cfg, _ = types.InitCfg("../cmd/dplatform/dplatform.toml")
+	cfg, _ = types.InitCfg("../cmd/dplatformos/dplatformos.toml")
 	datadir = ResetDatadir(cfg, "/TEMP/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 
-	cfg, _ = types.InitCfg("../cmd/dplatform/dplatform.toml")
+	cfg, _ = types.InitCfg("../cmd/dplatformos/dplatformos.toml")
 	datadir = ResetDatadir(cfg, "~/hello")
 	assert.Equal(t, datadir+"/datadir", cfg.BlockChain.DbPath)
 }
@@ -276,7 +276,7 @@ func (t *testClient) Wait(in *queue.Message) (*queue.Message, error) {
 
 func TestExecBlock(t *testing.T) {
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatformos\"", 1)
 	cfg := types.NewDplatformOSConfig(new)
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)

@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatformos/queue"
 	"github.com/libp2p/go-libp2p"
 	"github.com/stretchr/testify/assert"
 )

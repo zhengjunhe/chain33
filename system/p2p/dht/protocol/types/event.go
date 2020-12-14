@@ -7,10 +7,10 @@ package types
 import (
 	"fmt"
 
-	"github.com/33cn/dplatform/queue"
+	"github.com/33cn/dplatformos/queue"
 )
 
-// EventHandler handle dplatform event
+// EventHandler handle dplatformos event
 type EventHandler func(*queue.Message)
 
 var (

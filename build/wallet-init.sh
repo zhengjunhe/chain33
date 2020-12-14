@@ -6,7 +6,7 @@ function SendToPrivacyExec() {
     execAdd=$3
     note=$4
     amount=$5
-    #sudo docker exec -it $name ./dplatform-cli send coins transfer -k $fromAdd -t $execAdd -n $note -a $amount
+    #sudo docker exec -it $name ./dplatformos-cli send coins transfer -k $fromAdd -t $execAdd -n $note -a $amount
     result=$($name send coins transfer -k "${fromAdd}" -t "${execAdd}" -n "${note}" -a "${amount}")
     echo "hash : $result"
 }
@@ -17,7 +17,7 @@ function pub2priv() {
     priAdd=$3
     note=$4
     amount=$5
-    #sudo docker exec -it $name ./dplatform-cli privacy pub2priv -f $fromAdd -p $priAdd -a $amount -n $note
+    #sudo docker exec -it $name ./dplatformos-cli privacy pub2priv -f $fromAdd -p $priAdd -a $amount -n $note
     result=$($name privacy pub2priv -f "${fromAdd}" -p "${priAdd}" -a "${amount}" -n "${note}" | jq -r ".hash")
     echo "hash : $result"
 }
@@ -41,7 +41,7 @@ function showPrivacyBalance() {
 function init() {
     echo "=========== # start set wallet 1 ============="
     echo "=========== # save seed to wallet ============="
-    result=$(./dplatform-cli seed save -p 1314fuzamei -s "tortoise main civil member grace happy century convince father cage beach hip maid merry rib" | jq ".isok")
+    result=$(./dplatformos-cli seed save -p 1314fuzamei -s "tortoise main civil member grace happy century convince father cage beach hip maid merry rib" | jq ".isok")
     if [ "${result}" = "false" ]; then
         echo "save seed to wallet error seed, result: ${result}"
         exit 1
@@ -50,7 +50,7 @@ function init() {
     sleep 2
 
     echo "=========== # unlock wallet ============="
-    result=$(./dplatform-cli wallet unlock -p 1314fuzamei -t 0 | jq ".isok")
+    result=$(./dplatformos-cli wallet unlock -p 1314fuzamei -t 0 | jq ".isok")
     if [ "${result}" = "false" ]; then
         exit 1
     fi
@@ -58,7 +58,7 @@ function init() {
     sleep 2
 
     echo "=========== # import private key transfer ============="
-    result=$(./dplatform-cli account import_key -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944 -l transfer | jq ".label")
+    result=$(./dplatformos-cli account import_key -k CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944 -l transfer | jq ".label")
     echo "${result}"
     if [ -z "${result}" ]; then
         exit 1
@@ -67,7 +67,7 @@ function init() {
     sleep 2
 
     echo "=========== # import private key mining ============="
-    result=$(./dplatform-cli account import_key -k 4257D8692EF7FE13C68B65D6A52F03933DB2FA5CE8FAF210B5B8B80C721CED01 -l mining | jq ".label")
+    result=$(./dplatformos-cli account import_key -k 4257D8692EF7FE13C68B65D6A52F03933DB2FA5CE8FAF210B5B8B80C721CED01 -l mining | jq ".label")
     echo "${result}"
     if [ -z "${result}" ]; then
         exit 1
@@ -75,7 +75,7 @@ function init() {
 
     sleep 2
     echo "=========== # set auto mining ============="
-    result=$(./dplatform-cli wallet auto_mine -f 1 | jq ".isok")
+    result=$(./dplatformos-cli wallet auto_mine -f 1 | jq ".isok")
     if [ "${result}" = "false" ]; then
         exit 1
     fi
@@ -88,7 +88,7 @@ init
 
 #构建隐私交易
 #    sleep 20
-#    name="./dplatform-cli"
+#    name="./dplatformos-cli"
 #    fromAdd="12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
 #    execAdd="1FeyE6VDZ4FYgpK1n2okWMDAtPkwBuooQd"
 #    note="test"

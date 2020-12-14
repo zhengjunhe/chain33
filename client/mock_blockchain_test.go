@@ -7,8 +7,8 @@ package client_test
 import (
 	"bytes"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 type mockBlockChain struct {

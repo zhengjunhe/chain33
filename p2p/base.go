@@ -6,10 +6,10 @@
 package p2p
 
 import (
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common/pubsub"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common/pubsub"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 	lru "github.com/hashicorp/golang-lru"
 )
 

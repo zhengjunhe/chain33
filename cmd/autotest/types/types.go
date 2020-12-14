@@ -8,7 +8,7 @@ import "reflect"
 
 //var
 var (
-	CliCmd        string                      //dplatform cli可执行文件名
+	CliCmd        string                      //dplatformos cli可执行文件名
 	CheckTimeout  int                         //用例check时超时次数
 	autoTestItems = make(map[string]AutoTest) //保存注册的dapp测试类型
 )

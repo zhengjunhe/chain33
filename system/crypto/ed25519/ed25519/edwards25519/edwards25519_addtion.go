@@ -8,7 +8,7 @@ Package edwards25519 将edwards25519中的差异代码移动到本处进行差�
 package edwards25519
 
 import (
-	"github.com/33cn/dplatform/common/crypto/sha3"
+	"github.com/33cn/dplatformos/common/crypto/sha3"
 )
 
 var (

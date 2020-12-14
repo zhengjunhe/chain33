@@ -10,12 +10,12 @@ import (
 	"net/rpc"
 	"time"
 
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/pluginmgr"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/rpc/grpcclient"
-	_ "github.com/33cn/dplatform/rpc/grpcclient" // register grpc multiple resolver
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/pluginmgr"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/rpc/grpcclient"
+	_ "github.com/33cn/dplatformos/rpc/grpcclient" // register grpc multiple resolver
+	"github.com/33cn/dplatformos/types"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -165,7 +165,7 @@ func NewGRpcServer(c queue.Client, api client.QueueProtocolAPI) *Grpcserver {
 	if rpcCfg.EnableTLS {
 		creds, err := credentials.NewServerTLSFromFile(rpcCfg.CertFile, rpcCfg.KeyFile)
 		if err != nil {
-			panic(fmt.Sprintf("err=%s, if cert.pem not found, run dplatform-cli cert --host=127.0.0.1 to create", err.Error()))
+			panic(fmt.Sprintf("err=%s, if cert.pem not found, run dplatformos-cli cert --host=127.0.0.1 to create", err.Error()))
 		}
 		credsOps := grpc.Creds(creds)
 		opts = append(opts, credsOps)

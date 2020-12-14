@@ -12,7 +12,7 @@ import (
 	"errors"
 	"unsafe"
 
-	"github.com/33cn/dplatform/common"
+	"github.com/33cn/dplatformos/common"
 	"github.com/decred/base58"
 	lru "github.com/hashicorp/golang-lru"
 )

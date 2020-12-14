@@ -7,8 +7,8 @@ package executor
 import (
 	"fmt"
 
-	pty "github.com/33cn/dplatform/system/dapp/manage/types"
-	"github.com/33cn/dplatform/types"
+	pty "github.com/33cn/dplatformos/system/dapp/manage/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 func localKey(key string) []byte {

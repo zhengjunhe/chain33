@@ -7,8 +7,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/33cn/dplatform/cmd/tools/strategy"
-	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatformos/cmd/tools/strategy"
+	"github.com/33cn/dplatformos/cmd/tools/types"
 	"github.com/spf13/cobra"
 )
 

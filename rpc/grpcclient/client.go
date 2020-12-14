@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 )
@@ -16,7 +16,7 @@ var mu sync.Mutex
 
 var defaultClient types.DplatformOSClient
 
-//NewMainChainClient 创建一个平行链的 主链 grpc dplatform 客户端
+//NewMainChainClient 创建一个平行链的 主链 grpc dplatformos 客户端
 func NewMainChainClient(cfg *types.DplatformOSConfig, grpcaddr string) (types.DplatformOSClient, error) {
 	mu.Lock()
 	defer mu.Unlock()

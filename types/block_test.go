@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/33cn/dplatform/common/address"
+	"github.com/33cn/dplatformos/common/address"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

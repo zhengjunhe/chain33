@@ -5,9 +5,9 @@
 package executor
 
 import (
-	dbm "github.com/33cn/dplatform/common/db"
-	drivers "github.com/33cn/dplatform/system/dapp"
-	"github.com/33cn/dplatform/types"
+	dbm "github.com/33cn/dplatformos/common/db"
+	drivers "github.com/33cn/dplatformos/system/dapp"
+	"github.com/33cn/dplatformos/types"
 )
 
 func init() {

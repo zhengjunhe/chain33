@@ -1,8 +1,8 @@
 package mempool
 
 import (
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 func (mem *Mempool) reply() {

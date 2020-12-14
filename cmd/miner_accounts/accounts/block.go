@@ -10,13 +10,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 // ts/height -> blockHeader
-type dplatform struct {
+type dplatformos struct {
 	lastHeader *rpctypes.Header
 	// height -> ts -> header
 	Headers   map[int64]*rpctypes.Header
@@ -26,7 +26,7 @@ type dplatform struct {
 	Host         string
 }
 
-func (b dplatform) findBlock(ts int64) (int64, *rpctypes.Header) {
+func (b dplatformos) findBlock(ts int64) (int64, *rpctypes.Header) {
 	log.Info("show", "utc", ts, "lastBlockTime", b.lastHeader.BlockTime)
 	if ts > b.lastHeader.BlockTime {
 		ts = b.lastHeader.BlockTime
@@ -45,7 +45,7 @@ func (b dplatform) findBlock(ts int64) (int64, *rpctypes.Header) {
 	return 0, nil
 }
 
-func (b dplatform) getBalance(addrs []string, exec string, height int64) (*rpctypes.Header, []*rpctypes.Account, error) {
+func (b dplatformos) getBalance(addrs []string, exec string, height int64) (*rpctypes.Header, []*rpctypes.Account, error) {
 	rpcCli, err := jsonclient.NewJSONClient(b.Host)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -61,7 +61,7 @@ func (b dplatform) getBalance(addrs []string, exec string, height int64) (*rpcty
 	return hs.Items[0], acc, err
 }
 
-func (b dplatform) addBlock(h *rpctypes.Header) error {
+func (b dplatformos) addBlock(h *rpctypes.Header) error {
 	b.Headers[h.BlockTime] = h
 	b.Height2Ts[h.Height] = h.BlockTime
 	if h.Height > b.lastHeader.Height {
@@ -71,7 +71,7 @@ func (b dplatform) addBlock(h *rpctypes.Header) error {
 	return nil
 }
 
-var cache = dplatform{
+var cache = dplatformos{
 	lastHeader:   &rpctypes.Header{Height: 0},
 	Headers:      map[int64]*rpctypes.Header{},
 	Height2Ts:    map[int64]int64{},

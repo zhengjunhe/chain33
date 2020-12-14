@@ -12,7 +12,7 @@ import (
 
 	"unsafe"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 //消息队列的主要作用是解耦合，让各个模块相对的独立运行。
@@ -217,7 +217,7 @@ func (client *client) CloseQueue() (*types.Reply, error) {
 	if client.q.isClosed() {
 		return &types.Reply{IsOk: true}, nil
 	}
-	qlog.Debug("queue", "msg", "closing dplatform")
+	qlog.Debug("queue", "msg", "closing dplatformos")
 	client.q.interrupt <- struct{}{}
 	//	close(client.q.interupt)
 	return &types.Reply{IsOk: true}, nil

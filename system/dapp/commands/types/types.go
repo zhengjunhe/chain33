@@ -6,7 +6,7 @@
 package types
 
 import (
-	rpctypes "github.com/33cn/dplatform/rpc/types"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
 )
 
 // AccountsResult defines accountsresult command

@@ -13,13 +13,13 @@ import (
 	"bytes"
 	"reflect"
 
-	"github.com/33cn/dplatform/account"
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/client/api"
-	"github.com/33cn/dplatform/common/address"
-	dbm "github.com/33cn/dplatform/common/db"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/account"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/client/api"
+	"github.com/33cn/dplatformos/common/address"
+	dbm "github.com/33cn/dplatformos/common/db"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/types"
 )
 
 var blog = log.New("module", "execs.base")
@@ -62,7 +62,7 @@ type Driver interface {
 	Query(funcName string, params []byte) (types.Message, error)
 	IsFree() bool
 	SetAPI(client.QueueProtocolAPI)
-	SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformOSClient)
+	SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformosapi types.DplatformOSClient)
 	SetTxs(txs []*types.Transaction)
 	SetReceipt(receipts []*types.ReceiptData)
 
@@ -153,8 +153,8 @@ func (d *DriverBase) SetAPI(queueapi client.QueueProtocolAPI) {
 }
 
 // SetExecutorAPI set queue protocol api
-func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformOSClient) {
-	d.execapi = api.New(queueapi, dplatformapi)
+func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformosapi types.DplatformOSClient) {
+	d.execapi = api.New(queueapi, dplatformosapi)
 }
 
 // GetAPI return queue protocol api

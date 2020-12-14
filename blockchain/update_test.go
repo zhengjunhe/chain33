@@ -8,12 +8,12 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	client "github.com/33cn/dplatform/queue"
-	clientMocks "github.com/33cn/dplatform/queue/mocks"
+	client "github.com/33cn/dplatformos/queue"
+	clientMocks "github.com/33cn/dplatformos/queue/mocks"
 )
 
 func TestUpgradePlugin(t *testing.T) {

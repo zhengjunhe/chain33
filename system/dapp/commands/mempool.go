@@ -5,10 +5,10 @@
 package commands
 
 import (
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	"github.com/33cn/dplatform/system/dapp/commands/types"
-	ctypes "github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	"github.com/33cn/dplatformos/system/dapp/commands/types"
+	ctypes "github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 )
 

@@ -2,33 +2,33 @@
 ## 安装
 
 ```
-$ sudo install dplatform-cli.bash  /usr/share/bash-completion/completions/dplatform-cli
+$ sudo install dplatformos-cli.bash  /usr/share/bash-completion/completions/dplatformos-cli
 ```
 
 不安装
 ```
-. dplatform-cli.bash
+. dplatformos-cli.bash
 ```
 
 ```
 # 重新开个窗口就有用了
-$ ./dplatform/dplatform-cli 
+$ ./dplatformos/dplatformos-cli 
 account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 ```
 
 ## 演示
 ```
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli 
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
 account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli b
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli b
 block  dpom    
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli dpom 
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom 
 priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw   
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli dpom t
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom t
 transfer  txgroup   
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli dpom transfer -
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom transfer -
 -a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to  
 ```
 

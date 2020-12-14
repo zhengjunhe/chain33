@@ -17,14 +17,14 @@ import (
 
 	"strings"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/common/crypto"
-	"github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/common/merkle"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/common/crypto"
+	"github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/common/merkle"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 	"github.com/pkg/errors"
 )
 
@@ -569,7 +569,7 @@ func ResetDatadir(cfg *types.Config, datadir string) string {
 		datadir = filepath.Join(dir, datadir[2:])
 	}
 	if len(datadir) >= 6 && datadir[:6] == "$TEMP/" {
-		dir, err := ioutil.TempDir("", "dplatformdatadir-")
+		dir, err := ioutil.TempDir("", "dplatformosdatadir-")
 		if err != nil {
 			panic(err)
 		}

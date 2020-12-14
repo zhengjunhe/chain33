@@ -11,10 +11,10 @@ import (
 
 	"strings"
 
-	"github.com/33cn/dplatform/client/mocks"
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/types"
-	pb "github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client/mocks"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/types"
+	pb "github.com/33cn/dplatformos/types"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -682,7 +682,7 @@ func TestGrpc_GetFork(t *testing.T) {
 	})
 
 	str := types.GetDefaultCfgstring()
-	newstr := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	newstr := strings.Replace(str, "Title=\"local\"", "Title=\"dplatformos\"", 1)
 	cfg := types.NewDplatformOSConfig(newstr)
 	Init(cfg)
 	api := new(mocks.QueueProtocolAPI)

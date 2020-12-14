@@ -5,9 +5,9 @@
 package account
 
 import (
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/types"
 )
 
 // LoadExecAccount Load exec account from address and exec

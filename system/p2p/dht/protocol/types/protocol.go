@@ -16,13 +16,13 @@ import (
 	discovery "github.com/libp2p/go-libp2p-discovery"
 	kbt "github.com/libp2p/go-libp2p-kbucket"
 
-	"github.com/33cn/dplatform/system/p2p/dht/net"
+	"github.com/33cn/dplatformos/system/p2p/dht/net"
 
-	"github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatformos/p2p"
 
-	"github.com/33cn/dplatform/queue"
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
@@ -180,7 +180,7 @@ func (base *BaseProtocol) GetChainCfg() *types.DplatformOSConfig {
 
 }
 
-// GetQueueClient get dplatform msg queue client
+// GetQueueClient get dplatformos msg queue client
 func (base *BaseProtocol) GetQueueClient() queue.Client {
 
 	return base.QueueClient

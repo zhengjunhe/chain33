@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/dplatform/common/address"
-	dbm "github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/common/version"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/util/testnode"
+	"github.com/33cn/dplatformos/common/address"
+	dbm "github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/common/version"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/util/testnode"
 	"github.com/stretchr/testify/assert"
 )
 

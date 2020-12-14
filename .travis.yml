@@ -1,5 +1,5 @@
 language: go
-go_import_path: github.com/33cn/dplatform
+go_import_path: github.com/33cn/dplatformos
 
 
 os: linux

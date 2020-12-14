@@ -8,7 +8,7 @@ import (
 	"errors"
 )
 
-// dplatform定义的错误类型
+// dplatformos定义的错误类型
 var (
 	ErrSequenceNotMatch        = errors.New("ErrSequenceNotMatch")
 	ErrSequenceTooBig          = errors.New("ErrSequenceTooBig")

@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/33cn/dplatform/common/crypto"
-	_ "github.com/33cn/dplatform/system/crypto/init"
+	"github.com/33cn/dplatformos/common/crypto"
+	_ "github.com/33cn/dplatformos/system/crypto/init"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

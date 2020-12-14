@@ -5,7 +5,7 @@
 package btcbase
 
 import (
-	"github.com/33cn/dplatform/wallet/bipwallet/transformer"
+	"github.com/33cn/dplatformos/wallet/bipwallet/transformer"
 )
 
 //不同币种的前缀版本号

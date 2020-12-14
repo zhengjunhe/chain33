@@ -13,12 +13,12 @@ import (
 
 	"github.com/multiformats/go-multiaddr"
 
-	"github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/common/version"
-	"github.com/33cn/dplatform/queue"
-	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/common/version"
+	"github.com/33cn/dplatformos/queue"
+	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/google/uuid"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -27,9 +27,9 @@ import (
 
 const (
 	protoTypeID = "PeerProtocolType"
-	peerInfoReq = "/dplatform/peerinfoReq/1.0.0" //老版本
-	//peerInfoReqV2  = "/dplatform/peerinfoReq/1.0.1" //新版本，增加dplatform version 信息反馈
-	peerVersionReq = "/dplatform/peerVersion/1.0.0"
+	peerInfoReq = "/dplatformos/peerinfoReq/1.0.0" //老版本
+	//peerInfoReqV2  = "/dplatformos/peerinfoReq/1.0.1" //新版本，增加dplatformos version 信息反馈
+	peerVersionReq = "/dplatformos/peerVersion/1.0.0"
 	pubsubTypeID   = "PubSubProtoType"
 )
 
@@ -308,7 +308,7 @@ func (p *peerInfoProtol) detectNodeAddr() {
 
 }
 
-//接收dplatform其他模块发来的请求消息
+//接收dplatformos其他模块发来的请求消息
 func (p *peerInfoProtol) handleEvent(msg *queue.Message) {
 	pinfos := p.PeerInfoManager.FetchPeerInfosInMin()
 	var peers []*types.Peer

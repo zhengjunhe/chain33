@@ -8,10 +8,10 @@ import (
 	"os"
 	"sync"
 
-	"github.com/33cn/dplatform/common/db"
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/wallet/bipwallet"
+	"github.com/33cn/dplatformos/common/db"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/wallet/bipwallet"
 	p2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
 )
@@ -258,11 +258,11 @@ func GenPubkey(key string) (string, error) {
 
 }
 
-//PeerIDToPubkey 提供节点ID转换为pubkey,进而通过pubkey创建dplatform 地址的功能
+//PeerIDToPubkey 提供节点ID转换为pubkey,进而通过pubkey创建dplatformos 地址的功能
 func PeerIDToPubkey(id string) (string, error) {
 	//encodeIdStr := "16Uiu2HAm7vDB7XDuEv8XNPcoPqumVngsjWoogGXENNDXVYMiCJHM"
 	//hexpubStr:="02b99bc73bfb522110634d5644d476b21b3171eefab517da0646ef2aba39dbf4a0"
-	//dplatform address:13ohj5JH6NE15ENfuQRneqGdg29nT27K3k
+	//dplatformos address:13ohj5JH6NE15ENfuQRneqGdg29nT27K3k
 	pID, err := peer.Decode(id)
 	if err != nil {
 		return "", err

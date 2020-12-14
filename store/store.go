@@ -6,9 +6,9 @@
 package store
 
 import (
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/system/store"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/system/store"
+	"github.com/33cn/dplatformos/types"
 )
 
 // New new store queue module

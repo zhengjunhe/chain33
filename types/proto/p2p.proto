@@ -5,7 +5,7 @@ import "common.proto";
 import "blockchain.proto";
 
 package types;
-option go_package = "github.com/33cn/dplatform/types";
+option go_package = "github.com/33cn/dplatformos/types";
 
 service p2pgservice {
     //广播交易

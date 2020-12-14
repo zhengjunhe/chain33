@@ -7,7 +7,7 @@ package dapp
 import (
 	"bytes"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 )
 
 // AllowIsSame allow issame drivername

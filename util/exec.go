@@ -7,11 +7,11 @@ package util
 import (
 	"errors"
 
-	clientApi "github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	clientApi "github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 //CheckBlock : To check the block's validaty

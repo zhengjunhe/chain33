@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/dplatform/cmd/tools/tasks"
+	"github.com/33cn/dplatformos/cmd/tools/tasks"
 )
 
 type updateInitStrategy struct {
@@ -26,8 +26,8 @@ type updateInitStrategy struct {
 }
 
 func (up *updateInitStrategy) Run() error {
-	mlog.Info("Begin run dplatform update init.go.")
-	defer mlog.Info("Run dplatform update init.go finish.")
+	mlog.Info("Begin run dplatformos update init.go.")
+	defer mlog.Info("Run dplatformos update init.go finish.")
 	if err := up.initMember(); err != nil {
 		return err
 	}
@@ -40,7 +40,7 @@ func (up *updateInitStrategy) initMember() error {
 	gopath := os.Getenv("GOPATH")
 	if err != nil || path == "" {
 		if len(gopath) > 0 {
-			path = filepath.Join(gopath, "/src/github.com/33cn/dplatform/plugin/")
+			path = filepath.Join(gopath, "/src/github.com/33cn/dplatformos/plugin/")
 		}
 	}
 	if packname == "" {

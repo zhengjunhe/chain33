@@ -21,35 +21,35 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatformos/p2p"
 
-	"github.com/33cn/dplatform/metrics"
+	"github.com/33cn/dplatformos/metrics"
 
 	"time"
 
-	"github.com/33cn/dplatform/blockchain"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/blockchain"
+	"github.com/33cn/dplatformos/util"
 
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/limits"
-	clog "github.com/33cn/dplatform/common/log"
-	log "github.com/33cn/dplatform/common/log/log15"
-	"github.com/33cn/dplatform/common/version"
-	"github.com/33cn/dplatform/consensus"
-	"github.com/33cn/dplatform/executor"
-	"github.com/33cn/dplatform/mempool"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/rpc"
-	"github.com/33cn/dplatform/store"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/wallet"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/limits"
+	clog "github.com/33cn/dplatformos/common/log"
+	log "github.com/33cn/dplatformos/common/log/log15"
+	"github.com/33cn/dplatformos/common/version"
+	"github.com/33cn/dplatformos/consensus"
+	"github.com/33cn/dplatformos/executor"
+	"github.com/33cn/dplatformos/mempool"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/rpc"
+	"github.com/33cn/dplatformos/store"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/wallet"
 	"google.golang.org/grpc/grpclog"
 )
 
 var (
 	cpuNum      = runtime.NumCPU()
 	configPath  = flag.String("f", "", "configfile")
-	datadir     = flag.String("datadir", "", "data dir of dplatform, include logs and datas")
+	datadir     = flag.String("datadir", "", "data dir of dplatformos, include logs and datas")
 	versionCmd  = flag.Bool("v", false, "version")
 	fixtime     = flag.Bool("fixtime", false, "fix time")
 	waitPid     = flag.Bool("waitpid", false, "p2p stuck until seed save info wallet & wallet unlock")
@@ -70,7 +70,7 @@ func RunDplatformOS(name, defCfg string) {
 	}
 	if *configPath == "" {
 		if name == "" {
-			*configPath = "dplatform.toml"
+			*configPath = "dplatformos.toml"
 		} else {
 			*configPath = name + ".toml"
 		}
@@ -94,8 +94,8 @@ func RunDplatformOS(name, defCfg string) {
 		panic(err)
 	}
 	//set config: bityuan 用 bityuan.toml 这个配置文件
-	dplatformCfg := types.NewDplatformOSConfig(types.MergeCfg(types.ReadFile(*configPath), defCfg))
-	cfg := dplatformCfg.GetModuleConfig()
+	dplatformosCfg := types.NewDplatformOSConfig(types.MergeCfg(types.ReadFile(*configPath), defCfg))
+	cfg := dplatformosCfg.GetModuleConfig()
 	if *datadir != "" {
 		util.ResetDatadir(cfg, *datadir)
 	}
@@ -149,41 +149,41 @@ func RunDplatformOS(name, defCfg string) {
 	version.SetLocalDBVersion(cfg.Store.LocalDBVersion)
 	version.SetStoreDBVersion(cfg.Store.StoreDBVersion)
 	version.SetAppVersion(cfg.Version)
-	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " dplatform:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
+	log.Info(cfg.Title + "-app:" + version.GetAppVersion() + " dplatformos:" + version.GetVersion() + " localdb:" + version.GetLocalDBVersion() + " statedb:" + version.GetStoreDBVersion())
 	log.Info("loading queue")
 	q := queue.New("channel")
-	q.SetConfig(dplatformCfg)
+	q.SetConfig(dplatformosCfg)
 
 	log.Info("loading mempool module")
-	mem := mempool.New(dplatformCfg)
+	mem := mempool.New(dplatformosCfg)
 	mem.SetQueueClient(q.Client())
 
 	log.Info("loading execs module")
-	exec := executor.New(dplatformCfg)
+	exec := executor.New(dplatformosCfg)
 	exec.SetQueueClient(q.Client())
 
 	log.Info("loading blockchain module")
 	cfg.BlockChain.RollbackBlock = *rollback
 	cfg.BlockChain.RollbackSave = *save
-	chain := blockchain.New(dplatformCfg)
+	chain := blockchain.New(dplatformosCfg)
 	chain.SetQueueClient(q.Client())
 
 	log.Info("loading store module")
-	s := store.New(dplatformCfg)
+	s := store.New(dplatformosCfg)
 	s.SetQueueClient(q.Client())
 
 	chain.Upgrade()
 
 	log.Info("loading consensus module")
-	cs := consensus.New(dplatformCfg)
+	cs := consensus.New(dplatformosCfg)
 	cs.SetQueueClient(q.Client())
 
 	//jsonrpc, grpc, channel 三种模式
-	rpcapi := rpc.New(dplatformCfg)
+	rpcapi := rpc.New(dplatformosCfg)
 	rpcapi.SetQueueClient(q.Client())
 
 	log.Info("loading wallet module")
-	walletm := wallet.New(dplatformCfg)
+	walletm := wallet.New(dplatformosCfg)
 	walletm.SetQueueClient(q.Client())
 
 	chain.Rollbackblock()
@@ -197,7 +197,7 @@ func RunDplatformOS(name, defCfg string) {
 	log.Info("loading p2p module")
 	var network queue.Module
 	if cfg.P2P.Enable {
-		network = p2p.NewP2PMgr(dplatformCfg)
+		network = p2p.NewP2PMgr(dplatformosCfg)
 	} else {
 		network = &util.MockModule{Key: "p2p"}
 	}
@@ -205,7 +205,7 @@ func RunDplatformOS(name, defCfg string) {
 
 	health := util.NewHealthCheckServer(q.Client())
 	health.Start(cfg.Health)
-	metrics.StartMetrics(dplatformCfg)
+	metrics.StartMetrics(dplatformosCfg)
 	defer func() {
 		//close all module,clean some resource
 		log.Info("begin close health module")

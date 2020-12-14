@@ -13,9 +13,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/util/testnode"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/util/testnode"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -29,7 +29,7 @@ func TestRollbackblock(t *testing.T) {
 		})
 	})
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatformos\"", 1)
 	cfg := types.NewDplatformOSConfig(new)
 	mfg := cfg.GetModuleConfig()
 	mfg.BlockChain.RollbackBlock = 0
@@ -55,7 +55,7 @@ func TestNeedRollback(t *testing.T) {
 	})
 
 	str := types.GetDefaultCfgstring()
-	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
+	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatformos\"", 1)
 	cfg := types.NewDplatformOSConfig(new)
 	mock33 := testnode.NewWithConfig(cfg, nil)
 	chain := mock33.GetBlockChain()

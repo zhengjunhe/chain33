@@ -7,9 +7,9 @@ import (
 	"errors"
 	"sync/atomic"
 
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 )

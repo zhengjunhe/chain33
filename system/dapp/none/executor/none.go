@@ -10,8 +10,8 @@ package executor
 // nofee transaction will not pack into block
 
 import (
-	drivers "github.com/33cn/dplatform/system/dapp"
-	"github.com/33cn/dplatform/types"
+	drivers "github.com/33cn/dplatformos/system/dapp"
+	"github.com/33cn/dplatformos/types"
 )
 
 var driverName = "none"

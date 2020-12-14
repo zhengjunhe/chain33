@@ -7,8 +7,8 @@ package types
 import (
 	"testing"
 
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	"github.com/33cn/dplatform/types"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	"github.com/33cn/dplatformos/types"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 )
@@ -69,11 +69,11 @@ func TestDecodeAccount(t *testing.T) {
 }
 
 func TestCreateRawTx(t *testing.T) {
-	dplatformCfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
-	types.SetCliSysParam(dplatformCfg.GetTitle(), dplatformCfg)
+	dplatformosCfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
+	types.SetCliSysParam(dplatformosCfg.GetTitle(), dplatformosCfg)
 
 	cmd := &cobra.Command{}
-	cmd.Flags().StringP("title", "t", dplatformCfg.GetTitle(), "for test")
+	cmd.Flags().StringP("title", "t", dplatformosCfg.GetTitle(), "for test")
 
 	var err error
 	_, err = CreateRawTx(cmd, "", 0, "", false, "", "")

@@ -7,8 +7,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/33cn/dplatform/cmd/tools/strategy"
-	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatformos/cmd/tools/strategy"
+	"github.com/33cn/dplatformos/cmd/tools/types"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +16,7 @@ import (
 func UpdateInitCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "updateinit",
-		Short: "Update dplatform plugin consensus、dapp、store、mempool init.go file",
+		Short: "Update dplatformos plugin consensus、dapp、store、mempool init.go file",
 		Run:   updateInit,
 	}
 	cmd.Flags().StringP("path", "p", "plugin", "path of plugin")

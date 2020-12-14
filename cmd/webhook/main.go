@@ -16,7 +16,7 @@ const (
 	path = "/webhooks"
 )
 
-var project = flag.String("p", "dplatform", "the github project name")
+var project = flag.String("p", "dplatformos", "the github project name")
 
 func main() {
 	flag.Parse()

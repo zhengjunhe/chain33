@@ -8,7 +8,7 @@ import (
 	"container/list"
 	"sync"
 
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/types"
 	lru "github.com/hashicorp/golang-lru"
 )
 

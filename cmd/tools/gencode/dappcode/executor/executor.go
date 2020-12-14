@@ -5,8 +5,8 @@
 package executor
 
 import (
-	"github.com/33cn/dplatform/cmd/tools/gencode/base"
-	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatformos/cmd/tools/gencode/base"
+	"github.com/33cn/dplatformos/cmd/tools/types"
 )
 
 func init() {
@@ -41,10 +41,10 @@ var (
 	executorContent = `package executor
 
 import (
-	log "github.com/33cn/dplatform/common/log/log15"
+	log "github.com/33cn/dplatformos/common/log/log15"
 	${EXECNAME}types "${IMPORTPATH}/${EXECNAME}/types"
-	drivers "github.com/33cn/dplatform/system/dapp"
-	"github.com/33cn/dplatform/types"
+	drivers "github.com/33cn/dplatformos/system/dapp"
+	"github.com/33cn/dplatformos/types"
 )
 
 /* 

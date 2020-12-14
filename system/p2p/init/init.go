@@ -6,5 +6,5 @@
 package init
 
 import (
-	_ "github.com/33cn/dplatform/system/p2p/dht" //基于libp2p dht网络
+	_ "github.com/33cn/dplatformos/system/p2p/dht" //基于libp2p dht网络
 )

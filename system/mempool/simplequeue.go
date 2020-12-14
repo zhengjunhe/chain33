@@ -5,8 +5,8 @@
 package mempool
 
 import (
-	"github.com/33cn/dplatform/common/listmap"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/listmap"
+	"github.com/33cn/dplatformos/types"
 )
 
 // SubConfig 配置信息

@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
-	"github.com/33cn/dplatform/types"
+	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
+	"github.com/33cn/dplatformos/types"
 	core "github.com/libp2p/go-libp2p-core"
 	"github.com/libp2p/go-libp2p-core/peerstore"
 	"github.com/multiformats/go-multiaddr"

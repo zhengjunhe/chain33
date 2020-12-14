@@ -6,7 +6,7 @@
 package init
 
 import (
-	_ "github.com/33cn/dplatform/system/dapp/coins"  // register coins package
-	_ "github.com/33cn/dplatform/system/dapp/manage" // register manage package
-	_ "github.com/33cn/dplatform/system/dapp/none"   // register none package
+	_ "github.com/33cn/dplatformos/system/dapp/coins"  // register coins package
+	_ "github.com/33cn/dplatformos/system/dapp/manage" // register manage package
+	_ "github.com/33cn/dplatformos/system/dapp/none"   // register none package
 )

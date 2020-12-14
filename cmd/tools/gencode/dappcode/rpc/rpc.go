@@ -5,8 +5,8 @@
 package rpc
 
 import (
-	"github.com/33cn/dplatform/cmd/tools/gencode/base"
-	"github.com/33cn/dplatform/cmd/tools/types"
+	"github.com/33cn/dplatformos/cmd/tools/gencode/base"
+	"github.com/33cn/dplatformos/cmd/tools/types"
 )
 
 func init() {
@@ -54,7 +54,7 @@ var (
 
 import (
 	${EXECNAME}types "${IMPORTPATH}/${EXECNAME}/types"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
 )
 
 /* 

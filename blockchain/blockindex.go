@@ -9,8 +9,8 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/33cn/dplatform/common/difficulty"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common/difficulty"
+	"github.com/33cn/dplatformos/types"
 )
 
 type blockNode struct {

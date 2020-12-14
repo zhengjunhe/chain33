@@ -7,7 +7,7 @@ package headers
 import (
 	"testing"
 
-	"github.com/33cn/dplatform/p2p"
+	"github.com/33cn/dplatformos/p2p"
 
 	"context"
 	"crypto/rand"
@@ -16,18 +16,18 @@ import (
 	libp2p "github.com/libp2p/go-libp2p"
 	crypto "github.com/libp2p/go-libp2p-core/crypto"
 
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/queue"
-	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
-	p2pty "github.com/33cn/dplatform/system/p2p/dht/types"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/queue"
+	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
+	p2pty "github.com/33cn/dplatformos/system/p2p/dht/types"
+	"github.com/33cn/dplatformos/types"
 	multiaddr "github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/assert"
 )
 
 func newTestEnv(q queue.Queue) *prototypes.P2PEnv {
 
-	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../../../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../../../cmd/dplatformos/dplatformos.test.toml"))
 	q.SetConfig(cfg)
 	go q.Start()
 

@@ -1,10 +1,10 @@
 package protocol
 
 import (
-	"github.com/33cn/dplatform/common/log/log15"
+	"github.com/33cn/dplatformos/common/log/log15"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
 )
 
 var (

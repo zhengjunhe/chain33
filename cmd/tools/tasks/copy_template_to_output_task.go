@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/33cn/dplatform/cmd/tools/types"
-	"github.com/33cn/dplatform/cmd/tools/util"
+	"github.com/33cn/dplatformos/cmd/tools/types"
+	"github.com/33cn/dplatformos/cmd/tools/util"
 )
 
 //CopyTemplateToOutputTask ...

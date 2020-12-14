@@ -9,22 +9,22 @@ import (
 	"testing"
 	"time"
 
-	bcMocks "github.com/33cn/dplatform/blockchain/mocks"
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/common"
-	"github.com/33cn/dplatform/common/crypto"
-	"github.com/33cn/dplatform/consensus"
-	"github.com/33cn/dplatform/executor"
-	"github.com/33cn/dplatform/mempool"
-	"github.com/33cn/dplatform/p2p"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/rpc"
-	"github.com/33cn/dplatform/rpc/jsonclient"
-	rpctypes "github.com/33cn/dplatform/rpc/types"
-	"github.com/33cn/dplatform/store"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
-	"github.com/33cn/dplatform/wallet"
+	bcMocks "github.com/33cn/dplatformos/blockchain/mocks"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/common"
+	"github.com/33cn/dplatformos/common/crypto"
+	"github.com/33cn/dplatformos/consensus"
+	"github.com/33cn/dplatformos/executor"
+	"github.com/33cn/dplatformos/mempool"
+	"github.com/33cn/dplatformos/p2p"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/rpc"
+	"github.com/33cn/dplatformos/rpc/jsonclient"
+	rpctypes "github.com/33cn/dplatformos/rpc/types"
+	"github.com/33cn/dplatformos/store"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
+	"github.com/33cn/dplatformos/wallet"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
@@ -680,7 +680,7 @@ func Test_RecoverPush(t *testing.T) {
 	assert.Equal(t, atomic.LoadInt32(&pushNotifyInfo.status), notRunning)
 	chain.ProcGetLastPushSeq(subscribe.Name)
 
-	//dplatform的push服务重启后，不会将其添加到task中，
+	//dplatformos的push服务重启后，不会将其添加到task中，
 	chainAnother := &BlockChain{
 		isRecordBlockSequence: true,
 		enablePushSubscribe:   true,

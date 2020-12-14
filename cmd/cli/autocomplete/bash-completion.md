@@ -1,6 +1,6 @@
 # 命令行自动补全
 
-  目前在ubuntu下用git 等软件你会发现按tab键有提示或补全的功能， 这个功能依赖一个软件包， 叫bash-completion。bash-completion 提供的能力是bash shell 的可编程补全。而dplatform-cli 功能也越来越多，每加一步都看下帮助， 效率不高。 把这个能力加到dplatform-cli里， 应该能提高不少效率。
+  目前在ubuntu下用git 等软件你会发现按tab键有提示或补全的功能， 这个功能依赖一个软件包， 叫bash-completion。bash-completion 提供的能力是bash shell 的可编程补全。而dplatformos-cli 功能也越来越多，每加一步都看下帮助， 效率不高。 把这个能力加到dplatformos-cli里， 应该能提高不少效率。
 
 ## bash-completion
 
@@ -63,8 +63,8 @@ compgen: 用法: compgen [-abcdefgjksuv] [-o 选项]  [-A 动作] [-G 全局模�
 complete 演示
 ```
 # 是不是很简单
-$ complete -W "account block dpom trade token" dplatform-cli
-linj@linj-TM1701:~$ dplatform-cli t
+$ complete -W "account block dpom trade token" dplatformos-cli
+linj@linj-TM1701:~$ dplatformos-cli t
 token  trade  
 
 # 再次打击
@@ -98,11 +98,11 @@ complete: 用法: complete [-abcdefgjksuv] [-pr] [-DE] [-o 选项] [-A 动作] [
 ```
 
 ```
-linj@linj-TM1701:~$ dplatform-cli account 
+linj@linj-TM1701:~$ dplatformos-cli account 
 
-declare -a COMP_WORDS='([0]="dplatform-cli" [1]="account" [2]="")'
+declare -a COMP_WORDS='([0]="dplatformos-cli" [1]="account" [2]="")'
 declare -- COMP_CWORD="2"
-declare -- COMP_LINE="dplatform-cli account "
+declare -- COMP_LINE="dplatformos-cli account "
 declare -- COMP_WORDBREAKS=" 	
 \"'><=;|&(:"
 declare -- COMP_KEY="9"
@@ -112,10 +112,10 @@ declare -- COMP_TYPE="9"
 
 ### 演示程序1 子命令补全
 
-dplatform-cli 参数补全
+dplatformos-cli 参数补全
 ```
 #!/bin/bash
-# 通过dplatform-cli 的help 找到一级的子命令
+# 通过dplatformos-cli 的help 找到一级的子命令
 subcmd_list=("account" "block" "dpom" "close" "coins" "config" "evm" "exec" "hashlock" "help" "mempool" "net" "privacy" "relay" "retrieve" "seed" "send" "stat" "ticket" "token" "trade" "tx" "version" "wallet")
 #
 function _subcmd() {
@@ -126,47 +126,47 @@ function _subcmd() {
   return 0
 }
 
-# 用 _subcmd 补全 dplatform-cli
+# 用 _subcmd 补全 dplatformos-cli
 # _subcmd 通过当前光标所在的输入参数过滤可选的子命令
-complete -F _subcmd dplatform-cli
+complete -F _subcmd dplatformos-cli
 ```
 
 试用一下
 ```
 linj@linj-TM1701:~$ . subcmd.bash  
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli 
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
 account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli t
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli t
 ticket  token   trade   tx      
 ```
 
 ### 生效
 
 ```
-linj@linj-TM1701:~$ sudo install subcmd.bash  /usr/share/bash-completion/completions/dplatform-cli
+linj@linj-TM1701:~$ sudo install subcmd.bash  /usr/share/bash-completion/completions/dplatformos-cli
 # 重新开个窗口就有用了
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli 
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
 account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 ```
 
-### 给dplatform-cli 做个 bash-completion
+### 给dplatformos-cli 做个 bash-completion
 
 
- 地址: https://gitlab.33.cn/linj/dplatform-cli-completion
+ 地址: https://gitlab.33.cn/linj/dplatformos-cli-completion
 
 演示
 ```
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli 
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
 account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli b
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli b
 block  dpom    
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli dpom 
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom 
 priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw   
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli dpom t
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom t
 transfer  txgroup   
-linj@linj-TM1701:~$ ./dplatform/dplatform-cli dpom transfer -
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom transfer -
 -a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to  
 ```

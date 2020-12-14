@@ -11,15 +11,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/33cn/dplatform/client"
-	"github.com/33cn/dplatform/client/api"
-	"github.com/33cn/dplatform/common/address"
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/store"
-	_ "github.com/33cn/dplatform/system"
-	drivers "github.com/33cn/dplatform/system/dapp"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/client"
+	"github.com/33cn/dplatformos/client/api"
+	"github.com/33cn/dplatformos/common/address"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/store"
+	_ "github.com/33cn/dplatformos/system"
+	drivers "github.com/33cn/dplatformos/system/dapp"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -284,7 +284,7 @@ func TestExecutorErrAPIEnv(t *testing.T) {
 	assert.Equal(t, true, api.IsAPIEnvError(err))
 }
 func TestCheckTx(t *testing.T) {
-	exec, q := initEnv(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
+	exec, q := initEnv(types.ReadFile("../cmd/dplatformos/dplatformos.test.toml"))
 	cfg := exec.client.GetConfig()
 
 	store := store.New(cfg)

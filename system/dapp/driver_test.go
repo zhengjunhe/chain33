@@ -6,10 +6,10 @@ import (
 
 	"sync"
 
-	"github.com/33cn/dplatform/client/mocks"
-	"github.com/33cn/dplatform/rpc/grpcclient"
-	"github.com/33cn/dplatform/types"
-	"github.com/33cn/dplatform/util"
+	"github.com/33cn/dplatformos/client/mocks"
+	"github.com/33cn/dplatformos/rpc/grpcclient"
+	"github.com/33cn/dplatformos/types"
+	"github.com/33cn/dplatformos/util"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -104,7 +104,7 @@ func TestDriverAPI(t *testing.T) {
 	demo.SetExecutorAPI(api, gcli)
 	assert.NotNil(t, demo.GetAPI())
 	assert.NotNil(t, demo.GetExecutorAPI())
-	cfg.SetTitleOnlyForTest("dplatform")
+	cfg.SetTitleOnlyForTest("dplatformos")
 	assert.Equal(t, "parentHash", string(demo.GetParentHash()))
 	assert.Equal(t, "parentHash", string(demo.GetLastHash()))
 	cfg.SetTitleOnlyForTest("user.p.wzw.")

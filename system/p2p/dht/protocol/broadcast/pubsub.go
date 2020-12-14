@@ -9,12 +9,12 @@ import (
 	"runtime"
 	"time"
 
-	prototypes "github.com/33cn/dplatform/system/p2p/dht/protocol/types"
+	prototypes "github.com/33cn/dplatformos/system/p2p/dht/protocol/types"
 	core "github.com/libp2p/go-libp2p-core"
 
-	"github.com/33cn/dplatform/p2p/utils"
-	"github.com/33cn/dplatform/system/p2p/dht/net"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/p2p/utils"
+	"github.com/33cn/dplatformos/system/p2p/dht/net"
+	"github.com/33cn/dplatformos/types"
 	"github.com/golang/snappy"
 )
 

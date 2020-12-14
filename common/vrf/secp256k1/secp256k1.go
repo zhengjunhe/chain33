@@ -32,7 +32,7 @@ import (
 	"errors"
 	"math/big"
 
-	vrfp "github.com/33cn/dplatform/common/vrf"
+	vrfp "github.com/33cn/dplatformos/common/vrf"
 	"github.com/btcsuite/btcd/btcec"
 )
 

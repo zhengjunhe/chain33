@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/33cn/dplatform/common/log/log15"
-	dplatformType "github.com/33cn/dplatform/system/dapp/commands/types"
+	"github.com/33cn/dplatformos/common/log/log15"
+	dplatformosType "github.com/33cn/dplatformos/system/dapp/commands/types"
 )
 
 //CaseFunc interface for testCase
@@ -65,7 +65,7 @@ type BaseCase struct {
 }
 
 //check item handler
-//适配autotest早期版本，handlerfunc的参数为json的map形式，后续统一使用dplatform的TxDetailResult结构体结构
+//适配autotest早期版本，handlerfunc的参数为json的map形式，后续统一使用dplatformos的TxDetailResult结构体结构
 
 //CheckHandlerFuncDiscard 检查func
 type CheckHandlerFuncDiscard func(map[string]interface{}) bool
@@ -76,7 +76,7 @@ type CheckHandlerMapDiscard map[string]CheckHandlerFuncDiscard
 //建议使用
 
 //CheckHandlerParamType 检查参数类型
-type CheckHandlerParamType *dplatformType.TxDetailResult
+type CheckHandlerParamType *dplatformosType.TxDetailResult
 
 //CheckHandlerFunc 检查func
 type CheckHandlerFunc func(CheckHandlerParamType) bool
@@ -232,7 +232,7 @@ func (pack *BaseCasePack) CheckResult(handlerMap interface{}) (bCheck bool, bSuc
 		bCheck = true
 		var tyname string
 		var jsonMap map[string]interface{}
-		var txRecp dplatformType.TxDetailResult
+		var txRecp dplatformosType.TxDetailResult
 		pack.TxReceipt = txInfo
 		pack.FLog.Info("TxReceiptJson", "TestID", pack.PackID)
 		//hack, for pretty json log

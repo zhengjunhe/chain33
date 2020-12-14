@@ -14,9 +14,9 @@ import (
 	"sync/atomic"
 	"syscall"
 
-	"github.com/33cn/dplatform/common"
-	dbm "github.com/33cn/dplatform/common/db"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/common"
+	dbm "github.com/33cn/dplatformos/common/db"
+	"github.com/33cn/dplatformos/types"
 )
 
 var (
@@ -65,7 +65,7 @@ func (chain *BlockChain) ImportBlockProc(filename string, dir string) {
 }
 
 //ExportBlock 通过指定title和起始高度将block信息导出到一个指定文件中。
-// title:dplatform/bityuan
+// title:dplatformos/bityuan
 // startHeight:需要导入/导出的起始高度
 // dbPath:存储到指定路径,默认当前目录下
 func (chain *BlockChain) ExportBlock(title, dbPath string, startHeight int64) error {
@@ -378,7 +378,7 @@ func getDataDir(datadir string) string {
 		datadir = filepath.Join(dir, datadir[2:])
 	}
 	if len(datadir) >= 6 && datadir[:6] == "$TEMP/" {
-		dir, err := ioutil.TempDir("", "dplatformdatadir-")
+		dir, err := ioutil.TempDir("", "dplatformosdatadir-")
 		if err != nil {
 			panic(err)
 		}

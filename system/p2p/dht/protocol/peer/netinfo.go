@@ -3,8 +3,8 @@ package peer
 import (
 	"net"
 
-	"github.com/33cn/dplatform/queue"
-	"github.com/33cn/dplatform/types"
+	"github.com/33cn/dplatformos/queue"
+	"github.com/33cn/dplatformos/types"
 )
 
 func (p *peerInfoProtol) netinfoHandleEvent(msg *queue.Message) {

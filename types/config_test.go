@@ -28,7 +28,7 @@ func TestChainConfig(t *testing.T) {
 
 //测试实际的配置文件
 func TestSubConfig(t *testing.T) {
-	cfg, err := initSubModuleString(readFile("testdata/dplatform.toml"))
+	cfg, err := initSubModuleString(readFile("testdata/dplatformos.toml"))
 	assert.Equal(t, 0, len(cfg.Consensus))
 	assert.Equal(t, 2, len(cfg.Store))
 	assert.Equal(t, 1, len(cfg.Exec))
@@ -37,15 +37,15 @@ func TestSubConfig(t *testing.T) {
 }
 
 func TestConfInit(t *testing.T) {
-	cfg := NewDplatformOSConfig(ReadFile("testdata/dplatform.toml"))
+	cfg := NewDplatformOSConfig(ReadFile("testdata/dplatformos.toml"))
 	assert.True(t, cfg.IsEnable("TxHeight"))
 }
 
 func TestConfigNoInit(t *testing.T) {
-	cfg := NewDplatformOSConfigNoInit(ReadFile("testdata/dplatform.toml"))
+	cfg := NewDplatformOSConfigNoInit(ReadFile("testdata/dplatformos.toml"))
 	assert.False(t, cfg.IsEnable("TxHeight"))
 	cfg.EnableCheckFork(false)
-	cfg.dplatformCfgInit(cfg.GetModuleConfig())
+	cfg.dplatformosCfgInit(cfg.GetModuleConfig())
 	mcfg := cfg.GetModuleConfig()
 	assert.Equal(t, cfg.forks.forks["ForkV16Withdraw"], int64(480000))
 	assert.Equal(t, mcfg.Fork.Sub["token"]["Enable"], int64(100899))

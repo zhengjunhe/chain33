@@ -2,7 +2,7 @@ package store
 
 //default names and parameters
 const (
-	DhtStoreNamespace = "dplatform-dhtstore"
+	DhtStoreNamespace = "dplatformos-dhtstore"
 	DBName            = "p2pstore"
 
 	DefaultDataDriver = "leveldb"

@@ -17,11 +17,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	l "github.com/33cn/dplatform/common/log/log15"
+	l "github.com/33cn/dplatformos/common/log/log15"
 	tml "github.com/BurntSushi/toml"
 	"github.com/rs/cors"
 
-	"github.com/33cn/dplatform/cmd/miner_accounts/accounts"
+	"github.com/33cn/dplatformos/cmd/miner_accounts/accounts"
 )
 
 var (

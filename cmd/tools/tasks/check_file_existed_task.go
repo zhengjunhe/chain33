@@ -5,7 +5,7 @@
 package tasks
 
 import (
-	"github.com/33cn/dplatform/cmd/tools/util"
+	"github.com/33cn/dplatformos/cmd/tools/util"
 )
 
 // CheckFileExistedTask 检测文件是否存在
