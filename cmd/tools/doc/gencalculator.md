@@ -306,7 +306,7 @@ func (j *Jrpc)QueryCalcCount(in *ptypes.ReqQueryCalcCount, result *interface{}) 
 
 ##### rpc说明
 >对于构造交易和query类接口可以通过dplatform框架的rpc去调用，
-分别是Dplatform.CreateTransaction和Dplatform.Query，上述代码只是示例如何开发rpc接口，
+分别是DplatformOS.CreateTransaction和DplatformOS.Query，上述代码只是示例如何开发rpc接口，
 实际使用中，只需要实现query接口，并通过框架rpc调用，也可以根据需求封装rpc接口，在commands模块将会介绍如何调用框架rpc
 
 #### commands命令行模块
@@ -357,7 +357,7 @@ func createAdd(cmd *cobra.Command, args []string) {
 	}
 	var res string
 	//调用框架CreateTransaction接口构建原始交易
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.CreateTransaction", dplatformReq, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.CreateTransaction", dplatformReq, &res)
 	ctx.RunWithoutMarshal()
 }
 ```
@@ -392,7 +392,7 @@ func queryCalcCountCmd() *cobra.Command {
  	var res interface{}
  	res = &calculatortypes.ReplyQueryCalcCount{}
  	//调用框架Query rpc接口, 通过框架调用，需要指定query对应的函数名称，具体参数见Query4Jrpc结构
- 	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.Query", dplatformReq, &res)
+ 	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.Query", dplatformReq, &res)
  	//调用合约内部rpc接口, 注意合约自定义的rpc接口是以合约名称作为rpc服务，这里为calculator
  	//ctx := jsonclient.NewRPCCtx(rpcLaddr, "calculator.QueryCalcCount", req, &res)
  	ctx.Run()
@@ -437,7 +437,7 @@ $ cd $GOPATH/src/github.com/33cn/plugin && make
 编译后可以运行节点，进行钱包相关配置，即可发送合约交易进行功能性测试，本例相关命令行
 ```bash
 # 通过curl方式调用rpc接口构建Add原始交易
-curl -kd '{"method":"Dplatform.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:28803
+curl -kd '{"method":"DplatformOS.CreateTransaction", "params":[{"execer":"calculator", "actionName":"Add", "payload":{"summand":1,"addend":1}}]}' http://localhost:28803
 # 通过dplatform-cli构建Add原始交易
 ./dplatform-cli calculator add -a 1 -s 1
 

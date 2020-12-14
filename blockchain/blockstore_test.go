@@ -20,7 +20,7 @@ import (
 )
 
 func InitEnv() *BlockChain {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	chain := New(cfg)
@@ -399,7 +399,7 @@ func TestGetSetSerialChunkNum(t *testing.T) {
 }
 
 func TestGetBodyFromP2Pstore(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	chain := New(cfg)

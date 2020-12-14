@@ -24,13 +24,13 @@ var once sync.Once
 
 func TestRollbackblock(t *testing.T) {
 	once.Do(func() {
-		types.RegFork("store-kvmvccmavl", func(cfg *types.DplatformConfig) {
+		types.RegFork("store-kvmvccmavl", func(cfg *types.DplatformOSConfig) {
 			cfg.RegisterDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 		})
 	})
 	str := types.GetDefaultCfgstring()
 	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
-	cfg := types.NewDplatformConfig(new)
+	cfg := types.NewDplatformOSConfig(new)
 	mfg := cfg.GetModuleConfig()
 	mfg.BlockChain.RollbackBlock = 0
 	mock33 := testnode.NewWithConfig(cfg, nil)
@@ -49,14 +49,14 @@ func TestRollbackblock(t *testing.T) {
 
 func TestNeedRollback(t *testing.T) {
 	once.Do(func() {
-		types.RegFork("store-kvmvccmavl", func(cfg *types.DplatformConfig) {
+		types.RegFork("store-kvmvccmavl", func(cfg *types.DplatformOSConfig) {
 			cfg.RegisterDappFork("store-kvmvccmavl", "ForkKvmvccmavl", 20*10000)
 		})
 	})
 
 	str := types.GetDefaultCfgstring()
 	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
-	cfg := types.NewDplatformConfig(new)
+	cfg := types.NewDplatformOSConfig(new)
 	mock33 := testnode.NewWithConfig(cfg, nil)
 	chain := mock33.GetBlockChain()
 
@@ -160,7 +160,7 @@ func TestRollbackPara(t *testing.T) {
 	require.Equal(t, int64(2), chain.GetBlockHeight())
 }
 
-func testMockSendTx(t *testing.T, mock33 *testnode.DplatformMock) {
+func testMockSendTx(t *testing.T, mock33 *testnode.DplatformOSMock) {
 	cfg := mock33.GetClient().GetConfig()
 	txs := util.GenCoinsTxs(cfg, mock33.GetGenesisKey(), 10)
 	for i := 0; i < len(txs); i++ {

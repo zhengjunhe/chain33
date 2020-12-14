@@ -11,7 +11,7 @@ CHAIN33_PATH=../../
 
 function copyAutoTestConfig() {
 
-    declare -a DplatformAutoTestDirs=("${CHAIN33_PATH}/system")
+    declare -a DplatformOSAutoTestDirs=("${CHAIN33_PATH}/system")
     echo "#copy auto test config to path \"$1\""
     local AutoTestConfigFile="$1/autotest.toml"
 
@@ -23,7 +23,7 @@ function copyAutoTestConfig() {
     } >"${AutoTestConfigFile}"
 
     #copy all the dapp test case config file
-    for rootDir in "${DplatformAutoTestDirs[@]}"; do
+    for rootDir in "${DplatformOSAutoTestDirs[@]}"; do
 
         if [[ ! -d ${rootDir} ]]; then
             continue
@@ -54,7 +54,7 @@ function copyAutoTestConfig() {
     done
 }
 
-function copyDplatform() {
+function copyDplatformOS() {
 
     echo "# copy dplatform bin to path \"$1\", make sure build dplatform"
     cp ../dplatform ../dplatform-cli ../dplatform.toml "$1"
@@ -70,7 +70,7 @@ function copyAll() {
     fi
     cp autotest "${dir}"
     copyAutoTestConfig "${dir}"
-    copyDplatform "${dir}"
+    copyDplatformOS "${dir}"
     echo "# all copy have done!"
 }
 

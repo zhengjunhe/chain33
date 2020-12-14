@@ -24,7 +24,7 @@ import (
 )
 
 func initEnv(cfgstring string) (*Executor, queue.Queue) {
-	cfg := types.NewDplatformConfig(cfgstring)
+	cfg := types.NewDplatformOSConfig(cfgstring)
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	exec := New(cfg)
@@ -192,7 +192,7 @@ func init() {
 
 var testRegOnce sync.Once
 
-func Register(cfg *types.DplatformConfig) {
+func Register(cfg *types.DplatformOSConfig) {
 	testRegOnce.Do(func() {
 		drivers.Register(cfg, "demo", newdemoApp, 1)
 		drivers.Register(cfg, "demof", newdemofApp, 1)

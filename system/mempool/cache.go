@@ -123,7 +123,7 @@ func (cache *txCache) Push(tx *types.Transaction) error {
 	return nil
 }
 
-func (cache *txCache) removeExpiredTx(cfg *types.DplatformConfig, height, blocktime int64) {
+func (cache *txCache) removeExpiredTx(cfg *types.DplatformOSConfig, height, blocktime int64) {
 	var txs []string
 	cache.qcache.Walk(0, func(tx *Item) bool {
 		if isExpired(cfg, tx, height, blocktime) {
@@ -135,7 +135,7 @@ func (cache *txCache) removeExpiredTx(cfg *types.DplatformConfig, height, blockt
 }
 
 //判断交易是否过期
-func isExpired(cfg *types.DplatformConfig, item *Item, height, blockTime int64) bool {
+func isExpired(cfg *types.DplatformOSConfig, item *Item, height, blockTime int64) bool {
 	if types.Now().Unix()-item.EnterTime >= mempoolExpiredInterval {
 		return true
 	}

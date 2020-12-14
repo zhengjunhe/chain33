@@ -11,7 +11,7 @@ import (
 )
 
 // Storecreate store queue module
-type Storecreate func(cfg *types.Store, sub []byte, dplatformcfg *types.DplatformConfig) queue.Module
+type Storecreate func(cfg *types.Store, sub []byte, dplatformcfg *types.DplatformOSConfig) queue.Module
 
 var regStore = make(map[string]Storecreate)
 

@@ -706,7 +706,7 @@ func (m *ReqRandHash) GetHash() []byte {
 type VersionInfo struct {
 	Title                string   `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	App                  string   `protobuf:"bytes,2,opt,name=app,proto3" json:"app,omitempty"`
-	Dplatform            string   `protobuf:"bytes,3,opt,name=dplatform,proto3" json:"dplatform,omitempty"`
+	DplatformOS            string   `protobuf:"bytes,3,opt,name=dplatform,proto3" json:"dplatform,omitempty"`
 	LocalDb              string   `protobuf:"bytes,4,opt,name=localDb,proto3" json:"localDb,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -752,9 +752,9 @@ func (m *VersionInfo) GetApp() string {
 	return ""
 }
 
-func (m *VersionInfo) GetDplatform() string {
+func (m *VersionInfo) GetDplatformOS() string {
 	if m != nil {
-		return m.Dplatform
+		return m.DplatformOS
 	}
 	return ""
 }

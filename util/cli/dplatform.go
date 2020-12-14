@@ -4,7 +4,7 @@
 
 // +build go1.8
 
-// package cli RunDplatform函数会加载各个模块，组合成区块链程序
+// package cli RunDplatformOS函数会加载各个模块，组合成区块链程序
 //主循环由消息队列驱动。
 //消息队列本身可插拔，可以支持各种队列
 //同时共识模式也是可以插拔的。
@@ -61,8 +61,8 @@ var (
 	startHeight = flag.Int64("startheight", 0, "export block start height")
 )
 
-//RunDplatform : run Dplatform
-func RunDplatform(name, defCfg string) {
+//RunDplatformOS : run DplatformOS
+func RunDplatformOS(name, defCfg string) {
 	flag.Parse()
 	if *versionCmd {
 		fmt.Println(version.GetVersion())
@@ -94,7 +94,7 @@ func RunDplatform(name, defCfg string) {
 		panic(err)
 	}
 	//set config: bityuan 用 bityuan.toml 这个配置文件
-	dplatformCfg := types.NewDplatformConfig(types.MergeCfg(types.ReadFile(*configPath), defCfg))
+	dplatformCfg := types.NewDplatformOSConfig(types.MergeCfg(types.ReadFile(*configPath), defCfg))
 	cfg := dplatformCfg.GetModuleConfig()
 	if *datadir != "" {
 		util.ResetDatadir(cfg, *datadir)

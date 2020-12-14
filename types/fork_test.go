@@ -11,7 +11,7 @@ import (
 )
 
 func TestForks(t *testing.T) {
-	cfg := NewDplatformConfig(GetDefaultCfgstring())
+	cfg := NewDplatformOSConfig(GetDefaultCfgstring())
 	cfg.forks.setLocalFork()
 	assert.Equal(t, cfg.forks.IsFork(1, "ForkV1"), false)
 	assert.Equal(t, cfg.forks.IsFork(1, "ForkV12"), false)
@@ -23,6 +23,6 @@ func TestForks(t *testing.T) {
 }
 
 func TestParaFork(t *testing.T) {
-	NewDplatformConfig(ReadFile("testdata/guodun.toml"))
-	NewDplatformConfig(ReadFile("testdata/guodun2.toml"))
+	NewDplatformOSConfig(ReadFile("testdata/guodun.toml"))
+	NewDplatformOSConfig(ReadFile("testdata/guodun2.toml"))
 }

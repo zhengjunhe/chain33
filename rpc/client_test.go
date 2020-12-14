@@ -21,13 +21,13 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-func Init(cfg *types.DplatformConfig) {
+func Init(cfg *types.DplatformOSConfig) {
 	slog.SetLogLevel("error")
 	pluginmgr.InitExec(cfg)
 }
 
 func newTestChannelClient() *channelClient {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	return &channelClient{
@@ -247,7 +247,7 @@ func TestChannelClient_GetAddrOverview(t *testing.T) {
 }
 
 func testChannelClientGetBalanceCoin(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	db := new(account.DB)
@@ -281,7 +281,7 @@ func testChannelClientGetBalanceCoin(t *testing.T) {
 }
 
 func testChannelClientGetBalanceOther(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	db := new(account.DB)
@@ -320,7 +320,7 @@ func TestChannelClient_GetBalance(t *testing.T) {
 }
 
 func TestChannelClient_GetTotalCoins(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	client := new(channelClient)
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -345,7 +345,7 @@ func TestChannelClient_GetTotalCoins(t *testing.T) {
 }
 
 func TestChannelClient_CreateNoBalanceTransaction(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	client := new(channelClient)
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)

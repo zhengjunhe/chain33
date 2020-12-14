@@ -610,7 +610,7 @@ func (bc *BaseClient) CheckTxExpire(txs []*types.Transaction, height int64, bloc
 }
 
 //检测交易数组是否过期，只要有一个过期就认为整个交易组过期
-func isExpire(cfg *types.DplatformConfig, txs []*types.Transaction, height int64, blocktime int64) bool {
+func isExpire(cfg *types.DplatformOSConfig, txs []*types.Transaction, height int64, blocktime int64) bool {
 	for _, tx := range txs {
 		if height > 0 && blocktime > 0 && tx.IsExpire(cfg, height, blocktime) {
 			log.Debug("isExpire", "height", height, "blocktime", blocktime, "hash", common.ToHex(tx.Hash()), "Expire", tx.Expire)

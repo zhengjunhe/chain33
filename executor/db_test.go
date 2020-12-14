@@ -16,13 +16,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func newStateDbForTest(height int64, cfg *types.DplatformConfig) dbm.KV {
+func newStateDbForTest(height int64, cfg *types.DplatformOSConfig) dbm.KV {
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	return NewStateDB(q.Client(), nil, nil, &StateDBOption{Height: height})
 }
 func TestStateDBGet(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	db := newStateDbForTest(0, cfg)
 	testDBGet(t, db)
 }
@@ -49,7 +49,7 @@ func testDBGet(t *testing.T, db dbm.KV) {
 func TestStateDBTxGetOld(t *testing.T) {
 	str := types.GetDefaultCfgstring()
 	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
-	cfg := types.NewDplatformConfig(new)
+	cfg := types.NewDplatformOSConfig(new)
 
 	q := queue.New("channel")
 	q.SetConfig(cfg)
@@ -137,7 +137,7 @@ func testTxGet(t *testing.T, db dbm.KV) {
 }
 
 func TestStateDBTxGet(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	db := newStateDbForTest(cfg.GetFork("ForkExecRollback"), cfg)
 	testTxGet(t, db)
 }

@@ -27,7 +27,7 @@ import (
 
 func newTestEnv(q queue.Queue) *prototypes.P2PEnv {
 
-	cfg := types.NewDplatformConfig(types.ReadFile("../../../../../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../../../cmd/dplatform/dplatform.test.toml"))
 	q.SetConfig(cfg)
 	go q.Start()
 

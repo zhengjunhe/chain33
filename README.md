@@ -6,7 +6,7 @@ https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/6874
  [![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/33cn/dplatform?svg=true&branch=master&passingText=Windows%20-%20OK&failingText=Windows%20-%20failed&pendingText=Windows%20-%20pending)](https://ci.appveyor.com/project/33cn/dplatform)
 [![codecov](https://codecov.io/gh/33cn/dplatform/branch/master/graph/badge.svg)](https://codecov.io/gh/33cn/dplatform) [![Join the chat at https://gitter.im/33cn/Lobby](https://badges.gitter.im/33cn/Lobby.svg)](https://gitter.im/33cn/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-# Dplatform 区块链开发框架(为了适合go module 的版本号标准 最新版本号改为: 1.65.0)
+# DplatformOS 区块链开发框架(为了适合go module 的版本号标准 最新版本号改为: 1.65.0)
 
 高度模块化, 遵循 KISS原则的区块链开发框架
 

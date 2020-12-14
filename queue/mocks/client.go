@@ -56,15 +56,15 @@ func (_m *Client) FreeMessage(msg ...*queue.Message) {
 }
 
 // GetConfig provides a mock function with given fields:
-func (_m *Client) GetConfig() *types.DplatformConfig {
+func (_m *Client) GetConfig() *types.DplatformOSConfig {
 	ret := _m.Called()
 
-	var r0 *types.DplatformConfig
-	if rf, ok := ret.Get(0).(func() *types.DplatformConfig); ok {
+	var r0 *types.DplatformOSConfig
+	if rf, ok := ret.Get(0).(func() *types.DplatformOSConfig); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*types.DplatformConfig)
+			r0 = ret.Get(0).(*types.DplatformOSConfig)
 		}
 	}
 

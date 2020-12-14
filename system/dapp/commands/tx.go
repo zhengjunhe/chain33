@@ -77,7 +77,7 @@ func queryTxByAddr(cmd *cobra.Command, args []string) {
 		Index:     index,
 	}
 	var res rpctypes.ReplyTxInfos
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetTxByAddr", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetTxByAddr", params, &res)
 	ctx.Run()
 }
 
@@ -108,7 +108,7 @@ func queryTx(cmd *cobra.Command, args []string) {
 		Hash: hash,
 	}
 	var res rpctypes.TransactionDetail
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.QueryTransaction", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.QueryTransaction", params, &res)
 	ctx.SetResultCb(parseQueryTxRes)
 	ctx.Run()
 }
@@ -158,7 +158,7 @@ func getTxsByHashes(cmd *cobra.Command, args []string) {
 	}
 
 	var res rpctypes.TransactionDetails
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetTxByHashes", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetTxByHashes", params, &res)
 	ctx.SetResultCb(parseQueryTxsByHashesRes)
 	ctx.Run()
 }
@@ -211,7 +211,7 @@ func getTxHexByHash(cmd *cobra.Command, args []string) {
 		Hash: txHash,
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetHexTxByHash", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetHexTxByHash", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -239,7 +239,7 @@ func decodeTx(cmd *cobra.Command, args []string) {
 	}
 
 	var res rpctypes.ReplyTxList
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.DecodeRawTransaction", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.DecodeRawTransaction", params, &res)
 	ctx.SetResultCb(parseReplyTxList)
 	ctx.Run()
 }
@@ -278,7 +278,7 @@ func viewAddress(cmd *cobra.Command, args []string) {
 	}
 
 	var res types.AddrOverview
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetAddrOverview", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetAddrOverview", params, &res)
 	ctx.SetResultCb(parseAddrOverview)
 	ctx.Run()
 }
@@ -342,6 +342,6 @@ func reWriteRawTx(cmd *cobra.Command, args []string) {
 		Index:  index,
 	}
 
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.ReWriteRawTx", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.ReWriteRawTx", params, nil)
 	ctx.RunWithoutMarshal()
 }

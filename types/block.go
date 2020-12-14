@@ -15,7 +15,7 @@ import (
 )
 
 // Hash 获取block的hash值
-func (block *Block) Hash(cfg *DplatformConfig) []byte {
+func (block *Block) Hash(cfg *DplatformOSConfig) []byte {
 	if cfg.IsFork(block.Height, "ForkBlockHash") {
 		return block.HashNew()
 	}
@@ -54,7 +54,7 @@ func (block *Block) Size() int {
 }
 
 // GetHeader 获取block的Header信息
-func (block *Block) GetHeader(cfg *DplatformConfig) *Header {
+func (block *Block) GetHeader(cfg *DplatformOSConfig) *Header {
 	head := &Header{}
 	head.Version = block.Version
 	head.ParentHash = block.ParentHash
@@ -92,7 +92,7 @@ func (block *Block) getHeaderHashNew() *Header {
 }
 
 // VerifySignature 验证区块和交易的签名,支持指定需要验证的交易
-func VerifySignature(cfg *DplatformConfig, block *Block, txs []*Transaction) bool {
+func VerifySignature(cfg *DplatformOSConfig, block *Block, txs []*Transaction) bool {
 	//检查区块的签名
 	if !block.verifySignature(cfg) {
 		return false
@@ -102,11 +102,11 @@ func VerifySignature(cfg *DplatformConfig, block *Block, txs []*Transaction) boo
 }
 
 // CheckSign 检测block的签名,以及交易的签名
-func (block *Block) CheckSign(cfg *DplatformConfig) bool {
+func (block *Block) CheckSign(cfg *DplatformOSConfig) bool {
 	return VerifySignature(cfg, block, block.Txs)
 }
 
-func (block *Block) verifySignature(cfg *DplatformConfig) bool {
+func (block *Block) verifySignature(cfg *DplatformOSConfig) bool {
 	if block.GetSignature() == nil {
 		return true
 	}
@@ -205,7 +205,7 @@ func CheckSign(data []byte, execer string, sign *Signature) bool {
 //2,交易组中的平行连交易，需要将整个交易组都过滤出来
 //目前暂时不返回单个交易的proof证明路径，
 //后面会将平行链的交易组装到一起，构成一个子roothash。会返回子roothash的proof证明路径
-func (blockDetail *BlockDetail) FilterParaTxsByTitle(cfg *DplatformConfig, title string) *ParaTxDetail {
+func (blockDetail *BlockDetail) FilterParaTxsByTitle(cfg *DplatformOSConfig, title string) *ParaTxDetail {
 	var paraTx ParaTxDetail
 	paraTx.Header = blockDetail.Block.GetHeader(cfg)
 

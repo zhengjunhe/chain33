@@ -603,7 +603,7 @@ func (q *QueueProtocol) Version() (*types.VersionInfo, error) {
 	return &types.VersionInfo{
 		Title:     q.client.GetConfig().GetTitle(),
 		App:       version.GetAppVersion(),
-		Dplatform: version.GetVersion(),
+		DplatformOS: version.GetVersion(),
 		LocalDb:   version.GetLocalDBVersion(),
 	}, nil
 }
@@ -1034,13 +1034,13 @@ func (q *QueueProtocol) GetParaTxByHeight(param *types.ReqParaTxByHeight) (*type
 }
 
 //GetConfig 通过seq以及title获取对应平行连的交易
-func (q *QueueProtocol) GetConfig() *types.DplatformConfig {
+func (q *QueueProtocol) GetConfig() *types.DplatformOSConfig {
 	if q.client == nil {
-		panic("client is nil, can not get DplatformConfig")
+		panic("client is nil, can not get DplatformOSConfig")
 	}
 	cfg := q.client.GetConfig()
 	if cfg == nil {
-		panic("DplatformConfig is nil")
+		panic("DplatformOSConfig is nil")
 	}
 	return cfg
 }

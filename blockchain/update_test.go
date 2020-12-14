@@ -17,7 +17,7 @@ import (
 )
 
 func TestUpgradePlugin(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 
 	cli := new(clientMocks.Client)
 	cli.On("Sub", "blockchain").Return(nil)

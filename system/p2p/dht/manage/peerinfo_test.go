@@ -24,7 +24,7 @@ func Test_peerinfo(t *testing.T) {
 	defer cancel()
 	netw := swarmt.GenSwarm(t, ctx)
 	h := bhost.NewBlankHost(netw)
-	cfg := types.NewDplatformConfig(types.ReadFile("../../../../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../../cmd/dplatform/dplatform.test.toml"))
 	mcfg := &p2pty.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P["dht"], mcfg)
 	q := queue.New("channel")

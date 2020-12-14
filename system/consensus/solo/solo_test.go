@@ -140,7 +140,7 @@ func BenchmarkSendTx(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			for pb.Next() {
 				tx := util.CreateNoneTxWithTxHeight(cfg, priv, 0)
-				poststr := fmt.Sprintf(`{"jsonrpc":"2.0","id":2,"method":"Dplatform.SendTransaction","params":[{"data":"%v"}]}`,
+				poststr := fmt.Sprintf(`{"jsonrpc":"2.0","id":2,"method":"DplatformOS.SendTransaction","params":[{"data":"%v"}]}`,
 					common.ToHex(types.Encode(tx)))
 
 				resp, _ := http.Post("http://localhost:28803", "application/json", bytes.NewBufferString(poststr))
@@ -180,7 +180,7 @@ func BenchmarkSoloNewBlock(b *testing.B) {
 				panic(err.Error())
 			}
 			defer conn.Close()
-			gcli := types.NewDplatformClient(conn)
+			gcli := types.NewDplatformOSClient(conn)
 			for {
 				tx := util.CreateNoneTxWithTxHeight(cfg, mock33.GetGenesisKey(), atomic.LoadInt64(&height))
 				//测试去签名情况

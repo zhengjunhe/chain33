@@ -111,6 +111,6 @@ func queryConfig(cmd *cobra.Command, args []string) {
 	params.Payload = types.MustPBToJSON(req)
 
 	var res types.ReplyConfig
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.Query", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.Query", params, &res)
 	ctx.Run()
 }

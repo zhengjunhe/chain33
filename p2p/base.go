@@ -23,7 +23,7 @@ type IP2P interface {
 type Manager struct {
 	SysAPI   client.QueueProtocolAPI
 	Client   queue.Client
-	ChainCfg *types.DplatformConfig
+	ChainCfg *types.DplatformOSConfig
 	PubSub   *pubsub.PubSub
 	//subChan         chan interface{}
 	broadcastFilter *lru.Cache
@@ -61,7 +61,7 @@ func LoadP2PCreate(p2pType string) CreateP2P {
 }
 
 // NewP2PMgr new p2p manager
-func NewP2PMgr(cfg *types.DplatformConfig) *Manager {
+func NewP2PMgr(cfg *types.DplatformOSConfig) *Manager {
 	mgr := &Manager{
 		PubSub: pubsub.NewPubSub(1024),
 	}

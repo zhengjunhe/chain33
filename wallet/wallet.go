@@ -93,7 +93,7 @@ func DisableLog() {
 }
 
 // New 创建一个钱包对象
-func New(cfg *types.DplatformConfig) *Wallet {
+func New(cfg *types.DplatformOSConfig) *Wallet {
 	mcfg := cfg.GetModuleConfig().Wallet
 	//walletStore
 	//accountdb = account.NewCoinsAccount()

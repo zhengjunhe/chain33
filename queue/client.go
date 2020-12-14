@@ -40,7 +40,7 @@ type Client interface {
 	CloseQueue() (*types.Reply, error)
 	NewMessage(topic string, ty int64, data interface{}) (msg *Message)
 	FreeMessage(msg ...*Message) //回收msg， 需要注意回收时上下文不再引用
-	GetConfig() *types.DplatformConfig
+	GetConfig() *types.DplatformOSConfig
 }
 
 // Module be used for module interface
@@ -70,12 +70,12 @@ func newClient(q *queue) Client {
 	return client
 }
 
-// GetConfig return the queue DplatformConfig
-func (client *client) GetConfig() *types.DplatformConfig {
+// GetConfig return the queue DplatformOSConfig
+func (client *client) GetConfig() *types.DplatformOSConfig {
 	types.AssertConfig(client.q)
 	cfg := client.q.GetConfig()
 	if cfg == nil {
-		panic("DplatformConfig is nil")
+		panic("DplatformOSConfig is nil")
 	}
 	return cfg
 }

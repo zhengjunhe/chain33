@@ -42,12 +42,12 @@ func init() {
 }
 
 // InitFork initials coins forks.
-func InitFork(cfg *types.DplatformConfig) {
+func InitFork(cfg *types.DplatformOSConfig) {
 	cfg.RegisterDappFork(CoinsX, "Enable", 0)
 }
 
 // InitExecutor registers coins.
-func InitExecutor(cfg *types.DplatformConfig) {
+func InitExecutor(cfg *types.DplatformOSConfig) {
 	types.RegistorExecutor(CoinsX, NewType(cfg))
 }
 
@@ -57,7 +57,7 @@ type CoinsType struct {
 }
 
 // NewType new coinstype
-func NewType(cfg *types.DplatformConfig) *CoinsType {
+func NewType(cfg *types.DplatformOSConfig) *CoinsType {
 	c := &CoinsType{}
 	c.SetChild(c)
 	c.SetConfig(cfg)

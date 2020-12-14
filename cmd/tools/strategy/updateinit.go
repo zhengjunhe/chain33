@@ -47,7 +47,7 @@ func (up *updateInitStrategy) initMember() error {
 		packname = strings.Replace(path, gopath+"/src/", "", 1)
 	}
 	if len(path) == 0 {
-		return errors.New("Dplatform Plugin Not Existed")
+		return errors.New("DplatformOS Plugin Not Existed")
 	}
 	up.consRootPath = fmt.Sprintf("%s/consensus/", path)
 	up.dappRootPath = fmt.Sprintf("%s/dapp/", path)

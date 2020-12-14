@@ -87,7 +87,7 @@ func StartAutoTest() bool {
 
 	if len(autoTestConfig.CliCommand) == 0 {
 
-		stdLog.Error("NullDplatformCli")
+		stdLog.Error("NullDplatformOSCli")
 		return false
 	}
 	//init types

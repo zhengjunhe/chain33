@@ -11,7 +11,7 @@ import (
 )
 
 func TestChainConfig(t *testing.T) {
-	cfg := NewDplatformConfig(GetDefaultCfgstring())
+	cfg := NewDplatformOSConfig(GetDefaultCfgstring())
 	cfg.S("a", true)
 	_, err := cfg.G("b")
 	assert.Equal(t, err, ErrNotFound)
@@ -37,12 +37,12 @@ func TestSubConfig(t *testing.T) {
 }
 
 func TestConfInit(t *testing.T) {
-	cfg := NewDplatformConfig(ReadFile("testdata/dplatform.toml"))
+	cfg := NewDplatformOSConfig(ReadFile("testdata/dplatform.toml"))
 	assert.True(t, cfg.IsEnable("TxHeight"))
 }
 
 func TestConfigNoInit(t *testing.T) {
-	cfg := NewDplatformConfigNoInit(ReadFile("testdata/dplatform.toml"))
+	cfg := NewDplatformOSConfigNoInit(ReadFile("testdata/dplatform.toml"))
 	assert.False(t, cfg.IsEnable("TxHeight"))
 	cfg.EnableCheckFork(false)
 	cfg.dplatformCfgInit(cfg.GetModuleConfig())

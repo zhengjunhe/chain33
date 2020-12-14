@@ -25,7 +25,7 @@ func init() {
 
 func initEnv() (queue.Queue, queue.Module) {
 	var q = queue.New("channel")
-	cfg := types.NewDplatformConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
 	s := New(cfg)
 	s.SetQueueClient(q.Client())
 	return q, s
@@ -275,7 +275,7 @@ var storecfg1 = &types.Store{Name: "mavl", Driver: "leveldb", DbPath: "/tmp/stor
 
 func TestNewMavl(t *testing.T) {
 	os.RemoveAll(storecfg1.DbPath)
-	cfg := types.NewDplatformConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
 	store := New(cfg)
 	assert.NotNil(t, store)
 }

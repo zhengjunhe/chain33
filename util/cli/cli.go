@@ -43,16 +43,16 @@ func Run(RPCAddr, ParaName, name string) {
 	}
 
 	exist, _ := pathExists(configPath)
-	var dplatformCfg *types.DplatformConfig
+	var dplatformCfg *types.DplatformOSConfig
 	if exist {
-		dplatformCfg = types.NewDplatformConfig(types.ReadFile(configPath))
+		dplatformCfg = types.NewDplatformOSConfig(types.ReadFile(configPath))
 	} else {
 		cfgstring := types.GetDefaultCfgstring()
 		if ParaName != "" {
 			cfgstring = strings.Replace(cfgstring, "Title=\"local\"", fmt.Sprintf("Title=\"%s\"", ParaName), 1)
 			cfgstring = strings.Replace(cfgstring, "FixTime=false", "CoinSymbol=\"para\"", 1)
 		}
-		dplatformCfg = types.NewDplatformConfig(cfgstring)
+		dplatformCfg = types.NewDplatformOSConfig(cfgstring)
 	}
 
 	types.SetCliSysParam(dplatformCfg.GetTitle(), dplatformCfg)
@@ -71,9 +71,9 @@ func Run(RPCAddr, ParaName, name string) {
 				panic(err)
 			}
 			//		rpc, _ := jsonrpc.NewJSONClient(rpcLaddr)
-			//		rpc.Call("Dplatform.CloseQueue", nil, nil)
+			//		rpc.Call("DplatformOS.CloseQueue", nil, nil)
 			var res rpctypes.Reply
-			ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.CloseQueue", nil, &res)
+			ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.CloseQueue", nil, &res)
 			ctx.Run()
 		},
 	}

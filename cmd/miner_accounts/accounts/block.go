@@ -79,14 +79,14 @@ var cache = dplatform{
 }
 
 func getLastHeader(cli *jsonclient.JSONClient) (*rpctypes.Header, error) {
-	method := "Dplatform.GetLastHeader"
+	method := "DplatformOS.GetLastHeader"
 	var res rpctypes.Header
 	err := cli.Call(method, nil, &res)
 	return &res, err
 }
 
 func getHeaders(cli *jsonclient.JSONClient, start, end int64) (*rpctypes.Headers, error) {
-	method := "Dplatform.GetHeaders"
+	method := "DplatformOS.GetHeaders"
 	params := &types.ReqBlocks{Start: start, End: end, IsDetail: false}
 	var res rpctypes.Headers
 	err := cli.Call(method, params, &res)
@@ -94,7 +94,7 @@ func getHeaders(cli *jsonclient.JSONClient, start, end int64) (*rpctypes.Headers
 }
 
 func getBalanceAt(cli *jsonclient.JSONClient, addrs []string, exec, stateHash string) ([]*rpctypes.Account, error) {
-	method := "Dplatform.GetBalance"
+	method := "DplatformOS.GetBalance"
 	params := &types.ReqBalance{Addresses: addrs, Execer: exec, StateHash: stateHash}
 	var res []*rpctypes.Account
 	err := cli.Call(method, params, &res)

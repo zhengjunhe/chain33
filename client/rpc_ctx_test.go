@@ -94,7 +94,7 @@ func (c *GrpcCtx) Run() (err error) {
 	}
 	defer conn.Close()
 
-	rpc := types.NewDplatformClient(conn)
+	rpc := types.NewDplatformOSClient(conn)
 	switch c.Method {
 	case "GetBlocks":
 		reply, err := rpc.GetBlocks(context.Background(), c.Params.(*types.ReqBlocks))

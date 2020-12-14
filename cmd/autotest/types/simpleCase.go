@@ -25,7 +25,7 @@ type SimplePack struct {
 //SendCommand 发送cmd
 func (testCase *SimpleCase) SendCommand(packID string) (PackFunc, error) {
 
-	output, err := RunDplatformCli(strings.Fields(testCase.GetCmd()))
+	output, err := RunDplatformOSCli(strings.Fields(testCase.GetCmd()))
 	if err != nil {
 		return nil, errors.New(output)
 	}

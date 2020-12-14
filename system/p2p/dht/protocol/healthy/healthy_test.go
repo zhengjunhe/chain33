@@ -149,7 +149,7 @@ func initEnv(t *testing.T, q queue.Queue) []*Protocol {
 		t.Fatal(err)
 	}
 	t.Log("h1", host1.ID(), "h2", host2.ID())
-	cfg := types.NewDplatformConfig(types.ReadFile("../../../../../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../../../cmd/dplatform/dplatform.test.toml"))
 	mcfg := &types2.P2PSubConfig{}
 	types.MustDecode(cfg.GetSubConfig().P2P[types2.DHTTypeName], mcfg)
 	mcfg.DisableFindLANPeers = true

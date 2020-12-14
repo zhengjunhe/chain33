@@ -44,7 +44,7 @@ func TestManageConfig(t *testing.T) {
 		Payload:    jsondata,
 	}
 	var txhex string
-	err = mocker.GetJSONC().Call("Dplatform.CreateTransaction", req, &txhex)
+	err = mocker.GetJSONC().Call("DplatformOS.CreateTransaction", req, &txhex)
 	assert.Nil(t, err)
 	hash, err := mocker.SendAndSign(mocker.GetHotKey(), txhex)
 	assert.Nil(t, err)
@@ -64,7 +64,7 @@ func TestManageConfig(t *testing.T) {
 		ActionName: "Modify",
 		Payload:    jsondata,
 	}
-	err = mocker.GetJSONC().Call("Dplatform.CreateTransaction", req, &txhex)
+	err = mocker.GetJSONC().Call("DplatformOS.CreateTransaction", req, &txhex)
 	assert.Nil(t, err)
 	hash, err = mocker.SendAndSign(mocker.GetHotKey(), txhex)
 	assert.Nil(t, err)
@@ -84,7 +84,7 @@ func TestManageConfig(t *testing.T) {
 		ActionName: "Modify",
 		Payload:    jsondata,
 	}
-	err = mocker.GetJSONC().Call("Dplatform.CreateTransaction", req, &txhex)
+	err = mocker.GetJSONC().Call("DplatformOS.CreateTransaction", req, &txhex)
 	assert.Nil(t, err)
 	hash, err = mocker.SendAndSign(mocker.GetHotKey(), txhex)
 	assert.Nil(t, err)
@@ -110,7 +110,7 @@ func TestManageConfig(t *testing.T) {
 		Payload:  types.MustPBToJSON(queryreq),
 	}
 	var reply types.ReplyConfig
-	err = mocker.GetJSONC().Call("Dplatform.Query", query, &reply)
+	err = mocker.GetJSONC().Call("DplatformOS.Query", query, &reply)
 	assert.Nil(t, err)
 	assert.Equal(t, reply.Key, "token-blacklist")
 	assert.Equal(t, reply.Value, "[DPOM YCC TTT]")
@@ -127,7 +127,7 @@ func TestManageConfig(t *testing.T) {
 		ActionName: "Modify",
 		Payload:    jsondata,
 	}
-	err = mocker.GetJSONC().Call("Dplatform.CreateTransaction", req, &txhex)
+	err = mocker.GetJSONC().Call("DplatformOS.CreateTransaction", req, &txhex)
 	assert.Nil(t, err)
 	hash, err = mocker.SendAndSign(mocker.GetHotKey(), txhex)
 	assert.Nil(t, err)
@@ -144,7 +144,7 @@ func TestManageConfig(t *testing.T) {
 		FuncName: "GetConfigItem",
 		Payload:  types.MustPBToJSON(queryreq),
 	}
-	err = mocker.GetJSONC().Call("Dplatform.Query", query, &reply)
+	err = mocker.GetJSONC().Call("DplatformOS.Query", query, &reply)
 	assert.Nil(t, err)
 	assert.Equal(t, reply.Key, "token-blacklist")
 	assert.Equal(t, reply.Value, "[DPOM YCC]")
@@ -183,7 +183,7 @@ func TestTokenFinisher(t *testing.T) {
 		Payload:    jsondata,
 	}
 	var txhex string
-	err = mocker.GetJSONC().Call("Dplatform.CreateTransaction", req, &txhex)
+	err = mocker.GetJSONC().Call("DplatformOS.CreateTransaction", req, &txhex)
 	assert.Nil(t, err)
 	hash, err := mocker.SendAndSign(mocker.GetHotKey(), txhex)
 	assert.Nil(t, err)
@@ -201,7 +201,7 @@ func TestTokenFinisher(t *testing.T) {
 		Payload:  types.MustPBToJSON(queryreq),
 	}
 	var reply types.ReplyConfig
-	err = mocker.GetJSONC().Call("Dplatform.Query", query, &reply)
+	err = mocker.GetJSONC().Call("DplatformOS.Query", query, &reply)
 	assert.Nil(t, err)
 	assert.Equal(t, reply.Key, "token-finisher")
 	assert.Equal(t, reply.Value, "[1FCX9XJTZXvZteagTrefJEBPZMt8BFmdoi]")

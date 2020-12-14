@@ -124,7 +124,7 @@ func processMsg(q queue.Queue) {
 	}()
 }
 
-func NewP2p(cfg *types.DplatformConfig, cli queue.Client) p2p2.IP2P {
+func NewP2p(cfg *types.DplatformOSConfig, cli queue.Client) p2p2.IP2P {
 	p2pmgr := p2p2.NewP2PMgr(cfg)
 	p2pmgr.SysAPI, _ = client.New(cli, nil)
 	subCfg := p2pmgr.ChainCfg.GetSubConfig().P2P
@@ -380,7 +380,7 @@ func Test_Id(t *testing.T) {
 
 func Test_p2p(t *testing.T) {
 
-	cfg := types.NewDplatformConfig(types.ReadFile("../../../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../../../cmd/dplatform/dplatform.test.toml"))
 	q := queue.New("channel")
 	datadir := util.ResetDatadir(cfg.GetModuleConfig(), "$TEMP/")
 	q.SetConfig(cfg)

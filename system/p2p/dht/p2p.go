@@ -46,7 +46,7 @@ func init() {
 
 // P2P p2p struct
 type P2P struct {
-	chainCfg      *types.DplatformConfig
+	chainCfg      *types.DplatformOSConfig
 	host          core.Host
 	discovery     *net.Discovery
 	connManag     *manage.ConnManager

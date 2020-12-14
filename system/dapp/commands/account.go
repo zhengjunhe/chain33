@@ -63,7 +63,7 @@ func dumpKey(cmd *cobra.Command, args []string) {
 		Data: addr,
 	}
 	var res types.ReplyString
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.DumpPrivkey", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.DumpPrivkey", params, &res)
 	ctx.Run()
 }
 
@@ -80,7 +80,7 @@ func GetAccountListCmd() *cobra.Command {
 func listAccount(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res rpctypes.WalletAccounts
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetAccounts", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetAccounts", nil, &res)
 	ctx.SetResultCb(parseListAccountRes)
 	ctx.Run()
 }
@@ -149,7 +149,7 @@ func balance(cmd *cobra.Command, args []string) {
 	if execer == "" && height == -1 {
 		req := types.ReqAllExecBalance{Addr: addr}
 		var res rpctypes.AllExecBalance
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetAllExecBalance", req, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetAllExecBalance", req, &res)
 		ctx.SetResultCb(parseGetAllBalanceRes)
 		ctx.Run()
 		return
@@ -163,7 +163,7 @@ func balance(cmd *cobra.Command, args []string) {
 			IsDetail: false,
 		}
 		var res rpctypes.Headers
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetHeaders", params, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetHeaders", params, &res)
 		_, err := ctx.RunResult()
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -176,7 +176,7 @@ func balance(cmd *cobra.Command, args []string) {
 	if execer == "" {
 		req := types.ReqAllExecBalance{Addr: addr, StateHash: stateHash}
 		var res rpctypes.AllExecBalance
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetAllExecBalance", req, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetAllExecBalance", req, &res)
 		ctx.SetResultCb(parseGetAllBalanceRes)
 		ctx.Run()
 		return
@@ -195,7 +195,7 @@ func balance(cmd *cobra.Command, args []string) {
 		StateHash: stateHash,
 	}
 	var res []*rpctypes.Account
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetBalance", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetBalance", params, &res)
 	ctx.SetResultCb(parseGetBalanceRes)
 	ctx.Run()
 }
@@ -258,7 +258,7 @@ func importKey(cmd *cobra.Command, args []string) {
 		Label:   label,
 	}
 	var res types.WalletAccount
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.ImportPrivkey", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.ImportPrivkey", params, &res)
 	ctx.SetResultCb(parseImportKeyRes)
 	ctx.Run()
 }
@@ -296,7 +296,7 @@ func createAccount(cmd *cobra.Command, args []string) {
 		Label: label,
 	}
 	var res types.WalletAccount
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.NewAccount", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.NewAccount", params, &res)
 	ctx.SetResultCb(parseCreateAccountRes)
 	ctx.Run()
 }
@@ -351,7 +351,7 @@ func getAccount(cmd *cobra.Command, args []string) {
 		Label: label,
 	}
 	var res types.WalletAccount
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetAccount", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetAccount", params, &res)
 	ctx.SetResultCb(parseSetLabelRes)
 	ctx.Run()
 }
@@ -365,7 +365,7 @@ func setLabel(cmd *cobra.Command, args []string) {
 		Label: label,
 	}
 	var res types.WalletAccount
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.SetLabl", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.SetLabl", params, &res)
 	ctx.SetResultCb(parseSetLabelRes)
 	ctx.Run()
 }
@@ -417,7 +417,7 @@ func dumpKeys(cmd *cobra.Command, args []string) {
 		Passwd:   pwd,
 	}
 	var res types.Reply
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.DumpPrivkeysFile", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.DumpPrivkeysFile", params, &res)
 	ctx.Run()
 }
 
@@ -430,6 +430,6 @@ func importKeys(cmd *cobra.Command, args []string) {
 		Passwd:   pwd,
 	}
 	var res types.Reply
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.ImportPrivkeysFile", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.ImportPrivkeysFile", params, &res)
 	ctx.Run()
 }

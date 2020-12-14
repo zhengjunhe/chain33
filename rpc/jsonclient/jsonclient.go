@@ -35,7 +35,7 @@ func addPrefix(prefix, name string) string {
 
 // NewJSONClient produce a json object
 func NewJSONClient(url string) (*JSONClient, error) {
-	return New("Dplatform", url, false)
+	return New("DplatformOS", url, false)
 }
 
 // New produce a jsonclient by perfix and url

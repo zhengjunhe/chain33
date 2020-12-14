@@ -47,7 +47,7 @@ func TestJSONClient_Call(t *testing.T) {
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
 	api := new(mocks.QueueProtocolAPI)
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	qm := &qmocks.Client{}
 	qm.On("GetConfig", mock.Anything).Return(cfg)
@@ -72,7 +72,7 @@ func TestJSONClient_Call(t *testing.T) {
 	assert.NotNil(t, jsonClient)
 
 	var result = ""
-	err = jsonClient.Call("Dplatform.Version", nil, &result)
+	err = jsonClient.Call("DplatformOS.Version", nil, &result)
 	assert.NotNil(t, err)
 	assert.Empty(t, result)
 
@@ -80,37 +80,37 @@ func TestJSONClient_Call(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, jsonClient)
 
-	ver := &types.VersionInfo{Dplatform: "6.0.2"}
+	ver := &types.VersionInfo{DplatformOS: "6.0.2"}
 	api.On("Version").Return(ver, nil)
 	var nodeVersion types.VersionInfo
-	err = jsonClient.Call("Dplatform.Version", nil, &nodeVersion)
+	err = jsonClient.Call("DplatformOS.Version", nil, &nodeVersion)
 	assert.Nil(t, err)
-	assert.Equal(t, "6.0.2", nodeVersion.Dplatform)
+	assert.Equal(t, "6.0.2", nodeVersion.DplatformOS)
 
 	var isSnyc bool
-	err = jsonClient.Call("Dplatform.IsSync", &types.ReqNil{}, &isSnyc)
+	err = jsonClient.Call("DplatformOS.IsSync", &types.ReqNil{}, &isSnyc)
 	assert.Nil(t, err)
 	assert.Equal(t, ret.GetIsOk(), isSnyc)
 	var nodeInfo rpctypes.NodeNetinfo
 	api.On("GetNetInfo", mock.Anything).Return(&types.NodeNetInfo{Externaladdr: "123"}, nil)
-	err = jsonClient.Call("Dplatform.GetNetInfo", &types.ReqNil{}, &nodeInfo)
+	err = jsonClient.Call("DplatformOS.GetNetInfo", &types.ReqNil{}, &nodeInfo)
 	assert.Nil(t, err)
 	assert.Equal(t, "123", nodeInfo.Externaladdr)
 
 	var singRet = ""
 	api.On("ExecWalletFunc", "wallet", "SignRawTx", mock.Anything).Return(&types.ReplySignRawTx{TxHex: "123"}, nil)
-	err = jsonClient.Call("Dplatform.SignRawTx", &types.ReqSignRawTx{}, &singRet)
+	err = jsonClient.Call("DplatformOS.SignRawTx", &types.ReqSignRawTx{}, &singRet)
 	assert.Nil(t, err)
 	assert.Equal(t, "123", singRet)
 
 	var fee types.TotalFee
 	api.On("LocalGet", mock.Anything).Return(nil, errors.New("error value"))
-	err = jsonClient.Call("Dplatform.QueryTotalFee", &types.LocalDBGet{Keys: [][]byte{[]byte("test")}}, &fee)
+	err = jsonClient.Call("DplatformOS.QueryTotalFee", &types.LocalDBGet{Keys: [][]byte{[]byte("test")}}, &fee)
 	assert.NotNil(t, err)
 
 	var retNtp bool
 	api.On("IsNtpClockSync", mock.Anything).Return(&types.Reply{IsOk: true, Msg: []byte("yes")}, nil)
-	err = jsonClient.Call("Dplatform.IsNtpClockSync", &types.ReqNil{}, &retNtp)
+	err = jsonClient.Call("DplatformOS.IsNtpClockSync", &types.ReqNil{}, &retNtp)
 	assert.Nil(t, err)
 	assert.True(t, retNtp)
 	api.On("GetProperFee", mock.Anything).Return(&types.ReplyProperFee{ProperFee: 2}, nil)
@@ -128,7 +128,7 @@ func testDecodeTxHex(t *testing.T, txHex string) *types.Transaction {
 	return &tx
 }
 
-func testCreateTxCoins(t *testing.T, cfg *types.DplatformConfig, jsonClient *jsonclient.JSONClient) {
+func testCreateTxCoins(t *testing.T, cfg *types.DplatformOSConfig, jsonClient *jsonclient.JSONClient) {
 	req := &rpctypes.CreateTx{
 		To:          "184wj4nsgVxKyz2NhM3Yb5RK5Ap6AFRFq2",
 		Amount:      10,
@@ -140,13 +140,13 @@ func testCreateTxCoins(t *testing.T, cfg *types.DplatformConfig, jsonClient *jso
 		ExecName:    cfg.ExecName("coins"),
 	}
 	var res string
-	err := jsonClient.Call("Dplatform.CreateRawTransaction", req, &res)
+	err := jsonClient.Call("DplatformOS.CreateRawTransaction", req, &res)
 	assert.Nil(t, err)
 	tx := testDecodeTxHex(t, res)
 	assert.Equal(t, "184wj4nsgVxKyz2NhM3Yb5RK5Ap6AFRFq2", tx.To)
 	assert.Equal(t, int64(1), tx.Fee)
 	req.Fee = 0
-	err = jsonClient.Call("Dplatform.CreateRawTransaction", req, &res)
+	err = jsonClient.Call("DplatformOS.CreateRawTransaction", req, &res)
 	assert.Nil(t, err)
 	tx = testDecodeTxHex(t, res)
 	fee, _ := tx.GetRealFee(2)
@@ -161,7 +161,7 @@ func TestGrpc_Call(t *testing.T) {
 	rpcCfg.JrpcFuncWhitelist = []string{"*"}
 	rpcCfg.GrpcFuncWhitelist = []string{"*"}
 	InitCfg(rpcCfg)
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	api := new(mocks.QueueProtocolAPI)
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	_ = NewGrpcServer()
@@ -183,7 +183,7 @@ func TestGrpc_Call(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, c)
 
-	client := types.NewDplatformClient(c)
+	client := types.NewDplatformOSClient(c)
 	result, err := client.IsSync(ctx, &types.ReqNil{})
 
 	assert.Nil(t, err)
@@ -204,7 +204,7 @@ func TestGrpc_Call(t *testing.T) {
 }
 
 func TestRPC(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	rpcCfg := cfg.GetModuleConfig().RPC
 	rpcCfg.JrpcBindAddr = "28803"
 	rpcCfg.GrpcBindAddr = "8802"

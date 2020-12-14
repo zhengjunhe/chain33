@@ -32,7 +32,7 @@ func init() {
 }
 
 func initEnv() (*Wallet, queue.Module, queue.Queue, string) {
-	cfg := types.NewDplatformConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
+	cfg := types.NewDplatformOSConfig(types.ReadFile("../cmd/dplatform/dplatform.test.toml"))
 	var q = queue.New("channel")
 	q.SetConfig(cfg)
 	wallet := New(cfg)

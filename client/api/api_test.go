@@ -20,7 +20,7 @@ import (
 
 func TestAPI(t *testing.T) {
 	api := new(mocks.QueueProtocolAPI)
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	gapi, err := grpcclient.NewMainChainClient(cfg, "")
 	assert.Nil(t, err)
 	api.On("GetConfig", mock.Anything).Return(cfg)

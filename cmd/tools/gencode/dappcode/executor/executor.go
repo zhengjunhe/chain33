@@ -61,7 +61,7 @@ var (
 var driverName = ${EXECNAME}types.${CLASSNAME}X
 
 // Init register dapp
-func Init(name string, cfg *types.DplatformConfig, sub []byte) {
+func Init(name string, cfg *types.DplatformOSConfig, sub []byte) {
 	drivers.Register(cfg, GetName(), new${CLASSNAME}, cfg.GetDappFork(driverName, "Enable"))
     InitExecType()
 }

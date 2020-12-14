@@ -86,7 +86,7 @@ type Push struct {
 	tasks          map[string]*pushNotify
 	mu             sync.Mutex
 	postService    PostService
-	cfg            *types.DplatformConfig
+	cfg            *types.DplatformOSConfig
 	postFail2Sleep int32
 	postwg         *sync.WaitGroup
 }
@@ -218,7 +218,7 @@ func (chain *BlockChain) ProcGetLastPushSeq(name string) (int64, error) {
 	return n, nil
 }
 
-func newpush(commonStore CommonStore, seqStore SequenceStore, cfg *types.DplatformConfig) *Push {
+func newpush(commonStore CommonStore, seqStore SequenceStore, cfg *types.DplatformOSConfig) *Push {
 	tasks := make(map[string]*pushNotify)
 
 	pushClient := &PushClient{

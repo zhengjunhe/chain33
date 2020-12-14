@@ -62,7 +62,7 @@ type Driver interface {
 	Query(funcName string, params []byte) (types.Message, error)
 	IsFree() bool
 	SetAPI(client.QueueProtocolAPI)
-	SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformClient)
+	SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformOSClient)
 	SetTxs(txs []*types.Transaction)
 	SetReceipt(receipts []*types.ReceiptData)
 
@@ -153,7 +153,7 @@ func (d *DriverBase) SetAPI(queueapi client.QueueProtocolAPI) {
 }
 
 // SetExecutorAPI set queue protocol api
-func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformClient) {
+func (d *DriverBase) SetExecutorAPI(queueapi client.QueueProtocolAPI, dplatformapi types.DplatformOSClient) {
 	d.execapi = api.New(queueapi, dplatformapi)
 }
 
@@ -275,7 +275,7 @@ func (d *DriverBase) callLocal(prefix string, tx *types.Transaction, receipt *ty
 }
 
 // CheckAddress check address
-func CheckAddress(cfg *types.DplatformConfig, addr string, height int64) error {
+func CheckAddress(cfg *types.DplatformOSConfig, addr string, height int64) error {
 	if IsDriverAddress(addr, height) {
 		return nil
 	}

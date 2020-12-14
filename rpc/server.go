@@ -33,11 +33,11 @@ var (
 	rpcFilterPrintFuncBlacklist = make(map[string]bool)
 )
 
-// Dplatform  a channel client
-type Dplatform struct {
+// DplatformOS  a channel client
+type DplatformOS struct {
 	cli channelClient
 	//for communicate with main chain in parallel chain
-	mainGrpcCli types.DplatformClient
+	mainGrpcCli types.DplatformOSClient
 }
 
 // Grpc a channelClient
@@ -59,7 +59,7 @@ func NewGrpcServer() *Grpcserver {
 
 // JSONRPCServer  a json rpcserver object
 type JSONRPCServer struct {
-	jrpc *Dplatform
+	jrpc *DplatformOS
 	s    *rpc.Server
 	l    net.Listener
 }
@@ -179,13 +179,13 @@ func NewGRpcServer(c queue.Client, api client.QueueProtocolAPI) *Grpcserver {
 
 	server := grpc.NewServer(opts...)
 	s.s = server
-	types.RegisterDplatformServer(server, s.grpc)
+	types.RegisterDplatformOSServer(server, s.grpc)
 	return s
 }
 
 // NewJSONRPCServer new json rpcserver object
 func NewJSONRPCServer(c queue.Client, api client.QueueProtocolAPI) *JSONRPCServer {
-	j := &JSONRPCServer{jrpc: &Dplatform{}}
+	j := &JSONRPCServer{jrpc: &DplatformOS{}}
 	j.jrpc.cli.Init(c, api)
 	if c.GetConfig().IsPara() {
 		grpcCli, err := grpcclient.NewMainChainClient(c.GetConfig(), "")
@@ -196,7 +196,7 @@ func NewJSONRPCServer(c queue.Client, api client.QueueProtocolAPI) *JSONRPCServe
 	}
 	server := rpc.NewServer()
 	j.s = server
-	err := server.RegisterName("Dplatform", j.jrpc)
+	err := server.RegisterName("DplatformOS", j.jrpc)
 	if err != nil {
 		return nil
 	}
@@ -224,7 +224,7 @@ func InitCfg(cfg *types.RPC) {
 }
 
 // New produce a rpc by cfg
-func New(cfg *types.DplatformConfig) *RPC {
+func New(cfg *types.DplatformOSConfig) *RPC {
 	mcfg := cfg.GetModuleConfig().RPC
 	InitCfg(mcfg)
 	if mcfg.EnableTrace {

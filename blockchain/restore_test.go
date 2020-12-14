@@ -26,7 +26,7 @@ func TestNeedReExec(t *testing.T) {
 			assert.Equal(t, r, "not support degrade the program")
 		}
 	}()
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	mock33 := testnode.NewWithConfig(cfg, nil)
 
 	//发送交易
@@ -78,7 +78,7 @@ func GetAddrTxsCount(db dbm.DB, addr string) (int64, error) {
 }
 
 func TestUpgradeStore(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	cfg.GetModuleConfig().BlockChain.EnableReExecLocal = true
 	mock33 := testnode.NewWithConfig(cfg, nil)
 	//发送交易

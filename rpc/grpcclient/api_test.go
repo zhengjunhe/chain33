@@ -16,7 +16,7 @@ import (
 )
 
 func TestMultipleGRPC(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	qapi := new(mocks.QueueProtocolAPI)
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
 	qapi.On("Query", "ticket", "RandNumHash", mock.Anything).Return(&types.ReplyHash{Hash: []byte("hello")}, nil)
@@ -38,7 +38,7 @@ func TestMultipleGRPC(t *testing.T) {
 	paraRemoteGrpcClient := "127.0.0.1:8004,127.0.0.1:8003,127.0.0.1"
 	conn, err := grpc.Dial(grpcclient.NewMultipleURL(paraRemoteGrpcClient), grpc.WithInsecure())
 	assert.Nil(t, err)
-	grpcClient := types.NewDplatformClient(conn)
+	grpcClient := types.NewDplatformOSClient(conn)
 	param := &types.ReqRandHash{
 		ExecName: "ticket",
 		BlockNum: 5,
@@ -50,7 +50,7 @@ func TestMultipleGRPC(t *testing.T) {
 }
 
 func TestMultipleGRPCLocalhost(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	qapi := new(mocks.QueueProtocolAPI)
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
 	qapi.On("Query", "ticket", "RandNumHash", mock.Anything).Return(&types.ReplyHash{Hash: []byte("hello")}, nil)
@@ -72,7 +72,7 @@ func TestMultipleGRPCLocalhost(t *testing.T) {
 	paraRemoteGrpcClient := "localhost:8004,localhost:8003,localhost"
 	conn, err := grpc.Dial(grpcclient.NewMultipleURL(paraRemoteGrpcClient), grpc.WithInsecure())
 	assert.Nil(t, err)
-	grpcClient := types.NewDplatformClient(conn)
+	grpcClient := types.NewDplatformOSClient(conn)
 	param := &types.ReqRandHash{
 		ExecName: "ticket",
 		BlockNum: 5,
@@ -85,7 +85,7 @@ func TestMultipleGRPCLocalhost(t *testing.T) {
 
 func TestNewParaClient(t *testing.T) {
 	qapi := new(mocks.QueueProtocolAPI)
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	qapi.On("GetConfig", mock.Anything).Return(cfg)
 	qapi.On("Query", "ticket", "RandNumHash", mock.Anything).Return(&types.ReplyHash{Hash: []byte("hello")}, nil)
 	//testnode setup
@@ -117,7 +117,7 @@ func TestNewParaClient(t *testing.T) {
 }
 
 func TestNewMainChainClient(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	grpcClient1, err := grpcclient.NewMainChainClient(cfg, "")
 	assert.Nil(t, err)
 	grpcClient2, err := grpcclient.NewMainChainClient(cfg, "")

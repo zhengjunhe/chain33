@@ -301,7 +301,7 @@ func GetMerkleRootAndBranch(leaves [][]byte, position uint32) (roothash []byte, 
 var zeroHash [32]byte
 
 //CalcMerkleRoot 计算merkle树根
-func CalcMerkleRoot(cfg *types.DplatformConfig, height int64, txs []*types.Transaction) []byte {
+func CalcMerkleRoot(cfg *types.DplatformOSConfig, height int64, txs []*types.Transaction) []byte {
 	if !cfg.IsFork(height, "ForkRootHash") {
 		return calcMerkleRoot(txs)
 	}
@@ -358,7 +358,7 @@ func CalcMerkleRootCache(txs []*types.TransactionCache) []byte {
 }
 
 //CalcMultiLayerMerkleInfo 计算多层merkle树根hash以及子链根hash信息
-func CalcMultiLayerMerkleInfo(cfg *types.DplatformConfig, height int64, txs []*types.Transaction) ([]byte, []types.ChildChain) {
+func CalcMultiLayerMerkleInfo(cfg *types.DplatformOSConfig, height int64, txs []*types.Transaction) ([]byte, []types.ChildChain) {
 	if !cfg.IsFork(height, "ForkRootHash") {
 		return nil, nil
 	}

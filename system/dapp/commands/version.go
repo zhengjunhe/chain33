@@ -25,7 +25,7 @@ func VersionCmd() *cobra.Command {
 func version(cmd *cobra.Command, args []string) {
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
 	var res types.VersionInfo
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.Version", nil, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.Version", nil, &res)
 	ctx.Run()
 
 }

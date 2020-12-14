@@ -29,7 +29,7 @@ var (
 )
 
 // Register register dcriver height in name
-func Register(cfg *types.DplatformConfig, name string, create DriverCreate, height int64) {
+func Register(cfg *types.DplatformOSConfig, name string, create DriverCreate, height int64) {
 	if cfg == nil {
 		panic("Execute: GetConfig is nil")
 	}

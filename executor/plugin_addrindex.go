@@ -116,7 +116,7 @@ func setAddrTxsCount(db dbm.KVDB, addr string, count int64) error {
 	return db.Set(kv.Key, kv.Value)
 }
 
-func updateAddrTxsCount(cfg *types.DplatformConfig, cachedb dbm.KVDB, addr string, amount int64, isadd bool) (*types.KeyValue, error) {
+func updateAddrTxsCount(cfg *types.DplatformOSConfig, cachedb dbm.KVDB, addr string, amount int64, isadd bool) (*types.KeyValue, error) {
 	//blockchaindb 数据库0版本不支持此功能
 	ver := cfg.GInt("dbversion")
 	if ver == 0 {

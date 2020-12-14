@@ -15,7 +15,7 @@ type Action struct {
 	db       dbm.KV
 	fromaddr string
 	height   int64
-	cfg      *types.DplatformConfig
+	cfg      *types.DplatformOSConfig
 }
 
 // NewAction new a action object

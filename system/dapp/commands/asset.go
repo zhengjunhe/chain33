@@ -82,7 +82,7 @@ func assetBalance(cmd *cobra.Command, args []string) {
 			IsDetail: false,
 		}
 		var res rpcTypes.Headers
-		ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetHeaders", params, &res)
+		ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetHeaders", params, &res)
 		_, err := ctx.RunResult()
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -102,7 +102,7 @@ func assetBalance(cmd *cobra.Command, args []string) {
 		AssetSymbol: assetSymbol,
 	}
 	var res []*rpcTypes.Account
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.GetBalance", params, &res)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.GetBalance", params, &res)
 	ctx.SetResultCb(parseGetBalanceRes)
 	ctx.Run()
 }
@@ -139,7 +139,7 @@ func CreateAssetSendToExec(cmd *cobra.Command, args []string, fromExec string) {
 	}
 
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -174,7 +174,7 @@ func CreateAssetWithdraw(cmd *cobra.Command, args []string, fromExec string) {
 	}
 
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 
@@ -200,7 +200,7 @@ func CreateAssetTransfer(cmd *cobra.Command, args []string, fromExec string) {
 	}
 
 	rpcLaddr, _ := cmd.Flags().GetString("rpc_laddr")
-	ctx := jsonclient.NewRPCCtx(rpcLaddr, "Dplatform.CreateTransaction", params, nil)
+	ctx := jsonclient.NewRPCCtx(rpcLaddr, "DplatformOS.CreateTransaction", params, nil)
 	ctx.RunWithoutMarshal()
 }
 

@@ -66,7 +66,7 @@ type ProtocolManager struct {
 
 // P2PEnv p2p全局公共变量
 type P2PEnv struct {
-	ChainCfg        *types.DplatformConfig
+	ChainCfg        *types.DplatformOSConfig
 	QueueClient     queue.Client
 	Host            core.Host
 	ConnManager     IConnManager
@@ -174,7 +174,7 @@ func (base *BaseProtocol) GetP2PEnv() *P2PEnv {
 }
 
 // GetChainCfg get chain cfg
-func (base *BaseProtocol) GetChainCfg() *types.DplatformConfig {
+func (base *BaseProtocol) GetChainCfg() *types.DplatformOSConfig {
 
 	return base.ChainCfg
 

@@ -41,7 +41,7 @@ type TxGroup interface {
 }
 
 //ExecName  执行器name
-func (c *DplatformConfig) ExecName(name string) string {
+func (c *DplatformOSConfig) ExecName(name string) string {
 	if len(name) > 1 && name[0] == '#' {
 		return name[1:]
 	}
@@ -131,7 +131,7 @@ func FindExecer(key []byte) (execer []byte, err error) {
 }
 
 //GetParaExec  获取平行链执行
-func (c *DplatformConfig) GetParaExec(execer []byte) []byte {
+func (c *DplatformOSConfig) GetParaExec(execer []byte) []byte {
 	//必须是平行链
 	if !c.IsPara() {
 		return execer
@@ -326,7 +326,7 @@ func ManageKey(key string) string {
 }
 
 //ManaeKeyWithHeigh 超级管理员账户key
-func (c *DplatformConfig) ManaeKeyWithHeigh(key string, height int64) string {
+func (c *DplatformOSConfig) ManaeKeyWithHeigh(key string, height int64) string {
 	if c.IsFork(height, "ForkExecKey") {
 		return ManageKey(key)
 	}

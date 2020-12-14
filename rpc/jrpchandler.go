@@ -21,7 +21,7 @@ import (
 )
 
 // CreateRawTransaction create rawtransaction by jrpc
-func (c *Dplatform) CreateRawTransaction(in *rpctypes.CreateTx, result *interface{}) error {
+func (c *DplatformOS) CreateRawTransaction(in *rpctypes.CreateTx, result *interface{}) error {
 	if in == nil {
 		log.Error("CreateRawTransaction", "Error", types.ErrInvalidParam)
 		return types.ErrInvalidParam
@@ -46,7 +46,7 @@ func (c *Dplatform) CreateRawTransaction(in *rpctypes.CreateTx, result *interfac
 }
 
 // ReWriteRawTx re-write raw tx by jrpc
-func (c *Dplatform) ReWriteRawTx(in *rpctypes.ReWriteRawTx, result *interface{}) error {
+func (c *DplatformOS) ReWriteRawTx(in *rpctypes.ReWriteRawTx, result *interface{}) error {
 	inpb := &types.ReWriteRawTx{
 		Tx:     in.Tx,
 		To:     in.To,
@@ -64,7 +64,7 @@ func (c *Dplatform) ReWriteRawTx(in *rpctypes.ReWriteRawTx, result *interface{})
 }
 
 // CreateRawTxGroup create rawtransaction with group
-func (c *Dplatform) CreateRawTxGroup(in *types.CreateTransactionGroup, result *interface{}) error {
+func (c *DplatformOS) CreateRawTxGroup(in *types.CreateTransactionGroup, result *interface{}) error {
 	reply, err := c.cli.CreateRawTxGroup(in)
 	if err != nil {
 		return err
@@ -75,7 +75,7 @@ func (c *Dplatform) CreateRawTxGroup(in *types.CreateTransactionGroup, result *i
 }
 
 // CreateNoBlanaceTxs create multiple transaction with no balance
-func (c *Dplatform) CreateNoBlanaceTxs(in *types.NoBalanceTxs, result *string) error {
+func (c *DplatformOS) CreateNoBlanaceTxs(in *types.NoBalanceTxs, result *string) error {
 	tx, err := c.cli.CreateNoBalanceTxs(in)
 	if err != nil {
 		return err
@@ -86,7 +86,7 @@ func (c *Dplatform) CreateNoBlanaceTxs(in *types.NoBalanceTxs, result *string) e
 }
 
 // CreateNoBalanceTransaction create transaction with no balance
-func (c *Dplatform) CreateNoBalanceTransaction(in *types.NoBalanceTx, result *string) error {
+func (c *DplatformOS) CreateNoBalanceTransaction(in *types.NoBalanceTx, result *string) error {
 	params := &types.NoBalanceTxs{
 		TxHexs:  []string{in.GetTxHex()},
 		PayAddr: in.GetPayAddr(),
@@ -103,7 +103,7 @@ func (c *Dplatform) CreateNoBalanceTransaction(in *types.NoBalanceTx, result *st
 }
 
 // SendTransaction send transaction
-func (c *Dplatform) SendTransaction(in rpctypes.RawParm, result *interface{}) error {
+func (c *DplatformOS) SendTransaction(in rpctypes.RawParm, result *interface{}) error {
 	var parm types.Transaction
 	data, err := common.FromHex(in.Data)
 	if err != nil {
@@ -131,7 +131,7 @@ func (c *Dplatform) SendTransaction(in rpctypes.RawParm, result *interface{}) er
 }
 
 // GetHexTxByHash get hex transaction by hash
-func (c *Dplatform) GetHexTxByHash(in rpctypes.QueryParm, result *interface{}) error {
+func (c *DplatformOS) GetHexTxByHash(in rpctypes.QueryParm, result *interface{}) error {
 	var data types.ReqHash
 	hash, err := common.FromHex(in.Hash)
 	if err != nil {
@@ -147,7 +147,7 @@ func (c *Dplatform) GetHexTxByHash(in rpctypes.QueryParm, result *interface{}) e
 }
 
 // QueryTransaction query transaction
-func (c *Dplatform) QueryTransaction(in rpctypes.QueryParm, result *interface{}) error {
+func (c *DplatformOS) QueryTransaction(in rpctypes.QueryParm, result *interface{}) error {
 	var data types.ReqHash
 	hash, err := common.FromHex(in.Hash)
 	if err != nil {
@@ -171,7 +171,7 @@ func (c *Dplatform) QueryTransaction(in rpctypes.QueryParm, result *interface{})
 }
 
 // GetBlocks get block information
-func (c *Dplatform) GetBlocks(in rpctypes.BlockParam, result *interface{}) error {
+func (c *DplatformOS) GetBlocks(in rpctypes.BlockParam, result *interface{}) error {
 	reply, err := c.cli.GetBlocks(&types.ReqBlocks{Start: in.Start, End: in.End, IsDetail: in.Isdetail, Pid: []string{""}})
 	if err != nil {
 		return err
@@ -190,7 +190,7 @@ func (c *Dplatform) GetBlocks(in rpctypes.BlockParam, result *interface{}) error
 }
 
 // GetLastHeader get last header
-func (c *Dplatform) GetLastHeader(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetLastHeader(in *types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.GetLastHeader()
 	if err != nil {
 		return err
@@ -222,7 +222,7 @@ func (c *Dplatform) GetLastHeader(in *types.ReqNil, result *interface{}) error {
 
 // GetTxByAddr get transaction by address
 // GetTxByAddr(parm *types.ReqAddr) (*types.ReplyTxInfo, error)
-func (c *Dplatform) GetTxByAddr(in types.ReqAddr, result *interface{}) error {
+func (c *DplatformOS) GetTxByAddr(in types.ReqAddr, result *interface{}) error {
 	reply, err := c.cli.GetTransactionByAddr(&in)
 	if err != nil {
 		return err
@@ -246,7 +246,7 @@ GetTxByHashes(parm *types.ReqHashes) (*types.TransactionDetails, error)
 GetMempool() (*types.ReplyTxList, error)
 GetAccounts() (*types.WalletAccounts, error)
 */
-func (c *Dplatform) GetTxByHashes(in rpctypes.ReqHashes, result *interface{}) error {
+func (c *DplatformOS) GetTxByHashes(in rpctypes.ReqHashes, result *interface{}) error {
 	log.Warn("GetTxByHashes", "hashes", in)
 	var parm types.ReqHashes
 	parm.Hashes = make([][]byte, 0)
@@ -361,7 +361,7 @@ func fmtAsssets(assets []*types.Asset) []*rpctypes.Asset {
 }
 
 // GetMempool get mempool information
-func (c *Dplatform) GetMempool(in *types.ReqGetMempool, result *interface{}) error {
+func (c *DplatformOS) GetMempool(in *types.ReqGetMempool, result *interface{}) error {
 	reply, err := c.cli.GetMempool(in)
 	if err != nil {
 		return err
@@ -388,13 +388,13 @@ func (c *Dplatform) GetMempool(in *types.ReqGetMempool, result *interface{}) err
 }
 
 // GetAccountsV2 get accounts for version 2
-func (c *Dplatform) GetAccountsV2(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetAccountsV2(in *types.ReqNil, result *interface{}) error {
 	req := &types.ReqAccountList{WithoutBalance: false}
 	return c.GetAccounts(req, result)
 }
 
 // GetAccounts get accounts
-func (c *Dplatform) GetAccounts(in *types.ReqAccountList, result *interface{}) error {
+func (c *DplatformOS) GetAccounts(in *types.ReqAccountList, result *interface{}) error {
 	req := types.ReqAccountList{WithoutBalance: in.WithoutBalance}
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletGetAccountList", &req)
 	if err != nil {
@@ -414,7 +414,7 @@ func (c *Dplatform) GetAccounts(in *types.ReqAccountList, result *interface{}) e
 }
 
 // NewAccount new a account
-func (c *Dplatform) NewAccount(in types.ReqNewAccount, result *interface{}) error {
+func (c *DplatformOS) NewAccount(in types.ReqNewAccount, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "NewAccount", &in)
 	if err != nil {
 		return err
@@ -425,7 +425,7 @@ func (c *Dplatform) NewAccount(in types.ReqNewAccount, result *interface{}) erro
 }
 
 // WalletTxList transaction list of wallet
-func (c *Dplatform) WalletTxList(in rpctypes.ReqWalletTransactionList, result *interface{}) error {
+func (c *DplatformOS) WalletTxList(in rpctypes.ReqWalletTransactionList, result *interface{}) error {
 	var parm types.ReqWalletTransactionList
 	parm.FromTx = []byte(in.FromTx)
 	parm.Count = in.Count
@@ -446,7 +446,7 @@ func (c *Dplatform) WalletTxList(in rpctypes.ReqWalletTransactionList, result *i
 }
 
 // ImportPrivkey import privkey of wallet
-func (c *Dplatform) ImportPrivkey(in types.ReqWalletImportPrivkey, result *interface{}) error {
+func (c *DplatformOS) ImportPrivkey(in types.ReqWalletImportPrivkey, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletImportPrivkey", &in)
 	if err != nil {
 		return err
@@ -456,7 +456,7 @@ func (c *Dplatform) ImportPrivkey(in types.ReqWalletImportPrivkey, result *inter
 }
 
 // SendToAddress send to address of coins
-func (c *Dplatform) SendToAddress(in types.ReqWalletSendToAddress, result *interface{}) error {
+func (c *DplatformOS) SendToAddress(in types.ReqWalletSendToAddress, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletSendToAddress", &in)
 	if err != nil {
 		log.Debug("SendToAddress", "Error", err.Error())
@@ -470,7 +470,7 @@ func (c *Dplatform) SendToAddress(in types.ReqWalletSendToAddress, result *inter
 }
 
 // SetTxFee set tx fee
-func (c *Dplatform) SetTxFee(in types.ReqWalletSetFee, result *interface{}) error {
+func (c *DplatformOS) SetTxFee(in types.ReqWalletSetFee, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletSetFee", &in)
 	if err != nil {
 		return err
@@ -484,7 +484,7 @@ func (c *Dplatform) SetTxFee(in types.ReqWalletSetFee, result *interface{}) erro
 }
 
 // SetLabl set lable
-func (c *Dplatform) SetLabl(in types.ReqWalletSetLabel, result *interface{}) error {
+func (c *DplatformOS) SetLabl(in types.ReqWalletSetLabel, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletSetLabel", &in)
 	if err != nil {
 		return err
@@ -496,7 +496,7 @@ func (c *Dplatform) SetLabl(in types.ReqWalletSetLabel, result *interface{}) err
 }
 
 //GetAccount getAddress by lable
-func (c *Dplatform) GetAccount(in types.ReqGetAccount, result *interface{}) error {
+func (c *DplatformOS) GetAccount(in types.ReqGetAccount, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletGetAccount", &in)
 	if err != nil {
 		return err
@@ -509,7 +509,7 @@ func (c *Dplatform) GetAccount(in types.ReqGetAccount, result *interface{}) erro
 }
 
 // MergeBalance merge balance
-func (c *Dplatform) MergeBalance(in types.ReqWalletMergeBalance, result *interface{}) error {
+func (c *DplatformOS) MergeBalance(in types.ReqWalletMergeBalance, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletMergeBalance", &in)
 	if err != nil {
 		return err
@@ -524,7 +524,7 @@ func (c *Dplatform) MergeBalance(in types.ReqWalletMergeBalance, result *interfa
 }
 
 // SetPasswd set password
-func (c *Dplatform) SetPasswd(in types.ReqWalletSetPasswd, result *interface{}) error {
+func (c *DplatformOS) SetPasswd(in types.ReqWalletSetPasswd, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletSetPasswd", &in)
 	if err != nil {
 		return err
@@ -538,7 +538,7 @@ func (c *Dplatform) SetPasswd(in types.ReqWalletSetPasswd, result *interface{}) 
 }
 
 // Lock wallet lock
-func (c *Dplatform) Lock(in types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) Lock(in types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletLock", &in)
 	if err != nil {
 		return err
@@ -552,7 +552,7 @@ func (c *Dplatform) Lock(in types.ReqNil, result *interface{}) error {
 }
 
 // UnLock wallet unlock
-func (c *Dplatform) UnLock(in types.WalletUnLock, result *interface{}) error {
+func (c *DplatformOS) UnLock(in types.WalletUnLock, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "WalletUnLock", &in)
 	if err != nil {
 		return err
@@ -566,7 +566,7 @@ func (c *Dplatform) UnLock(in types.WalletUnLock, result *interface{}) error {
 }
 
 // GetPeerInfo get peer information
-func (c *Dplatform) GetPeerInfo(in types.P2PGetPeerReq, result *interface{}) error {
+func (c *DplatformOS) GetPeerInfo(in types.P2PGetPeerReq, result *interface{}) error {
 	reply, err := c.cli.PeerInfo(&in)
 	if err != nil {
 		return err
@@ -605,7 +605,7 @@ func (c *Dplatform) GetPeerInfo(in types.P2PGetPeerReq, result *interface{}) err
 }
 
 // GetHeaders get headers
-func (c *Dplatform) GetHeaders(in types.ReqBlocks, result *interface{}) error {
+func (c *DplatformOS) GetHeaders(in types.ReqBlocks, result *interface{}) error {
 	reply, err := c.cli.GetHeaders(&in)
 	if err != nil {
 		return err
@@ -637,7 +637,7 @@ func (c *Dplatform) GetHeaders(in types.ReqBlocks, result *interface{}) error {
 }
 
 // GetLastMemPool get  contents in last mempool
-func (c *Dplatform) GetLastMemPool(in types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetLastMemPool(in types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.GetLastMempool()
 	if err != nil {
 		return err
@@ -659,7 +659,7 @@ func (c *Dplatform) GetLastMemPool(in types.ReqNil, result *interface{}) error {
 }
 
 // GetProperFee get  contents in proper fee
-func (c *Dplatform) GetProperFee(in types.ReqProperFee, result *interface{}) error {
+func (c *DplatformOS) GetProperFee(in types.ReqProperFee, result *interface{}) error {
 	reply, err := c.cli.GetProperFee(&in)
 	if err != nil {
 		return err
@@ -672,7 +672,7 @@ func (c *Dplatform) GetProperFee(in types.ReqProperFee, result *interface{}) err
 
 // GetBlockOverview get overview of block
 // GetBlockOverview(parm *types.ReqHash) (*types.BlockOverview, error)
-func (c *Dplatform) GetBlockOverview(in rpctypes.QueryParm, result *interface{}) error {
+func (c *DplatformOS) GetBlockOverview(in rpctypes.QueryParm, result *interface{}) error {
 	var data types.ReqHash
 	hash, err := common.FromHex(in.Hash)
 	if err != nil {
@@ -717,7 +717,7 @@ func (c *Dplatform) GetBlockOverview(in rpctypes.QueryParm, result *interface{})
 }
 
 // GetAddrOverview get overview of address
-func (c *Dplatform) GetAddrOverview(in types.ReqAddr, result *interface{}) error {
+func (c *DplatformOS) GetAddrOverview(in types.ReqAddr, result *interface{}) error {
 	reply, err := c.cli.GetAddrOverview(&in)
 	if err != nil {
 		return err
@@ -727,7 +727,7 @@ func (c *Dplatform) GetAddrOverview(in types.ReqAddr, result *interface{}) error
 }
 
 // GetBlockHash get block hash
-func (c *Dplatform) GetBlockHash(in types.ReqInt, result *interface{}) error {
+func (c *DplatformOS) GetBlockHash(in types.ReqInt, result *interface{}) error {
 	reply, err := c.cli.GetBlockHash(&in)
 	if err != nil {
 		return err
@@ -739,7 +739,7 @@ func (c *Dplatform) GetBlockHash(in types.ReqInt, result *interface{}) error {
 }
 
 // GenSeed seed
-func (c *Dplatform) GenSeed(in types.GenSeedLang, result *interface{}) error {
+func (c *DplatformOS) GenSeed(in types.GenSeedLang, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "GenSeed", &in)
 	if err != nil {
 		return err
@@ -749,7 +749,7 @@ func (c *Dplatform) GenSeed(in types.GenSeedLang, result *interface{}) error {
 }
 
 // SaveSeed save seed
-func (c *Dplatform) SaveSeed(in types.SaveSeedByPw, result *interface{}) error {
+func (c *DplatformOS) SaveSeed(in types.SaveSeedByPw, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "SaveSeed", &in)
 	if err != nil {
 		return err
@@ -763,7 +763,7 @@ func (c *Dplatform) SaveSeed(in types.SaveSeedByPw, result *interface{}) error {
 }
 
 // GetSeed get seed
-func (c *Dplatform) GetSeed(in types.GetSeedByPw, result *interface{}) error {
+func (c *DplatformOS) GetSeed(in types.GetSeedByPw, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "GetSeed", &in)
 	if err != nil {
 		return err
@@ -773,7 +773,7 @@ func (c *Dplatform) GetSeed(in types.GetSeedByPw, result *interface{}) error {
 }
 
 // GetWalletStatus get status of wallet
-func (c *Dplatform) GetWalletStatus(in types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetWalletStatus(in types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "GetWalletStatus", &in)
 	if err != nil {
 		return err
@@ -790,7 +790,7 @@ func (c *Dplatform) GetWalletStatus(in types.ReqNil, result *interface{}) error 
 }
 
 // GetBalance get balance
-func (c *Dplatform) GetBalance(in types.ReqBalance, result *interface{}) error {
+func (c *DplatformOS) GetBalance(in types.ReqBalance, result *interface{}) error {
 	//增加addr地址的校验
 	for _, addr := range in.GetAddresses() {
 		err := address.CheckAddress(addr)
@@ -810,7 +810,7 @@ func (c *Dplatform) GetBalance(in types.ReqBalance, result *interface{}) error {
 }
 
 // GetAllExecBalance get all balance of exec
-func (c *Dplatform) GetAllExecBalance(in types.ReqAllExecBalance, result *interface{}) error {
+func (c *DplatformOS) GetAllExecBalance(in types.ReqAllExecBalance, result *interface{}) error {
 	balance, err := c.cli.GetAllExecBalance(&in)
 	if err != nil {
 		return err
@@ -832,7 +832,7 @@ func (c *Dplatform) GetAllExecBalance(in types.ReqAllExecBalance, result *interf
 }
 
 // ExecWallet exec wallet
-func (c *Dplatform) ExecWallet(in *rpctypes.ChainExecutor, result *interface{}) error {
+func (c *DplatformOS) ExecWallet(in *rpctypes.ChainExecutor, result *interface{}) error {
 	hash, err := common.FromHex(in.StateHash)
 	if err != nil {
 		return err
@@ -861,7 +861,7 @@ func (c *Dplatform) ExecWallet(in *rpctypes.ChainExecutor, result *interface{}) 
 }
 
 // Query query
-func (c *Dplatform) Query(in rpctypes.Query4Jrpc, result *interface{}) error {
+func (c *DplatformOS) Query(in rpctypes.Query4Jrpc, result *interface{}) error {
 	cfg := c.cli.GetConfig()
 	execty := types.LoadExecutorType(in.Execer)
 	if execty == nil {
@@ -890,7 +890,7 @@ func (c *Dplatform) Query(in rpctypes.Query4Jrpc, result *interface{}) error {
 }
 
 // DumpPrivkey dump privkey
-func (c *Dplatform) DumpPrivkey(in types.ReqString, result *interface{}) error {
+func (c *DplatformOS) DumpPrivkey(in types.ReqString, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "DumpPrivkey", &in)
 	if err != nil {
 		return err
@@ -900,7 +900,7 @@ func (c *Dplatform) DumpPrivkey(in types.ReqString, result *interface{}) error {
 }
 
 // DumpPrivkeysFile dumps private key to file.
-func (c *Dplatform) DumpPrivkeysFile(in types.ReqPrivkeysFile, result *interface{}) error {
+func (c *DplatformOS) DumpPrivkeysFile(in types.ReqPrivkeysFile, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "DumpPrivkeysFile", &in)
 	if err != nil {
 		return err
@@ -914,7 +914,7 @@ func (c *Dplatform) DumpPrivkeysFile(in types.ReqPrivkeysFile, result *interface
 }
 
 // ImportPrivkeysFile imports private key from file.
-func (c *Dplatform) ImportPrivkeysFile(in types.ReqPrivkeysFile, result *interface{}) error {
+func (c *DplatformOS) ImportPrivkeysFile(in types.ReqPrivkeysFile, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "ImportPrivkeysFile", &in)
 	if err != nil {
 		return err
@@ -928,7 +928,7 @@ func (c *Dplatform) ImportPrivkeysFile(in types.ReqPrivkeysFile, result *interfa
 }
 
 // Version get software version
-func (c *Dplatform) Version(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) Version(in *types.ReqNil, result *interface{}) error {
 	resp, err := c.cli.Version()
 	if err != nil {
 		return err
@@ -938,7 +938,7 @@ func (c *Dplatform) Version(in *types.ReqNil, result *interface{}) error {
 }
 
 // GetTotalCoins get total coins
-func (c *Dplatform) GetTotalCoins(in *types.ReqGetTotalCoins, result *interface{}) error {
+func (c *DplatformOS) GetTotalCoins(in *types.ReqGetTotalCoins, result *interface{}) error {
 	resp, err := c.cli.GetTotalCoins(in)
 	if err != nil {
 		return err
@@ -948,7 +948,7 @@ func (c *Dplatform) GetTotalCoins(in *types.ReqGetTotalCoins, result *interface{
 }
 
 // IsSync is sync or not
-func (c *Dplatform) IsSync(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) IsSync(in *types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.IsSync()
 	if err != nil {
 		return err
@@ -962,7 +962,7 @@ func (c *Dplatform) IsSync(in *types.ReqNil, result *interface{}) error {
 }
 
 // IsNtpClockSync  is ntp clock sync
-func (c *Dplatform) IsNtpClockSync(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) IsNtpClockSync(in *types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.IsNtpClockSync()
 	if err != nil {
 		return err
@@ -976,7 +976,7 @@ func (c *Dplatform) IsNtpClockSync(in *types.ReqNil, result *interface{}) error 
 }
 
 // QueryTotalFee query total fee
-func (c *Dplatform) QueryTotalFee(in *types.LocalDBGet, result *interface{}) error {
+func (c *DplatformOS) QueryTotalFee(in *types.LocalDBGet, result *interface{}) error {
 	if in == nil || len(in.Keys) != 1 {
 		return types.ErrInvalidParam
 	}
@@ -1000,7 +1000,7 @@ func (c *Dplatform) QueryTotalFee(in *types.LocalDBGet, result *interface{}) err
 }
 
 // SignRawTx signature the rawtransaction
-func (c *Dplatform) SignRawTx(in *types.ReqSignRawTx, result *interface{}) error {
+func (c *DplatformOS) SignRawTx(in *types.ReqSignRawTx, result *interface{}) error {
 	req := types.ReqSignRawTx{Addr: in.Addr, Privkey: in.Privkey, TxHex: in.TxHex, Expire: in.Expire,
 		Index: in.Index, Token: in.Token, Fee: in.Fee, NewToAddr: in.NewToAddr}
 	reply, err := c.cli.ExecWalletFunc("wallet", "SignRawTx", &req)
@@ -1012,7 +1012,7 @@ func (c *Dplatform) SignRawTx(in *types.ReqSignRawTx, result *interface{}) error
 }
 
 // GetNetInfo get net information
-func (c *Dplatform) GetNetInfo(in types.P2PGetNetInfoReq, result *interface{}) error {
+func (c *DplatformOS) GetNetInfo(in types.P2PGetNetInfoReq, result *interface{}) error {
 	resp, err := c.cli.GetNetInfo(&in)
 	if err != nil {
 		return err
@@ -1033,7 +1033,7 @@ func (c *Dplatform) GetNetInfo(in types.P2PGetNetInfoReq, result *interface{}) e
 }
 
 // GetFatalFailure return fatal failure
-func (c *Dplatform) GetFatalFailure(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetFatalFailure(in *types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.ExecWalletFunc("wallet", "FatalFailure", &types.ReqNil{})
 	if err != nil {
 		return err
@@ -1043,7 +1043,7 @@ func (c *Dplatform) GetFatalFailure(in *types.ReqNil, result *interface{}) error
 }
 
 // DecodeRawTransaction 考虑交易组的解析统一返回ReplyTxList列表
-func (c *Dplatform) DecodeRawTransaction(in *types.ReqDecodeRawTransaction, result *interface{}) error {
+func (c *DplatformOS) DecodeRawTransaction(in *types.ReqDecodeRawTransaction, result *interface{}) error {
 	tx, err := c.cli.DecodeRawTransaction(in)
 	if err != nil {
 		return err
@@ -1073,7 +1073,7 @@ func (c *Dplatform) DecodeRawTransaction(in *types.ReqDecodeRawTransaction, resu
 }
 
 // GetTimeStatus get status of time
-func (c *Dplatform) GetTimeStatus(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetTimeStatus(in *types.ReqNil, result *interface{}) error {
 	reply, err := c.cli.GetTimeStatus()
 	if err != nil {
 		return err
@@ -1088,7 +1088,7 @@ func (c *Dplatform) GetTimeStatus(in *types.ReqNil, result *interface{}) error {
 }
 
 // CloseQueue close queue
-func (c *Dplatform) CloseQueue(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) CloseQueue(in *types.ReqNil, result *interface{}) error {
 	go func() {
 		time.Sleep(time.Millisecond * 100)
 		_, err := c.cli.CloseQueue()
@@ -1102,7 +1102,7 @@ func (c *Dplatform) CloseQueue(in *types.ReqNil, result *interface{}) error {
 }
 
 // GetLastBlockSequence get sequence last block
-func (c *Dplatform) GetLastBlockSequence(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetLastBlockSequence(in *types.ReqNil, result *interface{}) error {
 	resp, err := c.cli.GetLastBlockSequence()
 	if err != nil {
 		return err
@@ -1112,7 +1112,7 @@ func (c *Dplatform) GetLastBlockSequence(in *types.ReqNil, result *interface{}) 
 }
 
 // GetBlockSequences get the block loading sequence number information for the specified interval
-func (c *Dplatform) GetBlockSequences(in rpctypes.BlockParam, result *interface{}) error {
+func (c *DplatformOS) GetBlockSequences(in rpctypes.BlockParam, result *interface{}) error {
 	resp, err := c.cli.GetBlockSequences(&types.ReqBlocks{Start: in.Start, End: in.End, IsDetail: in.Isdetail, Pid: []string{""}})
 	if err != nil {
 		return err
@@ -1128,7 +1128,7 @@ func (c *Dplatform) GetBlockSequences(in rpctypes.BlockParam, result *interface{
 }
 
 // GetBlockByHashes get block information by hashes
-func (c *Dplatform) GetBlockByHashes(in rpctypes.ReqHashes, result *interface{}) error {
+func (c *DplatformOS) GetBlockByHashes(in rpctypes.ReqHashes, result *interface{}) error {
 	log.Warn("GetBlockByHashes", "hashes", in)
 	var parm types.ReqHashes
 	parm.Hashes = make([][]byte, 0)
@@ -1157,7 +1157,7 @@ func (c *Dplatform) GetBlockByHashes(in rpctypes.ReqHashes, result *interface{})
 }
 
 // CreateTransaction create transaction
-func (c *Dplatform) CreateTransaction(in *rpctypes.CreateTxIn, result *interface{}) error {
+func (c *DplatformOS) CreateTransaction(in *rpctypes.CreateTxIn, result *interface{}) error {
 	if in == nil {
 		return types.ErrInvalidParam
 	}
@@ -1171,13 +1171,13 @@ func (c *Dplatform) CreateTransaction(in *rpctypes.CreateTxIn, result *interface
 }
 
 // ConvertExectoAddr convert exec to address
-func (c *Dplatform) ConvertExectoAddr(in rpctypes.ExecNameParm, result *string) error {
+func (c *DplatformOS) ConvertExectoAddr(in rpctypes.ExecNameParm, result *string) error {
 	*result = address.ExecAddress(in.ExecName)
 	return nil
 }
 
 // GetExecBalance get balance exec
-func (c *Dplatform) GetExecBalance(in *types.ReqGetExecBalance, result *interface{}) error {
+func (c *DplatformOS) GetExecBalance(in *types.ReqGetExecBalance, result *interface{}) error {
 	resp, err := c.cli.GetExecBalance(in)
 	if err != nil {
 		return err
@@ -1188,7 +1188,7 @@ func (c *Dplatform) GetExecBalance(in *types.ReqGetExecBalance, result *interfac
 }
 
 // AddPushSubscribe  add Seq CallBack
-func (c *Dplatform) AddPushSubscribe(in *types.PushSubscribeReq, result *interface{}) error {
+func (c *DplatformOS) AddPushSubscribe(in *types.PushSubscribeReq, result *interface{}) error {
 	resp, err := c.cli.AddPushSubscribe(in)
 	log.Error("AddPushSubscribe", "err", err, "reply", resp)
 
@@ -1200,7 +1200,7 @@ func (c *Dplatform) AddPushSubscribe(in *types.PushSubscribeReq, result *interfa
 }
 
 // ListPushes  List Seq CallBack
-func (c *Dplatform) ListPushes(in *types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) ListPushes(in *types.ReqNil, result *interface{}) error {
 	resp, err := c.cli.ListPushes()
 	if err != nil {
 		return err
@@ -1210,7 +1210,7 @@ func (c *Dplatform) ListPushes(in *types.ReqNil, result *interface{}) error {
 }
 
 // GetPushSeqLastNum  Get Seq Call Back Last Num
-func (c *Dplatform) GetPushSeqLastNum(in *types.ReqString, result *interface{}) error {
+func (c *DplatformOS) GetPushSeqLastNum(in *types.ReqString, result *interface{}) error {
 	resp, err := c.cli.GetPushSeqLastNum(in)
 	if err != nil {
 		return err
@@ -1277,7 +1277,7 @@ func fmtAccount(balances []*types.Account) []*rpctypes.Account {
 }
 
 // GetCoinSymbol get coin symbol
-func (c *Dplatform) GetCoinSymbol(in types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) GetCoinSymbol(in types.ReqNil, result *interface{}) error {
 	cfg := c.cli.GetConfig()
 	symbol := cfg.GetCoinSymbol()
 	resp := types.ReplyString{Data: symbol}
@@ -1304,7 +1304,7 @@ func fmtTxProofs(txProofs []*types.TxProof) []*rpctypes.TxProof {
 }
 
 // NetProtocols get net information
-func (c *Dplatform) NetProtocols(in types.ReqNil, result *interface{}) error {
+func (c *DplatformOS) NetProtocols(in types.ReqNil, result *interface{}) error {
 	resp, err := c.cli.NetProtocols(&in)
 	if err != nil {
 		return err

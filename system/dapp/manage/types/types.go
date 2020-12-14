@@ -31,13 +31,13 @@ func init() {
 }
 
 //InitFork init
-func InitFork(cfg *types.DplatformConfig) {
+func InitFork(cfg *types.DplatformOSConfig) {
 	cfg.RegisterDappFork(ManageX, "Enable", 120000)
 	cfg.RegisterDappFork(ManageX, "ForkManageExec", 400000)
 }
 
 //InitExecutor init Executor
-func InitExecutor(cfg *types.DplatformConfig) {
+func InitExecutor(cfg *types.DplatformOSConfig) {
 	types.RegistorExecutor(ManageX, NewType(cfg))
 }
 
@@ -47,7 +47,7 @@ type ManageType struct {
 }
 
 // NewType new a managetype object
-func NewType(cfg *types.DplatformConfig) *ManageType {
+func NewType(cfg *types.DplatformOSConfig) *ManageType {
 	c := &ManageType{}
 	c.SetChild(c)
 	c.SetConfig(cfg)

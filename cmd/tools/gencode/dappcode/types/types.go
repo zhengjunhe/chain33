@@ -83,12 +83,12 @@ func init() {
 }
 
 // InitFork defines register fork
-func InitFork(cfg *types.DplatformConfig) {
+func InitFork(cfg *types.DplatformOSConfig) {
 	cfg.RegisterDappFork(${CLASSNAME}X, "Enable", 0)
 }
 
 // InitExecutor defines register executor
-func InitExecutor(cfg *types.DplatformConfig) {
+func InitExecutor(cfg *types.DplatformOSConfig) {
 	types.RegistorExecutor(${CLASSNAME}X, NewType(cfg))
 }
 
@@ -96,7 +96,7 @@ type ${EXECNAME}Type struct {
     types.ExecTypeBase
 }
 
-func NewType(cfg *types.DplatformConfig) *${EXECNAME}Type {
+func NewType(cfg *types.DplatformOSConfig) *${EXECNAME}Type {
     c := &${EXECNAME}Type{}
     c.SetChild(c)
     c.SetConfig(cfg)

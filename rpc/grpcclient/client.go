@@ -14,10 +14,10 @@ const paraChainGrpcRecSize = 100 * 1024 * 1024
 
 var mu sync.Mutex
 
-var defaultClient types.DplatformClient
+var defaultClient types.DplatformOSClient
 
 //NewMainChainClient 创建一个平行链的 主链 grpc dplatform 客户端
-func NewMainChainClient(cfg *types.DplatformConfig, grpcaddr string) (types.DplatformClient, error) {
+func NewMainChainClient(cfg *types.DplatformOSConfig, grpcaddr string) (types.DplatformOSClient, error) {
 	mu.Lock()
 	defer mu.Unlock()
 	if grpcaddr == "" && defaultClient != nil {
@@ -41,7 +41,7 @@ func NewMainChainClient(cfg *types.DplatformConfig, grpcaddr string) (types.Dpla
 	if err != nil {
 		return nil, err
 	}
-	grpcClient := types.NewDplatformClient(conn)
+	grpcClient := types.NewDplatformOSClient(conn)
 	if grpcaddr == "" {
 		defaultClient = grpcClient
 	}

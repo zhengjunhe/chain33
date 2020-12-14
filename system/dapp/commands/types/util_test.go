@@ -69,7 +69,7 @@ func TestDecodeAccount(t *testing.T) {
 }
 
 func TestCreateRawTx(t *testing.T) {
-	dplatformCfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	dplatformCfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	types.SetCliSysParam(dplatformCfg.GetTitle(), dplatformCfg)
 
 	cmd := &cobra.Command{}

@@ -32,7 +32,7 @@ import (
 
 var sendTxWait = time.Millisecond * 5
 
-type DplatformMock struct {
+type DplatformOSMock struct {
 	random  *rand.Rand
 	q       queue.Queue
 	client  queue.Client
@@ -51,26 +51,26 @@ type DplatformMock struct {
 }
 
 //GetAPI :
-func (mock *DplatformMock) GetAPI() client.QueueProtocolAPI {
+func (mock *DplatformOSMock) GetAPI() client.QueueProtocolAPI {
 	return mock.api
 }
 
 //GetRPC :
-func (mock *DplatformMock) GetRPC() *rpc.RPC {
+func (mock *DplatformOSMock) GetRPC() *rpc.RPC {
 	return mock.rpc
 }
 
 //GetCfg :
-func (mock *DplatformMock) GetCfg() *types.Config {
+func (mock *DplatformOSMock) GetCfg() *types.Config {
 	return mock.cfg
 }
 
 //Close :
-func (mock *DplatformMock) Close() {
+func (mock *DplatformOSMock) Close() {
 	mock.closeNoLock()
 }
 
-func (mock *DplatformMock) closeNoLock() {
+func (mock *DplatformOSMock) closeNoLock() {
 	mock.network.Close()
 	mock.rpc.Close()
 	mock.mem.Close()
@@ -87,22 +87,22 @@ func (mock *DplatformMock) closeNoLock() {
 }
 
 //GetClient :
-func (mock *DplatformMock) GetClient() queue.Client {
+func (mock *DplatformOSMock) GetClient() queue.Client {
 	return mock.client
 }
 
 //GetBlockChain :
-func (mock *DplatformMock) GetBlockChain() *BlockChain {
+func (mock *DplatformOSMock) GetBlockChain() *BlockChain {
 	return mock.chain
 }
 
 //GetGenesisKey :
-func (mock *DplatformMock) GetGenesisKey() crypto.PrivKey {
+func (mock *DplatformOSMock) GetGenesisKey() crypto.PrivKey {
 	return util.TestPrivkeyList[1]
 }
 
 //WaitHeight :
-func (mock *DplatformMock) WaitHeight(height int64) error {
+func (mock *DplatformOSMock) WaitHeight(height int64) error {
 	for {
 		header, err := mock.api.GetLastHeader()
 		if err != nil {
@@ -116,7 +116,7 @@ func (mock *DplatformMock) WaitHeight(height int64) error {
 	return nil
 }
 
-func (mock *DplatformMock) GetJSONC() *jsonclient.JSONClient {
+func (mock *DplatformOSMock) GetJSONC() *jsonclient.JSONClient {
 	jsonc, err := jsonclient.NewJSONClient("http://" + mock.cfg.RPC.JrpcBindAddr + "/")
 	if err != nil {
 		return nil
@@ -125,7 +125,7 @@ func (mock *DplatformMock) GetJSONC() *jsonclient.JSONClient {
 }
 
 //WaitTx :
-func (mock *DplatformMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
+func (mock *DplatformOSMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
 	if hash == nil {
 		return nil, nil
 	}
@@ -140,7 +140,7 @@ func (mock *DplatformMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, err
 		data := rpctypes.QueryParm{
 			Hash: common.ToHex(hash),
 		}
-		err = mock.GetJSONC().Call("Dplatform.QueryTransaction", data, &testResult)
+		err = mock.GetJSONC().Call("DplatformOS.QueryTransaction", data, &testResult)
 		return &testResult, err
 	}
 }
@@ -693,26 +693,26 @@ func Test_RecoverPush(t *testing.T) {
 }
 
 //init work
-func NewDplatformMock(cfgpath string, mockapi client.QueueProtocolAPI) *DplatformMock {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+func NewDplatformOSMock(cfgpath string, mockapi client.QueueProtocolAPI) *DplatformOSMock {
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	return newWithConfigNoLock(cfg, mockapi)
 }
 
-func NewDplatformMockWithFlag(cfgpath string, mockapi client.QueueProtocolAPI, isRecordBlockSequence, enablePushSubscribe bool) *DplatformMock {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+func NewDplatformOSMockWithFlag(cfgpath string, mockapi client.QueueProtocolAPI, isRecordBlockSequence, enablePushSubscribe bool) *DplatformOSMock {
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	cfg.GetModuleConfig().BlockChain.IsRecordBlockSequence = isRecordBlockSequence
 	cfg.GetModuleConfig().BlockChain.EnablePushSubscribe = enablePushSubscribe
 	return newWithConfigNoLock(cfg, mockapi)
 }
 
-func newWithConfigNoLock(cfg *types.DplatformConfig, mockapi client.QueueProtocolAPI) *DplatformMock {
+func newWithConfigNoLock(cfg *types.DplatformOSConfig, mockapi client.QueueProtocolAPI) *DplatformOSMock {
 	mfg := cfg.GetModuleConfig()
 	sub := cfg.GetSubConfig()
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	types.Debug = false
 	datadir := util.ResetDatadir(mfg, "$TEMP/")
-	mock := &DplatformMock{cfg: mfg, sub: sub, q: q, datadir: datadir}
+	mock := &DplatformOSMock{cfg: mfg, sub: sub, q: q, datadir: datadir}
 	mock.random = rand.New(rand.NewSource(types.Now().UnixNano()))
 
 	mock.exec = executor.New(cfg)
@@ -762,7 +762,7 @@ func newWithConfigNoLock(cfg *types.DplatformConfig, mockapi client.QueueProtoco
 	return mock
 }
 
-func addTx(cfg *types.DplatformConfig, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
+func addTx(cfg *types.DplatformOSConfig, priv crypto.PrivKey, api client.QueueProtocolAPI) ([]*types.Transaction, string, error) {
 	txs := util.GenCoinsTxs(cfg, priv, 1)
 	hash := common.ToHex(txs[0].Hash())
 	reply, err := api.SendTx(txs[0])
@@ -775,7 +775,7 @@ func addTx(cfg *types.DplatformConfig, priv crypto.PrivKey, api client.QueueProt
 	return txs, hash, nil
 }
 
-func createBlocks(t *testing.T, mock33 *DplatformMock, blockchain *BlockChain, number int64) {
+func createBlocks(t *testing.T, mock33 *DplatformOSMock, blockchain *BlockChain, number int64) {
 	chainlog.Info("testProcAddBlockMsg begin --------------------")
 
 	curheight := blockchain.GetBlockHeight()
@@ -801,8 +801,8 @@ func createBlocks(t *testing.T, mock33 *DplatformMock, blockchain *BlockChain, n
 	chainlog.Info("testProcAddBlockMsg end --------------------")
 }
 
-func createBlockChain(t *testing.T) (*BlockChain, *DplatformMock) {
-	mock33 := NewDplatformMock("", nil)
+func createBlockChain(t *testing.T) (*BlockChain, *DplatformOSMock) {
+	mock33 := NewDplatformOSMock("", nil)
 
 	//cfg := mock33.GetClient().GetConfig()
 	blockchain := mock33.GetBlockChain()
@@ -811,8 +811,8 @@ func createBlockChain(t *testing.T) (*BlockChain, *DplatformMock) {
 	return blockchain, mock33
 }
 
-func createBlockChainWithFalgSet(t *testing.T, isRecordBlockSequence, enablePushSubscribe bool) (*BlockChain, *DplatformMock) {
-	mock33 := NewDplatformMockWithFlag("", nil, isRecordBlockSequence, enablePushSubscribe)
+func createBlockChainWithFalgSet(t *testing.T, isRecordBlockSequence, enablePushSubscribe bool) (*BlockChain, *DplatformOSMock) {
+	mock33 := NewDplatformOSMockWithFlag("", nil, isRecordBlockSequence, enablePushSubscribe)
 
 	//cfg := mock33.GetClient().GetConfig()
 	blockchain := mock33.GetBlockChain()

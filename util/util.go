@@ -73,7 +73,7 @@ func MakeStringToLower(in string, pos, count int) (out string, err error) {
 }
 
 //GenNoneTxs : 创建一些 none 执行器的 交易列表，一般用于测试
-func GenNoneTxs(cfg *types.DplatformConfig, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
+func GenNoneTxs(cfg *types.DplatformOSConfig, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
 	for i := 0; i < int(n); i++ {
 		txs = append(txs, CreateNoneTx(cfg, priv))
 	}
@@ -81,7 +81,7 @@ func GenNoneTxs(cfg *types.DplatformConfig, priv crypto.PrivKey, n int64) (txs [
 }
 
 //GenCoinsTxs : generate txs to be executed on exector coin
-func GenCoinsTxs(cfg *types.DplatformConfig, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
+func GenCoinsTxs(cfg *types.DplatformOSConfig, priv crypto.PrivKey, n int64) (txs []*types.Transaction) {
 	to, _ := Genaddress()
 	for i := 0; i < int(n); i++ {
 		txs = append(txs, CreateCoinsTx(cfg, priv, to, n+1))
@@ -104,7 +104,7 @@ func Genaddress() (string, crypto.PrivKey) {
 }
 
 // CreateNoneTx : Create None Tx
-func CreateNoneTx(cfg *types.DplatformConfig, priv crypto.PrivKey) *types.Transaction {
+func CreateNoneTx(cfg *types.DplatformOSConfig, priv crypto.PrivKey) *types.Transaction {
 	return CreateTxWithExecer(cfg, priv, "none")
 }
 
@@ -116,7 +116,7 @@ func updateExpireWithTxHeight(tx *types.Transaction, priv crypto.PrivKey, currHe
 }
 
 // CreateCoinsTxWithTxHeight 使用txHeight作为交易过期
-func CreateCoinsTxWithTxHeight(cfg *types.DplatformConfig, priv crypto.PrivKey, to string, amount, currHeight int64) *types.Transaction {
+func CreateCoinsTxWithTxHeight(cfg *types.DplatformOSConfig, priv crypto.PrivKey, to string, amount, currHeight int64) *types.Transaction {
 
 	tx := CreateCoinsTx(cfg, nil, to, amount)
 	updateExpireWithTxHeight(tx, priv, currHeight)
@@ -124,7 +124,7 @@ func CreateCoinsTxWithTxHeight(cfg *types.DplatformConfig, priv crypto.PrivKey, 
 }
 
 //CreateNoneTxWithTxHeight 使用txHeight作为交易过期
-func CreateNoneTxWithTxHeight(cfg *types.DplatformConfig, priv crypto.PrivKey, currHeight int64) *types.Transaction {
+func CreateNoneTxWithTxHeight(cfg *types.DplatformOSConfig, priv crypto.PrivKey, currHeight int64) *types.Transaction {
 
 	tx := CreateNoneTx(cfg, nil)
 	updateExpireWithTxHeight(tx, priv, currHeight)
@@ -132,7 +132,7 @@ func CreateNoneTxWithTxHeight(cfg *types.DplatformConfig, priv crypto.PrivKey, c
 }
 
 // CreateTxWithExecer ： Create Tx With Execer
-func CreateTxWithExecer(cfg *types.DplatformConfig, priv crypto.PrivKey, execer string) *types.Transaction {
+func CreateTxWithExecer(cfg *types.DplatformOSConfig, priv crypto.PrivKey, execer string) *types.Transaction {
 	if execer == "coins" {
 		to, _ := Genaddress()
 		return CreateCoinsTx(cfg, priv, to, types.Coin)
@@ -170,7 +170,7 @@ func JSONPrint(t TestingT, input interface{}) {
 }
 
 // CreateManageTx : Create Manage Tx
-func CreateManageTx(cfg *types.DplatformConfig, priv crypto.PrivKey, key, op, value string) *types.Transaction {
+func CreateManageTx(cfg *types.DplatformOSConfig, priv crypto.PrivKey, key, op, value string) *types.Transaction {
 	v := &types.ModifyConfig{Key: key, Op: op, Value: value, Addr: ""}
 	exec := types.LoadExecutorType("manage")
 	if exec == nil {
@@ -189,13 +189,13 @@ func CreateManageTx(cfg *types.DplatformConfig, priv crypto.PrivKey, key, op, va
 }
 
 // CreateCoinsTx : Create Coins Tx
-func CreateCoinsTx(cfg *types.DplatformConfig, priv crypto.PrivKey, to string, amount int64) *types.Transaction {
+func CreateCoinsTx(cfg *types.DplatformOSConfig, priv crypto.PrivKey, to string, amount int64) *types.Transaction {
 	tx := createCoinsTx(cfg, to, amount)
 	tx.Sign(types.SECP256K1, priv)
 	return tx
 }
 
-func createCoinsTx(cfg *types.DplatformConfig, to string, amount int64) *types.Transaction {
+func createCoinsTx(cfg *types.DplatformOSConfig, to string, amount int64) *types.Transaction {
 	exec := types.LoadExecutorType("coins")
 	if exec == nil {
 		panic("unknow driver coins")
@@ -216,7 +216,7 @@ func createCoinsTx(cfg *types.DplatformConfig, to string, amount int64) *types.T
 }
 
 //CreateTxWithTxHeight : Create Tx With Tx Height
-func CreateTxWithTxHeight(cfg *types.DplatformConfig, priv crypto.PrivKey, to string, amount, expire int64) *types.Transaction {
+func CreateTxWithTxHeight(cfg *types.DplatformOSConfig, priv crypto.PrivKey, to string, amount, expire int64) *types.Transaction {
 	tx := createCoinsTx(cfg, to, amount)
 	tx.Expire = expire + types.TxHeightFlag
 	tx.Sign(types.SECP256K1, priv)
@@ -224,7 +224,7 @@ func CreateTxWithTxHeight(cfg *types.DplatformConfig, priv crypto.PrivKey, to st
 }
 
 // GenTxsTxHeigt : Gen Txs with Heigt
-func GenTxsTxHeigt(cfg *types.DplatformConfig, priv crypto.PrivKey, n, height int64) (txs []*types.Transaction) {
+func GenTxsTxHeigt(cfg *types.DplatformOSConfig, priv crypto.PrivKey, n, height int64) (txs []*types.Transaction) {
 	to, _ := Genaddress()
 	for i := 0; i < int(n); i++ {
 		tx := CreateTxWithTxHeight(cfg, priv, to, types.Coin*(n+1), 20+height)
@@ -236,7 +236,7 @@ func GenTxsTxHeigt(cfg *types.DplatformConfig, priv crypto.PrivKey, n, height in
 var zeroHash [32]byte
 
 // CreateNoneBlock : Create None Block
-func CreateNoneBlock(cfg *types.DplatformConfig, priv crypto.PrivKey, n int64) *types.Block {
+func CreateNoneBlock(cfg *types.DplatformOSConfig, priv crypto.PrivKey, n int64) *types.Block {
 	newblock := &types.Block{}
 	newblock.Height = 1
 	newblock.BlockTime = types.Now().Unix()
@@ -247,7 +247,7 @@ func CreateNoneBlock(cfg *types.DplatformConfig, priv crypto.PrivKey, n int64) *
 }
 
 //CreateCoinsBlock : create coins block, n size
-func CreateCoinsBlock(cfg *types.DplatformConfig, priv crypto.PrivKey, n int64) *types.Block {
+func CreateCoinsBlock(cfg *types.DplatformOSConfig, priv crypto.PrivKey, n int64) *types.Block {
 	newblock := &types.Block{}
 	newblock.Height = 1
 	newblock.BlockTime = types.Now().Unix()
@@ -486,7 +486,7 @@ func ExecBlockUpgrade(client queue.Client, prevStateRoot []byte, block *types.Bl
 }
 
 //CreateNewBlock : Create a New Block
-func CreateNewBlock(cfg *types.DplatformConfig, parent *types.Block, txs []*types.Transaction) *types.Block {
+func CreateNewBlock(cfg *types.DplatformOSConfig, parent *types.Block, txs []*types.Transaction) *types.Block {
 	newblock := &types.Block{}
 	newblock.Height = parent.Height + 1
 	newblock.BlockTime = parent.BlockTime + 1

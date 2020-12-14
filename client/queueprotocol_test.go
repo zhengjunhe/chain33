@@ -30,7 +30,7 @@ var (
 func TestMain(m *testing.M) {
 	mock.grpcMock = &grpcMock
 	mock.jrpcMock = &jrpc
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	pluginmgr.InitExec(cfg)
 	api = mock.startup(0)
 	flag := m.Run()
@@ -611,7 +611,7 @@ func TestJsonRPC(t *testing.T) {
 
 func testGetAccountsJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.WalletAccounts
-	err := rpc.newRPCCtx("Dplatform.GetAccounts", &types.ReqNil{}, &res)
+	err := rpc.newRPCCtx("DplatformOS.GetAccounts", &types.ReqNil{}, &res)
 	if err != nil {
 		t.Error("testGetAccountsJSONRPC Failed.", err)
 	}
@@ -619,7 +619,7 @@ func testGetAccountsJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testDumpPrivkeyJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res types.ReplyString
-	err := rpc.newRPCCtx("Dplatform.DumpPrivkey", &types.ReqString{}, &res)
+	err := rpc.newRPCCtx("DplatformOS.DumpPrivkey", &types.ReqString{}, &res)
 	if err != nil {
 		t.Error("testDumpPrivkeyJSONRPC Failed.", err)
 	}
@@ -627,7 +627,7 @@ func testDumpPrivkeyJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testDumpPrivkeysFileJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.Reply
-	err := rpc.newRPCCtx("Dplatform.DumpPrivkeysFile", &types.ReqPrivkeysFile{}, &res)
+	err := rpc.newRPCCtx("DplatformOS.DumpPrivkeysFile", &types.ReqPrivkeysFile{}, &res)
 	if err != nil {
 		t.Error("testDumpPrivkeysFileJSONRPC Failed.", err)
 	}
@@ -635,7 +635,7 @@ func testDumpPrivkeysFileJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testImportPrivkeysFileJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.Reply
-	err := rpc.newRPCCtx("Dplatform.ImportPrivkeysFile", &types.ReqPrivkeysFile{}, &res)
+	err := rpc.newRPCCtx("DplatformOS.ImportPrivkeysFile", &types.ReqPrivkeysFile{}, &res)
 	if err != nil {
 		t.Error("testImportPrivkeysFileJSONRPC Failed.", err)
 	}
@@ -643,7 +643,7 @@ func testImportPrivkeysFileJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testGetWalletStatusJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.WalletStatus
-	err := rpc.newRPCCtx("Dplatform.GetWalletStatus", &types.ReqNil{}, &res)
+	err := rpc.newRPCCtx("DplatformOS.GetWalletStatus", &types.ReqNil{}, &res)
 	if err != nil {
 		t.Error("testGetWalletStatusJSONRPC Failed.", err)
 	} else {
@@ -655,7 +655,7 @@ func testGetWalletStatusJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testGetNetInfoJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.NodeNetinfo
-	err := rpc.newRPCCtx("Dplatform.GetNetInfo",
+	err := rpc.newRPCCtx("DplatformOS.GetNetInfo",
 		types.P2PGetNetInfoReq{}, &res)
 	if err != nil {
 		t.Error("testGetNetInfoJSONRPC failed. Error", err)
@@ -664,7 +664,7 @@ func testGetNetInfoJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testIsSyncJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res bool
-	err := rpc.newRPCCtx("Dplatform.IsSync",
+	err := rpc.newRPCCtx("DplatformOS.IsSync",
 		nil, &res)
 	if err != nil {
 		t.Error("testIsSyncJSONRPC failed. Error", err)
@@ -673,7 +673,7 @@ func testIsSyncJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testIsNtpClockSyncJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res bool
-	err := rpc.newRPCCtx("Dplatform.IsNtpClockSync",
+	err := rpc.newRPCCtx("DplatformOS.IsNtpClockSync",
 		nil, &res)
 	if err != nil {
 		t.Error("testIsNtpClockSyncJSONRPC failed. Error", err)
@@ -682,7 +682,7 @@ func testIsNtpClockSyncJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testGetPeerInfoJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res types.PeerList
-	err := rpc.newRPCCtx("Dplatform.GetPeerInfo",
+	err := rpc.newRPCCtx("DplatformOS.GetPeerInfo",
 		types.P2PGetPeerReq{}, &res)
 	if err != nil {
 		t.Error("testGetPeerInfoJSONRPC failed. Error", err)
@@ -694,7 +694,7 @@ func testGenSeedJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 		Lang: 1,
 	}
 	var res types.ReplySeed
-	err := rpc.newRPCCtx("Dplatform.GenSeed",
+	err := rpc.newRPCCtx("DplatformOS.GenSeed",
 		params, &res)
 	if err != nil {
 		t.Error("testGenSeedJSONRPC failed. Error", err)
@@ -703,7 +703,7 @@ func testGenSeedJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testGetLastMemPoolJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.ReplyTxList
-	err := rpc.newRPCCtx("Dplatform.GetLastMemPool",
+	err := rpc.newRPCCtx("DplatformOS.GetLastMemPool",
 		nil, &res)
 	if err != nil {
 		t.Error("testGetLastMemPoolJSONRPC failed. Error", err)
@@ -712,7 +712,7 @@ func testGetLastMemPoolJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testGetProperFeeJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.ReplyProperFee
-	err := rpc.newRPCCtx("Dplatform.GetProperFee",
+	err := rpc.newRPCCtx("DplatformOS.GetProperFee",
 		nil, &res)
 	if err != nil {
 		t.Error("testGetProperFeeJSONRPC failed. Error", err)
@@ -721,7 +721,7 @@ func testGetProperFeeJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testGetMempoolJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.ReplyTxList
-	err := rpc.newRPCCtx("Dplatform.GetMempool",
+	err := rpc.newRPCCtx("DplatformOS.GetMempool",
 		nil, &res)
 	if err != nil {
 		t.Error("testGetMempoolJSONRPC failed. Error", err)
@@ -730,7 +730,7 @@ func testGetMempoolJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 
 func testGetLastHeaderJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	var res rpctypes.Header
-	err := rpc.newRPCCtx("Dplatform.GetLastHeader",
+	err := rpc.newRPCCtx("DplatformOS.GetLastHeader",
 		nil, &res)
 	if err != nil {
 		t.Error("testGetLastHeaderJSONRPC failed. Error", err)
@@ -745,7 +745,7 @@ func testGetHeadersCmdJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	}
 
 	var res rpctypes.Headers
-	err := rpc.newRPCCtx("Dplatform.GetHeaders",
+	err := rpc.newRPCCtx("DplatformOS.GetHeaders",
 		params, &res)
 	if err != nil {
 		t.Error("testGetHeadersCmdJSONRPC failed. Error", err)
@@ -758,7 +758,7 @@ func testGetBlockOverviewJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	}
 
 	var res rpctypes.BlockOverview
-	err := rpc.newRPCCtx("Dplatform.GetBlockOverview",
+	err := rpc.newRPCCtx("DplatformOS.GetBlockOverview",
 		params, &res)
 	if err != nil {
 		t.Error("testGetBlockOverviewJSONRPC failed. Error", err)
@@ -773,7 +773,7 @@ func testGetBlocksJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 	}
 
 	var res rpctypes.BlockDetails
-	err := rpc.newRPCCtx("Dplatform.GetBlocks",
+	err := rpc.newRPCCtx("DplatformOS.GetBlocks",
 		params, &res)
 	if err != nil {
 		t.Error("testGetBlocksJSONRPC failed. Error", err)
@@ -785,7 +785,7 @@ func testGetBlockHashJSONRPC(t *testing.T, rpc *mockJRPCSystem) {
 		Height: 100,
 	}
 	var res rpctypes.ReplyHash
-	err := rpc.newRPCCtx("Dplatform.GetBlockHash",
+	err := rpc.newRPCCtx("DplatformOS.GetBlockHash",
 		params, &res)
 	if err != nil {
 		t.Error("testGetBlockHashJSONRPC failed. Error", err)
@@ -870,7 +870,7 @@ func testVersionGRPC(t *testing.T, rpc *mockGRPCSystem) {
 	if err != nil {
 		t.Error("Call Version Failed.", err)
 	}
-	assert.Equal(t, version.GetVersion(), res.Dplatform)
+	assert.Equal(t, version.GetVersion(), res.DplatformOS)
 }
 
 func testDumpPrivkeyGRPC(t *testing.T, rpc *mockGRPCSystem) {

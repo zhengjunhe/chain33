@@ -34,50 +34,50 @@ http_req() {
 }
 
 dplatform_lock() {
-    http_req '{"method":"Dplatform.Lock","params":[]}' ${MAIN_HTTP} ".result.isOK" "$FUNCNAME"
+    http_req '{"method":"DplatformOS.Lock","params":[]}' ${MAIN_HTTP} ".result.isOK" "$FUNCNAME"
 }
 
 dplatform_unlock() {
-    http_req '{"method":"Dplatform.UnLock","params":[{"passwd":"1314fuzamei","timeout":0}]}' ${MAIN_HTTP} ".result.isOK" "$FUNCNAME"
+    http_req '{"method":"DplatformOS.UnLock","params":[{"passwd":"1314fuzamei","timeout":0}]}' ${MAIN_HTTP} ".result.isOK" "$FUNCNAME"
 }
 
 dplatform_WalletTxList() {
-    req='{"method":"Dplatform.WalletTxList", "params":[{"fromTx":"", "count":2, "direction":1}]}'
+    req='{"method":"DplatformOS.WalletTxList", "params":[{"fromTx":"", "count":2, "direction":1}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.txDetails|length == 2)' "$FUNCNAME"
 }
 
 dplatform_ImportPrivkey() {
-    req='{"method":"Dplatform.ImportPrivkey", "params":[{"privkey":"0x88b2fb90411935872f0501dd13345aba19b5fac9b00eb0dddd7df977d4d5477e", "label":"testimportkey"}]}'
+    req='{"method":"DplatformOS.ImportPrivkey", "params":[{"privkey":"0x88b2fb90411935872f0501dd13345aba19b5fac9b00eb0dddd7df977d4d5477e", "label":"testimportkey"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.label=="testimportkey") and (.result.acc.addr == "1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt")' "$FUNCNAME"
 }
 
 dplatform_DumpPrivkey() {
-    req='{"method":"Dplatform.DumpPrivkey", "params":[{"data":"1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt"}]}'
+    req='{"method":"DplatformOS.DumpPrivkey", "params":[{"data":"1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.data=="0x88b2fb90411935872f0501dd13345aba19b5fac9b00eb0dddd7df977d4d5477e")' "$FUNCNAME"
 }
 
 dplatform_DumpPrivkeysFile() {
-    req='{"method":"Dplatform.DumpPrivkeysFile", "params":[{"fileName":"PrivkeysFile","passwd":"123456"}]}'
+    req='{"method":"DplatformOS.DumpPrivkeysFile", "params":[{"fileName":"PrivkeysFile","passwd":"123456"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and .result.isOK' "$FUNCNAME"
 }
 
 dplatform_ImportPrivkeysFile() {
-    req='{"method":"Dplatform.ImportPrivkeysFile", "params":[{"fileName":"PrivkeysFile","passwd":"123456"}]}'
+    req='{"method":"DplatformOS.ImportPrivkeysFile", "params":[{"fileName":"PrivkeysFile","passwd":"123456"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and .result.isOK' "$FUNCNAME"
     # rm -rf ./PrivkeysFile
 }
 
 dplatform_SendToAddress() {
-    req='{"method":"Dplatform.SendToAddress", "params":[{"from":"12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv","to":"1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt", "amount":100000000, "note":"test\n"}]}'
+    req='{"method":"DplatformOS.SendToAddress", "params":[{"from":"12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv","to":"1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt", "amount":100000000, "note":"test\n"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.hash|length==66)' "$FUNCNAME"
 }
 
 dplatform_SetTxFee() {
-    http_req '{"method":"Dplatform.SetTxFee", "params":[{"amount":100000}]}' ${MAIN_HTTP} '(.error|not) and .result.isOK' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.SetTxFee", "params":[{"amount":100000}]}' ${MAIN_HTTP} '(.error|not) and .result.isOK' "$FUNCNAME"
 }
 
 dplatform_SetLabl() {
-    req='{"method":"Dplatform.SetLabl", "params":[{"addr":"1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt", "label":"updatetestimport"}]}'
+    req='{"method":"DplatformOS.SetLabl", "params":[{"addr":"1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt", "label":"updatetestimport"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.label=="updatetestimport") and (.result.acc.addr == "1D9xKRnLvV2zMtSxSx33ow1GF4pcbLcNRt")' "$FUNCNAME"
 }
 
@@ -86,49 +86,49 @@ dplatform_GetPeerInfo() {
         echo_rst "$FUNCNAME" 2
     else
         resok='(.error|not) and (.result.peers|length >= 1) and (.result.peers[0] | [has("addr", "port", "name", "mempoolSize", "self", "header"), true] | unique | length == 1)'
-        http_req '{"method":"Dplatform.GetPeerInfo", "params":[{}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
+        http_req '{"method":"DplatformOS.GetPeerInfo", "params":[{}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
     fi
 }
 
 dplatform_GetHeaders() {
     resok='(.error|not) and (.result.items|length == 2) and (.result.items[0] | [has("version","parentHash", "txHash", "stateHash", "height", "blockTime", "txCount", "hash", "difficulty"),true] | unique | length == 1 )'
-    http_req '{"method":"Dplatform.GetHeaders", "params":[{"start":1, "end":2, "isDetail":true}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetHeaders", "params":[{"start":1, "end":2, "isDetail":true}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
 
 dplatform_GetLastMemPool() {
     if [ "$IS_PARA" == true ]; then
         echo_rst "$FUNCNAME" 2
     else
-        http_req '{"method":"Dplatform.GetLastMemPool", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.txs|length >= 0)' "$FUNCNAME"
+        http_req '{"method":"DplatformOS.GetLastMemPool", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.txs|length >= 0)' "$FUNCNAME"
     fi
 }
 
 dplatform_GetProperFee() {
-    http_req '{"method":"Dplatform.GetProperFee", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.properFee > 1000)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetProperFee", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.properFee > 1000)' "$FUNCNAME"
 }
 
 dplatform_GetBlockOverview() {
-    hash=$(curl -ksd '{"method":"Dplatform.GetHeaders", "params":[{"start":1, "end":1, "isDetail":true}]}' ${MAIN_HTTP} | jq '.result.items[0].hash')
-    req='{"method":"Dplatform.GetBlockOverview", "params":[{"hash":'"$hash"'}]}'
+    hash=$(curl -ksd '{"method":"DplatformOS.GetHeaders", "params":[{"start":1, "end":1, "isDetail":true}]}' ${MAIN_HTTP} | jq '.result.items[0].hash')
+    req='{"method":"DplatformOS.GetBlockOverview", "params":[{"hash":'"$hash"'}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result| [has("head", "txCount", "txHashes"), true]|unique|length == 1) and (.result.txCount == (.result.txHashes|length))' "$FUNCNAME"
 }
 
 dplatform_GetAddrOverview() {
-    req='{"method":"Dplatform.GetAddrOverview", "params":[{"addr":"12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"}]}'
+    req='{"method":"DplatformOS.GetAddrOverview", "params":[{"addr":"12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result|[has("reciver", "balance", "txCount"), true]|unique|length == 1)' "$FUNCNAME"
 }
 
 dplatform_SetPasswd() {
-    http_req '{"method":"Dplatform.SetPasswd", "params":[{"oldPass":"1314fuzamei", "newPass":"1314fuzamei"}]}' ${MAIN_HTTP} '(.error|not) and .result.isOK' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.SetPasswd", "params":[{"oldPass":"1314fuzamei", "newPass":"1314fuzamei"}]}' ${MAIN_HTTP} '(.error|not) and .result.isOK' "$FUNCNAME"
 }
 
 dplatform_MergeBalance() {
-    http_req '{"method":"Dplatform.MergeBalance", "params":[{"to":"12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"}]}' ${MAIN_HTTP} '(.error|not) and (.result.hashes|length > 0)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.MergeBalance", "params":[{"to":"12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"}]}' ${MAIN_HTTP} '(.error|not) and (.result.hashes|length > 0)' "$FUNCNAME"
 }
 
 dplatform_QueryTotalFee() {
     local height=1
-    hash=$(curl -ksd '{"method":"Dplatform.GetBlockHash","params":[{"height":'$height'}]}' ${MAIN_HTTP} | jq -r ".result.hash")
+    hash=$(curl -ksd '{"method":"DplatformOS.GetBlockHash","params":[{"height":'$height'}]}' ${MAIN_HTTP} | jq -r ".result.hash")
     if [ -z "$hash" ]; then
         echo "hash is null"
         echo_rst "$FUNCNAME" 1
@@ -137,7 +137,7 @@ dplatform_QueryTotalFee() {
     blockhash_base64=$(echo -n "$hash" | cut -d " " -f 1 | xxd -r -p | base64)
     base64_hash="$prefixhash_base64$blockhash_base64"
 
-    req='{"method":"Dplatform.QueryTotalFee","params":[{"keys":["'$base64_hash'"]}]}'
+    req='{"method":"DplatformOS.QueryTotalFee","params":[{"keys":["'$base64_hash'"]}]}'
     http_req "$req" ${MAIN_HTTP} '(.result.txCount >= 0)' "$FUNCNAME"
 }
 
@@ -145,23 +145,23 @@ dplatform_GetNetInfo() {
     if [ "$IS_PARA" == true ]; then
         echo_rst "$FUNCNAME" 2
     else
-        http_req '{"method":"Dplatform.GetNetInfo", "params":[]}' ${MAIN_HTTP} '(.result.externalAddr| length > 0)' "$FUNCNAME"
+        http_req '{"method":"DplatformOS.GetNetInfo", "params":[]}' ${MAIN_HTTP} '(.result.externalAddr| length > 0)' "$FUNCNAME"
     fi
 }
 
 dplatform_GetFatalFailure() {
-    http_req '{"method":"Dplatform.GetFatalFailure", "params":[]}' ${MAIN_HTTP} '(.error|not) and (.result | 0)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetFatalFailure", "params":[]}' ${MAIN_HTTP} '(.error|not) and (.result | 0)' "$FUNCNAME"
 }
 
 dplatform_DecodeRawTransaction() {
     tx="0a05636f696e73122c18010a281080c2d72f222131477444795771577233553637656a7663776d333867396e7a6e7a434b58434b7120a08d0630a696c0b3f78dd9ec083a2131477444795771577233553637656a7663776d333867396e7a6e7a434b58434b71"
-    http_req '{"method":"Dplatform.DecodeRawTransaction", "params":[{"txHex":"'$tx'"}]}' ${MAIN_HTTP} '(.result.txs[0].execer == "coins")' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.DecodeRawTransaction", "params":[{"txHex":"'$tx'"}]}' ${MAIN_HTTP} '(.result.txs[0].execer == "coins")' "$FUNCNAME"
 }
 
 dplatform_GetTimeStatus() {
-    r1=$(curl -ksd '{"method":"Dplatform.GetTimeStatus","params":[]}' ${MAIN_HTTP} | jq -r ".result.localTime")
+    r1=$(curl -ksd '{"method":"DplatformOS.GetTimeStatus","params":[]}' ${MAIN_HTTP} | jq -r ".result.localTime")
     if [ -z "$r1" ]; then
-        curl -ksd '{"method":"Dplatform.GetTimeStatus","params":[]}' ${MAIN_HTTP}
+        curl -ksd '{"method":"DplatformOS.GetTimeStatus","params":[]}' ${MAIN_HTTP}
     fi
     [ -n "$r1" ]
     echo_rst "$FUNCNAME" "$?"
@@ -171,7 +171,7 @@ dplatform_GetLastBlockSequence() {
     if [ "$IS_PARA" == true ]; then
         echo_rst "$FUNCNAME" 2
     else
-        http_req '{"method":"Dplatform.GetLastBlockSequence","params":[]}' ${MAIN_HTTP} ".result >= 0" "$FUNCNAME"
+        http_req '{"method":"DplatformOS.GetLastBlockSequence","params":[]}' ${MAIN_HTTP} ".result >= 0" "$FUNCNAME"
     fi
 }
 
@@ -179,51 +179,51 @@ dplatform_GetBlockSequences() {
     if [ "$IS_PARA" == true ]; then
         echo_rst "$FUNCNAME" 2
     else
-        http_req '{"method":"Dplatform.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} ".result.blkseqInfos|length==3" "$FUNCNAME"
+        http_req '{"method":"DplatformOS.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} ".result.blkseqInfos|length==3" "$FUNCNAME"
     fi
 }
 
 dplatform_GetBlockByHashes() {
     if [ "$IS_PARA" == true ]; then
-        geneis=$(curl -ksd '{"method":"Dplatform.GetBlockHash", "params":[{"height":0}]}' "${MAIN_HTTP}" | jq -r '(.result.hash)')
-        req='{"method":"Dplatform.GetBlockByHashes","params":[{"hashes":["'"${geneis}"'"]}]}'
+        geneis=$(curl -ksd '{"method":"DplatformOS.GetBlockHash", "params":[{"height":0}]}' "${MAIN_HTTP}" | jq -r '(.result.hash)')
+        req='{"method":"DplatformOS.GetBlockByHashes","params":[{"hashes":["'"${geneis}"'"]}]}'
         http_req "$req" ${MAIN_HTTP} '(.result.items[0].block.parentHash == "0x0000000000000000000000000000000000000000000000000000000000000000")' "$FUNCNAME"
     else
-        hash0=$(curl -ksd '{"method":"Dplatform.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} | jq -r ".result.blkseqInfos[0].hash")
-        hash1=$(curl -ksd '{"method":"Dplatform.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} | jq -r ".result.blkseqInfos[1].hash")
-        hash2=$(curl -ksd '{"method":"Dplatform.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} | jq -r ".result.blkseqInfos[2].hash")
+        hash0=$(curl -ksd '{"method":"DplatformOS.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} | jq -r ".result.blkseqInfos[0].hash")
+        hash1=$(curl -ksd '{"method":"DplatformOS.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} | jq -r ".result.blkseqInfos[1].hash")
+        hash2=$(curl -ksd '{"method":"DplatformOS.GetBlockSequences","params":[{"start":1,"end":3,"isDetail":true}]}' ${MAIN_HTTP} | jq -r ".result.blkseqInfos[2].hash")
 
-        req='{"method":"Dplatform.GetBlockByHashes","params":[{"hashes":["'"$hash1"'","'"$hash2"'"]}]}'
+        req='{"method":"DplatformOS.GetBlockByHashes","params":[{"hashes":["'"$hash1"'","'"$hash2"'"]}]}'
         resok='(.result.items[0].block.parentHash == "'"$hash0"'") and (.result.items[1].block.parentHash =="'"$hash1"'")'
         http_req "$req" ${MAIN_HTTP} "$resok" "$FUNCNAME"
     fi
 }
 
 dplatform_ConvertExectoAddr() {
-    http_req '{"method":"Dplatform.ConvertExectoAddr","params":[{"execname":"coins"}]}' ${MAIN_HTTP} '(.result == "1GaHYpWmqAJsqRwrpoNcB8VvgKtSwjcHqt")' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.ConvertExectoAddr","params":[{"execname":"coins"}]}' ${MAIN_HTTP} '(.result == "1GaHYpWmqAJsqRwrpoNcB8VvgKtSwjcHqt")' "$FUNCNAME"
 }
 
 dplatform_GetExecBalance() {
     local height=6802
-    statehash=$(curl -ksd '{"method":"Dplatform.GetBlocks","params":[{"start":'$height',"end":'$height',"isDetail":false}]}' ${MAIN_HTTP} | jq -r ".result.items[0].block.stateHash")
+    statehash=$(curl -ksd '{"method":"DplatformOS.GetBlocks","params":[{"start":'$height',"end":'$height',"isDetail":false}]}' ${MAIN_HTTP} | jq -r ".result.items[0].block.stateHash")
     state_base64=$(echo -n "$statehash" | cut -d " " -f 1 | xxd -r -p | base64)
     addr="12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
     addr_base64=$(echo -n "$addr" | base64)
 
-    req='{"method":"Dplatform.GetExecBalance","params":[{"symbol":"dpom","stateHash":"'$state_base64'","addr":"'$addr_base64'","execer":"coins","count":100}]}'
+    req='{"method":"DplatformOS.GetExecBalance","params":[{"symbol":"dpom","stateHash":"'$state_base64'","addr":"'$addr_base64'","execer":"coins","count":100}]}'
     http_req "$req" ${MAIN_HTTP} "(.error|not)" "$FUNCNAME"
 }
 
 dplatform_AddPushSubscribe() {
-    http_req '{"method":"Dplatform.AddPushSubscribe","params":[{"name":"test","url":"http://test","encode":"json"}]}' ${MAIN_HTTP} '(.result.isOk == true)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.AddPushSubscribe","params":[{"name":"test","url":"http://test","encode":"json"}]}' ${MAIN_HTTP} '(.result.isOk == true)' "$FUNCNAME"
 }
 
 dplatform_ListPushes() {
-    http_req '{"method":"Dplatform.ListPushes","params":[]}' ${MAIN_HTTP} ' (.result.pushes[0].name == "test")' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.ListPushes","params":[]}' ${MAIN_HTTP} ' (.result.pushes[0].name == "test")' "$FUNCNAME"
 }
 
 dplatform_GetPushSeqLastNum() {
-    http_req '{"method":"Dplatform.GetPushSeqLastNum","params":[{"data":"test-another"}]}' ${MAIN_HTTP} '(.result.data == -1)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetPushSeqLastNum","params":[{"data":"test-another"}]}' ${MAIN_HTTP} '(.result.data == -1)' "$FUNCNAME"
 }
 
 dplatform_GetCoinSymbol() {
@@ -233,42 +233,42 @@ dplatform_GetCoinSymbol() {
     fi
 
     resok='(.result.data == "'"$symbol"'")'
-    http_req '{"method":"Dplatform.GetCoinSymbol","params":[]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetCoinSymbol","params":[]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
 
 dplatform_GetHexTxByHash() {
     #先获取一笔交易
-    reHash=$(curl -ksd '{"jsonrpc":"2.0","id":2,"method":"Dplatform.GetTxByAddr","params":[{"addr":"14KEKbYtKKQm4wMthSK9J4La4nAiidGozt","flag":0,"count":1,"direction":0,"height":-1,"index":0}]}' -H 'content-type:text/plain;' ${MAIN_HTTP} | jq -r '.result.txInfos[0].hash')
+    reHash=$(curl -ksd '{"jsonrpc":"2.0","id":2,"method":"DplatformOS.GetTxByAddr","params":[{"addr":"14KEKbYtKKQm4wMthSK9J4La4nAiidGozt","flag":0,"count":1,"direction":0,"height":-1,"index":0}]}' -H 'content-type:text/plain;' ${MAIN_HTTP} | jq -r '.result.txInfos[0].hash')
     #查询交易
-    req='{"method":"Dplatform.GetHexTxByHash","params":[{"hash":"'"$reHash"'","upgrade":false}]}'
+    req='{"method":"DplatformOS.GetHexTxByHash","params":[{"hash":"'"$reHash"'","upgrade":false}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result != null)' "$FUNCNAME"
 }
 
 dplatform_QueryTransaction() {
     #先获取一笔交易
-    reHash=$(curl -ksd '{"jsonrpc":"2.0","id":2,"method":"Dplatform.GetTxByAddr","params":[{"addr":"14KEKbYtKKQm4wMthSK9J4La4nAiidGozt","flag":0,"count":1,"direction":0,"height":-1,"index":0}]}' -H 'content-type:text/plain;' ${MAIN_HTTP} | jq -r '.result.txInfos[0].hash')
+    reHash=$(curl -ksd '{"jsonrpc":"2.0","id":2,"method":"DplatformOS.GetTxByAddr","params":[{"addr":"14KEKbYtKKQm4wMthSK9J4La4nAiidGozt","flag":0,"count":1,"direction":0,"height":-1,"index":0}]}' -H 'content-type:text/plain;' ${MAIN_HTTP} | jq -r '.result.txInfos[0].hash')
     #查询交易
-    req='{"method":"Dplatform.QueryTransaction","params":[{"hash":"'"$reHash"'","upgrade":false}]}'
+    req='{"method":"DplatformOS.QueryTransaction","params":[{"hash":"'"$reHash"'","upgrade":false}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.receipt.tyName == "ExecOk") and (.result.height >= 0) and (.result.index >= 0) and (.result.amount >= 0)' "$FUNCNAME"
 }
 
 dplatform_GetBlocks() {
-    http_req '{"method":"Dplatform.GetBlocks","params":[{"start":1,"end":2}]}' ${MAIN_HTTP} '(.result.items[1].block.height == 2)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetBlocks","params":[{"start":1,"end":2}]}' ${MAIN_HTTP} '(.result.items[1].block.height == 2)' "$FUNCNAME"
 }
 
 dplatform_GetLastHeader() {
     resok='(.error|not) and (.result.height >= 0) and (.result | [has("version","parentHash", "txHash", "stateHash", "height", "blockTime", "txCount", "hash", "difficulty"),true] | unique | length == 1)'
-    http_req '{"method":"Dplatform.GetLastHeader","params":[{}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetLastHeader","params":[{}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
 
 dplatform_GetTxByAddr() {
-    req='{"method":"Dplatform.GetTxByAddr","params":[{"addr":"14KEKbYtKKQm4wMthSK9J4La4nAiidGozt","flag":0,"count":1,"direction":0,"height":-1,"index":0}]}'
+    req='{"method":"DplatformOS.GetTxByAddr","params":[{"addr":"14KEKbYtKKQm4wMthSK9J4La4nAiidGozt","flag":0,"count":1,"direction":0,"height":-1,"index":0}]}'
     resok='(.error|not) and (.result.txInfos[0].index >= 0) and (.result.txInfos[0] | [has("hash", "height", "index", "assets"),true] | unique | length == 1)'
     http_req "$req" ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
 
 dplatform_GetTxByHashes() {
-    req='{"method":"Dplatform.GetTxByHashes","params":[{"hashes":["0x8040109d3859827d0f0c80ce91cc4ec80c496c45250f5e5755064b6da60842ab","0x501b910fd85d13d1ab7d776bce41a462f27c4bfeceb561dc47f0a11b10f452e4"]}]}'
+    req='{"method":"DplatformOS.GetTxByHashes","params":[{"hashes":["0x8040109d3859827d0f0c80ce91cc4ec80c496c45250f5e5755064b6da60842ab","0x501b910fd85d13d1ab7d776bce41a462f27c4bfeceb561dc47f0a11b10f452e4"]}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.txs|length == 2)' "$FUNCNAME"
 }
 
@@ -276,29 +276,29 @@ dplatform_GetMempool() {
     if [ "$IS_PARA" == true ]; then
         echo_rst "$FUNCNAME" 2
     else
-        http_req '{"method":"Dplatform.GetMempool","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.txs|length >= 0)' "$FUNCNAME"
+        http_req '{"method":"DplatformOS.GetMempool","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.txs|length >= 0)' "$FUNCNAME"
     fi
 }
 
 dplatform_GetAccountsV2() {
-    http_req '{"method":"Dplatform.GetAccountsV2","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.wallets|length >= 0)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetAccountsV2","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.wallets|length >= 0)' "$FUNCNAME"
 }
 
 dplatform_GetAccounts() {
-    http_req '{"method":"Dplatform.GetAccounts","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.wallets|length >= 0)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetAccounts","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result.wallets|length >= 0)' "$FUNCNAME"
 }
 
 dplatform_NewAccount() {
-    http_req '{"method":"Dplatform.NewAccount","params":[{"label":"test169"}]}' ${MAIN_HTTP} '(.error|not) and (.result.label == "test169") and (.result.acc | [has("addr"),true] | unique | length == 1)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.NewAccount","params":[{"label":"test169"}]}' ${MAIN_HTTP} '(.error|not) and (.result.label == "test169") and (.result.acc | [has("addr"),true] | unique | length == 1)' "$FUNCNAME"
 }
 
 # hyb
 dplatform_CreateRawTransaction() {
     local to="1EDDghAtgBsamrNEtNmYdQzC1QEhLkr87t"
     local amount=10000000
-    tx=$(curl -ksd '{"method":"Dplatform.CreateRawTransaction","params":[{"to":"'$to'","amount":'$amount'}]}' ${MAIN_HTTP} | jq -r ".result")
+    tx=$(curl -ksd '{"method":"DplatformOS.CreateRawTransaction","params":[{"to":"'$to'","amount":'$amount'}]}' ${MAIN_HTTP} | jq -r ".result")
 
-    req='{"method":"Dplatform.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
+    req='{"method":"DplatformOS.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
     resok='(.result.txs[0].payload.transfer.amount == "'$amount'") and (.result.txs[0].to == "'$to'")'
     http_req "$req" ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
@@ -314,9 +314,9 @@ dplatform_CreateTransaction() {
         exec="coins"
     fi
 
-    tx=$(curl -ksd '{"method":"Dplatform.CreateTransaction","params":[{"execer":"'$exec'","actionName":"Transfer","payload":{"to":"'$to'", "amount":'$amount'}}]}' ${MAIN_HTTP} | jq -r ".result")
+    tx=$(curl -ksd '{"method":"DplatformOS.CreateTransaction","params":[{"execer":"'$exec'","actionName":"Transfer","payload":{"to":"'$to'", "amount":'$amount'}}]}' ${MAIN_HTTP} | jq -r ".result")
 
-    req='{"method":"Dplatform.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
+    req='{"method":"DplatformOS.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
     resok='(.result.txs[0].payload.transfer.amount == "'$amount'") and (.result.txs[0].payload.transfer.to == "'$to'")'
     http_req "$req" ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
@@ -324,9 +324,9 @@ dplatform_CreateTransaction() {
 dplatform_ReWriteRawTx() {
     local fee=1000000
     local tx1="0a05636f696e73122d18010a291080ade20422223145444467684174674273616d724e45744e6d5964517a43315145684c6b7238377420a08d0630f6db93c0e0d3f1ff5e3a223145444467684174674273616d724e45744e6d5964517a43315145684c6b72383774"
-    tx=$(curl -ksd '{"method":"Dplatform.ReWriteRawTx","params":[{"expire":"120s","fee":'$fee',"tx":"'$tx1'"}]}' ${MAIN_HTTP} | jq -r ".result")
+    tx=$(curl -ksd '{"method":"DplatformOS.ReWriteRawTx","params":[{"expire":"120s","fee":'$fee',"tx":"'$tx1'"}]}' ${MAIN_HTTP} | jq -r ".result")
 
-    req='{"method":"Dplatform.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
+    req='{"method":"DplatformOS.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result.txs[0].execer == "coins") and (.result.txs[0].to == "1EDDghAtgBsamrNEtNmYdQzC1QEhLkr87t") and (.result.txs[0].fee == '$fee')' "$FUNCNAME"
 }
 
@@ -336,9 +336,9 @@ dplatform_CreateRawTxGroup() {
     local groupCount=2
     tx1="0a0a757365722e7772697465121d236d642368616b6468676f7177656a6872676f716a676f6a71776c6a6720a08d0630a0b7b1b1dda2f4c5743a2231444e615344524739524431397335396d65416f654e34613246365248393766536f"
     tx2="0a0a757365722e7772697465121d236d642368616b6468676f7177656a6872676f716a676f6a71776c6a6720a08d0630c5838f94e2f49acb4b3a2231444e615344524739524431397335396d65416f654e34613246365248393766536f"
-    tx=$(curl -ksd '{"method":"Dplatform.CreateRawTxGroup","params":[{"txs":["'$tx1'","'$tx2'"]}]}' ${MAIN_HTTP} | jq -r ".result")
+    tx=$(curl -ksd '{"method":"DplatformOS.CreateRawTxGroup","params":[{"txs":["'$tx1'","'$tx2'"]}]}' ${MAIN_HTTP} | jq -r ".result")
 
-    req='{"method":"Dplatform.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
+    req='{"method":"DplatformOS.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
     resok='(.error|not) and (.result.txs[0].execer == "'$exec'") and (.result.txs[0].to == "'$to'") and (.result.txs[0].groupCount == '$groupCount') and (.result.txs[1].execer == "'$exec'") and (.result.txs[1].to == "'$to'") and (.result.txs[1].groupCount == '$groupCount')'
     http_req "$req" ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
@@ -348,9 +348,9 @@ dplatform_SignRawTx() {
     local privkey="CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944"
 
     tx1="0a05636f696e73122d18010a291080ade20422223145444467684174674273616d724e45744e6d5964517a43315145684c6b7238377420a08d0628e1ddcae60530f6db93c0e0d3f1ff5e3a223145444467684174674273616d724e45744e6d5964517a43315145684c6b72383774"
-    tx=$(curl -ksd '{"method":"Dplatform.SignRawTx","params":[{"expire":"120s","fee":'$fee',"privkey":"'$privkey'","txHex":"'$tx1'"}]}' ${MAIN_HTTP} | jq -r ".result")
+    tx=$(curl -ksd '{"method":"DplatformOS.SignRawTx","params":[{"expire":"120s","fee":'$fee',"privkey":"'$privkey'","txHex":"'$tx1'"}]}' ${MAIN_HTTP} | jq -r ".result")
 
-    req='{"method":"Dplatform.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
+    req='{"method":"DplatformOS.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
     resok='(.error|not) and (.result.txs[0].execer == "coins") and (.result.txs[0].to == "1EDDghAtgBsamrNEtNmYdQzC1QEhLkr87t") and (.result.txs[0].fee == '$fee') and (.result.txs[0].from == "14KEKbYtKKQm4wMthSK9J4La4nAiidGozt")'
     http_req "$req" ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
@@ -362,9 +362,9 @@ dplatform_SendTransaction() {
     local privkey="CC38546E9E659D15E6B4893F0AB32A06D103931A8230B0BDE71459D2B27D6944"
 
     tx1="0a05636f696e73122d18010a291080ade20422223145444467684174674273616d724e45744e6d5964517a43315145684c6b7238377420a08d0628e1ddcae60530f6db93c0e0d3f1ff5e3a223145444467684174674273616d724e45744e6d5964517a43315145684c6b72383774"
-    tx=$(curl -ksd '{"method":"Dplatform.SignRawTx","params":[{"expire":"120s","fee":'$fee',"privkey":"'$privkey'","txHex":"'$tx1'"}]}' ${MAIN_HTTP} | jq -r ".result")
+    tx=$(curl -ksd '{"method":"DplatformOS.SignRawTx","params":[{"expire":"120s","fee":'$fee',"privkey":"'$privkey'","txHex":"'$tx1'"}]}' ${MAIN_HTTP} | jq -r ".result")
 
-    req='{"method":"Dplatform.SendTransaction","params":[{"data":"'"$tx"'"}]}'
+    req='{"method":"DplatformOS.SendTransaction","params":[{"data":"'"$tx"'"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result != null)' "$FUNCNAME"
 }
 
@@ -384,28 +384,28 @@ dplatform_CreateNoBalanceTransaction() {
         txHex="0a05636f696e73122d18010a291080ade20422223145444467684174674273616d724e45744e6d5964517a43315145684c6b7238377420a08d0630a1938af2e88e97fb0d3a223145444467684174674273616d724e45744e6d5964517a43315145684c6b72383774"
     fi
 
-    tx=$(curl -ksd '{"method":"Dplatform.CreateNoBalanceTransaction","params":[{"txHex":"'$txHex'"}]}' ${MAIN_HTTP} | jq -r ".result")
-    req='{"method":"Dplatform.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
+    tx=$(curl -ksd '{"method":"DplatformOS.CreateNoBalanceTransaction","params":[{"txHex":"'$txHex'"}]}' ${MAIN_HTTP} | jq -r ".result")
+    req='{"method":"DplatformOS.DecodeRawTransaction","params":[{"txHex":"'"$tx"'"}]}'
     resok='(.error|not) and (.result.txs[0].execer == "'$exec'") and (.result.txs[0].groupCount == 2) and (.result.txs[1].execer == "'$coinexec'") and (.result.txs[1].groupCount == 2) and (.result.txs[1].to == "'$to'")'
     http_req "$req" ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
 
 dplatform_GetBlockHash() {
-    http_req '{"method":"Dplatform.GetBlockHash","params":[{"height":1}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("hash"))' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetBlockHash","params":[{"height":1}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("hash"))' "$FUNCNAME"
 }
 
 dplatform_GenSeed() {
-    http_req '{"method":"Dplatform.GenSeed", "params":[{"lang":0}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("seed"))' "$FUNCNAME"
-    seed=$(curl -ksd '{"method":"Dplatform.GenSeed", "params":[{"lang":0}]}' ${MAIN_HTTP} | jq -r ".result.seed")
+    http_req '{"method":"DplatformOS.GenSeed", "params":[{"lang":0}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("seed"))' "$FUNCNAME"
+    seed=$(curl -ksd '{"method":"DplatformOS.GenSeed", "params":[{"lang":0}]}' ${MAIN_HTTP} | jq -r ".result.seed")
 }
 
 dplatform_SaveSeed() {
-    req='{"method":"Dplatform.SaveSeed", "params":[{"seed":"'"$seed"'", "passwd": "1314fuzamei"}]}'
+    req='{"method":"DplatformOS.SaveSeed", "params":[{"seed":"'"$seed"'", "passwd": "1314fuzamei"}]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result| has("isOK"))' "$FUNCNAME"
 }
 
 dplatform_GetSeed() {
-    http_req '{"method":"Dplatform.GetSeed", "params":[{"passwd": "1314fuzamei"}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("seed"))' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetSeed", "params":[{"passwd": "1314fuzamei"}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("seed"))' "$FUNCNAME"
 }
 
 dplatform_testSeed() {
@@ -416,41 +416,41 @@ dplatform_testSeed() {
 }
 
 dplatform_GetWalletStatus() {
-    http_req '{"method":"Dplatform.GetWalletStatus","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result| [has("isWalletLock", "isAutoMining", "isHasSeed", "isTicketLock"), true] | unique | length == 1)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetWalletStatus","params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result| [has("isWalletLock", "isAutoMining", "isHasSeed", "isTicketLock"), true] | unique | length == 1)' "$FUNCNAME"
 }
 
 dplatform_GetBalance() {
-    http_req '{"method":"Dplatform.GetBalance","params":[{"addresses" : ["14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"], "execer" : "coins"}]}' ${MAIN_HTTP} '(.error|not) and (.result[0] | [has("balance", "frozen"), true] | unique | length == 1)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetBalance","params":[{"addresses" : ["14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"], "execer" : "coins"}]}' ${MAIN_HTTP} '(.error|not) and (.result[0] | [has("balance", "frozen"), true] | unique | length == 1)' "$FUNCNAME"
 }
 
 dplatform_GetAllExecBalance() {
     resok='(.error|not) and (.result| [has("addr", "execAccount"), true] | unique | length == 1) and (.result.execAccount | [map(has("execer", "account")), true] | flatten | unique | length == 1) and ([.result.execAccount[].account] | [map(has("balance", "frozen")), true] | flatten | unique | length == 1)'
-    http_req '{"method":"Dplatform.GetAllExecBalance", "params":[{"addr" : "14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetAllExecBalance", "params":[{"addr" : "14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"}]}' ${MAIN_HTTP} "$resok" "$FUNCNAME"
 }
 
 dplatform_ExecWallet() {
-    req='{"method":"Dplatform.ExecWallet", "params":[{"funcName" : "NewAccountByIndex", "payload" : {"data" : 100000009}, "stateHash" : "", "execer" : "wallet" }]}'
+    req='{"method":"DplatformOS.ExecWallet", "params":[{"funcName" : "NewAccountByIndex", "payload" : {"data" : 100000009}, "stateHash" : "", "execer" : "wallet" }]}'
     http_req "$req" ${MAIN_HTTP} '(.error|not) and (.result | has("data"))' "$FUNCNAME"
 }
 
 dplatform_Query() {
-    http_req '{"method":"Dplatform.Query", "params":[{ "execer":"coins", "funcName": "GetTxsByAddr", "payload" : {"addr" : "1KSBd17H7ZK8iT37aJztFB22XGwsPTdwE4"}}]}' ${MAIN_HTTP} '(. | has("result"))' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.Query", "params":[{ "execer":"coins", "funcName": "GetTxsByAddr", "payload" : {"addr" : "1KSBd17H7ZK8iT37aJztFB22XGwsPTdwE4"}}]}' ${MAIN_HTTP} '(. | has("result"))' "$FUNCNAME"
 }
 
 dplatform_Version() {
-    http_req '{"method":"Dplatform.Version", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result)' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.Version", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (.result)' "$FUNCNAME"
 }
 
 dplatform_GetTotalCoins() {
-    http_req '{"method":"Dplatform.GetTotalCoins", "params":[{"symbol" : "dpom", "stateHash":"", "startKey":"", "count":2, "execer":"coins"}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("count"))' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetTotalCoins", "params":[{"symbol" : "dpom", "stateHash":"", "startKey":"", "count":2, "execer":"coins"}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("count"))' "$FUNCNAME"
 }
 
 dplatform_IsSync() {
-    http_req '{"method":"Dplatform.IsSync", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (. | has("result"))' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.IsSync", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (. | has("result"))' "$FUNCNAME"
 }
 
 dplatform_IsNtpClockSync() {
-    http_req '{"method":"Dplatform.IsNtpClockSync", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (. | has("result"))' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.IsNtpClockSync", "params":[{}]}' ${MAIN_HTTP} '(.error|not) and (. | has("result"))' "$FUNCNAME"
 }
 
 run_testcases() {

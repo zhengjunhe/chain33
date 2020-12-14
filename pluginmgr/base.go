@@ -17,7 +17,7 @@ type PluginBase struct {
 	Name     string
 	ExecName string
 	RPC      func(name string, s types.RPCServer)
-	Exec     func(name string, cfg *typ.DplatformConfig, sub []byte)
+	Exec     func(name string, cfg *typ.DplatformOSConfig, sub []byte)
 	Wallet   func(walletBiz wcom.WalletOperate, sub []byte)
 	Cmd      func() *cobra.Command
 }
@@ -33,7 +33,7 @@ func (p *PluginBase) GetExecutorName() string {
 }
 
 // InitExec init exec
-func (p *PluginBase) InitExec(cfg *typ.DplatformConfig) {
+func (p *PluginBase) InitExec(cfg *typ.DplatformOSConfig) {
 	sub := cfg.GetSubConfig().Exec
 	subcfg, ok := sub[p.ExecName]
 	if !ok {

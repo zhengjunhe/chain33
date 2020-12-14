@@ -14,7 +14,7 @@ import (
 )
 
 // New new consensus queue module
-func New(cfg *types.DplatformConfig) queue.Module {
+func New(cfg *types.DplatformOSConfig) queue.Module {
 	mcfg := cfg.GetModuleConfig().Consensus
 	sub := cfg.GetSubConfig().Consensus
 	con, err := consensus.Load(mcfg.Name)

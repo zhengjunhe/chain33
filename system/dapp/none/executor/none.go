@@ -17,7 +17,7 @@ import (
 var driverName = "none"
 
 // Init register newnone
-func Init(name string, cfg *types.DplatformConfig, sub []byte) {
+func Init(name string, cfg *types.DplatformOSConfig, sub []byte) {
 	if name != driverName {
 		panic("system dapp can't be rename")
 	}

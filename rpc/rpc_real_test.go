@@ -21,7 +21,7 @@ import (
 	_ "github.com/33cn/dplatform/system"
 )
 
-func getRPCClient(t *testing.T, mocker *testnode.DplatformMock) *jsonclient.JSONClient {
+func getRPCClient(t *testing.T, mocker *testnode.DplatformOSMock) *jsonclient.JSONClient {
 	jrpcClient := mocker.GetJSONC()
 	assert.NotNil(t, jrpcClient)
 	return jrpcClient
@@ -56,7 +56,7 @@ func TestErrLog(t *testing.T) {
 		Hash: common.ToHex(tx12.Hash()),
 	}
 	//query transaction
-	err = jrpcClient.Call("Dplatform.QueryTransaction", req, &testResult)
+	err = jrpcClient.Call("DplatformOS.QueryTransaction", req, &testResult)
 	assert.Nil(t, err)
 	assert.Equal(t, string(testResult.Receipt.Logs[0].Log), `"ErrNoBalance"`)
 	assert.Equal(t, "0.6000", testResult.Tx.AmountFmt)
@@ -89,7 +89,7 @@ func TestSendToExec(t *testing.T) {
 		ExecName:    "user.f3d",
 	}
 	var res string
-	err := jrpcClient.Call("Dplatform.CreateRawTransaction", req, &res)
+	err := jrpcClient.Call("DplatformOS.CreateRawTransaction", req, &res)
 	assert.Nil(t, err)
 	gen := mocker.GetGenesisKey()
 	tx := getTx(t, res)
@@ -112,7 +112,7 @@ func TestGetAllExecBalance(t *testing.T) {
 	addr := "38BRY193Wvy9MkdqMjmuaYeUHnJaFjUxMP"
 	req := types.ReqAddr{Addr: addr}
 	var res rpctypes.AllExecBalance
-	err := jrpcClient.Call("Dplatform.GetAllExecBalance", req, &res)
+	err := jrpcClient.Call("DplatformOS.GetAllExecBalance", req, &res)
 	assert.Nil(t, err)
 	assert.Equal(t, addr, res.Addr)
 	assert.Nil(t, res.ExecAccount)
@@ -130,7 +130,7 @@ func TestCreateTransactionUserWrite(t *testing.T) {
 		Payload:    []byte(`{"key":"value"}`),
 	}
 	var res string
-	err := jrpcClient.Call("Dplatform.CreateTransaction", req, &res)
+	err := jrpcClient.Call("DplatformOS.CreateTransaction", req, &res)
 	assert.Nil(t, err)
 	tx := getTx(t, res)
 	assert.NotNil(t, tx)
@@ -150,7 +150,7 @@ func TestExprieCreateNoBalanceTransaction(t *testing.T) {
 		Payload:    []byte(`{"key":"value"}`),
 	}
 	var res string
-	err := jrpcClient.Call("Dplatform.CreateTransaction", req, &res)
+	err := jrpcClient.Call("DplatformOS.CreateTransaction", req, &res)
 	assert.Nil(t, err)
 	gen := mocker.GetGenesisKey().Bytes()
 	req2 := &types.NoBalanceTx{
@@ -159,7 +159,7 @@ func TestExprieCreateNoBalanceTransaction(t *testing.T) {
 		Expire:  "300s",
 	}
 	var groupres string
-	err = jrpcClient.Call("Dplatform.CreateNoBalanceTransaction", req2, &groupres)
+	err = jrpcClient.Call("DplatformOS.CreateNoBalanceTransaction", req2, &groupres)
 	assert.Nil(t, err)
 
 	txByteData, err := common.FromHex(groupres)
@@ -184,7 +184,7 @@ func TestExprieSignRawTx(t *testing.T) {
 		Payload:    []byte(`{"key":"value"}`),
 	}
 	var res string
-	err := jrpcClient.Call("Dplatform.CreateTransaction", req, &res)
+	err := jrpcClient.Call("DplatformOS.CreateTransaction", req, &res)
 	assert.Nil(t, err)
 
 	txNone := &types.Transaction{Execer: []byte(cfg.ExecName(types.NoneX)), Payload: []byte("no-fee-transaction")}
@@ -197,7 +197,7 @@ func TestExprieSignRawTx(t *testing.T) {
 		Txs: []string{hex.EncodeToString(types.Encode(txNone)), res},
 	}
 	var groupres string
-	err = jrpcClient.Call("Dplatform.CreateRawTxGroup", req2, &groupres)
+	err = jrpcClient.Call("DplatformOS.CreateRawTxGroup", req2, &groupres)
 	assert.Nil(t, err)
 
 	txByteData, err := common.FromHex(groupres)
@@ -211,7 +211,7 @@ func TestExprieSignRawTx(t *testing.T) {
 		Expire:  "300s",
 	}
 	var signgrouptx string
-	err = jrpcClient.Call("Dplatform.SignRawTx", req3, &signgrouptx)
+	err = jrpcClient.Call("DplatformOS.SignRawTx", req3, &signgrouptx)
 	assert.Nil(t, err)
 
 	txByteData, err = common.FromHex(signgrouptx)

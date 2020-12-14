@@ -57,7 +57,7 @@ func main() {
 		panic(err)
 	}
 
-	go accounts.SyncBlock(cfg.DplatformHost)
+	go accounts.SyncBlock(cfg.DplatformOSHost)
 
 	shower := accounts.ShowMinerAccount{DataDir: cfg.DataDir, Addrs: cfg.MinerAddr}
 	server := rpc.NewServer()

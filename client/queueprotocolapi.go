@@ -132,5 +132,5 @@ type QueueProtocolAPI interface {
 	GetParaTxByHeight(param *types.ReqParaTxByHeight) (*types.ParaTxDetails, error)
 
 	// get chain config
-	GetConfig() *types.DplatformConfig
+	GetConfig() *types.DplatformOSConfig
 }

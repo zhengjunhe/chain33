@@ -18,7 +18,7 @@ var pluginItems = make(map[string]Plugin)
 var once = &sync.Once{}
 
 // InitExec init exec
-func InitExec(cfg *typ.DplatformConfig) {
+func InitExec(cfg *typ.DplatformOSConfig) {
 	once.Do(func() {
 		for _, item := range pluginItems {
 			item.InitExec(cfg)

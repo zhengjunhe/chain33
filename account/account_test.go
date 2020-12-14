@@ -31,7 +31,7 @@ var (
 
 func GenerAccDb() (*DB, *DB) {
 	//构造账户数据库
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	accCoin := NewCoinsAccount(cfg)
 	stroedb, _ := db.NewGoMemDB("gomemdb", "test", 128)
 	accCoin.SetDB(stroedb)
@@ -117,7 +117,7 @@ func TestDepositBalance(t *testing.T) {
 
 func initEnv() queue.Queue {
 	var q = queue.New("channel")
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	q.SetConfig(cfg)
 	return q
 }
@@ -207,7 +207,7 @@ func TestGetTotalCoins(t *testing.T) {
 
 func TestAccountName(t *testing.T) {
 	stroedb, _ := db.NewGoMemDB("gomemdb", "test", 128)
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	accCoin := NewCoinsAccount(cfg)
 	accCoin.SetDB(stroedb)
 	coinsAddr := address.ExecAddress("coins")
@@ -472,7 +472,7 @@ func getExecBalance(callback func(*types.StoreList) (*types.StoreListReply, erro
 }
 
 func TestGetExecBalance2(t *testing.T) {
-	accCoin := NewCoinsAccount(types.NewDplatformConfig(types.GetDefaultCfgstring()))
+	accCoin := NewCoinsAccount(types.NewDplatformOSConfig(types.GetDefaultCfgstring()))
 	key := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	execAddr := "16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
@@ -559,7 +559,7 @@ func TestGetExecBalance2(t *testing.T) {
 }
 
 func TestGetBalance(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	accCoin := NewCoinsAccount(cfg)
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 

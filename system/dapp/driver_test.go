@@ -44,7 +44,7 @@ func (none *noneApp) GetDriverName() string {
 	return "none"
 }
 
-func Init(cfg *types.DplatformConfig) {
+func Init(cfg *types.DplatformOSConfig) {
 	runonce.Do(func() {
 		Register(cfg, "none", newnoneApp, 0)
 		Register(cfg, "demo", newdemoApp, 1)
@@ -52,7 +52,7 @@ func Init(cfg *types.DplatformConfig) {
 }
 
 func TestReigister(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -85,7 +85,7 @@ func TestReigister(t *testing.T) {
 }
 
 func TestDriverAPI(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -121,7 +121,7 @@ func TestExecAddress(t *testing.T) {
 }
 
 func TestAllow(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	Init(cfg)
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
@@ -144,7 +144,7 @@ func TestAllow(t *testing.T) {
 }
 
 func TestDriverBase(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	api := &mocks.QueueProtocolAPI{}
 	api.On("GetConfig", mock.Anything).Return(cfg)
 	Init(cfg)

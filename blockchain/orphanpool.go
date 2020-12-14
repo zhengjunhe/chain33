@@ -34,11 +34,11 @@ type OrphanPool struct {
 	orphans      map[string]*orphanBlock
 	prevOrphans  map[string][]*orphanBlock
 	oldestOrphan *orphanBlock
-	param        *types.DplatformConfig
+	param        *types.DplatformOSConfig
 }
 
 //NewOrphanPool new
-func NewOrphanPool(param *types.DplatformConfig) *OrphanPool {
+func NewOrphanPool(param *types.DplatformOSConfig) *OrphanPool {
 	op := &OrphanPool{
 		orphans:     make(map[string]*orphanBlock),
 		prevOrphans: make(map[string][]*orphanBlock),

@@ -20,11 +20,11 @@ type BlockCache struct {
 	cachelock  sync.Mutex
 	cacheQueue *list.List
 	maxHeight  int64 //用来辅助判断cache 是否正确
-	sysPm      *types.DplatformConfig
+	sysPm      *types.DplatformOSConfig
 }
 
 //NewBlockCache new
-func NewBlockCache(param *types.DplatformConfig, defCacheSize int64) *BlockCache {
+func NewBlockCache(param *types.DplatformOSConfig, defCacheSize int64) *BlockCache {
 	return &BlockCache{
 		cache:      make(map[int64]*list.Element),
 		cacheHash:  make(map[string]*list.Element),

@@ -281,7 +281,7 @@ func genPrefixEdge(prefix []byte) (r []byte) {
 func TestIterateCallBack_Mode1(t *testing.T) {
 	dir, err := ioutil.TempDir("", "example")
 	assert.Nil(t, err)
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	defer os.RemoveAll(dir) // clean up
 	os.RemoveAll(dir)       //删除已存在目录
 	var storeCfg = newStoreCfg(dir)
@@ -426,7 +426,7 @@ func TestIterateCallBack_Mode1(t *testing.T) {
 func TestIterateCallBack_Mode2(t *testing.T) {
 	dir, err := ioutil.TempDir("", "example")
 	assert.Nil(t, err)
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	defer os.RemoveAll(dir) // clean up
 	os.RemoveAll(dir)       //删除已存在目录
 	var storeCfg = newStoreCfg(dir)

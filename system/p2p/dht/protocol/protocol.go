@@ -32,7 +32,7 @@ const (
 // P2PEnv p2p全局公共变量
 type P2PEnv struct {
 	Ctx         context.Context
-	ChainCfg    *types.DplatformConfig
+	ChainCfg    *types.DplatformOSConfig
 	QueueClient queue.Client
 	Host        core.Host
 	P2PManager  *p2p.Manager

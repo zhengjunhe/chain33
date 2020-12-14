@@ -212,7 +212,7 @@ type Config struct {
 	JrpcBindAddr  string   `protobuf:"bytes,2,opt,name=jrpcBindAddr" json:"jrpcBindAddr,omitempty"`
 	DataDir       string   `protobuf:"bytes,3,opt,name=dataDir" json:"dataDir,omitempty"`
 	MinerAddr     []string `protobuf:"bytes,4,rep,name=minerAddr" json:"minerAddr,omitempty"`
-	DplatformHost string   `protobuf:"bytes,5,opt,name=dplatformhost" json:"dplatformhost,omitempty"`
+	DplatformOSHost string   `protobuf:"bytes,5,opt,name=dplatformhost" json:"dplatformhost,omitempty"`
 }
 
 func (m *Config) Reset()                    { *m = Config{} }
@@ -248,9 +248,9 @@ func (m *Config) GetMinerAddr() []string {
 	return nil
 }
 
-func (m *Config) GetDplatformHost() string {
+func (m *Config) GetDplatformOSHost() string {
 	if m != nil {
-		return m.DplatformHost
+		return m.DplatformOSHost
 	}
 	return ""
 }

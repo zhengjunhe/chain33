@@ -13,5 +13,5 @@ import (
 )
 
 func main() {
-	cli.RunDplatform("", "")
+	cli.RunDplatformOS("", "")
 }

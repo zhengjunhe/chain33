@@ -42,20 +42,20 @@ type Executor struct {
 	disableLocal   bool
 	client         queue.Client
 	qclient        client.QueueProtocolAPI
-	grpccli        types.DplatformClient
+	grpccli        types.DplatformOSClient
 	pluginEnable   map[string]bool
 	alias          map[string]string
 	noneDriverPool *sync.Pool
 }
 
-func execInit(cfg *typ.DplatformConfig) {
+func execInit(cfg *typ.DplatformOSConfig) {
 	pluginmgr.InitExec(cfg)
 }
 
 var runonce sync.Once
 
 // New new executor
-func New(cfg *typ.DplatformConfig) *Executor {
+func New(cfg *typ.DplatformOSConfig) *Executor {
 	// init executor
 	runonce.Do(func() {
 		execInit(cfg)

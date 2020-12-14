@@ -126,7 +126,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 		//params.FuncName = "GetTokenInfo"
 		//params.Payload = req
 		//var res tokenty.Token
-		err = rpc.Call("Dplatform.Query", params, &res)
+		err = rpc.Call("DplatformOS.Query", params, &res)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return
@@ -153,7 +153,7 @@ func totalCoins(cmd *cobra.Command, args []string) {
 				params.Execer = "token"
 			}
 			var res types.ReplyGetTotalCoins
-			err = rpc.Call("Dplatform.GetTotalCoins", params, &res)
+			err = rpc.Call("DplatformOS.GetTotalCoins", params, &res)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				return
@@ -264,7 +264,7 @@ func execBalance(cmd *cobra.Command, args []string) {
 	for {
 		var reply types.ReplyGetExecBalance
 		var str string
-		err = rpc.Call("Dplatform.GetExecBalance", reqParam, &str)
+		err = rpc.Call("DplatformOS.GetExecBalance", reqParam, &str)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return
@@ -399,7 +399,7 @@ func totalFee(cmd *cobra.Command, args []string) {
 func getLastBlock(rpc *jsonclient.JSONClient) (*rpctypes.Header, error) {
 
 	res := &rpctypes.Header{}
-	err := rpc.Call("Dplatform.GetLastHeader", nil, &res)
+	err := rpc.Call("DplatformOS.GetLastHeader", nil, &res)
 	if err != nil {
 		return nil, err
 	}
@@ -411,7 +411,7 @@ func getBlockHash(height int64, rpc *jsonclient.JSONClient) (string, error) {
 
 	params := types.ReqInt{Height: height}
 	var res rpctypes.ReplyHash
-	err := rpc.Call("Dplatform.GetBlockHash", params, &res)
+	err := rpc.Call("DplatformOS.GetBlockHash", params, &res)
 	if err != nil {
 		return "", err
 	}
@@ -453,7 +453,7 @@ func queryTotalFeeWithHash(blockHash string, rpc *jsonclient.JSONClient) (*types
 	hash = append([]byte("TotalFeeKey:"), hash...)
 	params := types.LocalDBGet{Keys: [][]byte{hash[:]}}
 	res := &types.TotalFee{}
-	err = rpc.Call("Dplatform.QueryTotalFee", params, &res)
+	err = rpc.Call("DplatformOS.QueryTotalFee", params, &res)
 	if err != nil {
 		return nil, err
 	}
@@ -469,7 +469,7 @@ func getBlocks(start, end int64, rpc *jsonclient.JSONClient) (*rpctypes.BlockDet
 		Isdetail: true,
 	}
 	res := &rpctypes.BlockDetails{}
-	err := rpc.Call("Dplatform.GetBlocks", params, &res)
+	err := rpc.Call("DplatformOS.GetBlocks", params, &res)
 	if err != nil {
 		return nil, err
 	}

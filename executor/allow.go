@@ -61,7 +61,7 @@ func isAllowKeyWrite(e *executor, key, realExecer []byte, tx *types.Transaction,
 	return c.IsFriend(execdriver, key, tx)
 }
 
-func isAllowLocalKey(cfg *types.DplatformConfig, execer []byte, key []byte) error {
+func isAllowLocalKey(cfg *types.DplatformOSConfig, execer []byte, key []byte) error {
 	err := isAllowLocalKey2(cfg, execer, key)
 	if err != nil {
 		realexec := types.GetRealExecName(execer)
@@ -78,7 +78,7 @@ func isAllowLocalKey(cfg *types.DplatformConfig, execer []byte, key []byte) erro
 	return nil
 }
 
-func isAllowLocalKey2(cfg *types.DplatformConfig, execer []byte, key []byte) error {
+func isAllowLocalKey2(cfg *types.DplatformOSConfig, execer []byte, key []byte) error {
 	if len(execer) < 1 {
 		return errors.Wrap(types.ErrLocalPrefix, "execer empty")
 	}

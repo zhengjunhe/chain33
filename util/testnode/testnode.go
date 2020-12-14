@@ -50,8 +50,8 @@ func init() {
 //保证只有一个dplatform 会运行
 var lognode = log15.New("module", "lognode")
 
-//DplatformMock :
-type DplatformMock struct {
+//DplatformOSMock :
+type DplatformOSMock struct {
 	random   *rand.Rand
 	q        queue.Queue
 	client   queue.Client
@@ -72,17 +72,17 @@ type DplatformMock struct {
 }
 
 //GetDefaultConfig :
-func GetDefaultConfig() *types.DplatformConfig {
-	return types.NewDplatformConfig(types.GetDefaultCfgstring())
+func GetDefaultConfig() *types.DplatformOSConfig {
+	return types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 }
 
 //NewWithConfig :
-func NewWithConfig(cfg *types.DplatformConfig, mockapi client.QueueProtocolAPI) *DplatformMock {
+func NewWithConfig(cfg *types.DplatformOSConfig, mockapi client.QueueProtocolAPI) *DplatformOSMock {
 	return newWithConfig(cfg, mockapi)
 }
 
 // NewWithRPC 创建测试节点 并开放rpc服务
-func NewWithRPC(cfg *types.DplatformConfig, mockapi client.QueueProtocolAPI) *DplatformMock {
+func NewWithRPC(cfg *types.DplatformOSConfig, mockapi client.QueueProtocolAPI) *DplatformOSMock {
 	mock := newWithConfigNoLock(cfg, mockapi)
 	mock.rpc.Close()
 	server := rpc.New(cfg)
@@ -92,18 +92,18 @@ func NewWithRPC(cfg *types.DplatformConfig, mockapi client.QueueProtocolAPI) *Dp
 	return mock
 }
 
-func newWithConfig(cfg *types.DplatformConfig, mockapi client.QueueProtocolAPI) *DplatformMock {
+func newWithConfig(cfg *types.DplatformOSConfig, mockapi client.QueueProtocolAPI) *DplatformOSMock {
 	return newWithConfigNoLock(cfg, mockapi)
 }
 
-func newWithConfigNoLock(cfg *types.DplatformConfig, mockapi client.QueueProtocolAPI) *DplatformMock {
+func newWithConfigNoLock(cfg *types.DplatformOSConfig, mockapi client.QueueProtocolAPI) *DplatformOSMock {
 	mfg := cfg.GetModuleConfig()
 	sub := cfg.GetSubConfig()
 	q := queue.New("channel")
 	q.SetConfig(cfg)
 	types.Debug = false
 	datadir := util.ResetDatadir(mfg, "$TEMP/")
-	mock := &DplatformMock{cfg: mfg, sub: sub, q: q, datadir: datadir}
+	mock := &DplatformOSMock{cfg: mfg, sub: sub, q: q, datadir: datadir}
 	mock.random = rand.New(rand.NewSource(types.Now().UnixNano()))
 
 	mock.exec = executor.New(cfg)
@@ -157,22 +157,22 @@ func newWithConfigNoLock(cfg *types.DplatformConfig, mockapi client.QueueProtoco
 }
 
 //New :
-func New(cfgpath string, mockapi client.QueueProtocolAPI) *DplatformMock {
-	var cfg *types.DplatformConfig
+func New(cfgpath string, mockapi client.QueueProtocolAPI) *DplatformOSMock {
+	var cfg *types.DplatformOSConfig
 	if cfgpath == "" || cfgpath == "--notset--" || cfgpath == "--free--" {
-		cfg = types.NewDplatformConfig(types.GetDefaultCfgstring())
+		cfg = types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 		if cfgpath == "--free--" {
 			setFee(cfg.GetModuleConfig(), 0)
 			cfg.SetMinFee(0)
 		}
 	} else {
-		cfg = types.NewDplatformConfig(types.ReadFile(cfgpath))
+		cfg = types.NewDplatformOSConfig(types.ReadFile(cfgpath))
 	}
 	return newWithConfig(cfg, mockapi)
 }
 
 //Listen :
-func (mock *DplatformMock) Listen() {
+func (mock *DplatformOSMock) Listen() {
 	pluginmgr.AddRPC(mock.rpc)
 	var portgrpc, portjsonrpc int
 	for {
@@ -193,7 +193,7 @@ func (mock *DplatformMock) Listen() {
 }
 
 //ModifyParaClient modify para config
-func ModifyParaClient(cfg *types.DplatformConfig, gaddr string) {
+func ModifyParaClient(cfg *types.DplatformOSConfig, gaddr string) {
 	sub := cfg.GetSubConfig()
 	if sub.Consensus["para"] != nil {
 		data, err := types.ModifySubConfig(sub.Consensus["para"], "ParaRemoteGrpcClient", gaddr)
@@ -206,7 +206,7 @@ func ModifyParaClient(cfg *types.DplatformConfig, gaddr string) {
 }
 
 //GetBlockChain :
-func (mock *DplatformMock) GetBlockChain() *blockchain.BlockChain {
+func (mock *DplatformOSMock) GetBlockChain() *blockchain.BlockChain {
 	return mock.chain
 }
 
@@ -216,7 +216,7 @@ func setFee(cfg *types.Config, fee int64) {
 }
 
 //GetJSONC :
-func (mock *DplatformMock) GetJSONC() *jsonclient.JSONClient {
+func (mock *DplatformOSMock) GetJSONC() *jsonclient.JSONClient {
 	jsonc, err := jsonclient.NewJSONClient("http://" + mock.cfg.RPC.JrpcBindAddr + "/")
 	if err != nil {
 		return nil
@@ -225,7 +225,7 @@ func (mock *DplatformMock) GetJSONC() *jsonclient.JSONClient {
 }
 
 //SendAndSign :
-func (mock *DplatformMock) SendAndSign(priv crypto.PrivKey, hextx string) ([]byte, error) {
+func (mock *DplatformOSMock) SendAndSign(priv crypto.PrivKey, hextx string) ([]byte, error) {
 	txbytes, err := common.FromHex(hextx)
 	if err != nil {
 		return nil, err
@@ -245,7 +245,7 @@ func (mock *DplatformMock) SendAndSign(priv crypto.PrivKey, hextx string) ([]byt
 }
 
 //SendAndSignNonce 用外部传入的nonce 重写nonce
-func (mock *DplatformMock) SendAndSignNonce(priv crypto.PrivKey, hextx string, nonce int64) ([]byte, error) {
+func (mock *DplatformOSMock) SendAndSignNonce(priv crypto.PrivKey, hextx string, nonce int64) ([]byte, error) {
 	txbytes, err := common.FromHex(hextx)
 	if err != nil {
 		return nil, err
@@ -294,31 +294,31 @@ func newWalletRealize(qAPI client.QueueProtocolAPI) {
 }
 
 //GetAPI :
-func (mock *DplatformMock) GetAPI() client.QueueProtocolAPI {
+func (mock *DplatformOSMock) GetAPI() client.QueueProtocolAPI {
 	return mock.api
 }
 
 //GetRPC :
-func (mock *DplatformMock) GetRPC() *rpc.RPC {
+func (mock *DplatformOSMock) GetRPC() *rpc.RPC {
 	return mock.rpc
 }
 
 //GetCfg :
-func (mock *DplatformMock) GetCfg() *types.Config {
+func (mock *DplatformOSMock) GetCfg() *types.Config {
 	return mock.cfg
 }
 
 //GetLastSendTx :
-func (mock *DplatformMock) GetLastSendTx() []byte {
+func (mock *DplatformOSMock) GetLastSendTx() []byte {
 	return mock.lastsend
 }
 
 //Close :
-func (mock *DplatformMock) Close() {
+func (mock *DplatformOSMock) Close() {
 	mock.closeNoLock()
 }
 
-func (mock *DplatformMock) closeNoLock() {
+func (mock *DplatformOSMock) closeNoLock() {
 	lognode.Info("network close")
 	mock.network.Close()
 	lognode.Info("network close")
@@ -344,7 +344,7 @@ func (mock *DplatformMock) closeNoLock() {
 }
 
 //WaitHeight :
-func (mock *DplatformMock) WaitHeight(height int64) error {
+func (mock *DplatformOSMock) WaitHeight(height int64) error {
 	for {
 		header, err := mock.api.GetLastHeader()
 		if err != nil {
@@ -359,7 +359,7 @@ func (mock *DplatformMock) WaitHeight(height int64) error {
 }
 
 //WaitTx :
-func (mock *DplatformMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
+func (mock *DplatformOSMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, error) {
 	if hash == nil {
 		return nil, nil
 	}
@@ -374,13 +374,13 @@ func (mock *DplatformMock) WaitTx(hash []byte) (*rpctypes.TransactionDetail, err
 		data := rpctypes.QueryParm{
 			Hash: common.ToHex(hash),
 		}
-		err = mock.GetJSONC().Call("Dplatform.QueryTransaction", data, &testResult)
+		err = mock.GetJSONC().Call("DplatformOS.QueryTransaction", data, &testResult)
 		return &testResult, err
 	}
 }
 
 //SendHot :
-func (mock *DplatformMock) SendHot() error {
+func (mock *DplatformOSMock) SendHot() error {
 	types.AssertConfig(mock.client)
 	tx := util.CreateCoinsTx(mock.client.GetConfig(), mock.GetGenesisKey(), mock.GetHotAddress(), 10000*types.Coin)
 	mock.SendTx(tx)
@@ -388,7 +388,7 @@ func (mock *DplatformMock) SendHot() error {
 }
 
 //SendTx :
-func (mock *DplatformMock) SendTx(tx *types.Transaction) []byte {
+func (mock *DplatformOSMock) SendTx(tx *types.Transaction) []byte {
 	reply, err := mock.GetAPI().SendTx(tx)
 	if err != nil {
 		panic(err)
@@ -398,17 +398,17 @@ func (mock *DplatformMock) SendTx(tx *types.Transaction) []byte {
 }
 
 //SetLastSend :
-func (mock *DplatformMock) SetLastSend(hash []byte) {
+func (mock *DplatformOSMock) SetLastSend(hash []byte) {
 	mock.mu.Lock()
 	mock.lastsend = hash
 	mock.mu.Unlock()
 }
 
 //SendTxRPC :
-func (mock *DplatformMock) SendTxRPC(tx *types.Transaction) []byte {
+func (mock *DplatformOSMock) SendTxRPC(tx *types.Transaction) []byte {
 	var txhash string
 	hextx := common.ToHex(types.Encode(tx))
-	err := mock.GetJSONC().Call("Dplatform.SendTransaction", &rpctypes.RawParm{Data: hextx}, &txhash)
+	err := mock.GetJSONC().Call("DplatformOS.SendTransaction", &rpctypes.RawParm{Data: hextx}, &txhash)
 	if err != nil {
 		panic(err)
 	}
@@ -421,7 +421,7 @@ func (mock *DplatformMock) SendTxRPC(tx *types.Transaction) []byte {
 }
 
 //Wait :
-func (mock *DplatformMock) Wait() error {
+func (mock *DplatformOSMock) Wait() error {
 	if mock.lastsend == nil {
 		return nil
 	}
@@ -430,7 +430,7 @@ func (mock *DplatformMock) Wait() error {
 }
 
 //GetAccount :
-func (mock *DplatformMock) GetAccount(stateHash []byte, addr string) *types.Account {
+func (mock *DplatformOSMock) GetAccount(stateHash []byte, addr string) *types.Account {
 	statedb := executor.NewStateDB(mock.client, stateHash, nil, nil)
 	types.AssertConfig(mock.client)
 	acc := account.NewCoinsAccount(mock.client.GetConfig())
@@ -439,7 +439,7 @@ func (mock *DplatformMock) GetAccount(stateHash []byte, addr string) *types.Acco
 }
 
 //GetExecAccount :get execer account info
-func (mock *DplatformMock) GetExecAccount(stateHash []byte, execer, addr string) *types.Account {
+func (mock *DplatformOSMock) GetExecAccount(stateHash []byte, execer, addr string) *types.Account {
 	statedb := executor.NewStateDB(mock.client, stateHash, nil, nil)
 	types.AssertConfig(mock.client)
 	acc := account.NewCoinsAccount(mock.client.GetConfig())
@@ -448,7 +448,7 @@ func (mock *DplatformMock) GetExecAccount(stateHash []byte, execer, addr string)
 }
 
 //GetBlock :
-func (mock *DplatformMock) GetBlock(height int64) *types.Block {
+func (mock *DplatformOSMock) GetBlock(height int64) *types.Block {
 	blocks, err := mock.api.GetBlocks(&types.ReqBlocks{Start: height, End: height})
 	if err != nil {
 		panic(err)
@@ -457,7 +457,7 @@ func (mock *DplatformMock) GetBlock(height int64) *types.Block {
 }
 
 //GetLastBlock :
-func (mock *DplatformMock) GetLastBlock() *types.Block {
+func (mock *DplatformOSMock) GetLastBlock() *types.Block {
 	header, err := mock.api.GetLastHeader()
 	if err != nil {
 		panic(err)
@@ -466,27 +466,27 @@ func (mock *DplatformMock) GetLastBlock() *types.Block {
 }
 
 //GetClient :
-func (mock *DplatformMock) GetClient() queue.Client {
+func (mock *DplatformOSMock) GetClient() queue.Client {
 	return mock.client
 }
 
 //GetHotKey :
-func (mock *DplatformMock) GetHotKey() crypto.PrivKey {
+func (mock *DplatformOSMock) GetHotKey() crypto.PrivKey {
 	return util.TestPrivkeyList[0]
 }
 
 //GetHotAddress :
-func (mock *DplatformMock) GetHotAddress() string {
+func (mock *DplatformOSMock) GetHotAddress() string {
 	return address.PubKeyToAddress(mock.GetHotKey().PubKey().Bytes()).String()
 }
 
 //GetGenesisKey :
-func (mock *DplatformMock) GetGenesisKey() crypto.PrivKey {
+func (mock *DplatformOSMock) GetGenesisKey() crypto.PrivKey {
 	return util.TestPrivkeyList[1]
 }
 
 //GetGenesisAddress :
-func (mock *DplatformMock) GetGenesisAddress() string {
+func (mock *DplatformOSMock) GetGenesisAddress() string {
 	return address.PubKeyToAddress(mock.GetGenesisKey().PubKey().Bytes()).String()
 }
 

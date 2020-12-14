@@ -139,7 +139,7 @@ type BlockChain struct {
 }
 
 //New new
-func New(cfg *types.DplatformConfig) *BlockChain {
+func New(cfg *types.DplatformOSConfig) *BlockChain {
 	mcfg := cfg.GetModuleConfig().BlockChain
 	futureBlocks, err := lru.New(maxFutureBlocks)
 	if err != nil {
@@ -199,7 +199,7 @@ func New(cfg *types.DplatformConfig) *BlockChain {
 	return blockchain
 }
 
-func (chain *BlockChain) initConfig(cfg *types.DplatformConfig) {
+func (chain *BlockChain) initConfig(cfg *types.DplatformOSConfig) {
 	mcfg := cfg.GetModuleConfig().BlockChain
 	//if cfg.IsEnable("TxHeight") && chain.DefCacheSize <= (types.LowAllowPackHeight+types.HighAllowPackHeight+1) {
 	//	panic("when Enable TxHeight DefCacheSize must big than types.LowAllowPackHeight + types.HighAllowPackHeight")

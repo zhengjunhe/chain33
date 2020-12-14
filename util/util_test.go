@@ -109,7 +109,7 @@ func TestUpperLower(t *testing.T) {
 }
 
 func TestGenTx(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	txs := GenNoneTxs(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(txs))
 	assert.Equal(t, "none", string(txs[0].Execer))
@@ -128,7 +128,7 @@ func TestGenTx(t *testing.T) {
 }
 
 func TestGenBlock(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	block2 := CreateNoneBlock(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(block2.Txs))
 
@@ -189,7 +189,7 @@ func BenchmarkDelDupKey(b *testing.B) {
 }
 
 func TestDelDupTx(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	txs := GenNoneTxs(cfg, TestPrivkeyList[0], 2)
 	assert.Equal(t, 2, len(txs))
 	assert.Equal(t, "none", string(txs[0].Execer))
@@ -277,7 +277,7 @@ func (t *testClient) Wait(in *queue.Message) (*queue.Message, error) {
 func TestExecBlock(t *testing.T) {
 	str := types.GetDefaultCfgstring()
 	new := strings.Replace(str, "Title=\"local\"", "Title=\"dplatform\"", 1)
-	cfg := types.NewDplatformConfig(new)
+	cfg := types.NewDplatformOSConfig(new)
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -293,7 +293,7 @@ func TestExecBlock(t *testing.T) {
 }
 
 func TestExecBlockUpgrade(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -307,7 +307,7 @@ func TestExecBlockUpgrade(t *testing.T) {
 }
 
 func TestExecAndCheckBlock(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)
@@ -338,7 +338,7 @@ func TestExecKVSetRollback(t *testing.T) {
 }
 
 func TestCheckDupTx(t *testing.T) {
-	cfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	cfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	client := &testClient{}
 	client.On("Send", mock.Anything, mock.Anything).Return(nil)
 	client.On("GetConfig", mock.Anything).Return(cfg)

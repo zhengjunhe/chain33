@@ -86,7 +86,7 @@ func LoadExecutorType(execstr string) ExecutorType {
 }
 
 // CallExecNewTx 重构完成后删除
-func CallExecNewTx(c *DplatformConfig, execName, action string, param interface{}) ([]byte, error) {
+func CallExecNewTx(c *DplatformOSConfig, execName, action string, param interface{}) ([]byte, error) {
 	exec := LoadExecutorType(execName)
 	if exec == nil {
 		tlog.Error("callExecNewTx", "Error", "exec not found")
@@ -126,7 +126,7 @@ func CallCreateTransaction(execName, action string, param Message) (*Transaction
 }
 
 // CallCreateTx 构造交易信息
-func CallCreateTx(c *DplatformConfig, execName, action string, param Message) ([]byte, error) {
+func CallCreateTx(c *DplatformOSConfig, execName, action string, param Message) ([]byte, error) {
 	tx, err := CallCreateTransaction(execName, action, param)
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ func CallCreateTx(c *DplatformConfig, execName, action string, param Message) ([
 }
 
 //CallCreateTxJSON create tx by json
-func CallCreateTxJSON(c *DplatformConfig, execName, action string, param json.RawMessage) ([]byte, error) {
+func CallCreateTxJSON(c *DplatformOSConfig, execName, action string, param json.RawMessage) ([]byte, error) {
 	exec := LoadExecutorType(execName)
 	if exec == nil {
 		execer := GetParaExecName([]byte(execName))
@@ -161,14 +161,14 @@ func CallCreateTxJSON(c *DplatformConfig, execName, action string, param json.Ra
 }
 
 // CreateFormatTx 构造交易信息
-func CreateFormatTx(c *DplatformConfig, execName string, payload []byte) (*Transaction, error) {
+func CreateFormatTx(c *DplatformOSConfig, execName string, payload []byte) (*Transaction, error) {
 	//填写nonce,execer,to, fee 等信息, 后面会增加一个修改transaction的函数，会加上execer fee 等的修改
 	tx := &Transaction{Payload: payload}
 	return FormatTx(c, execName, tx)
 }
 
 // FormatTx 格式化tx交易
-func FormatTx(c *DplatformConfig, execName string, tx *Transaction) (*Transaction, error) {
+func FormatTx(c *DplatformOSConfig, execName string, tx *Transaction) (*Transaction, error) {
 	//填写nonce,execer,to, fee 等信息, 后面会增加一个修改transaction的函数，会加上execer fee 等的修改
 	tx.Nonce = rand.Int63()
 	tx.Execer = []byte(execName)
@@ -187,7 +187,7 @@ func FormatTx(c *DplatformConfig, execName string, tx *Transaction) (*Transactio
 }
 
 // FormatTxEncode 对交易信息编码成byte类型
-func FormatTxEncode(c *DplatformConfig, execName string, tx *Transaction) ([]byte, error) {
+func FormatTxEncode(c *DplatformOSConfig, execName string, tx *Transaction) ([]byte, error) {
 	tx, err := FormatTx(c, execName, tx)
 	if err != nil {
 		return nil, err
@@ -292,8 +292,8 @@ type ExecutorType interface {
 	GetAssets(tx *Transaction) ([]*Asset, error)
 
 	// about dplatformConfig
-	GetConfig() *DplatformConfig
-	SetConfig(cfg *DplatformConfig)
+	GetConfig() *DplatformOSConfig
+	SetConfig(cfg *DplatformOSConfig)
 }
 
 // ExecTypeGet  获取类型值
@@ -311,7 +311,7 @@ type ExecTypeBase struct {
 	rpclist             map[string]reflect.Method
 	queryMap            map[string]reflect.Type
 	forks               *Forks
-	cfg                 *DplatformConfig
+	cfg                 *DplatformOSConfig
 }
 
 // GetChild  获取子执行器
@@ -799,11 +799,11 @@ func (base *ExecTypeBase) GetAssets(tx *Transaction) ([]*Asset, error) {
 }
 
 //GetConfig ...
-func (base *ExecTypeBase) GetConfig() *DplatformConfig {
+func (base *ExecTypeBase) GetConfig() *DplatformOSConfig {
 	return base.cfg
 }
 
 //SetConfig ...
-func (base *ExecTypeBase) SetConfig(cfg *DplatformConfig) {
+func (base *ExecTypeBase) SetConfig(cfg *DplatformOSConfig) {
 	base.cfg = cfg
 }

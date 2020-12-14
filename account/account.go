@@ -37,17 +37,17 @@ type DB struct {
 	execer               string
 	symbol               string
 	accountKeyBuffer     []byte
-	cfg                  *types.DplatformConfig
+	cfg                  *types.DplatformOSConfig
 }
 
 // NewCoinsAccount 新建账户
-func NewCoinsAccount(cfg *types.DplatformConfig) *DB {
+func NewCoinsAccount(cfg *types.DplatformOSConfig) *DB {
 	prefix := "mavl-coins-" + cfg.GetCoinSymbol() + "-"
 	return newAccountDB(cfg, prefix)
 }
 
 // NewAccountDB 新建DB账户
-func NewAccountDB(cfg *types.DplatformConfig, execer string, symbol string, db dbm.KV) (*DB, error) {
+func NewAccountDB(cfg *types.DplatformOSConfig, execer string, symbol string, db dbm.KV) (*DB, error) {
 	//如果execer 和  symbol 中存在 "-", 那么创建失败
 	if strings.ContainsRune(execer, '-') {
 		return nil, types.ErrExecNameNotAllow
@@ -62,7 +62,7 @@ func NewAccountDB(cfg *types.DplatformConfig, execer string, symbol string, db d
 	return accDB, nil
 }
 
-func newAccountDB(cfg *types.DplatformConfig, prefix string) *DB {
+func newAccountDB(cfg *types.DplatformOSConfig, prefix string) *DB {
 	acc := &DB{cfg: cfg}
 	acc.accountKeyPerfix = []byte(prefix)
 	acc.accountKeyBuffer = make([]byte, 0, len(acc.accountKeyPerfix)+64)

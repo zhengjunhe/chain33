@@ -156,22 +156,22 @@ func (f *Forks) setForkForParaZero() {
 }
 
 // IsFork 是否系统 fork高度
-func (c *DplatformConfig) IsFork(height int64, fork string) bool {
+func (c *DplatformOSConfig) IsFork(height int64, fork string) bool {
 	return c.forks.IsFork(height, fork)
 }
 
 // IsDappFork 是否dapp fork高度
-func (c *DplatformConfig) IsDappFork(height int64, dapp, fork string) bool {
+func (c *DplatformOSConfig) IsDappFork(height int64, dapp, fork string) bool {
 	return c.forks.IsDappFork(height, dapp, fork)
 }
 
 // GetDappFork 获取dapp fork高度
-func (c *DplatformConfig) GetDappFork(dapp, fork string) int64 {
+func (c *DplatformOSConfig) GetDappFork(dapp, fork string) int64 {
 	return c.forks.GetDappFork(dapp, fork)
 }
 
 // SetDappFork 设置dapp fork高度
-func (c *DplatformConfig) SetDappFork(dapp, fork string, height int64) {
+func (c *DplatformOSConfig) SetDappFork(dapp, fork string, height int64) {
 	if c.needSetForkZero() {
 		height = 0
 		if fork == "ForkBlockHash" {
@@ -182,7 +182,7 @@ func (c *DplatformConfig) SetDappFork(dapp, fork string, height int64) {
 }
 
 // RegisterDappFork 注册dapp fork高度
-func (c *DplatformConfig) RegisterDappFork(dapp, fork string, height int64) {
+func (c *DplatformOSConfig) RegisterDappFork(dapp, fork string, height int64) {
 	if c.needSetForkZero() {
 		height = 0
 		if fork == "ForkBlockHash" {
@@ -193,17 +193,17 @@ func (c *DplatformConfig) RegisterDappFork(dapp, fork string, height int64) {
 }
 
 // GetFork 获取系统fork高度
-func (c *DplatformConfig) GetFork(fork string) int64 {
+func (c *DplatformOSConfig) GetFork(fork string) int64 {
 	return c.forks.GetFork(fork)
 }
 
 // HasFork 是否有系统fork
-func (c *DplatformConfig) HasFork(fork string) bool {
+func (c *DplatformOSConfig) HasFork(fork string) bool {
 	return c.forks.HasFork(fork)
 }
 
 // IsEnableFork 是否使能了fork
-func (c *DplatformConfig) IsEnableFork(height int64, fork string, enable bool) bool {
+func (c *DplatformOSConfig) IsEnableFork(height int64, fork string, enable bool) bool {
 	if !enable {
 		return false
 	}
@@ -212,7 +212,7 @@ func (c *DplatformConfig) IsEnableFork(height int64, fork string, enable bool) b
 
 //fork 设置规则：
 //所有的fork都需要有明确的配置，不开启fork 配置为 -1; forks即为从toml中读入文件
-func (c *DplatformConfig) initForkConfig(forks *ForkList) {
+func (c *DplatformOSConfig) initForkConfig(forks *ForkList) {
 	dplatformfork := c.forks.GetAll()
 	if dplatformfork == nil {
 		panic("dplatform fork not init")

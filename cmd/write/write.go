@@ -57,7 +57,7 @@ func initWrite() *Config {
 }
 
 func main() {
-	dplatformCfg := types.NewDplatformConfig(types.GetDefaultCfgstring())
+	dplatformCfg := types.NewDplatformOSConfig(types.GetDefaultCfgstring())
 	cfg := initWrite()
 	receiveAddr = cfg.UserWriteConf.ReceiveAddr
 	currentHeight = cfg.UserWriteConf.CurrentHeight
@@ -107,7 +107,7 @@ func ioHeightAndIndex() error {
 	return nil
 }
 
-func scanWrite(cfg *types.DplatformConfig) {
+func scanWrite(cfg *types.DplatformOSConfig) {
 	for {
 		time.Sleep(time.Second * 5)
 		rpc, err := jsonclient.NewJSONClient(rpcAddr)
@@ -127,7 +127,7 @@ func scanWrite(cfg *types.DplatformConfig) {
 		}
 
 		var replyTxInfos rpctypes.ReplyTxInfos
-		err = rpc.Call("Dplatform.GetTxByAddr", paramsReqAddr, &replyTxInfos)
+		err = rpc.Call("DplatformOS.GetTxByAddr", paramsReqAddr, &replyTxInfos)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			continue
@@ -146,7 +146,7 @@ func scanWrite(cfg *types.DplatformConfig) {
 		for _, hash := range txHashes {
 			paramsQuery := rpctypes.QueryParm{Hash: hash}
 			var transactionDetail rpctypes.TransactionDetail
-			err = rpc.Call("Dplatform.QueryTransaction", paramsQuery, &transactionDetail)
+			err = rpc.Call("DplatformOS.QueryTransaction", paramsQuery, &transactionDetail)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
 				continue
@@ -202,12 +202,12 @@ func scanWrite(cfg *types.DplatformConfig) {
 				Expire: "0",
 			}
 			var signed string
-			rpc.Call("Dplatform.SignRawTx", paramsReqSignRawTx, &signed)
+			rpc.Call("DplatformOS.SignRawTx", paramsReqSignRawTx, &signed)
 			paramsRaw := rpctypes.RawParm{
 				Data: signed,
 			}
 			var sent string
-			rpc.Call("Dplatform.SendTransaction", paramsRaw, &sent)
+			rpc.Call("DplatformOS.SendTransaction", paramsRaw, &sent)
 			f, err := os.OpenFile(heightFile, os.O_RDWR, 0666)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)

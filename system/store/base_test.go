@@ -187,7 +187,7 @@ func TestSubStore(t *testing.T) {
 }
 
 func TestRegAndLoad(t *testing.T) {
-	Reg("test", func(cfg *types.Store, sub []byte, dplatformcfg *types.DplatformConfig) queue.Module {
+	Reg("test", func(cfg *types.Store, sub []byte, dplatformcfg *types.DplatformOSConfig) queue.Module {
 		return nil
 	})
 

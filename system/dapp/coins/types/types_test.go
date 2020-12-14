@@ -13,7 +13,7 @@ import (
 )
 
 func TestTypeReflact(t *testing.T) {
-	ty := NewType(types.NewDplatformConfig(types.GetDefaultCfgstring()))
+	ty := NewType(types.NewDplatformOSConfig(types.GetDefaultCfgstring()))
 	assert.NotNil(t, ty)
 	//创建一个json字符串
 	data, err := types.PBToJSON(&types.AssetsTransfer{Amount: 10})
@@ -31,7 +31,7 @@ func TestTypeReflact(t *testing.T) {
 }
 
 func TestCoinsType(t *testing.T) {
-	ty := NewType(types.NewDplatformConfig(types.GetDefaultCfgstring()))
+	ty := NewType(types.NewDplatformOSConfig(types.GetDefaultCfgstring()))
 	payload := ty.GetPayload()
 	assert.Equal(t, &CoinsAction{}, payload.(*CoinsAction))
 

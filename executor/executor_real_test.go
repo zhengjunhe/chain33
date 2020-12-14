@@ -41,7 +41,7 @@ func TestExecGenesisBlock(t *testing.T) {
 	assert.Equal(t, block.Height, int64(0))
 }
 
-func newMockNode() *testnode.DplatformMock {
+func newMockNode() *testnode.DplatformOSMock {
 	cfg := testnode.GetDefaultConfig()
 	cfg.GetModuleConfig().Consensus.Minerstart = false
 	runonce.Do(func() {

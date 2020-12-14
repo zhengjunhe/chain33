@@ -60,8 +60,8 @@ type Queue interface {
 	Start()
 	Client() Client
 	Name() string
-	SetConfig(cfg *types.DplatformConfig)
-	GetConfig() *types.DplatformConfig
+	SetConfig(cfg *types.DplatformOSConfig)
+	GetConfig() *types.DplatformOSConfig
 }
 
 type queue struct {
@@ -72,7 +72,7 @@ type queue struct {
 	callback  chan *Message
 	isClose   int32
 	name      string
-	cfg       *types.DplatformConfig
+	cfg       *types.DplatformOSConfig
 	msgPool   *sync.Pool
 }
 
@@ -108,13 +108,13 @@ func New(name string) Queue {
 	return q
 }
 
-// GetConfig return the queue DplatformConfig
-func (q *queue) GetConfig() *types.DplatformConfig {
+// GetConfig return the queue DplatformOSConfig
+func (q *queue) GetConfig() *types.DplatformOSConfig {
 	return q.cfg
 }
 
 // Name return the queue name
-func (q *queue) SetConfig(cfg *types.DplatformConfig) {
+func (q *queue) SetConfig(cfg *types.DplatformOSConfig) {
 	if cfg == nil {
 		panic("set config is nil")
 	}

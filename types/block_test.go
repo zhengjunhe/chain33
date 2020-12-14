@@ -11,7 +11,7 @@ import (
 )
 
 func TestBlock(t *testing.T) {
-	cfg := NewDplatformConfig(GetDefaultCfgstring())
+	cfg := NewDplatformOSConfig(GetDefaultCfgstring())
 	b := &Block{}
 	assert.Equal(t, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", hex.EncodeToString(b.Hash(cfg)))
 	assert.Equal(t, b.HashOld(), b.HashNew())
@@ -36,7 +36,7 @@ func TestBlock(t *testing.T) {
 }
 
 func TestFilterParaTxsByTitle(t *testing.T) {
-	cfg := NewDplatformConfig(GetDefaultCfgstring())
+	cfg := NewDplatformOSConfig(GetDefaultCfgstring())
 	to := "14KEKbYtKKQm4wMthSK9J4La4nAiidGozt"
 
 	//构造一个主链交易

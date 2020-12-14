@@ -21,7 +21,7 @@ import (
 
 func main() {
 	types.S("cfg.${PROJECTNAME}", ${PROJECTNAME})
-	cli.RunDplatform("${PROJECTNAME}")
+	cli.RunDplatformOS("${PROJECTNAME}")
 }
 `
 

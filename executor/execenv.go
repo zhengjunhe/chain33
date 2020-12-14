@@ -30,7 +30,7 @@ type executor struct {
 	difficulty uint64
 	txs        []*types.Transaction
 	api        client.QueueProtocolAPI
-	gcli       types.DplatformClient
+	gcli       types.DplatformOSClient
 	execapi    api.ExecutorAPI
 	receipts   []*types.ReceiptData
 	//单个区块执行期间执行器缓存
@@ -39,7 +39,7 @@ type executor struct {
 	currTxIdx  int
 	currExecTx *types.Transaction
 	currDriver drivers.Driver
-	cfg        *types.DplatformConfig
+	cfg        *types.DplatformOSConfig
 	exec       *Executor
 }
 

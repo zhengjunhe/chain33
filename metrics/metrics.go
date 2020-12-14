@@ -24,7 +24,7 @@ var (
 )
 
 //StartMetrics 根据配置文件相关参数启动m
-func StartMetrics(cfg *types.DplatformConfig) {
+func StartMetrics(cfg *types.DplatformOSConfig) {
 	metrics := cfg.GetModuleConfig().Metrics
 	if !metrics.EnableMetrics {
 		log.Info("Metrics data is not enabled to emit")
