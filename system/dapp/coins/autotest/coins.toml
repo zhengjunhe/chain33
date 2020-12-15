@@ -13,7 +13,7 @@ command = "account import_key -k 0xd165c84ed37c2a427fea487470ee671b7a0495d68d826
 
 
 [[TransferCase]]
-id = "dpomTrans1"
+id = "dposTrans1"
 command = "send coins transfer -a 10 -t 1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj -k 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
 from = "12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
 to = "1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
@@ -23,45 +23,45 @@ dep = ["import1"]
 
 
 [[TransferCase]]
-id = "dpomTrans2"
+id = "dposTrans2"
 command = "send coins transfer -a 1 -t 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv -k 1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 from = "1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 to = "12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
 amount = "1"
 checkItem = ["balance"]
 repeat = 5
-dep = ["dpomTrans1"]
+dep = ["dposTrans1"]
 
 
 [[TransferCase]]
-id = "failDpomTrans"
+id = "failDposTrans"
 command = "send coins transfer -a 15 -t 12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv -k 1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 from = "1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 to = "12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
 amount = "15"
 checkItem = ["balance"]
-dep = ["dpomTrans1"]
+dep = ["dposTrans1"]
 fail = true
 
 
 [[TransferCase]]
-id = "dpomTrans3"
+id = "dposTrans3"
 command = "send coins transfer -a 1 -t 1GaHYpWmqAJsqRwrpoNcB8VvgKtSwjcHqt -k 1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 from = "1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 to = "1GaHYpWmqAJsqRwrpoNcB8VvgKtSwjcHqt"
 amount = "1"
 checkItem = ["balance"]
-dep = ["dpomTrans1"]
+dep = ["dposTrans1"]
 
 
 [[WithdrawCase]]
-id = "dpomWithdraw"
+id = "dposWithdraw"
 command = "send coins withdraw -a 0.1 -e coins -k 1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 addr = "1Ka7EPFRqs3v9yreXG6qA4RQbNmbPJCZPj"
 amount = "0.1"
 checkItem = ["balance"]
 repeat = 5
-dep = ["dpomTrans3"]
+dep = ["dposTrans3"]
 
 
 [[WithdrawCase]]

@@ -210,7 +210,7 @@ dplatformos_GetExecBalance() {
     addr="12qyocayNF7Lv6C9qW4avxs2E7U41fKSfv"
     addr_base64=$(echo -n "$addr" | base64)
 
-    req='{"method":"DplatformOS.GetExecBalance","params":[{"symbol":"dpom","stateHash":"'$state_base64'","addr":"'$addr_base64'","execer":"coins","count":100}]}'
+    req='{"method":"DplatformOS.GetExecBalance","params":[{"symbol":"dpos","stateHash":"'$state_base64'","addr":"'$addr_base64'","execer":"coins","count":100}]}'
     http_req "$req" ${MAIN_HTTP} "(.error|not)" "$FUNCNAME"
 }
 
@@ -227,7 +227,7 @@ dplatformos_GetPushSeqLastNum() {
 }
 
 dplatformos_GetCoinSymbol() {
-    symbol="dpom"
+    symbol="dpos"
     if [ "$IS_PARA" == true ]; then
         symbol="para"
     fi
@@ -442,7 +442,7 @@ dplatformos_Version() {
 }
 
 dplatformos_GetTotalCoins() {
-    http_req '{"method":"DplatformOS.GetTotalCoins", "params":[{"symbol" : "dpom", "stateHash":"", "startKey":"", "count":2, "execer":"coins"}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("count"))' "$FUNCNAME"
+    http_req '{"method":"DplatformOS.GetTotalCoins", "params":[{"symbol" : "dpos", "stateHash":"", "startKey":"", "count":2, "execer":"coins"}]}' ${MAIN_HTTP} '(.error|not) and (.result| has("count"))' "$FUNCNAME"
 }
 
 dplatformos_IsSync() {

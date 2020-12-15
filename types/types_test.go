@@ -281,9 +281,9 @@ func cloneByte(v []byte) []byte {
 }
 
 func TestIterateCallBack_PrefixWithoutExecAddr(t *testing.T) {
-	key := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
-	//prefix1 := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"
-	prefix2 := "mavl-coins-dpom-exec-"
+	key := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	//prefix1 := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"
+	prefix2 := "mavl-coins-dpos-exec-"
 	//execAddr := "16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 
@@ -318,7 +318,7 @@ func TestIterateCallBack_PrefixWithoutExecAddr(t *testing.T) {
 	assert.Equal(t, int64(2), reply.Num)
 	assert.Equal(t, 0, len(reply.NextKey))
 
-	key2 := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:2JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	key2 := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:2JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	bRet = reply.IterateCallBack([]byte(key2), value)
 	assert.Equal(t, false, bRet)
 	assert.Equal(t, 2, len(reply.Keys))
@@ -326,7 +326,7 @@ func TestIterateCallBack_PrefixWithoutExecAddr(t *testing.T) {
 	assert.Equal(t, int64(2), reply.Num)
 	assert.Equal(t, 0, len(reply.NextKey))
 
-	key3 := "mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	key3 := "mavl-coins-dpos-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	bRet = reply.IterateCallBack([]byte(key3), value)
 	assert.Equal(t, false, bRet)
 	assert.Equal(t, 3, len(reply.Keys))
@@ -346,8 +346,8 @@ func TestIterateCallBack_PrefixWithoutExecAddr(t *testing.T) {
 }
 
 func TestIterateCallBack_PrefixWithExecAddr(t *testing.T) {
-	key := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
-	prefix1 := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"
+	key := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	prefix1 := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"
 	//execAddr := "16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 
@@ -368,7 +368,7 @@ func TestIterateCallBack_PrefixWithExecAddr(t *testing.T) {
 
 	value := Encode(acc)
 
-	key2 := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:2JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	key2 := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:2JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	bRet := reply.IterateCallBack([]byte(key2), value)
 	assert.Equal(t, false, bRet)
 	assert.Equal(t, 0, len(reply.Keys))
@@ -383,7 +383,7 @@ func TestIterateCallBack_PrefixWithExecAddr(t *testing.T) {
 	assert.Equal(t, int64(1), reply.Num)
 	assert.Equal(t, len(key), len(reply.NextKey))
 
-	//key2 := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:2JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	//key2 := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:2JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	reply.NextKey = nil
 	reply.Count = int64(2)
 	bRet = reply.IterateCallBack([]byte(key2), value)
@@ -394,7 +394,7 @@ func TestIterateCallBack_PrefixWithExecAddr(t *testing.T) {
 	assert.Equal(t, 0, len(reply.NextKey))
 
 	reply.NextKey = nil
-	key3 := "mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	key3 := "mavl-coins-dpos-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	bRet = reply.IterateCallBack([]byte(key3), value)
 	assert.Equal(t, true, bRet)
 	assert.Equal(t, 2, len(reply.Keys))

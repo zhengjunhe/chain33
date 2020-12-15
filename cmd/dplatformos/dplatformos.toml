@@ -1,8 +1,8 @@
 Title="dplatformos"
 TestNet=true
 FixTime=false
-# 配置主币的名称: 比特元链dpom, 部分未配置的平行链需要配置为 dpom， 新的平行链配置 para或其他， 不配置panic
-CoinSymbol="dpom"
+# 配置主币的名称: 比特元链dpos, 部分未配置的平行链需要配置为 dpos， 新的平行链配置 para或其他， 不配置panic
+CoinSymbol="dpos"
 TxHeight=true
 
 [log]
@@ -262,7 +262,7 @@ dbCache=16
 # 钱包发送交易签名方式
 signType="secp256k1"
 # 钱包生成账户币种类型
-coinType="dpom"
+coinType="dpos"
 
 [wallet.sub.ticket]
 # 是否关闭ticket自动挖矿，默认false

@@ -118,7 +118,7 @@ func NewDplatformOSConfigNoInit(cfgstring string) *DplatformOSConfig {
 		minerExecs:  []string{"ticket"}, //挖矿的合约名单，适配旧配置，默认ticket
 		title:       cfg.Title,
 		chainConfig: make(map[string]interface{}),
-		coinSymbol:  "dpom",
+		coinSymbol:  "dpos",
 		forks:       &Forks{make(map[string]int64)},
 	}
 	// 先将每个模块的fork初始化到DplatformOSConfig中，然后如果需要再将toml中的替换

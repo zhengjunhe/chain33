@@ -317,7 +317,7 @@ func (c *channelClient) GetBalance(in *types.ReqBalance) ([]*types.Account, erro
 	// in.AssetExec & in.AssetSymbol 新增参数，
 	// 不填时兼容原来的调用
 	if in.AssetExec == "" || in.AssetSymbol == "" {
-		in.AssetSymbol = "dpom"
+		in.AssetSymbol = "dpos"
 		in.AssetExec = "coins"
 		return c.accountdb.GetBalance(c.QueueProtocolAPI, in)
 	}

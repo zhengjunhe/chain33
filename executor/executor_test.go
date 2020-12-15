@@ -115,7 +115,7 @@ func TestLoadDriver(t *testing.T) {
 func TestKeyAllow(t *testing.T) {
 	exect, _ := initEnv(types.GetDefaultCfgstring())
 	execInit(nil)
-	key := []byte("mavl-coins-dpom-exec-1wvmD6RNHzwhY4eN75WnM6JcaAvNQ4nHx:19xXg1WHzti5hzBRTUphkM8YmuX6jJkoAA")
+	key := []byte("mavl-coins-dpos-exec-1wvmD6RNHzwhY4eN75WnM6JcaAvNQ4nHx:19xXg1WHzti5hzBRTUphkM8YmuX6jJkoAA")
 	exec := []byte("retrieve")
 	tx1 := "0a05636f696e73120e18010a0a1080c2d72f1a036f746520a08d0630f1cdebc8f7efa5e9283a22313271796f6361794e46374c7636433971573461767873324537553431664b536676"
 	tx11, _ := hex.DecodeString(tx1)
@@ -139,7 +139,7 @@ func TestKeyAllow(t *testing.T) {
 func TestKeyAllow_evm(t *testing.T) {
 	exect, _ := initEnv(types.GetDefaultCfgstring())
 	execInit(nil)
-	key := []byte("mavl-coins-dpom-exec-1GacM93StrZveMrPjXDoz5TxajKa9LM5HG:19EJVYexvSn1kZ6MWiKcW14daXsPpdVDuF")
+	key := []byte("mavl-coins-dpos-exec-1GacM93StrZveMrPjXDoz5TxajKa9LM5HG:19EJVYexvSn1kZ6MWiKcW14daXsPpdVDuF")
 	exec := []byte("user.evm.0xc79c9113a71c0a4244e20f0780e7c13552f40ee30b05998a38edb08fe617aaa5")
 	tx1 := "0a05636f696e73120e18010a0a1080c2d72f1a036f746520a08d0630f1cdebc8f7efa5e9283a22313271796f6361794e46374c7636433971573461767873324537553431664b536676"
 	tx11, _ := hex.DecodeString(tx1)

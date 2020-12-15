@@ -18,12 +18,12 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
  7. frozen 冻结挖矿的币
  8. expectIncrease 预期挖到多少币
  9. expectMinerBlocks 预期间隔多少个块能挖到币
- 10. minerDpomDuring 在预期能挖到币的两倍时间间隔内，挖到多少币
+ 10. minerDposDuring 在预期能挖到币的两倍时间间隔内，挖到多少币
  11. expectTotalIncrease  一个小时内预期挖矿增加
 
 需要监控
  1. 挖矿总量异常： 根据总体币的挖矿情况报警 （不再根据原来的固定值）
-    1. 随着挖矿的dpom变动， 用于挖矿的币会有变化， 按固定的值来预警， 在用于挖矿的币变少时会有误报， 在json中增加 expectTotalIncrease 项， 在 totalIncreate < expectTotalIncrease * 90% 预警
+    1. 随着挖矿的dpos变动， 用于挖矿的币会有变化， 按固定的值来预警， 在用于挖矿的币变少时会有误报， 在json中增加 expectTotalIncrease 项， 在 totalIncreate < expectTotalIncrease * 90% 预警
  1. 挖矿帐号异常
     1. 是否有某个挖矿帐号， 一个小时挖矿所得为0, 可能是挖矿机器出故障了
     1. 增涨不到预期的50%
@@ -49,20 +49,20 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
             "expectIncrease" : "478.3413",
             "expectMinerBlocks" : "26.5745",
             "increase" : "522.0000",
-            "minerDpomDuring" : "18.0000"
+            "minerDposDuring" : "18.0000"
          },
          {
             "total" : "30286686.0000",
             "expectIncrease" : "478.6682",
             "frozen" : "30284014.0000",
             "addr" : "1KNGHukhbBnbWWnMYxu1C7YMoCj45Z3amm",
-            "minerDpomDuring" : "18.0000",
+            "minerDposDuring" : "18.0000",
             "increase" : "486.0000",
             "expectMinerBlocks" : "26.5927"
          },
          {
             "increase" : "54.0000",
-            "minerDpomDuring" : "36.0000",
+            "minerDposDuring" : "36.0000",
             "expectMinerBlocks" : "4.5225",
             "frozen" : "5150252.0000",
             "expectIncrease" : "81.4047",
@@ -75,12 +75,12 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
             "expectIncrease" : "478.8166",
             "frozen" : "30293402.0000",
             "expectMinerBlocks" : "26.6009",
-            "minerDpomDuring" : "54.0000",
+            "minerDposDuring" : "54.0000",
             "increase" : "414.0000"
          },
          {
             "expectMinerBlocks" : "26.5927",
-            "minerDpomDuring" : "36.0000",
+            "minerDposDuring" : "36.0000",
             "increase" : "450.0000",
             "addr" : "1FiDC6XWHLe7fDMhof8wJ3dty24f6aKKjK",
             "expectIncrease" : "478.6688",
@@ -90,7 +90,7 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
          {
             "expectMinerBlocks" : "26.5925",
             "increase" : "594.0000",
-            "minerDpomDuring" : "54.0000",
+            "minerDposDuring" : "54.0000",
             "addr" : "1AMvuuQ7V7FPQ4hkvHQdgNWy8wVL4d4hmp",
             "frozen" : "30283780.0000",
             "expectIncrease" : "478.6645",
@@ -101,7 +101,7 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
             "expectIncrease" : "25.1326",
             "frozen" : "1590072.0000",
             "addr" : "1ExRRLoJXa8LzXdNxnJvBkVNZpVw3QWMi4",
-            "minerDpomDuring" : "54.0000",
+            "minerDposDuring" : "54.0000",
             "increase" : "36.0000",
             "expectMinerBlocks" : "1.3963"
          },
@@ -110,14 +110,14 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
             "total" : "47779640.0000",
             "frozen" : "47775904.0000",
             "addr" : "1AH9HRd4WBJ824h9PP1jYpvRZ4BSA4oN6Y",
-            "minerDpomDuring" : "0.0000",
+            "minerDposDuring" : "0.0000",
             "increase" : "576.0000",
             "expectMinerBlocks" : "41.9525"
          },
          {
             "expectMinerBlocks" : "26.5921",
             "increase" : "432.0000",
-            "minerDpomDuring" : "36.0000",
+            "minerDposDuring" : "36.0000",
             "addr" : "1PSYYfCbtSeT1vJTvSKmQvhz8y6VhtddWi",
             "frozen" : "30283312.0000",
             "total" : "30290214.0000",
@@ -125,7 +125,7 @@ wget 127.0.0.1:8866 --no-proxy --post-data='{"id" : 1 , "method" : "ShowMinerAcc
          },
          {
             "expectMinerBlocks" : "26.5834",
-            "minerDpomDuring" : "36.0000",
+            "minerDposDuring" : "36.0000",
             "increase" : "576.0000",
             "addr" : "1G7s64AgX1ySDcUdSW5vDa8jTYQMnZktCd",
             "expectIncrease" : "478.5014",

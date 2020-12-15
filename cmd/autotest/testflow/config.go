@@ -22,7 +22,7 @@ var (
 
 //contract type
 /*
-dpom,
+dpos,
 token,
 trade,
 

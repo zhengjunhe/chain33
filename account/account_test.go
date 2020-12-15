@@ -192,7 +192,7 @@ func TestGetTotalCoins(t *testing.T) {
 	storeProcess(q)
 
 	accCoin, _ := GenerAccDb()
-	symbols := [2]string{"dpom", ""}
+	symbols := [2]string{"dpos", ""}
 	for _, symbol := range symbols {
 		reqTotalCoin := &types.ReqGetTotalCoins{
 			Symbol: symbol,
@@ -232,10 +232,10 @@ func TestAccountName(t *testing.T) {
 }
 
 func TestGetExecBalance(t *testing.T) {
-	key := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	key := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
-	//prefix1 := "mavl-coins-dpom-exec-"
-	//prefix2 := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"
+	//prefix1 := "mavl-coins-dpos-exec-"
+	//prefix2 := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:"
 
 	/*req := &types.StoreList {
 		StateHash: []byte("0000000000000000"),
@@ -247,7 +247,7 @@ func TestGetExecBalance(t *testing.T) {
 
 	fmt.Println("TestGetExecBalance---------------test case 1_1------------------------")
 	in := &types.ReqGetExecBalance{
-		Symbol:    "dpom",
+		Symbol:    "dpos",
 		StateHash: []byte("0000000000"),
 		Addr:      []byte(addr),
 		Execer:    "coins",
@@ -316,9 +316,9 @@ func storeList1_1(req *types.StoreList) (reply *types.StoreListReply, err error)
 	}
 	value := types.Encode(acc)
 
-	key1 := []byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	key2 := []byte("mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	key3 := []byte("mavl-coins-dpom-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key1 := []byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key2 := []byte("mavl-coins-dpos-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key3 := []byte("mavl-coins-dpos-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
 	reply.Num = 2
 	reply.Keys = append(reply.Keys, key1)
 	reply.Keys = append(reply.Keys, key2)
@@ -342,9 +342,9 @@ func storeList1_2(req *types.StoreList) (reply *types.StoreListReply, err error)
 		Addr:     string(req.End),
 	}
 	value := types.Encode(acc)
-	//key1 := []byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	//key2 := []byte("mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	key3 := []byte("mavl-coins-dpom-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	//key1 := []byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	//key2 := []byte("mavl-coins-dpos-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key3 := []byte("mavl-coins-dpos-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
 	reply.Num = 1
 	reply.Keys = append(reply.Keys, key3)
 	reply.Values = append(reply.Values, cloneByte(value))
@@ -366,9 +366,9 @@ func storeList2(req *types.StoreList) (reply *types.StoreListReply, err error) {
 	}
 	value := types.Encode(acc)
 
-	key1 := []byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	key2 := []byte("mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	key3 := []byte("mavl-coins-dpom-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key1 := []byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key2 := []byte("mavl-coins-dpos-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key3 := []byte("mavl-coins-dpos-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
 
 	reply.Num = 3
 	reply.Keys = append(reply.Keys, key1)
@@ -396,9 +396,9 @@ func storeList3(req *types.StoreList) (reply *types.StoreListReply, err error) {
 	}
 	value := types.Encode(acc)
 
-	//key1 := []byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	key2 := []byte("mavl-coins-dpom-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
-	//key3 := []byte("mavl-coins-dpom-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	//key1 := []byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	key2 := []byte("mavl-coins-dpos-exec-26htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
+	//key3 := []byte("mavl-coins-dpos-exec-36htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP")
 
 	reply.Num = 1
 	//reply.Keys = append(reply.Keys, key1)
@@ -448,7 +448,7 @@ func getExecBalance(callback func(*types.StoreList) (*types.StoreListReply, erro
 			fmt.Println("accountDB.GetExecBalance key does not match prefix", "key:", strKey, " prefix:", prefix)
 			return nil, types.ErrTypeAsset
 		}
-		//如果prefix形如：mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:  ,则是查找addr在一个合约地址上的余额，找到一个值即可结束。
+		//如果prefix形如：mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:  ,则是查找addr在一个合约地址上的余额，找到一个值即可结束。
 		if strings.HasSuffix(prefix, ":") {
 			addr := strKey[len(prefix):]
 			execAddr := []byte(prefix[(len(prefix) - len(addr) - 1):(len(prefix) - 1)])
@@ -473,7 +473,7 @@ func getExecBalance(callback func(*types.StoreList) (*types.StoreListReply, erro
 
 func TestGetExecBalance2(t *testing.T) {
 	accCoin := NewCoinsAccount(types.NewDplatformOSConfig(types.GetDefaultCfgstring()))
-	key := "mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
+	key := "mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 	execAddr := "16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"
 	addr := "1JmFaA6unrCFYEWPGRi7uuXY1KthTJxJEP"
 
@@ -485,7 +485,7 @@ func TestGetExecBalance2(t *testing.T) {
 	assert.Nil(t, err)
 
 	fmt.Println("-------------TestGetExecBalance2---test case2---")
-	in.Symbol = "dpom"
+	in.Symbol = "dpos"
 	in.Execer = "coins"
 	in.Addr = []byte(addr)
 	in.ExecAddr = []byte(execAddr)
@@ -509,7 +509,7 @@ func TestGetExecBalance2(t *testing.T) {
 	/*
 		fmt.Println("TestGetExecBalance---------------test case 1_1------------------------")
 		in := &types.ReqGetExecBalance{
-			Symbol:    "dpom",
+			Symbol:    "dpos",
 			StateHash: []byte("0000000000"),
 			Addr:      []byte(addr),
 			Execer:    "coins",

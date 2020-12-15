@@ -90,22 +90,22 @@ func TestGetAllCoinsMVCCIter(t *testing.T) {
 
 	m := getMVCCIter()
 	defer m.db.Close()
-	kvlist, err := m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "1"}, [2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTq", "2"}), hashN(0), nil, 0)
+	kvlist, err := m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "1"}, [2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTq", "2"}), hashN(0), nil, 0)
 	assert.Nil(t, err)
 	saveKVList(m.db, kvlist)
 
-	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "3"}, [2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTs", "4"}), hashN(1), hashN(0), 1)
+	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "3"}, [2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTs", "4"}), hashN(1), hashN(0), 1)
 	assert.Nil(t, err)
 	saveKVList(m.db, kvlist)
 
-	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "5"}, [2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTt", "6"}), hashN(2), hashN(1), 2)
+	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "5"}, [2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTt", "6"}), hashN(2), hashN(1), 2)
 	assert.Nil(t, err)
 	saveKVList(m.db, kvlist)
 
 	listhelper := NewListHelper(m)
 	fmt.Println("---case 1-1----")
 
-	values := listhelper.List([]byte("mavl-coins-dpom-"), nil, 100, 1)
+	values := listhelper.List([]byte("mavl-coins-dpos-"), nil, 100, 1)
 	assert.Equal(t, "3", string(values[0]))
 	assert.Equal(t, "2", string(values[1]))
 	assert.Equal(t, "4", string(values[2]))
@@ -118,7 +118,7 @@ func TestGetAllCoinsMVCCIter(t *testing.T) {
 
 	fmt.Println("---case 1-2----")
 	var matchValues [][]byte
-	listhelper.IteratorCallback([]byte("mavl-coins-dpom-"), nil, 0, 1, func(key, value []byte) bool {
+	listhelper.IteratorCallback([]byte("mavl-coins-dpos-"), nil, 0, 1, func(key, value []byte) bool {
 		matchValues = append(matchValues, value)
 		return false
 	})
@@ -151,7 +151,7 @@ func TestGetAllCoinsMVCCIter(t *testing.T) {
 	//m.PrintAll()
 	fmt.Println("---case 2-2----")
 	matchValues = nil
-	listhelper.IteratorCallback(([]byte("mavl-coins-dpom-")), []byte("mavl-coins-dpom-exec-"), 0, 1, func(key, value []byte) bool {
+	listhelper.IteratorCallback(([]byte("mavl-coins-dpos-")), []byte("mavl-coins-dpos-exec-"), 0, 1, func(key, value []byte) bool {
 		matchValues = append(matchValues, value)
 		return false
 	})
@@ -167,7 +167,7 @@ func TestGetAllCoinsMVCCIter(t *testing.T) {
 
 	fmt.Println("---case 2-3----")
 	matchValues = nil
-	listhelper.IteratorCallback(([]byte("mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTq")), []byte("mavl-coins-dpom-exec-"), 0, 1, func(key, value []byte) bool {
+	listhelper.IteratorCallback(([]byte("mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTq")), []byte("mavl-coins-dpos-exec-"), 0, 1, func(key, value []byte) bool {
 		matchValues = append(matchValues, value)
 		return false
 	})
@@ -190,19 +190,19 @@ func TestSimpleMVCCLocalDB(t *testing.T) {
 	kvdb := NewLocalDB(db3, false)
 	m := NewSimpleMVCC(kvdb)
 
-	kvlist, err := m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "1"}, [2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTq", "2"}), hashN(0), nil, 0)
+	kvlist, err := m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "1"}, [2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTq", "2"}), hashN(0), nil, 0)
 	assert.Nil(t, err)
 	setKVList(kvdb, kvlist)
 
-	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "3"}, [2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTs", "4"}), hashN(1), hashN(0), 1)
+	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "3"}, [2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTs", "4"}), hashN(1), hashN(0), 1)
 	assert.Nil(t, err)
 	setKVList(kvdb, kvlist)
 
-	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "5"}, [2]string{"mavl-coins-dpom-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTt", "6"}), hashN(2), hashN(1), 2)
+	kvlist, err = m.AddMVCC(KeyValueList([2]string{"mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp", "5"}, [2]string{"mavl-coins-dpos-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTt", "6"}), hashN(2), hashN(1), 2)
 	assert.Nil(t, err)
 	setKVList(kvdb, kvlist)
 
-	values, err := kvdb.List([]byte(".-mvcc-.d.mavl-coins-dpom-"), nil, 100, 1)
+	values, err := kvdb.List([]byte(".-mvcc-.d.mavl-coins-dpos-"), nil, 100, 1)
 	assert.Nil(t, err)
 	assert.Equal(t, 6, len(values))
 	assert.Equal(t, "3", string(values[0]))
@@ -212,19 +212,19 @@ func TestSimpleMVCCLocalDB(t *testing.T) {
 	assert.Equal(t, "1", string(values[4]))
 	assert.Equal(t, "5", string(values[5]))
 
-	v, err := m.GetV([]byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 0)
+	v, err := m.GetV([]byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 0)
 	assert.Nil(t, err)
 	assert.Equal(t, "1", string(v))
 
-	v, err = m.GetV([]byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 1)
+	v, err = m.GetV([]byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 1)
 	assert.Nil(t, err)
 	assert.Equal(t, "1", string(v))
 
-	v, err = m.GetV([]byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 2)
+	v, err = m.GetV([]byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 2)
 	assert.Nil(t, err)
 	assert.Equal(t, "5", string(v))
 
-	v, err = m.GetV([]byte("mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 3)
+	v, err = m.GetV([]byte("mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp"), 3)
 	assert.Nil(t, err)
 	assert.Equal(t, "5", string(v))
 

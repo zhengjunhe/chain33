@@ -74,7 +74,7 @@ type Wallet struct {
 	lastHeader         *types.Header
 	initFlag           uint32 // 钱包模块是否初始化完毕的标记，默认为0，表示未初始化
 	SignType           int    // SignType 签名类型 1；secp256k1，2：ed25519，3：sm2
-	CoinType           uint32 // CoinType 币种类型 dpom:0x80003333,ycc:0x80003334
+	CoinType           uint32 // CoinType 币种类型 dpos:0x80003333,ycc:0x80003334
 
 	minFee      int64
 	accountdb   *account.DB

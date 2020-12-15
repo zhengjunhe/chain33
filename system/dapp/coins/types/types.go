@@ -154,7 +154,7 @@ func (c *CoinsType) GetAssets(tx *types.Transaction) ([]*types.Asset, error) {
 	types := c.GetConfig()
 	assets[0].Symbol = types.GetCoinSymbol()
 
-	if assets[0].Symbol == "dpom" {
+	if assets[0].Symbol == "dpos" {
 		assets[0].Symbol = "DPOM"
 	}
 	return assets, nil

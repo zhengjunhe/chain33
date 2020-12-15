@@ -402,7 +402,7 @@ func (acc *DB) GetExecBalance(api client.QueueProtocolAPI, in *types.ReqGetExecB
 			log.Error("accountDB.GetExecBalance key does not match prefix", "key", strKey, "prefix", prefix)
 			return nil, types.ErrTypeAsset
 		}
-		//如果prefix形如：mavl-coins-dpom-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:  ,则是查找addr在一个合约地址上的余额，找到一个值即可结束。
+		//如果prefix形如：mavl-coins-dpos-exec-16htvcBNSEA7fZhAdLJphDwQRQJaHpyHTp:  ,则是查找addr在一个合约地址上的余额，找到一个值即可结束。
 		if strings.HasSuffix(prefix, ":") {
 			addr := strKey[len(prefix):]
 			execAddr := []byte(prefix[(len(prefix) - len(addr) - 1):(len(prefix) - 1)])

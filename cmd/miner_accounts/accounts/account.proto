@@ -14,7 +14,7 @@ message MinerAccount {
     string increase          = 3;
     string frozen            = 4;
     string expectIncrease    = 5;
-    string minerDpomDuring    = 6;
+    string minerDposDuring    = 6;
     string expectMinerBlocks = 7;
 }
 message Accounts {

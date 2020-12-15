@@ -63,7 +63,7 @@ compgen: 用法: compgen [-abcdefgjksuv] [-o 选项]  [-A 动作] [-G 全局模�
 complete 演示
 ```
 # 是不是很简单
-$ complete -W "account block dpom trade token" dplatformos-cli
+$ complete -W "account block dpos trade token" dplatformos-cli
 linj@linj-TM1701:~$ dplatformos-cli t
 token  trade  
 
@@ -116,7 +116,7 @@ dplatformos-cli 参数补全
 ```
 #!/bin/bash
 # 通过dplatformos-cli 的help 找到一级的子命令
-subcmd_list=("account" "block" "dpom" "close" "coins" "config" "evm" "exec" "hashlock" "help" "mempool" "net" "privacy" "relay" "retrieve" "seed" "send" "stat" "ticket" "token" "trade" "tx" "version" "wallet")
+subcmd_list=("account" "block" "dpos" "close" "coins" "config" "evm" "exec" "hashlock" "help" "mempool" "net" "privacy" "relay" "retrieve" "seed" "send" "stat" "ticket" "token" "trade" "tx" "version" "wallet")
 #
 function _subcmd() {
   local cur
@@ -135,7 +135,7 @@ complete -F _subcmd dplatformos-cli
 ```
 linj@linj-TM1701:~$ . subcmd.bash  
 linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
-account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
+account   dpos       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli t
 ticket  token   trade   tx      
@@ -147,7 +147,7 @@ ticket  token   trade   tx
 linj@linj-TM1701:~$ sudo install subcmd.bash  /usr/share/bash-completion/completions/dplatformos-cli
 # 重新开个窗口就有用了
 linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
-account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
+account   dpos       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 ```
 
@@ -159,14 +159,14 @@ block     close     config    exec      help      net       relay     seed      
 演示
 ```
 linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
-account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
+account   dpos       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli b
-block  dpom    
-linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom 
+block  dpos    
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpos 
 priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw   
-linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom t
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpos t
 transfer  txgroup   
-linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom transfer -
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpos transfer -
 -a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to  
 ```

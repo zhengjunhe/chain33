@@ -20,10 +20,10 @@ import (
 )
 
 const secondsPerBlock = 5
-const dpomPreBlock = 5
+const dposPreBlock = 5
 const baseInterval = 3600
 const maxInterval = 15 * 24 * 3600
-const monitorDpomLowLimit = 3 * 1e7 * types.Coin
+const monitorDposLowLimit = 3 * 1e7 * types.Coin
 
 var log = l.New("module", "accounts")
 
@@ -73,13 +73,13 @@ func (show *ShowMinerAccount) Get(in *TimeAt, out *interface{}) error {
 		return nil
 	}
 
-	totalDpom := int64(0)
+	totalDpos := int64(0)
 	for _, acc := range curAcc {
-		totalDpom += acc.Frozen
+		totalDpos += acc.Frozen
 	}
-	log.Info("show 1st balance", "utc", header.BlockTime, "total", totalDpom)
+	log.Info("show 1st balance", "utc", header.BlockTime, "total", totalDpos)
 
-	monitorInterval := calcMoniterInterval(totalDpom)
+	monitorInterval := calcMoniterInterval(totalDpos)
 	log.Info("show", "monitor Interval", monitorInterval)
 
 	lastHourHeader, lastAcc, err := cache.getBalance(addrs, "ticket", header.Height-monitorInterval)
@@ -124,10 +124,10 @@ func toBlockHeight(timeAt string) (int64, error) {
 
 // 计算监控区块的范围
 // 做对小额帐号限制，不然监控范围过大， 如9000个币需要138天
-func calcMoniterInterval(totalDpom int64) int64 {
+func calcMoniterInterval(totalDpos int64) int64 {
 	monitorInterval := int64(baseInterval)
-	if totalDpom < monitorDpomLowLimit && totalDpom > 0 {
-		monitorInterval = int64(float64(monitorDpomLowLimit) / float64(totalDpom) * float64(baseInterval))
+	if totalDpos < monitorDposLowLimit && totalDpos > 0 {
+		monitorInterval = int64(float64(monitorDposLowLimit) / float64(totalDpos) * float64(baseInterval))
 	}
 	if monitorInterval > maxInterval {
 		monitorInterval = maxInterval
@@ -169,7 +169,7 @@ func calcIncrease(miner *MinerAccounts, acc1, acc2 []*rpctypes.Account, header *
 		if v.lastAcc != nil && v.curAcc != nil {
 			total := v.curAcc.Balance + v.curAcc.Frozen
 			increase := total - v.lastAcc.Balance - v.lastAcc.Frozen
-			expectIncrease := float64(miner.Blocks) * float64(dpomPreBlock) * (float64(v.curAcc.Frozen) / float64(types.Coin)) / ticketTotal
+			expectIncrease := float64(miner.Blocks) * float64(dposPreBlock) * (float64(v.curAcc.Frozen) / float64(types.Coin)) / ticketTotal
 
 			m := &MinerAccount{
 				Addr:           k,
@@ -186,17 +186,17 @@ func calcIncrease(miner *MinerAccounts, acc1, acc2 []*rpctypes.Account, header *
 
 			// 由于取不到挖矿的交易， 通过预期挖矿数， 推断间隔多少个区块能挖到。
 			// 由于挖矿分布的波动， 用双倍的预期能挖到区块的时间间隔来预警
-			expectBlocks := (expectIncrease / dpomPreBlock)                               // 一个小时预期挖多少个块
+			expectBlocks := (expectIncrease / dposPreBlock)                               // 一个小时预期挖多少个块
 			expectMinerInterval := float64(miner.Seconds/secondsPerBlock) / expectBlocks // 预期多少秒可以挖一个块
 			moniterInterval := int64(2*expectMinerInterval) + 1
 
 			m.ExpectMinerBlocks = strconv.FormatFloat(expectBlocks, 'f', 4, 64)
 			_, acc, err := cache.getBalance([]string{m.Addr}, "ticket", header.Height-moniterInterval)
 			if err != nil || len(acc) == 0 {
-				m.MinerDpomDuring = "0.0000"
+				m.MinerDposDuring = "0.0000"
 			} else {
 				minerDelta := total - acc[0].Balance - acc[0].Frozen
-				m.MinerDpomDuring = strconv.FormatFloat(float64(minerDelta)/float64(types.Coin), 'f', 4, 64)
+				m.MinerDposDuring = strconv.FormatFloat(float64(minerDelta)/float64(types.Coin), 'f', 4, 64)
 			}
 
 			miner.MinerAccounts = append(miner.MinerAccounts, m)

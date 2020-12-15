@@ -29,7 +29,7 @@ const (
 	TypeFactomFactoids     uint32 = 0x80000083
 	TypeFactomEntryCredits uint32 = 0x80000084
 	TypeZcash              uint32 = 0x80000085
-	TypeDpom                uint32 = 0x80003333
+	TypeDpos                uint32 = 0x80003333
 	TypeYcc                uint32 = 0x80003334
 )
 
@@ -40,7 +40,7 @@ var CoinName = map[uint32]string{
 	TypeBitcoin:      "BTC",
 	TypeLitecoin:     "LTC",
 	TypeZcash:        "ZEC",
-	TypeDpom:          "DPOM",
+	TypeDpos:          "DPOM",
 	TypeYcc:          "YCC",
 }
 
@@ -51,7 +51,7 @@ var coinNameType = map[string]uint32{
 	"BTC": TypeBitcoin,
 	"LTC": TypeLitecoin,
 	"ZEC": TypeZcash,
-	"DPOM": TypeDpom,
+	"DPOM": TypeDpos,
 	"YCC": TypeYcc,
 }
 
@@ -62,7 +62,7 @@ func GetSLIP0044CoinType(name string) uint32 {
 		return ty
 	}
 	log.Error("GetSLIP0044CoinType: " + name + " not exist.")
-	return TypeDpom
+	return TypeDpos
 }
 
 // HDWallet 支持BIP-44标准的HD钱包

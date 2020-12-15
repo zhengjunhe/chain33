@@ -13,22 +13,22 @@ $ sudo install dplatformos-cli.bash  /usr/share/bash-completion/completions/dpla
 ```
 # 重新开个窗口就有用了
 $ ./dplatformos/dplatformos-cli 
-account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
+account   dpos       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 ```
 
 ## 演示
 ```
 linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli 
-account   dpom       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
+account   dpos       coins     evm       hashlock  mempool   privacy   retrieve  send      ticket    trade     version   
 block     close     config    exec      help      net       relay     seed      stat      token     tx        wallet    
 linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli b
-block  dpom    
-linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom 
+block  dpos    
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpos 
 priv2priv  priv2pub   pub2priv   send       transfer   txgroup    withdraw   
-linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom t
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpos t
 transfer  txgroup   
-linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpom transfer -
+linj@linj-TM1701:~$ ./dplatformos/dplatformos-cli dpos transfer -
 -a        --amount  -h        --help    -n        --note    --para    --rpc     -t        --to  
 ```
 

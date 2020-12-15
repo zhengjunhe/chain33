@@ -9,7 +9,7 @@ Title="local"
 TestNet=true
 FixTime=false
 TxHeight=false
-CoinSymbol="dpom"
+CoinSymbol="dpos"
 
 [log]
 # 日志级别，支持debug(dbug)/info/warn/error(eror)/crit
@@ -174,7 +174,7 @@ driver="leveldb"
 dbPath="wallet"
 dbCache=16
 signType="secp256k1"
-coinType="dpom"
+coinType="dpos"
 
 [wallet.sub.ticket]
 minerdisable=false
