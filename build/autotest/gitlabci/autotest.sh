@@ -34,7 +34,7 @@ function init() {
     sed -i $sedfix 's/^TestNet=.*/TestNet=true/g' dplatformos.toml
 
     # p2p
-    sed -i $sedfix 's/^seeds=.*/seeds=["dplatformos:13802","chain32:13802"]/g' dplatformos.toml
+    sed -i $sedfix 's/^seeds=.*/seeds=["dplatformos:28805","chain32:28805"]/g' dplatformos.toml
     #sed -i $sedfix 's/^enable=.*/enable=true/g' dplatformos.toml
     sed -i $sedfix '0,/^enable=.*/s//enable=true/' dplatformos.toml
     sed -i $sedfix 's/^isSeed=.*/isSeed=true/g' dplatformos.toml

@@ -46,7 +46,7 @@ func (p *peerInfoProtol) processVerReq(req *types.MessageP2PVersionReq, muaddr s
 func (p *peerInfoProtol) checkRemotePeerExternalAddr(remoteMAddr string) bool {
 
 	//存储对方的外网地址道peerstore中
-	//check remoteMaddr isPubAddr 示例： /ip4/192.168.0.1/tcp/13802
+	//check remoteMaddr isPubAddr 示例： /ip4/192.168.0.1/tcp/28805
 	if len(strings.Split(remoteMAddr, "/")) < 5 {
 		return false
 	}

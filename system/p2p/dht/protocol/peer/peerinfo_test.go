@@ -191,15 +191,15 @@ func Test_util(t *testing.T) {
 	assert.NotNil(t, peerinfo)
 	//----验证versionReq
 	p2pVerReq := &types.MessageP2PVersionReq{MessageData: proto.NewMessageCommon("uid122222", "16Uiu2HAmTdgKpRmE6sXj512HodxBPMZmjh6vHG1m4ftnXY3wLSpg", []byte("322222222222222"), false),
-		Message: &types.P2PVersion{Version: 0, AddrRecv: "/ip4/127.0.0.1/tcp/13802", AddrFrom: "/ip4/192.168.0.1/tcp/13802"}}
-	resp, _ := proto.processVerReq(p2pVerReq, "/ip4/192.168.0.1/tcp/13802")
+		Message: &types.P2PVersion{Version: 0, AddrRecv: "/ip4/127.0.0.1/tcp/28805", AddrFrom: "/ip4/192.168.0.1/tcp/28805"}}
+	resp, _ := proto.processVerReq(p2pVerReq, "/ip4/192.168.0.1/tcp/28805")
 	assert.NotNil(t, resp)
 
 	//-----------------
 	proto.getPeerInfo()
 	proto.setExternalAddr("150.109.6.160")
 	assert.NotEmpty(t, proto.getExternalAddr())
-	proto.setExternalAddr("/ip4/150.109.6.160/tcp/13802")
+	proto.setExternalAddr("/ip4/150.109.6.160/tcp/28805")
 	assert.Equal(t, "150.109.6.160", proto.getExternalAddr())
 	assert.True(t, !isPublicIP(snet.ParseIP("127.0.0.1")))
 	ips, err := localIPv4s()
@@ -210,18 +210,18 @@ func Test_util(t *testing.T) {
 	assert.False(t, isPublicIP(snet.ParseIP("172.16.59.221")))
 	assert.False(t, isPublicIP(snet.ParseIP("192.168.59.221")))
 	//增加测试用例
-	_, err = multiaddr.NewMultiaddr("/ip4/122.224.166.26/tcp/13802")
+	_, err = multiaddr.NewMultiaddr("/ip4/122.224.166.26/tcp/28805")
 	assert.Nil(t, err)
-	ok = proto.checkRemotePeerExternalAddr("/ip4/192.168.1.1/tcp/13802")
+	ok = proto.checkRemotePeerExternalAddr("/ip4/192.168.1.1/tcp/28805")
 	assert.False(t, ok)
 
-	ok = proto.checkRemotePeerExternalAddr("/ip4/122.224.166.26/tcp/13802")
+	ok = proto.checkRemotePeerExternalAddr("/ip4/122.224.166.26/tcp/28805")
 	assert.True(t, ok)
 	pid, err := peer.Decode("16Uiu2HAmTdgKpRmE6sXj512HodxBPMZmjh6vHG1m4ftnXY3wLSpg")
 	assert.Nil(t, err)
 	assert.Equal(t, pid.String(), "16Uiu2HAmTdgKpRmE6sXj512HodxBPMZmjh6vHG1m4ftnXY3wLSpg")
 
-	proto.setAddrToPeerStore(pid, "/ip4/122.224.166.26/tcp/13802", "/ip4/192.168.1.1/tcp/12345")
+	proto.setAddrToPeerStore(pid, "/ip4/122.224.166.26/tcp/28805", "/ip4/192.168.1.1/tcp/12345")
 	pid, err = peer.IDFromString("16Uiu2HAmTdgKpRmE6sXj512HodxBPMZmjh6vHG1m4ftnXY3wLSpg")
 	assert.NotNil(t, err)
 }
